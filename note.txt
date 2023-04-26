@@ -1,0 +1,98 @@
+Si on veut utiliser le client hexchat (pour ne pas prendre irci et etre que en ligne de commande),
+on peut facilement l'installer avec :
+
+apt-get download hexchat
+dpkg -x "nom du fichier telecharge" .
+mv usr/bin/hexchat hexchat
+
+Et bim ! On peut executer ./hexchat
+
+
+Qu'est ce qu'une socket ? Deja apparemment on dit UN socket.
+-un connecteur reseau, ou interface de connection
+-genre d'intermediaire a la connection, qui va gerer des problematique de reseau pour nous
+
+
+Fonctions autorisees :
+
+socket:
+<sys/socket.h>
+int	socket( int domain, int type, int protocol );
+ -create an unbound socket in a communications domain, and return a file descriptor that can be used
+  in later function calls that operate on sockets.
+		* domain : specifies te communications domain in which a socket is to be created
+		* type : specifies the type of socket to be created
+		* protocol : specifies a particular protocol to be used with the socket (protocol of 0 for
+			an unspecified default protocol appropriate for the type)
+
+close:
+<unistd.h>
+int	close( int filedes );
+ -close un fd
+
+setsockopt:
+<sys/socket.h>
+int	setsockopt( int sockfd, int level, int optname, const void *optval, socklen_t optlen );
+ -
+
+getsockname:
+<sys/socket.h>
+int	getsockot( int sockfd, int level, int optname, void *optval, socklen_t * optlen );
+ -
+
+struct protoent {
+	char	*p_name;		---> official protocol name
+	char	**p_aliases;	---> alias list
+	int		p_proto;		---> protocol number
+}
+
+getprotobyname:
+<netdb.h>
+struct protoent	*getprotobyname( const char *name );
+ -retourne une structure protoent pour l'entree depuis la database qui correspond au nom du protocole donne.
+
+gethostbyname:
+<netdb.h>
+struct hostent	*gethostbyname( const char *name );
+ - 
+
+
+getaddrinfo:
+
+freeaddrinfo:
+
+bind:
+
+connect:
+
+listen:
+
+accept:
+
+htons:
+
+htonl:
+
+ntohs:
+
+ntohl:
+
+inet_addr:
+
+inet_ntoa:
+
+send:
+
+recv:
+
+signal:
+
+lseek:
+
+fstat:
+
+fcntl:
+
+poll (ou équivalent):
+
+
