@@ -1,9 +1,0 @@
-Si on veut utiliser le client hexchat (pour ne pas prendre irci et etre que en ligne de commande),
-on peut facilement l'installer avec :
-
-apt-get download hexchat
-dpkg -x "nom du fichier telecharge" .
-mv usr/bin/hexchat hexchat
-
-Et bim ! On peut executer ./hexchat
-
