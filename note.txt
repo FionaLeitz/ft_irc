@@ -20,7 +20,7 @@ socket:
 int	socket( int domain, int type, int protocol );
  -create an unbound socket in a communications domain, and return a file descriptor that can be used
   in later function calls that operate on sockets.
-		* domain : specifies te communications domain in which a socket is to be created
+		* domain : specifies the communications domain in which a socket is to be created
 		* type : specifies the type of socket to be created
 		* protocol : specifies a particular protocol to be used with the socket (protocol of 0 for
 			an unspecified default protocol appropriate for the type)
@@ -35,15 +35,23 @@ setsockopt:
 int	setsockopt( int sockfd, int level, int optname, const void *optval, socklen_t optlen );
  -
 
+struct sockaddr {
+	ushort	sa_family;						---> address family
+	char	sa_data[14];					---> socket address (je crois que sa taille est variable ?)
+}
+
 getsockname:
 <sys/socket.h>
-int	getsockot( int sockfd, int level, int optname, void *optval, socklen_t * optlen );
- -
+int	getsockname( int socket, struct sockaddr *name, int *namelen );
+ -stock des information sur le socket dans le pointeur name.
+		* socket : le socket descriptor
+		* name : l'adresse du buffer ou stocker les infos sur le socket
+		* namelen : pointe vers un entier contenant la taille en bytes de name, puis est rempli par la taille requise.
 
 struct protoent {
-	char	*p_name;		---> official protocol name
-	char	**p_aliases;	---> alias list
-	int		p_proto;		---> protocol number
+	char	*p_name;						---> official protocol name
+	char	**p_aliases;					---> alias list
+	int		p_proto;						---> protocol number
 }
 
 getprotobyname:
@@ -51,13 +59,35 @@ getprotobyname:
 struct protoent	*getprotobyname( const char *name );
  -retourne une structure protoent pour l'entree depuis la database qui correspond au nom du protocole donne.
 
+struct hostent {
+	char	*h_name;						---> official name of host
+	char	**h_aliases;					---> alias list
+	int		h_addrtype;						---> host address type
+	int		h_length;						---> length of address
+	char	**h_addr_list;					---> list of addresses
+}
+
 gethostbyname:
 <netdb.h>
 struct hostent	*gethostbyname( const char *name );
- - 
+ -retourne une structure hostent correspondant au name (hostname ou adresse IPv4).
 
+struct addrinfo {
+	int					ai_flags;
+	int					ai_family;
+	int					ai_socktype;
+	int					ai_protocol;
+	socklen_t			ai_addrlen;
+	struct sockaddr		*ai_addr;
+	char				*ai_canonname;
+	struct addrinfo		*ai_next;
+}
 
 getaddrinfo:
+<netdb.h>
+int	getaddrinfo( const char *node, const char *service, const struct addrinfo *hints, struct addrinfo **res );
+  -retourne une ou plusieurs structure addrinfo, contenant une adresse Internet qui peut etre utilisee dans un appel a bind() ou connect().
+		*
 
 freeaddrinfo:
 
