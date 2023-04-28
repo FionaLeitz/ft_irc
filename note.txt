@@ -1,3 +1,12 @@
+Créez votre propre serveur IRC, en suivant les RFC standards d'Internet.
+L’objectif de ce projet est de reproduire le fonctionnement d’un serveur IRC.
+Vous utiliserez un vrai client IRC afin de vous connecter à votre serveur et ainsi de le
+tester.
+Internet fonctionne grâce à de nombreux standards et protocoles pour permettre une
+interopérabilité entre les machines connectées. Il est toujours intéressant de connaître ce
+genre de chose
+
+
 Si on veut utiliser le client hexchat (pour ne pas prendre irci et etre que en ligne de commande),
 on peut facilement l'installer avec :
 
@@ -108,21 +117,220 @@ ntohs:
 ntohl:
 
 inet_addr:
+<sys/socket.h>
+<netinet/in.h>
+<arpa/inet.h>
+in_addr_t inet_addr(const char *cp);
+	- CONVERTIR UNE ADRESSE INTERNET NUMERIQUE POINTEE IPV4 EN UNE DONNEE BINAIRE
+	
+	args :
+		const char *cp : adresse Internet de l'hôte a convertir
+
+	Les éléments d'une adresse en notation pointée peuvent être indiqués sous forme décimale, octale (avec un 0 devant) ou hexadécimale (avec un 0X devant).
+	La terminologie des adresses sous ces formes est appelée notation numérique pointée IPV4.
+	La forme qui utilise exactement quatre nombres décimaux est appelée notation décimale pointée IPV4 (ou quelques fois : notation quatre points IPv4). 
+
+	retour :
+		in_addr_t (equivalent a uint32 (unsigned long)) :  donnée binaire dans l'ordre des octets du réseau.
+		Si l'adresse est invalide, INADDR_NONE (généralement -1) est renvoyé.
+
 
 inet_ntoa:
+<sys/socket.h>
+<netinet/in.h>
+<arpa/inet.h>
+char *inet_ntoa(struct in_addr in);
+	- CONVERTIR UNE ADRESSE INTERNET BINAIRE EN UNE CHAINE DE CARACTERES NUMERIQUE POINTEE
+
+	args :
+		struct in_addr in : adresse Internet de l'hôte a convertir
+		struct in_addr {
+			in_addr_t s_addr;
+		};
+
 
 send:
+<sys/types.h>
+<sys/socket.h>
+ssize_t send(int s, const void *buf, size_t len, int flags);
+	- ENVOYER UN MESSAGE SUR UNE SOCKET
+
+	args :
+		1. int s : fd de la socket emettrice
+		2. const void *buf : message
+		3. size_t len : taille du message
+		4. int flags :
+		Sans aucun paramètre flags, send() est équivalent à write.
+
+	retour : 
+		S'il réussit, l'appel système renvoie le nombre de caractères émis.
+		S'il échoue, il renvoient -1 et errno contient le code d'erreur.
+
+		Si le message est trop long pour être transmis intégralement par le protocole sous-jacent, l'erreur EMSGSIZE sera déclenchée et rien ne sera émis. 
+		Si la socket ne dispose pas de la place suffisante pour le message, alors send() va bloquer, à moins que la socket ait été configurée en mode d'entrées-sorties non bloquantes auquel cas elle renverra EAGAIN.
+		Pour verifier s'il est possible d'émettre des données, on peut utiliser l'appel système select
+
 
 recv:
+<sys/types.h>
+<sys/socket.h>
+ssize_t recv(int s, void *buf, ssize_t len, int flags);
+	- RCECEVOIR UN MESSAGE SUR UNE SOCKET
+
+	args :
+		1. int s :
+		2. void *buf :
+		3. ssize_t len :
+		4. int flags :
+	
+	retour :
+		Si l'appel reussit, renvoie la longueur du message.
+		Si aucun message n'est disponible sur la socket, les fonctions de réception se mettent  en
+		attente,  à moins que la socket soit non bloquante (voir fcntl(2)) auquel cas la valeur -1
+		est renvoyée, et errno est positionnée à EAGAIN ou EWOULDBLOCK.
+	
+	Pour savoir si  des données supplémentaires sont disponibles dans la socket, on peut utiliser select(2), poll(2), ou epoll(7).
+
 
 signal:
+<signal.h>
+typedef void (*sighandler_t)(int);
+sighandler_t signal(int signum, sighandler_t handler);
+	-  GESTION DES SIGNAUX
+
+	args :
+		1. int signum : signal a gerer
+		2. sighandler_t handler : gestionnaire a installer
+			SIG_IGN : ignore
+			SIG_DFL : action par defaut du signal
+			Adresse d'une fonction
+
+	retour :
+		Renvoie la valeur précédente du gestionnaire de signaux, ou SIG_ERR en cas d'erreur.  
+
+
 
 lseek:
+<sys/types.h>
+<unistd.h>
+off_t lseek(int fd, off_t offset, int whence);   
+	- POSITIONNER LA TETE DE LECTURE/ECRITURE DANS UN FICHIER
+
+	args :
+		1. fd : fichier ouvert
+		2. off_t offset : position a laquelle placer la tete de lecture
+		3. int whence : directive a suivre
+			SEEK_SET : La tête est placée à offset octets depuis le début du fichier. 
+			SEEK_CUR : La tête de lecture/écriture est avancée de offset octets. 
+			SEEK_END : La tête est placée à la fin du fichier plus offset octets. 
+	
+	retour :
+		S'il réussit, renvoie le nouvel emplacement, mesuré en octets depuis le début du fichier.
+		En cas d'échec, la valeur (off_t) -1 est renvoyée, et errno contient le code d'erreur.  
+
+
 
 fstat:
+<sys/types.h>
+<sys/stat.h>
+<unistd.h>
+int fstat(int fd, struct stat *buf);
+	- OBTENIR L'ETAT D'UN FICHIER (FILE STATUS)
+
+	- récupère l'état du fichier référencé par fd et remplit le tampon buf
+	- pas besoin des droits d'accès au fichier pour obtenir les informations
+
+	args :
+		1. fd : fd dont on veut obtenir les informations
+		2. struct stat *buf : structure stat remplie par la fonction
+		struct stat {
+			dev_t     st_dev;         /* périphérique sur lequel le fichier réside */             */
+			ino_t     st_ino;         /* Numéro d’inœud                   */
+			mode_t    st_mode;        /* Protection                       */
+			nlink_t   st_nlink;       /* Nombre de liens physiques        */
+			uid_t     st_uid;         /* UID du propriétaire              */
+			gid_t     st_gid;         /* GID du propriétaire              */
+			dev_t     st_rdev;        /* Type de périphérique             */
+			off_t     st_size;        /* Taille totale du fichier en octets */
+			blksize_t st_blksize;     /* Taille  de  bloc  « préférée »  pour des entrées-sorties efficaces */
+			blkcnt_t  st_blocks;      /* Nombre de blocs de 512 octets alloués au fichier */
+
+			/* Depuis Linux 2.6, le noyau permet une précision à la
+			   nanoseconde pour les champs temporels suivants. Pour
+			   plus de précisions avant Linux 2.6, consultez les NOTES. */
+
+			struct timespec st_atim;  /* Heure dernier accès              */
+			struct timespec st_mtim;  /* Heure dernière modification      */
+			struct timespec st_ctim;  /* Heure dernier changement état    */
+
+		#define st_atime st_atim.tv_sec      /* Rétrocompatibilité        */
+		#define st_mtime st_mtim.tv_sec
+		#define st_ctime st_ctim.tv_sec
+		};
+
+
+	retour :
+		S'il  réussit, cet appel système renvoie 0.
+		S'il échoue, il renvoie -1 et remplit errno en conséquence.
+
+
 
 fcntl:
+<unistd.h>
+<fcntl.h>
+int fcntl(int fd, int cmd);
+int fcntl(int fd, int cmd, long arg);
+int fcntl(int fd, int cmd, struct flock *lock);
+	- EFFECTUER DES OPERATIONS SUR UN FD
 
-poll (ou équivalent):
+	- permet de se livrer à l'une des opérations décrites plus loin sur le descripteur de fichier fd.
+	- l'opération est déterminée par la valeur de l'argument cmd. 
 
+	- args :
+		1. fd
+		2. cmd : operation a executer sur le fd
+		3. (optionnel) La  nécessité  de  fournir  ce  paramètre
+		dépend  de  cmd. le paramètre doit être du type indiqué entre parenthèses après chaque nom
+		de commande cmd (dans la plupart des cas, le type requis est un int, et le  paramètre  est
+		identifié  en  utilisant  le  nom  arg),  ou  void  est  indiqué si le paramètre n'est pas
+		nécessaire.
+	
+	- differentes operations :
+		-    Dupliquer un descripteur de fichier
+		- Obtenir/modifier les attributs du descripteur de fichier
+		-  Obtenir/modifierles attribut d'état du fichier
+		- Verrouillages coopératifs
+		-   Verrouillage obligatoire
+		- Gestion des signaux
+		- Gestion des baux
+		-  Notification de modification de fichier et de répertoire (dnotify)
+		- Changer la capacité d'un tube
+	
+	- retour : la veleur de retour depend de l'operation
+
+
+
+poll (ou équivalent - select(), kqueue(), epoll()):
+<poll.h>
+int poll(struct pollfd *fds, nfds_t nfds, int délai);
+	- ATTENDRE UN EVENEMENT CONCERNANT UN FD
+
+	- attend que l'un des descripteurs de fichier parmi un ensemble soit prêt pour effectuer des entrées-sorties. 
+	- si aucun événement attendu (ni aucune erreur) ne s'est déjà produit, poll() bloque jusqu'à ce que l'un des événements survienne.
+
+	- args :
+		1. struct pollfd *fds : tableau de structures qui contiennent chacune un fd a surveiller
+			struct pollfd {
+				int   fd;         /* Descripteur de fichier ouvert */
+				short events;     /* Événements attendus, paramètre d'entrée  */
+				short revents;    /* Événements détectés, paramètre de sortie    */
+								  /* Les bits qui peuvent être positionnés ou renvoyés dans events et revents sont définis dans <poll.h> : */
+			};
+		2. nfds_t nfds :  unsigned int utilise pour decrire le nombre de fds, en l'occurence, le nombre d'elements dans notre tableau de structures
+		3. int delai : L'argument délai définit une limite supérieure, en millisecondes, sur le temps pendant lequel poll() bloquera. Définir une valeur négative pour délai signifie un délai d'attente infini. 
+		
+	- retour :
+		S'ils réussissent, ces appels renvoient une valeur positive représentant le nombre de structures ayant un champ revents non nul, c'est-à-dire le nombre de structures pour lesquels un événement attendu ou une erreur s'est produit.
+		Une valeur de retour nulle indique un dépassement du délai d'attente et qu'aucun descripteur de fichier n'était prêt.
+		S'ils échouent, ces appels renvoient -1, et errno contient le code d'erreur.  
 
