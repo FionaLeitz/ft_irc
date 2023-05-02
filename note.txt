@@ -100,13 +100,94 @@ int	getaddrinfo( const char *node, const char *service, const struct addrinfo *h
 
 freeaddrinfo:
 
+
 bind:
+#include <sys/types.h>
+#include <sys/socket.h>
+
+int bind(int sockfd, const struct sockaddr *addr, socklen_t addrlen);
+	- FOURNIR UN NOM A UNE SOCKET
+
+	args :
+		1. int sockfd : fd de la socket
+		2. const struct sockaddr *addr : addresse a affecter a la socket
+		3. socklen_t addrlen : taille de en octet de la structure d'adresse 
+
+	Traditionnellement cette opération est appelée « affectation d'un nom à une socket ». 
+	Quand une socket est créée avec l'appel système socket(2), elle existe dans l'espace des noms mais n'a pas de nom assigné.
+	bind() affecte l'adresse spécifiée dans addr à la socket référencée par le descripteur de fichier sockfd.
+
+	retour : Renvoie 0 si il réussit.
+			 Renvoie -1 en cas d'échec, auquel cas errno est renseignée en conséquence.  
+
 
 connect:
+#include <sys/types.h>
+#include <sys/socket.h>
+int connect(int sockfd, const struct sockaddr *serv_addr, socklen_t addrlen);
+	- DEBUTER UNE CONNEXION SUR UNE SOCKET
+
+	args :
+		1. int sockfd : fd de la socket
+		2. const struct sockaddr *serv_addr : adresse a laquelle connecter la socket (si la socket est du type SOCK_STREAM ou SOCK_SEQPACKET,
+											  cette fonction tente de se connecter à la socket qui est liée à l'adresse indiquée par serv_addr)
+		3. socklen_t addrlen : taille de l'adresse
+
+	Connecte la socket référencée par le descripteur de fichier sockfd à l'adresse indiquée par serv_addr.
+	En général, les sockets des protocoles orientés connexion ne réussissent un appel connect() qu'une seule fois, alors qu'une socket d'un
+	protocole sans connexion peut appeler connect() plusieurs fois pour changer son affectation
+
+	retour : Renvoie 0 si il réussit.
+			 Renvoie -1 en cas d'échec, auquel cas errno est renseignée en conséquence.  
+
 
 listen:
+#include <sys/types.h>
+#include <sys/socket.h>
+int listen(int sockfd, int backlog);
+	- ATTENDRE DES CONNEXIONS SUR UNE SOCKET
+
+	args :
+		1. int sockfd : fd qui fait référence à une socket de type SOCK_STREAM ou SOCK_SEQPACKET.
+		2. int backlog : longueur maximale jusqu'à laquelle la file des connexions en attente pour sockfd peut croître.
+					(si une nouvelle connexion arrive alors que la file est pleine, le client reçoit une erreur
+					indiquant ECONNREFUSED, ou, si le protocole sous-jacent supporte les retransmissions, la
+					requête peut être ignorée afin qu'un nouvel essai réussisse.)
+
+	listen() marque la socket référencée par sockfd comme une socket passive, c'est-à-dire comme une socket qui sera
+	utilisée pour accepter les demandes de connexions entrantes en utilisant accept(2). 
+	
+	retour : Renvoie 0 si il réussit.
+			 Renvoie -1 en cas d'échec, auquel cas errno est renseignée en conséquence.  
+
 
 accept:
+#include <sys/types.h>
+#include <sys/socket.h>
+int accept(int sockfd, struct sockaddr *adresse, socklen_t *longueur);
+	- ACCEPTER UNE CONNEXION SUR UNE SOCKET
+
+	args :
+		1. int sockfd : fd de la socket  socket qui a été créée en mode connecté (SOCK_STREAM et SOCK_SEQPACKET) avec la fonction socket(2), attachée à une adresse avec bind(2), et attend des connextions après un appel listen(2). 
+		2. struct sockaddr *adresse : pointeur sur une structure sockaddr, remplie avec l'adresse du correspondant se connectant
+		3. socklen_t *longueur : paramètre-résultat : il doit contenir initialement la taille de la structure pointée par adresse, et est renseigné au retour par la longueur réelle (en octet) de l'adresse remplie. Quand adresse vaut NULL, rien n'est rempli.
+	
+	extrait la première connexion de la file des connexions en attente de la socket sockfd à l'écoute, crée une nouvelle
+	socket connectée, et renvoie un nouveau descripteur de fichier qui fait référence à cette socket.
+	La nouvelle socket n'est pas en état d'écoute.
+	La socket originale sockfd n'est pas modifiée par l'appel système.
+	S'il n'y a pas de connexion en attente dans la file, et si la socket n'est pas marquée comme non bloquante, accept() se
+	met en attente d'une connexion.
+	Si la socket est non bloquante, et qu'aucune connexion n'est présente dans la file, accept() échoue avec l'erreur EAGAIN.
+
+	Pour être prévenu de l'arrivée d'une connexion sur une socket, on peut utiliser select(2) ou poll(2). Un événement « lecture »
+	sera délivré lorsqu'une tentative de connexion aura lieu, et on pourra alors appeler accept() pour la valider.
+	Autrement, on peut configurer la socket pour qu'elle envoie un signal SIGIO lorsqu'une activité la concernant se produit
+	voir socket(7) pour plus de détails.
+
+	retour : s'il reussit, renvoie le fd de la nouvelle socket
+	S'il échoue, renvoie -1 et errno contient le code d'erreur.
+
 
 htons:
 
@@ -333,4 +414,21 @@ int poll(struct pollfd *fds, nfds_t nfds, int délai);
 		S'ils réussissent, ces appels renvoient une valeur positive représentant le nombre de structures ayant un champ revents non nul, c'est-à-dire le nombre de structures pour lesquels un événement attendu ou une erreur s'est produit.
 		Une valeur de retour nulle indique un dépassement du délai d'attente et qu'aucun descripteur de fichier n'était prêt.
 		S'ils échouent, ces appels renvoient -1, et errno contient le code d'erreur.  
+
+
+			##############################################################################################
+
+
+NOTES 
+
+Pour accepter des connexions, les étapes suivantes sont effectuées :
+
+    1.
+        Une socket est créée avec socket(2). 
+    2.
+        La socket est limitée à une adresse locale avec bind(2), ainsi d'autres sockets peuvent y être connect(2)ées. 
+    3.
+        La volonté d'accepter des connexions entrantes et une limite de file pour les connexions entrantes sont spécifiées avec listen(). 
+    4.
+        Les connexions sont acceptées avec accept(2). 
 
