@@ -4,7 +4,7 @@ Vous utiliserez un vrai client IRC afin de vous connecter à votre serveur et ai
 tester.
 Internet fonctionne grâce à de nombreux standards et protocoles pour permettre une
 interopérabilité entre les machines connectées. Il est toujours intéressant de connaître ce
-genre de chose
+genre de chose.
 
 
 Si on veut utiliser le client hexchat (pour ne pas prendre irci et etre que en ligne de commande),
@@ -22,17 +22,34 @@ Qu'est ce qu'une socket ? Deja apparemment on dit UN socket.
 -genre d'intermediaire a la connection, qui va gerer des problematique de reseau pour nous
 
 
+
 Fonctions autorisees :
+
 
 socket:
 <sys/socket.h>
 int	socket( int domain, int type, int protocol );
- -create an unbound socket in a communications domain, and return a file descriptor that can be used
+ - create an unbound socket in a communications domain, and return a file descriptor that can be used
   in later function calls that operate on sockets.
 		* domain : specifies the communications domain in which a socket is to be created
 		* type : specifies the type of socket to be created
 		* protocol : specifies a particular protocol to be used with the socket (protocol of 0 for
 			an unspecified default protocol appropriate for the type)
+
+Dans la routine socket (int domaine, int type, int protocole), le paramètre "domaine" précise si le socket
+est pour une communication réseau ou une communication inter-processus;
+si on est dans le premier cas,  on parle de socket internet et le paramètre domaine prend la valeur "AF_INET".
+Si c'est le deuxième  cas, on a un socket UNIX c'est à dire une communication inter-processus et le paramètre "domaine" vaut AF_UNIX;
+toutefois, quelque soit le domaine choisi, on se retrouve dans l'un des quatre modes de communication suivantes:
+
+    1. en mode connecté à travers Internet : TCP
+    2. en mode connecté à travers Unix : TCP
+    3. en mode datagramme à travers Internet : UDP
+    4. en mode datagramme à travers Unix : UDP
+
+Dans le cadre de l'implémentation d'un serveur IRC en C++, les sockets sont utilisés pour permettre aux clients (utilisateurs du serveur)
+de se connecter et de communiquer avec le serveur. 
+
 
 close:
 <unistd.h>
@@ -190,13 +207,24 @@ int accept(int sockfd, struct sockaddr *adresse, socklen_t *longueur);
 	S'il échoue, renvoie -1 et errno contient le code d'erreur.
 
 
-htons:
 
-htonl:
+htonl,  htons,  ntohl, ntohs :
+#include <arpa/inet.h>
+- CONVERTIR DES DONNEES ENTRE L'ORDRE DES OCTETS ET DE L'HOTE ET DU RESEAU
 
-ntohs:
+unit32_t htonl(uint32_t hostlong);
+	convertit hostlong depuis l'ordre des octets de l'hôte vers celui du réseau
 
-ntohl:
+uint16_t htons(uint16_t hostshort);
+	convertit hostshort depuis l'ordre des octets de l'hôte vers celui du réseau.
+
+uint32_t ntohl(uint32_t netlong);
+	convertit netlong depuis l'ordre des octets du réseau vers celui de l'hôte
+
+uint16_t ntohs(uint16_t netshort);
+	convertit netshort depuis l'ordre des octets du réseau vers celui de l'hôte.
+
+
 
 inet_addr:
 <sys/socket.h>
@@ -422,14 +450,82 @@ int poll(struct pollfd *fds, nfds_t nfds, int délai);
 
 NOTES 
 
-Pour accepter des connexions, les étapes suivantes sont effectuées :
 
-    1.
-        Une socket est créée avec socket(2). 
-    2.
-        La socket est limitée à une adresse locale avec bind(2), ainsi d'autres sockets peuvent y être connect(2)ées. 
-    3.
-        La volonté d'accepter des connexions entrantes et une limite de file pour les connexions entrantes sont spécifiées avec listen(). 
-    4.
-        Les connexions sont acceptées avec accept(2). 
+SOCKET :
 
+	Pour accepter des connexions, les étapes suivantes sont effectuées :
+
+		1.
+			Une socket est créée avec socket(2). 
+		2.
+			La socket est limitée à une adresse locale avec bind(2), ainsi d'autres sockets peuvent y être connect(2)ées. 
+		3.
+			La volonté d'accepter des connexions entrantes et une limite de file pour les connexions entrantes sont spécifiées avec listen(). 
+		4.
+			Les connexions sont acceptées avec accept(2). 
+
+
+	Le protocole IRC (Internet Relay Chat) utilise des sockets pour la communication entre le client et le serveur. Le serveur doit donc
+	créer un socket d'écoute qui attend les connexions entrantes des clients et un socket pour chaque connexion acceptée. Chaque socket
+	accepté est utilisé pour communiquer avec le client correspondant.
+
+
+SERVEUR/CLIENT :
+
+	Dans un serveur IRC (Internet Relay Chat) :
+
+	client : l'application logicielle qui est exécutée sur l'ordinateur d'un utilisateur pour se connecter au serveur IRC et participer à
+	des conversations de groupe ou privées avec d'autres utilisateurs connectés au même serveur.
+
+	serveur : l'application logicielle qui gère les connexions des clients et permet à ces derniers de communiquer entre eux.
+	Il est responsable de l'acheminement des messages des clients aux autres utilisateurs connectés au même canal de discussion.
+	Le serveur IRC peut également être configuré pour fournir des fonctionnalités supplémentaires, telles que la gestion des utilisateurs,
+	la protection contre les spammeurs, la modération des discussions, etc.
+
+	Concrètement, dans un serveur IRC, le client se connecte au serveur en utilisant un nom d'utilisateur et un mot de passe (si requis).
+	Une fois connecté, le client peut rejoindre un ou plusieurs canaux de discussion où il peut interagir avec d'autres utilisateurs. Le client
+	peut également envoyer des messages privés à un utilisateur spécifique en utilisant son pseudonyme ou son adresse IP.
+
+	Le serveur IRC, quant à lui, gère les connexions des clients et les canaux de discussion. Il reçoit les messages envoyés par les clients et
+	les relaie aux autres utilisateurs connectés au même canal. Le serveur IRC peut également être programmé pour effectuer diverses tâches,
+	telles que la gestion des droits d'accès, la surveillance des conversations, la détection des spams, etc.
+
+
+SOCKET SERVEUR/CLIENT
+
+	La socket créée par le client est différente de celle créée par le serveur lorsqu'il accepte une connexion :
+
+	- socket créée par le client : créée par le client utilisée pour envoyer des messages au serveur
+	- socket créée par le serveur : utilisée pour recevoir des messages de l'utilisateur
+
+	Donc, pour résumer, le client crée une socket lorsqu'il se connecte au serveur IRC en utilisant la fonction connect(), et le serveur crée une
+	socket lorsqu'il accepte une connexion en utilisant la fonction accept().
+
+
+LIEN FONCTIONS 
+
+	Lorsqu'un utilisateur souhaite envoyer un message à un autre utilisateur sur un serveur IRC, le processus suivant peut se produire :
+
+		1. Le client IRC de l'utilisateur demande l'etablissement d'une connexion a l'aide de connect().
+
+		2. Le serveur IRC accepte la connexion du client en utilisant la fonction accept(). Cette fonction crée un nouveau socket pour la
+		communication entre le client et le serveur.
+
+		3. Le serveur IRC attend la demande de connexion d'un autre utilisateur en écoutant sur le socket créé avec la fonction listen().
+
+		4. Lorsqu'un autre utilisateur se connecte au serveur IRC, le serveur accepte la connexion en utilisant la fonction accept(). Cette
+		fonction crée un nouveau socket pour la communication entre l'utilisateur et le serveur.
+
+		5. L'utilisateur envoie un message au serveur IRC en utilisant la fonction send(). Cette fonction envoie le message sur le socket créé
+		avec la fonction connect().
+
+		6. Le serveur IRC reçoit le message de l'utilisateur en utilisant la fonction recv(). Cette fonction récupère le message sur le socket
+		créé avec la fonction accept().
+
+		7. Le serveur IRC relaie le message à l'utilisateur destinataire en utilisant la fonction send() sur le socket créé avec la fonction accept().
+
+		8. L'utilisateur destinataire reçoit le message en utilisant la fonction recv() sur le socket créé avec la fonction connect().
+
+	En somme, les fonctions socket(), bind(), listen(), connect() et accept() sont utilisées pour établir une connexion entre le client et le serveur IRC,
+	créer un socket d'écoute pour attendre les demandes de connexion entrantes, accepter les connexions des clients, recevoir et envoyer des messages entre
+	les clients connectés au serveur.
