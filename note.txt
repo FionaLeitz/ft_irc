@@ -288,16 +288,15 @@ ssize_t recv(int s, void *buf, ssize_t len, int flags);
 	- RCECEVOIR UN MESSAGE SUR UNE SOCKET
 
 	args :
-		1. int s :
-		2. void *buf :
-		3. ssize_t len :
-		4. int flags :
+		1. int s : fd de la socket qui envoie le message
+		2. void *buf : buffer ou est stocke le message
+		3. ssize_t len : taille en octet du buffer
+		4. int flags : type de reception
 	
 	retour :
 		Si l'appel reussit, renvoie la longueur du message.
-		Si aucun message n'est disponible sur la socket, les fonctions de réception se mettent  en
-		attente,  à moins que la socket soit non bloquante (voir fcntl(2)) auquel cas la valeur -1
-		est renvoyée, et errno est positionnée à EAGAIN ou EWOULDBLOCK.
+		Si aucun message n'est disponible sur la socket, les fonctions de réception se mettent en attente, à moins que la socket soit
+		non bloquante (voir fcntl(2)) auquel cas la valeur -1 est renvoyée, et errno est positionnée à EAGAIN ou EWOULDBLOCK.
 	
 	Pour savoir si  des données supplémentaires sont disponibles dans la socket, on peut utiliser select(2), poll(2), ou epoll(7).
 

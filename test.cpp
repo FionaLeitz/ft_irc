@@ -27,10 +27,12 @@ struct sockaddr {
 
 int main() {
 	int					serverSocket;
+	int					clientSocket;
 	struct sockaddr_in	serverAddress;
+	struct sockaddr_in clientAddress;
 	int					ret;
 
-	    // Création de la socket d'ecoute du serveur
+	/* Création de la socket d'ecoute du serveur */
     serverSocket = socket(AF_INET, SOCK_STREAM, 0);
     if (serverSocket == -1)
 	{
@@ -38,7 +40,8 @@ int main() {
         return (1);
     }
 
-    // Préparation de l'adresse IP et du port du serveur
+    /* Préparation de l'adresse IP et du port du serveur */
+
     std::memset(&serverAddress, 0, sizeof(serverAddress));
     serverAddress.sin_family = AF_INET; // toujours cette valeur mais jsp pourquoi
     serverAddress.sin_addr.s_addr = htonl(INADDR_LOOPBACK); // conversion depuis l'ordre des octets de l'hôte vers celui du réseau (pour un uint32)
@@ -49,8 +52,9 @@ int main() {
 	// serverAddress.sin_addr.s_addr = addr;
     serverAddress.sin_port = htons(3630);  // htons : conversion depuis l'ordre des octets de l'hôte vers celui du réseau (pour un uint16)
 	//port du pere noel
-	
-    // Attribution de l'adresse IP et du port à la socket
+
+    /* Attribution de l'adresse IP et du port à la socket */
+
     ret = bind(serverSocket, (struct sockaddr *)&serverAddress, sizeof(serverAddress));
     if (ret == -1)
 	{
@@ -66,36 +70,50 @@ int main() {
 		<< "\nsin_addr.s_addr = " << inet_ntoa(name.sin_addr) << std::endl;
 	}
 
-    // Attente de connexions entrantes
-    int listenResult = listen(serverSocket, 1);
-    if (listenResult == -1) {
-        std::cerr << "Erreur lors de l'attente de connexions entrantes" << std::endl;
+    /* Attente de connexions entrantes */
+
+    ret = listen(serverSocket, 1);
+    if (ret == -1) {
+        std::cerr << "Error while executing listen() : " << strerror(errno) << std::endl;
         return 1;
     }
 
-    // Acceptation de la première connexion entrante
-    struct sockaddr_in clientAddress;
-    socklen_t clientAddressLength = sizeof(clientAddress);
-    int clientSocket = accept(serverSocket, (struct sockaddr *)&clientAddress, &clientAddressLength);
-    if (clientSocket == -1) {
-        std::cerr << "Erreur lors de l'acceptation de la connexion entrante" << std::endl;
-        return 1;
-    }
+    /* Acceptation de la première connexion entrante */
 
-    // Réception du message du client
+	socklen_t clientAddressLength = sizeof(clientAddress);
+	clientSocket = accept(serverSocket, (struct sockaddr *)&clientAddress, &clientAddressLength);
+    if (clientSocket == -1)
+	{
+        std::cerr << "Error while executing accept() : " << strerror(errno) << std::endl;
+        return(1);
+    }
+	else
+	{
+		std::cout << "Client socket successfully created" << std::endl;
+	}
+
+    /* Réception du message du client */
+
     char buffer[256];
-    int recvResult = recv(clientSocket, buffer, sizeof(buffer), 0);
-    if (recvResult == -1) {
-        std::cerr << "Erreur lors de la réception du message" << std::endl;
-        return 1;
+    ret = recv(clientSocket, buffer, sizeof(buffer), 0);
+    if (ret == -1)
+	{
+        std::cerr << "Error while receiving the message with recv() : " << strerror(errno) << std::endl;
+        return(1);
     }
+	else
+	{
+		std::cout << "Successfully received a message of size " << ret << " from client ! "<< std::endl;
+	}
 
-    // Affichage du message reçu
+    /* Affichage du message reçu */
+
     std::cout << "Message reçu : " << buffer << std::endl;
 
-    // Fermeture des sockets
+    /* Fermeture des sockets */
+
     close(clientSocket);
     close(serverSocket);
 
-    return 0;
+    return (0);
 }
