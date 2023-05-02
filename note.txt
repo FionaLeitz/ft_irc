@@ -113,8 +113,9 @@ int bind(int sockfd, const struct sockaddr *addr, socklen_t addrlen);
 		2. const struct sockaddr *addr : addresse a affecter a la socket
 		3. socklen_t addrlen : taille de en octet de la structure d'adresse 
 
-	Traditionnellement cette opération est appelée « affectation d'un nom à une socket ». 
-	Quand une socket est créée avec l'appel système socket(2), elle existe dans l'espace des noms mais n'a pas de nom assigné.
+	Traditionnellement cette opération est appelée « affectation d'un nom à une socket ».
+	Après sa création, une socket n’est connue que du processus qui l’a créée et par ses descendants. Elle doit être désignée par une adresse
+	pour pouvoir être contactée de l’extérieur par d'autres processus locaux ou distants.
 	bind() affecte l'adresse spécifiée dans addr à la socket référencée par le descripteur de fichier sockfd.
 
 	retour : Renvoie 0 si il réussit.
