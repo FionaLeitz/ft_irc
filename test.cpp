@@ -104,6 +104,7 @@ int main() {
             std::cout << "Connexion acceptée depuis " << inet_ntoa(clientAddress.sin_addr) << ":" << ntohs(clientAddress.sin_port) << std::endl;
 			fds[1].fd = clientSocket;
 			fds[1].events = POLLIN;
+			//  send(clientSocket, ":localhost 001 cmeston :Welcome to the test IRC server cmeston\r\n", sizeof(":localhost 001 cmeston :Welcome to the test IRC server cmeston\r\n"), 0);
 		}
 		if (fds[1].revents & POLLIN)
 		{
@@ -124,6 +125,11 @@ int main() {
 			{
 				std::cout << "Successfully received a message of size " << ret << " from client ! "<< std::endl;
 				std::cout << "Message reçu : " << buffer << std::endl;
+				if (strncmp(buffer, "coucou", 6) == 0)
+				{
+					std::cout << "!!!!!!!!!" << std::endl;
+					send(clientSocket, ":cmeston!user@host JOIN #joli_channel\r\n", sizeof(":cmeston!user@host JOIN #joli_channel\r\n"), 0);
+				}
 			}
 
 		}
