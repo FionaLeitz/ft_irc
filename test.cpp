@@ -6,6 +6,7 @@
 #include <unistd.h>
 #include <errno.h>
 #include <arpa/inet.h>
+#include <poll.h>
 /*
 struct sockaddr_in {
 	short	sin_family;		// famille d'adresses : AF_INET   
@@ -31,6 +32,8 @@ int main() {
 	struct sockaddr_in	serverAddress;
 	struct sockaddr_in clientAddress;
 	int					ret;
+	struct pollfd		fds[2];
+	char				buffer[256];
 
 	/* Création de la socket d'ecoute du serveur */
     serverSocket = socket(AF_INET, SOCK_STREAM, 0);
@@ -78,37 +81,54 @@ int main() {
         return 1;
     }
 
-    /* Acceptation de la première connexion entrante */
-
-	socklen_t clientAddressLength = sizeof(clientAddress);
-	clientSocket = accept(serverSocket, (struct sockaddr *)&clientAddress, &clientAddressLength);
-    if (clientSocket == -1)
+	fds[0].fd = serverSocket;
+	fds[0].events = POLLIN;
+	while (1)
 	{
-        std::cerr << "Error while executing accept() : " << strerror(errno) << std::endl;
-        return(1);
-    }
-	else
-	{
-		std::cout << "Client socket successfully created" << std::endl;
-	}
+		ret = poll(fds, 2, -1);
+        if (ret < 0)
+		{
+            std::cerr << "Error while executing poll() : " << strerror(errno) << std::endl;
+            return (1);
+        }
+        if (fds[0].revents & POLLIN)
+		{
+			 /* Acceptation de la première connexion entrante */
+            socklen_t clientAddressLength = sizeof(clientAddress);
+            clientSocket = accept(serverSocket, (struct sockaddr *)&clientAddress, &clientAddressLength);
+            if (clientSocket == -1) //ou < 0 ?
+			{
+				std::cerr << "Error while executing accept() : " << strerror(errno) << std::endl;
+				return(1);
+			}
+            std::cout << "Connexion acceptée depuis " << inet_ntoa(clientAddress.sin_addr) << ":" << ntohs(clientAddress.sin_port) << std::endl;
+			fds[1].fd = clientSocket;
+			fds[1].events = POLLIN;
+		}
+		if (fds[1].revents & POLLIN)
+		{
+			bzero(buffer, 256);
+			ret = recv(clientSocket, buffer, sizeof(buffer), 0);
+			if (ret == -1)
+			{
+				std::cerr << "Error while receiving the message with recv() : " << strerror(errno) << std::endl;
+				return(1);
+			}
+			else if (ret == 0)
+			{
+				std::cout << "Client has left the chat" << std::endl;
+				close (clientSocket);
+				break ;
+			}
+			else
+			{
+				std::cout << "Successfully received a message of size " << ret << " from client ! "<< std::endl;
+				std::cout << "Message reçu : " << buffer << std::endl;
+			}
 
-    /* Réception du message du client */
+		}
+		}
 
-    char buffer[256];
-    ret = recv(clientSocket, buffer, sizeof(buffer), 0);
-    if (ret == -1)
-	{
-        std::cerr << "Error while receiving the message with recv() : " << strerror(errno) << std::endl;
-        return(1);
-    }
-	else
-	{
-		std::cout << "Successfully received a message of size " << ret << " from client ! "<< std::endl;
-	}
-
-    /* Affichage du message reçu */
-
-    std::cout << "Message reçu : " << buffer << std::endl;
 
     /* Fermeture des sockets */
 
