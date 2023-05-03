@@ -31,8 +31,8 @@ struct pollfd	*new_tab( struct pollfd *fds, int socket_nbr ) {
 	return new_tab;
 }
 
-// int	create_server_link( char *port ) {
-int	create_server_link( void ) {
+int	create_server_link( char *port ) {
+// int	create_server_link( void ) {
 
 	int					server_socket;
 	struct sockaddr_in	serverAddress;
@@ -49,8 +49,8 @@ int	create_server_link( void ) {
 	std::memset( &serverAddress, 0, sizeof( serverAddress ) );
 	serverAddress.sin_family = AF_INET;
 	serverAddress.sin_addr.s_addr = htonl( INADDR_LOOPBACK );
-	serverAddress.sin_port = htons( 3630 );
-	// serverAddress.sin_port = htons( atoi( port ) );
+	// serverAddress.sin_port = htons( 3630 );
+	serverAddress.sin_port = htons( atoi( port ) );
 
     /* Attribution de l'adresse IP et du port à la socket */
 	ret = bind( server_socket, (struct sockaddr *)&serverAddress, sizeof(serverAddress) );
@@ -79,13 +79,17 @@ void	end_close( struct pollfd *fds, int socket_nbr ) {
 		close( fds[socket_nbr].fd );
 }
 
+
+
 struct pollfd	*check_communication( struct pollfd *fds, int *socket_nbr ) {
 	int					ret;
 	struct sockaddr_in	clientAddress;
 	char				buffer[256];
 	socklen_t 			clientAddressLength = sizeof(clientAddress);
+	int					end = 0;
 
-	while (1)
+	// while ( end < 10 )
+	while ( 1 )
 	{
 		ret = poll(fds, *socket_nbr, -1);
         if (ret < 0)
@@ -111,8 +115,7 @@ struct pollfd	*check_communication( struct pollfd *fds, int *socket_nbr ) {
 			/* Verification de demande de communication */
 			if (fds[i].revents & POLLIN)
 			{
-				bzero(buffer, 256);
-				ret = recv(fds[i].fd, buffer, sizeof(buffer), 0);
+				ret = recv(fds[i].fd, &buffer[end], sizeof(buffer), 0);
 				if (ret == -1)
 				{
 					std::cerr << "Error while receiving the message with recv() : " << strerror(errno) << std::endl;
@@ -127,11 +130,17 @@ struct pollfd	*check_communication( struct pollfd *fds, int *socket_nbr ) {
 				else
 				{
 					std::cout << "Successfully received a message of size " << ret << " from client ! "<< std::endl;
-					std::cout << "Message reçu : " << buffer << std::endl;
+					if ( strstr( buffer, "\r\n" ) != NULL ) {
+						std::cout << "Message reçu : " << buffer << std::endl;
+						bzero(buffer, 256);
+					}
+					else
+						end = strlen( buffer );
 				}
 			}
 		}
 	}
+	// std::cout << buffer << std::endl;
 	return fds;
 }
 
@@ -139,16 +148,15 @@ int	main( int argc, char **argv ) {
 	struct pollfd		*fds = new pollfd[1];
 	int					socket_nbr[1];
 
-	(void)argc;
-	(void)argv;
-	// if ( argc != 2 ) {
-	// 	std::cout << "Error number of arguments" << std::endl;
-	// 	return 1;
-	// }
+	// (void)argc;
+	// (void)argv;
+	if ( argc != 2 ) {
+		std::cout << "Error number of arguments" << std::endl;
+		return 1;
+	}
 
-	// fds[0].fd = create_server_link( argv[1] );
-
-	fds[0].fd = create_server_link();
+	fds[0].fd = create_server_link( argv[1] );
+	// fds[0].fd = create_server_link();
 	if ( fds[0].fd == -1 )
 		return -1;
 	fds[0].events = POLLIN;

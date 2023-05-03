@@ -12,4 +12,11 @@
 # include <stdio.h>
 # include <cstdlib>
 
+typedef struct	s_client {
+	std::string	username;
+	std::string	nickname;
+	std::string	buffer;
+
+}			t_client;
+
 #endif
