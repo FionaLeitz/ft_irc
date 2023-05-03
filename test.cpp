@@ -34,6 +34,8 @@ int main() {
 	int					ret;
 	struct pollfd		fds[2];
 	char				buffer[256];
+	std::string			buff;
+	int					pos;
 
 	/* Création de la socket d'ecoute du serveur */
     serverSocket = socket(AF_INET, SOCK_STREAM, 0);
@@ -108,8 +110,10 @@ int main() {
 		}
 		if (fds[1].revents & POLLIN)
 		{
+			buff.clear();
 			bzero(buffer, 256);
 			ret = recv(clientSocket, buffer, sizeof(buffer), 0);
+			buff.insert(0, buffer);
 			if (ret == -1)
 			{
 				std::cerr << "Error while receiving the message with recv() : " << strerror(errno) << std::endl;
@@ -124,12 +128,22 @@ int main() {
 			else
 			{
 				std::cout << "Successfully received a message of size " << ret << " from client ! "<< std::endl;
-				std::cout << "Message reçu : " << buffer << std::endl;
-				if (strncmp(buffer, "coucou", 6) == 0)
+				std::cout << "Message reçu : " << buff << std::endl;
+				// if (strncmp(buffer, "coucou", 6) == 0)
+				// {
+				// 	std::cout << "!!!!!!!!!" << std::endl;
+				// 	send(clientSocket, ":cmeston!user@host JOIN #joli_channel\r\n", sizeof(":cmeston!user@host JOIN #joli_channel\r\n"), 0);
+				// }
+				ret = buff.find("\r\n");
+				pos = 0;
+				while (ret != -1)
 				{
-					std::cout << "!!!!!!!!!" << std::endl;
-					send(clientSocket, ":cmeston!user@host JOIN #joli_channel\r\n", sizeof(":cmeston!user@host JOIN #joli_channel\r\n"), 0);
+					std::cout << "Commande recue commence a " << pos << " et finit a " << ret - 1 << std::endl;
+					std::cout << buff.substr(pos, ret - pos) << std::endl;
+					pos = ret + 2;
+					ret = buff.find("\r\n", ret + 2);
 				}
+
 			}
 
 		}
