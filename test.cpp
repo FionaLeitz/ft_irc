@@ -38,7 +38,8 @@ int main() {
 	int					pos;
 	std::string			nick;
 	std::string			username;
-	std::string	response;
+	std::string			response;
+	std::string			message;
 
 	/* Création de la socket d'ecoute du serveur */
     serverSocket = socket(AF_INET, SOCK_STREAM, 0);
@@ -125,7 +126,6 @@ int main() {
 			{
 				std::cout << "Client has left the chat" << std::endl;
 				close (clientSocket);
-				break ;
 			}
 			else
 			{
@@ -135,7 +135,7 @@ int main() {
 				{
 					// #IRC connection handshake consists of sending NICK and USER messages. All IRC messages must end in \r\n
 					ret = buff.find("NICK") + 5;
-					nick = buff.substr(ret, buff.find("\r\n") - ret);
+					nick = buff.substr(ret, buff.find("USER") - 2 - ret);
 					ret = buff.find("USER") + 5;
 					username = buff.substr(ret, buff.rfind("\r\n") - ret);
 					response = ":server 001 " + nick + " :Welcome to the test IRC server " + nick + "\r\n";
@@ -157,6 +157,14 @@ int main() {
 				else if (buff.find("WHO") != std::string::npos)
 				{
 					response = ":server 352 " + nick + " #joli_channel " + nick + " user host server " + nick + " H :0 " + nick + "\r\n";
+					send(clientSocket, response.c_str(), response.length(), 0);
+				}
+				else if (buff.find("PRIVMSG") != std::string::npos)
+				{
+					ret = buff.find("#joli_channel :") + 15;
+					message = buff.substr(ret, buff.find("\r\n") - ret);
+					std::cout << "message = " << message << std::endl;
+					response = ":server PRIVMSG #joli_channel :" + message +"\r\n";
 					send(clientSocket, response.c_str(), response.length(), 0);
 				}
 				ret = buff.find("\r\n");
