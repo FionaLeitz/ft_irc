@@ -7,6 +7,11 @@
 #include <errno.h>
 #include <arpa/inet.h>
 #include <poll.h>
+
+#define USER_ID(nickname, username) (nickname + "!" + username + "@host")
+#define RPL_WELCOME(nickname, username) (":server 001 " + nickname + " :Welcome to the test IRC Network " + USER_ID(nickname, username) + "\r\n")
+#define RPL_JOIN(nickname, username, channel) (":" + USER_ID(nickname, username) + " JOIN " + channel + "\r\n")
+
 /*
 struct sockaddr_in {
 	short	sin_family;		// famille d'adresses : AF_INET   
@@ -48,7 +53,6 @@ int main() {
         std::cerr << "Failed to create socket : " << errno << std::endl;
         return (1);
     }
-
     /* Préparation de l'adresse IP et du port du serveur */
 
     std::memset(&serverAddress, 0, sizeof(serverAddress));
@@ -137,8 +141,8 @@ int main() {
 					ret = buff.find("NICK") + 5;
 					nick = buff.substr(ret, buff.find("USER") - 2 - ret);
 					ret = buff.find("USER") + 5;
-					username = buff.substr(ret, buff.rfind("\r\n") - ret);
-					response = ":server 001 " + nick + " :Welcome to the test IRC server " + nick + "\r\n";
+					username = buff.substr(ret, buff.find(" ", ret + 5) - ret);
+					response = RPL_WELCOME(nick, username);
 					std::cout << "\tnickname = " << nick << "\n\tusername = " << username << std::endl;
 					send(clientSocket, response.c_str(), response.length(), 0);
 					 //jsp si utile ou pas ?
@@ -146,7 +150,8 @@ int main() {
 				if (buff.find("coucou") != std::string::npos)
 				{
 					std::cout << "!!!!!!!!!" << std::endl;
-					response = ":" + nick + "!user@host JOIN #joli_channel\r\n";
+					response = RPL_JOIN(nick, username, "#joli_channel");
+					// std::cout << "###########" << std::endl << response << std::endl << RPL_JOIN(nick, username, "#joli_channel") << std::endl << std::endl;
 					send(clientSocket, response.c_str(), response.length(), 0);
 				}
 				else if (buff.find("MODE") != std::string::npos)
