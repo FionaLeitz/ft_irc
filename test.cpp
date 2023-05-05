@@ -49,7 +49,7 @@ int main() {
 
     std::memset(&serverAddress, 0, sizeof(serverAddress));
     serverAddress.sin_family = AF_INET; // toujours cette valeur mais jsp pourquoi
-    serverAddress.sin_addr.s_addr = htonl(INADDR_LOOPBACK); // conversion depuis l'ordre des octets de l'hôte vers celui du réseau (pour un uint32)
+    serverAddress.sin_addr.s_addr = htonl(INADDR_ANY); // conversion depuis l'ordre des octets de l'hôte vers celui du réseau (pour un uint32)
 	//  Lorsqu'on indique INADDR_ANY lors de l'attachement, la socket sera affectée à toutes les interfaces locales.
 	// INADDR_LOOPBACK : localhost
 	// autre adresse (je crois):
@@ -129,21 +129,27 @@ int main() {
 			{
 				std::cout << "Successfully received a message of size " << ret << " from client ! "<< std::endl;
 				std::cout << "Message reçu : " << buff << std::endl;
-				// if (strncmp(buffer, "coucou", 6) == 0)
-				// {
-				// 	std::cout << "!!!!!!!!!" << std::endl;
-				// 	send(clientSocket, ":cmeston!user@host JOIN #joli_channel\r\n", sizeof(":cmeston!user@host JOIN #joli_channel\r\n"), 0);
-				// }
+				if (buff.find("coucou") != std::string::npos)
+				{
+					std::cout << "!!!!!!!!!" << std::endl;
+					send(clientSocket, ":yoyo!user@host JOIN #joli_channel\r\n", strlen(":yoyo!user@host JOIN #joli_channel\r\n"), 0);
+				}
 				ret = buff.find("\r\n");
 				pos = 0;
+				// #IRC connection handshake consists of sending NICK and USER messages. All IRC messages must end in \r\n
 				while (ret != -1)
 				{
-					std::cout << "Commande recue commence a " << pos << " et finit a " << ret - 1 << std::endl;
-					std::cout << buff.substr(pos, ret - pos) << std::endl;
+					std::cout << "Commande recue (buff[" << pos << "] -- buff[" << ret - 1 << "]) : " 
+					<< buff.substr(pos, ret - pos) << std::endl;
 					pos = ret + 2;
 					ret = buff.find("\r\n", ret + 2);
 				}
-
+				ret = buff.find("USER");
+				if(ret != -1)
+				{
+					std::cout << "\tNickname = " << buff.substr(buff.find("NICK") + 5, buff.find("\r\n") - 5)
+					<< "\n\tUsername = " << buff.substr(ret + 5, buff.length() - ret - 7) << std::endl;
+				}
 			}
 
 		}
