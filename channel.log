@@ -1,0 +1,119 @@
+cote cmeston :
+
+➜  ft_irc git:(chine2) ✗ cat debug.log
+<< CAP LS
+<< NICK cmeston
+<< USER cmeston cmeston irc.dal.net :Chine MESTON
+	>> :server NOTICE AUTH :*** Looking up your hostname...
+	>> :server NOTICE AUTH :*** Checking Ident
+	>> :server NOTICE AUTH :*** Couldn't look up your hostname
+	>> :server NOTICE AUTH :*** No Ident response
+	>> :server 001 cmeston :Welcome to the DALnet IRC Network cmeston!~cmeston@62.210.33.9
+<< MODE cmeston +i
+	>> :server 002 cmeston :Your host is server, running version bahamut-2.2.2
+	>> :server 003 cmeston :This server was created Tue 23 Aug UTC at 2022 02:59:44 AM
+	>> :server 004 cmeston server bahamut-2.2.2 aAbcCdefFghHiIjkKmnoOPrRsSwxXy AbceiIjklLmMnoOpPrRsStv beIjklov
+	>> :server 005 cmeston NETWORK=DALnet SAFELIST MAXBANS=200 MAXCHANNELS=50 CHANNELLEN=32 KICKLEN=307 NICKLEN=30 TOPICLEN=307 MODES=6 CHANTYPES=# CHANLIMIT=#:50 PREFIX=(ohv)@%+ STATUSMSG=@%+ :are available on this server
+	>> :server 005 cmeston CASEMAPPING=ascii WATCH=128 SILENCE=10 ELIST=cmntu EXCEPTS INVEX CHANMODES=beI,k,jl,ciPAmMnOprRsSt MAXLIST=b:200,e:100,I:100 TARGMAX=DCCALLOW:,JOIN:,KICK:4,KILL:20,NOTICE:20,PART:,PRIVMSG:20,WHOIS:,WHOWAS: :are available on this server
+	>> :server 251 cmeston :There are 86 users and 7793 invisible on 39 servers
+	>> :server 252 cmeston 80 :IRC Operators online
+	>> :server 254 cmeston 3874 :channels formed
+	>> :server 255 cmeston :I have 1658 clients and 1 servers
+	>> :server 265 cmeston :Current local users: 1658 Max: 3677
+	>> :server 266 cmeston :Current global users: 7879 Max: 12059
+
+...
+
+	>> :cmeston MODE cmeston :+iH
+<< PING server
+	>> :server PONG server :cmeston
+	--> lag pong
+<< JOIN #help
+	>> :cmeston!~cmeston@998f-94c0-9d79-666d-1cb8.210.62.ip JOIN :#help
+	>> :server 332 cmeston #help :6Ask your question in channel and wait patiently 3� Welcome to #Help on DALnet � 12Websites at http://help.dal.net/help � http://help.dal.net/HelpCommittee/official/ � http://docs.dal.net � 4Never go to web pages spammed on IRC, Never give out your password to anything EXCEPT nickserv
+	>> :server 333 cmeston #help Coastwatcher!deception@staff.dalnet 1673477299
+	>> :server 353 cmeston = #help :cmeston @phosphor Arman Fasiha papa_smurf Mugger Kacnep @Xzibit Ayukawa wyatt depeche {o_o} D|aBol|C @GabruMalaysia mezen ChiQuiTiTa @eddyk0ng Sinyo Mag Errr prince Nando Maahir Arfie AvocetVIS Herry-AFK RaZmOkET RaimondRaj MikeDbes sjanse +Holbrook campari ubuntui DkrTremos Hidden +humility kisser Guest14329 Koragg Robus Andy @Profound @darkstar JAWC Joss Lady_Pinkpearl Fusl +TimBachman Shahensha Wagoo Guest50702 
+	>> :server 353 cmeston = #help :Angelz Hobbyboy pat eSiR Gokturk @sps ekin @isupr yoonix firebugs Guest41500 Ganonk chalcedony napster jeian Crow +burnout amielca copycat MasterScript bosen Mobscene Guest24635 +electrohead @xPsycho athary Excalibur ComputerTech nappy Suntop KindOne 
+	>> :server 366 cmeston #help :End of /NAMES list.
+<< MODE #help
+	>> :server 324 cmeston #help +tncPlj 200 3:10
+	--> chanquery mode
+<< WHO #help
+	>> :server 329 cmeston #help 1111763723
+	--> event 329
+	>> :services.dal.net 328 cmeston #help :http://help.dal.net/help/
+	"<canal> <utilisateur> <hôte> <serveur> <pseudo> <H|G>[*][@|+] :<compteur de distance> <vrai nom>"
+	>> :server 352 cmeston #channel user host server nick H@ :0 realname
+	--> silent event who
+	>> :server 352 cmeston #help ~cmeston 998f-94c0-9d79-666d-1cb8.210.62.ip server cmeston H :0 Chine MESTON
+	--> silent event who
+	>> :server 352 cmeston #help user1 host1 server1 nick :5 realname
+	--> silent event who
+	>> :server 352 cmeston #help Arfie DALnet kiwi.ix.nz.dal.net Arfie G* :3 John Doe
+	--> silent event who
+	>> :server 352 cmeston #help WatfordJC 4785-759a-e7ef-78f7-e25.aka.johncook.uk lion.tx.us.dal.net JAWC H :2 John Cook
+	...
+	--> silent event who
+	>> :server 315 cmeston #help :End of /WHO list.
+	--> chanquery who end
+<< MODE #help b
+	>> :server 368 cmeston #help :End of Channel Ban List
+	--> chanquery ban end
+<< PING server
+	>> :server PONG server :cmeston
+	--> lag pong
+<< PING server
+	>> :server PONG server :cmeston
+	--> lag pong
+
+----------------- un deuxieme user va join le serveur -----------------------
+
+	>> :turlututu!~cmeston@998f-94c0-9d79-666d-1cb8.210.62.ip JOIN :#help
+<< PRIVMSG #help :coucou
+	>> :turlututu!~cmeston@998f-94c0-9d79-666d-1cb8.210.62.ip PRIVMSG #help :hi
+<< PING server
+	>> :server PONG server :cmeston
+	--> lag pong
+
+
+
+
+
+du cote de turlututu :
+
+...
+
+<< JOIN #help
+	>> :turlututu!~cmeston@998f-94c0-9d79-666d-1cb8.210.62.ip JOIN :#help
+	>> :server 332 turlututu #help :6Ask your question in channel and wait patiently 3� Welcome to #Help on DALnet � 12Websites at http://help.dal.net/help � http://help.dal.net/HelpCommittee/official/ � http://docs.dal.net � 4Never go to web pages spammed on IRC, Never give out your password to anything EXCEPT nickserv
+	>> :server 333 turlututu #help Coastwatcher!deception@staff.dalnet 1673477299
+	>> :server 353 turlututu = #help :turlututu cmeston @phosphor Arman Fasiha papa_smurf Mugger Kacnep @Xzibit Ayukawa wyatt depeche {o_o} D|aBol|C @GabruMalaysia mezen ChiQuiTiTa @eddyk0ng Sinyo Mag Errr prince Nando Maahir Arfie AvocetVIS Herry-AFK RaZmOkET RaimondRaj MikeDbes sjanse +Holbrook campari ubuntui DkrTremos Hidden +humility kisser Guest14329 Koragg Robus Andy @Profound @darkstar JAWC Joss Lady_Pinkpearl Fusl +TimBachman Shahensha Wagoo 
+	>> :server 353 turlututu = #help :Guest50702 Angelz Hobbyboy pat eSiR Gokturk @sps ekin @isupr yoonix firebugs Guest41500 Ganonk chalcedony napster jeian Crow +burnout amielca nappy Suntop KindOne ComputerTech Excalibur athary @xPsycho +electrohead Guest24635 Mobscene bosen MasterScript copycat 
+	>> :server 366 turlututu #help :End of /NAMES list.
+<< MODE #help
+	>> :services.dal.net 328 turlututu #help :http://help.dal.net/help/
+	>> :server 324 turlututu #help +tncPlj 200 3:10
+	--> chanquery mode
+<< WHO #help
+	>> :server 329 turlututu #help 1111763723
+	--> event 329
+	>> :server 352 turlututu #help ~cmeston 998f-94c0-9d79-666d-1cb8.210.62.ip server turlututu H :0 Chine MESTON
+	--> silent event who
+	>> :server 352 turlututu #help ~cmeston 998f-94c0-9d79-666d-1cb8.210.62.ip sakura.jp.as.dal.net cmeston H :5 Chine MESTON
+	--> silent event who
+	...
+	>> :server 315 turlututu #help :End of /WHO list.
+	--> chanquery who end
+<< MODE #help b
+	>> :server 368 turlututu #help :End of Channel Ban List
+	--> chanquery ban end
+<< PING server
+	>> :server PONG server :turlututu
+	--> lag pong
+"PRIVMSG <destinataire>{,<destinataire>} <texte à envoyer >"
+"PRIVMSG jto@tolsun.oulu.fi :Hello ! ; Message à un client du serveur tolsun.oulu.fi dont le nom est "jto"."
+"PRIVMSG $*.fi :Server tolsun.oulu.fi rebooting. ; Message à tous sur les serveurs dont les noms correspondent à *.fi."
+"PRIVMSG #*.edu :NSFNet is undergoing work, expect interruptions ; Message à tous les utilisateurs qui viennent d'un hôte dont le nom correspond à *.edu.""
+	>> :cmeston!~cmeston@998f-94c0-9d79-666d-1cb8.210.62.ip PRIVMSG #help :coucou
+
+<< PRIVMSG #help :hi

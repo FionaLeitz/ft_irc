@@ -16,6 +16,8 @@ class	Client {
 		const std::string &			getNickname( void ) const;
 		const std::string &			getBuffer( void ) const;
 		const int &					getFd( void ) const;
+		void						setNickname(std::string nick);
+		void						setUsername(std::string username);
 
 	private:
 		std::string	_username;
