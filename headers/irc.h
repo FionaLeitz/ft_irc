@@ -12,6 +12,7 @@
 # include <stdio.h>
 # include <cstdlib>
 # include <map>
+# include <cctype>
 
 typedef struct	s_client {
 	std::string	username;

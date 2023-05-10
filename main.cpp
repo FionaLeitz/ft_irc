@@ -148,6 +148,14 @@ struct pollfd	*check_communication( struct pollfd *fds, int *socket_nbr ) {
 	return fds;
 }
 
+int	parse_port( char *port ) {
+	int count = 0;
+	for ( ; isdigit(port[count]) != 0; count++ );
+	if ( port[count] != '\0' )
+		return -1;
+	return 0;
+}	
+
 int	main( int argc, char **argv ) {
 	struct pollfd		*fds = new pollfd[1];
 	int					socket_nbr[1];
@@ -156,6 +164,10 @@ int	main( int argc, char **argv ) {
 	// (void)argv;
 	if ( argc != 2 ) {
 		std::cout << "Error number of arguments" << std::endl;
+		return 1;
+	}
+	if ( parse_port( argv[1] ) == -1 ) {
+		std::cout << "Error port" << std::endl;
 		return 1;
 	}
 

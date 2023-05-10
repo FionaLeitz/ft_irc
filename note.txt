@@ -534,15 +534,16 @@ TO DO LIST :
 	- On en est ou ? Discution sur ce qu'il y a a faire
 	- Definir les besoins des clients (channel, username, nickname, mode, ...)
 	- Les channels, on a besoin de quoi pour eux ?
+	- Le mot de passe en paramettre, ou le rentrer en tant que client ?
 
 	- Commande client server
 		PASS			-> met un mot de passe de connection
-		AUTHENTICATE	-> 
+		AUTHENTICATE	-> ???
 		NICK			-> change le nickname de l'utilisateur
 		USER			-> a la connection, specifie le username, hostname, real name, et mode de base du client
 		OPER			-> authentifie un client en tant que operateur (moderateur)
 		QUIT			-> se deconnecte
-		CAP				-> 
+		CAP				-> ???
 		PING / PONG		-> verifie la connection (repond PONG)
 
 	- Commande channel
@@ -560,4 +561,4 @@ TO DO LIST :
 
 	- Operateur (client avec des privileges, moderateur)
 		KILL	-> deconnecte un autre client de force
-		RESTART	->
+		RESTART	-> redemarre le server (risque)
