@@ -5,19 +5,19 @@
 >> :sakura.jp.as.dal.net NOTICE AUTH :*** Checking Ident
 >> :sakura.jp.as.dal.net NOTICE AUTH :*** Couldn't look up your hostname
 >> :sakura.jp.as.dal.net NOTICE AUTH :*** No Ident response
->> :sakura.jp.as.dal.net 001 cmeston :Welcome to the DALnet IRC Network cmeston!~cmeston@62.210.33.77
+>> :sakura.jp.as.dal.net 001 cmeston :Welcome to the DALnet IRC Network cmeston!~cmeston@62.210.33.9
 << MODE cmeston +i
 >> :sakura.jp.as.dal.net 002 cmeston :Your host is sakura.jp.as.dal.net, running version bahamut-2.2.2
 >> :sakura.jp.as.dal.net 003 cmeston :This server was created Tue 23 Aug UTC at 2022 02:59:44 AM
 >> :sakura.jp.as.dal.net 004 cmeston sakura.jp.as.dal.net bahamut-2.2.2 aAbcCdefFghHiIjkKmnoOPrRsSwxXy AbceiIjklLmMnoOpPrRsStv beIjklov
 >> :sakura.jp.as.dal.net 005 cmeston NETWORK=DALnet SAFELIST MAXBANS=200 MAXCHANNELS=50 CHANNELLEN=32 KICKLEN=307 NICKLEN=30 TOPICLEN=307 MODES=6 CHANTYPES=# CHANLIMIT=#:50 PREFIX=(ohv)@%+ STATUSMSG=@%+ :are available on this server
 >> :sakura.jp.as.dal.net 005 cmeston CASEMAPPING=ascii WATCH=128 SILENCE=10 ELIST=cmntu EXCEPTS INVEX CHANMODES=beI,k,jl,ciPAmMnOprRsSt MAXLIST=b:200,e:100,I:100 TARGMAX=DCCALLOW:,JOIN:,KICK:4,KILL:20,NOTICE:20,PART:,PRIVMSG:20,WHOIS:,WHOWAS: :are available on this server
->> :sakura.jp.as.dal.net 251 cmeston :There are 97 users and 7938 invisible on 39 servers
->> :sakura.jp.as.dal.net 252 cmeston 82 :IRC Operators online
->> :sakura.jp.as.dal.net 254 cmeston 3936 :channels formed
->> :sakura.jp.as.dal.net 255 cmeston :I have 1536 clients and 1 servers
->> :sakura.jp.as.dal.net 265 cmeston :Current local users: 1536 Max: 3677
->> :sakura.jp.as.dal.net 266 cmeston :Current global users: 8035 Max: 12059
+>> :sakura.jp.as.dal.net 251 cmeston :There are 86 users and 7793 invisible on 39 servers
+>> :sakura.jp.as.dal.net 252 cmeston 80 :IRC Operators online
+>> :sakura.jp.as.dal.net 254 cmeston 3874 :channels formed
+>> :sakura.jp.as.dal.net 255 cmeston :I have 1658 clients and 1 servers
+>> :sakura.jp.as.dal.net 265 cmeston :Current local users: 1658 Max: 3677
+>> :sakura.jp.as.dal.net 266 cmeston :Current global users: 7879 Max: 12059
 >> :sakura.jp.as.dal.net NOTICE cmeston :*** Notice -- motd was last changed at 26/11/2020 19:53
 >> :sakura.jp.as.dal.net 375 cmeston :- sakura.jp.as.dal.net Message of the Day - 
 >> :sakura.jp.as.dal.net 372 cmeston :-26/11/2020 19:53
@@ -75,11 +75,11 @@
 >> :sakura.jp.as.dal.net PONG sakura.jp.as.dal.net :cmeston
 --> lag pong
 << JOIN #help
->> :cmeston!~cmeston@1973-cabf-c594-efa1-695e.210.62.ip JOIN :#help
+>> :cmeston!~cmeston@998f-94c0-9d79-666d-1cb8.210.62.ip JOIN :#help
 >> :sakura.jp.as.dal.net 332 cmeston #help :6Ask your question in channel and wait patiently 3� Welcome to #Help on DALnet � 12Websites at http://help.dal.net/help � http://help.dal.net/HelpCommittee/official/ � http://docs.dal.net � 4Never go to web pages spammed on IRC, Never give out your password to anything EXCEPT nickserv
 >> :sakura.jp.as.dal.net 333 cmeston #help Coastwatcher!deception@staff.dalnet 1673477299
->> :sakura.jp.as.dal.net 353 cmeston = #help :cmeston MikeDbes maahir_ Ateeb DaRkSaMuRai KoRniChe sjanse {o_o} Ayukawa Mugger @Xzibit @eddyk0ng Arman Noypi Arfie Shadowless +Holbrook campari ubuntui DkrTremos Hidden +humility D|aBol|C kisser Guest14329 Koragg Robus Andy @Profound @darkstar JAWC mezen Joss Lady_Pinkpearl Mag Prince Nando ChiQuiTiTa @GabruMalaysia Errr Fusl +TimBachman Shahensha Wagoo Guest50702 Angelz Hobbyboy pat eSiR Gokturk depeche @sps 
->> :sakura.jp.as.dal.net 353 cmeston = #help :wyatt ekin @isupr yoonix RaimondRaj Herry-AFK firebugs AvocetVIS Guest41500 Ganonk chalcedony napster jeian Crow +burnout amielca copycat MasterScript bosen Mobscene Guest24635 +electrohead @xPsycho athary Excalibur ComputerTech nappy Suntop KindOne 
+>> :sakura.jp.as.dal.net 353 cmeston = #help :cmeston @phosphor Arman Fasiha papa_smurf Mugger Kacnep @Xzibit Ayukawa wyatt depeche {o_o} D|aBol|C @GabruMalaysia mezen ChiQuiTiTa @eddyk0ng Sinyo Mag Errr prince Nando Maahir Arfie AvocetVIS Herry-AFK RaZmOkET RaimondRaj MikeDbes sjanse +Holbrook campari ubuntui DkrTremos Hidden +humility kisser Guest14329 Koragg Robus Andy @Profound @darkstar JAWC Joss Lady_Pinkpearl Fusl +TimBachman Shahensha Wagoo Guest50702 
+>> :sakura.jp.as.dal.net 353 cmeston = #help :Angelz Hobbyboy pat eSiR Gokturk @sps ekin @isupr yoonix firebugs Guest41500 Ganonk chalcedony napster jeian Crow +burnout amielca copycat MasterScript bosen Mobscene Guest24635 +electrohead @xPsycho athary Excalibur ComputerTech nappy Suntop KindOne 
 >> :sakura.jp.as.dal.net 366 cmeston #help :End of /NAMES list.
 << MODE #help
 >> :sakura.jp.as.dal.net 324 cmeston #help +tncPlj 200 3:10
@@ -88,37 +88,65 @@
 >> :sakura.jp.as.dal.net 329 cmeston #help 1111763723
 --> event 329
 >> :services.dal.net 328 cmeston #help :http://help.dal.net/help/
->> :sakura.jp.as.dal.net 352 cmeston #help ~cmeston 1973-cabf-c594-efa1-695e.210.62.ip sakura.jp.as.dal.net cmeston H :0 Chine MESTON
+>> :sakura.jp.as.dal.net 352 cmeston #help ~cmeston 998f-94c0-9d79-666d-1cb8.210.62.ip sakura.jp.as.dal.net cmeston H :0 Chine MESTON
 --> silent event who
->> :sakura.jp.as.dal.net 352 cmeston #help ~qwebirc 8283-13d4-3e74-d69c-aa1e.sgnwmi.sbcglobal.net halcyon.il.us.dal.net MikeDbes H :3 http://www.dal.net:9090/
---> silent event who
->> :sakura.jp.as.dal.net 352 cmeston #help ~maahir e955-48d-d7d8-9e6c-b2e1.shell.oddprotocol.org halcyon.il.us.dal.net maahir_ H :3 maahir
---> silent event who
->> :sakura.jp.as.dal.net 352 cmeston #help ~Ateeb df50-12c6-334-a537-123.39.39.ip punch.wa.us.dal.net Ateeb H :5 Syed Ateeb
---> silent event who
->> :sakura.jp.as.dal.net 352 cmeston #help ~devilish 3f48-55d7-1420-f025-b1d6.162.102.ip lair.nl.eu.dal.net DaRkSaMuRai H :2 The devil is in the details.
---> silent event who
->> :sakura.jp.as.dal.net 352 cmeston #help ~Marhba acc0-9f1a-c93e-8ee7-292c.158.102.ip atw.hu.eu.dal.net KoRniChe H :5 Marhba User
---> silent event who
->> :sakura.jp.as.dal.net 352 cmeston #help sjanse 8859-8581-269a-2cd-d6c.2096.c206.2a02.ip sakura.jp.as.dal.net sjanse H :0 sjanse
---> silent event who
->> :sakura.jp.as.dal.net 352 cmeston #help o_o ircorigin.world loyalty.ix.us.dal.net {o_o} H :4 "don't stop"..."keep hungry...go wild"
---> silent event who
->> :sakura.jp.as.dal.net 352 cmeston #help Ayukawa staff.dalnet nonstop.ix.me.dal.net Ayukawa H* :5 I hope I get my turn with you
---> silent event who
->> :sakura.jp.as.dal.net 352 cmeston #help ~Mugger e7ea-50ac-9a6c-137c-d8a8.in-addr.zen.co.uk punch.wa.us.dal.net Mugger H :5 ...
---> silent event who
->> :sakura.jp.as.dal.net 352 cmeston #help ~Xzibit de13-3a3e-a167-762e-266.41.196.ip nonstop.ix.me.dal.net Xzibit H@ :5 You know but you actin` like you don`t know
---> silent event who
->> :sakura.jp.as.dal.net 352 cmeston #help eddyk0ng dalnet lair.nl.eu.dal.net eddyk0ng H*@ :2 Do not argue with fools
+>> :sakura.jp.as.dal.net 352 cmeston #help ~inSecure 52ac-b2b4-32ba-2dd8-84c8.f530.85f.2a02.ip sakura.jp.as.dal.net phosphor H@ :0 Pro turntablist
 --> silent event who
 >> :sakura.jp.as.dal.net 352 cmeston #help uid142073 a15e-249-6542-283-2736.tinside.irccloud.com atw.hu.eu.dal.net Arman H :5 Arman
 --> silent event who
->> :sakura.jp.as.dal.net 352 cmeston #help uid498400 2ee2-80ab-20d5-bbbc-9a9a.ilkley.irccloud.com lion.tx.us.dal.net Noypi H :2 jay
+>> :sakura.jp.as.dal.net 352 cmeston #help uid469756 9a12-6f60-5f3c-fa60-a082.helmsley.irccloud.com atw.hu.eu.dal.net Fasiha G :5 This is cool
+--> silent event who
+>> :sakura.jp.as.dal.net 352 cmeston #help ~Shining_S 1c52-bc9a-efa5-10cb-846.65.58.ip halcyon.il.us.dal.net papa_smurf H :3 ...
+--> silent event who
+>> :sakura.jp.as.dal.net 352 cmeston #help ~Mugger e7ea-50ac-9a6c-137c-d8a8.in-addr.zen.co.uk punch.wa.us.dal.net Mugger H :5 ...
+--> silent event who
+>> :sakura.jp.as.dal.net 352 cmeston #help ~Kacnep ed4b-4a55-ba66-ac4a-5872.49.46.ip punch.wa.us.dal.net Kacnep H :5 3,0Life is a roulette!
+--> silent event who
+>> :sakura.jp.as.dal.net 352 cmeston #help ~Xzibit de13-3a3e-a167-762e-266.41.196.ip nonstop.ix.me.dal.net Xzibit H@ :5 You know but you actin` like you don`t know
+--> silent event who
+>> :sakura.jp.as.dal.net 352 cmeston #help Ayukawa staff.dalnet nonstop.ix.me.dal.net Ayukawa G* :5 I hope I get my turn with you
+--> silent event who
+>> :sakura.jp.as.dal.net 352 cmeston #help ~wyatt 1bb1-d144-afd0-f2d7-5858.251.198.ip punch.wa.us.dal.net wyatt H :5 wyatt
+--> silent event who
+>> :sakura.jp.as.dal.net 352 cmeston #help depeche 5960-10fb-152a-1e57-fe1e.thunderirc.net lair.nl.eu.dal.net depeche H :2 empty
+--> silent event who
+>> :sakura.jp.as.dal.net 352 cmeston #help o_o ircorigin.world loyalty.ix.us.dal.net {o_o} H :4 "don't stop"..."keep hungry...go wild"
+--> silent event who
+>> :sakura.jp.as.dal.net 352 cmeston #help r0cky d822-abe-3bf7-6e3-306e.2077.a140.2605.ip lion.tx.us.dal.net D|aBol|C G :2 ZNC By - WWW.4Bouncers1.Darkworld.Network
+--> silent event who
+>> :sakura.jp.as.dal.net 352 cmeston #help gabs 9932-321f-71a9-14ba-a753.do.it.cx sakura.jp.as.dal.net GabruMalaysia H@ :0 Gabs
+--> silent event who
+>> :sakura.jp.as.dal.net 352 cmeston #help ~me d7d-73b0-68dc-71bd-1a86.2955.8429.2a02.ip sakura.jp.as.dal.net mezen H :0 realname
+--> silent event who
+>> :sakura.jp.as.dal.net 352 cmeston #help ChiQuiTiTa 789f-14e0-aaf5-6b6b-78b2.vps.ovh.net lair.nl.eu.dal.net ChiQuiTiTa G :2 13SoY Una ChiCa ChiQuiTiTa TierNa DulCe
+--> silent event who
+>> :sakura.jp.as.dal.net 352 cmeston #help eddyk0ng dalnet lair.nl.eu.dal.net eddyk0ng H*@ :2 Do not argue with fools
+--> silent event who
+>> :sakura.jp.as.dal.net 352 cmeston #help znc 9c4-c718-c2f8-86e7-5aa0.88.ad80.2403.ip lion.tx.us.dal.net Sinyo H :2 sepp
+--> silent event who
+>> :sakura.jp.as.dal.net 352 cmeston #help zero-one c198-c497-a519-7d9-f262.awfulnet.org sakura.jp.as.dal.net Mag H :0 zero-one
+--> silent event who
+>> :sakura.jp.as.dal.net 352 cmeston #help ~err 23bb-bcb9-967d-2f1d-4288.1f09.470.2001.ip sakura.jp.as.dal.net Errr H :0 4ʇɐ ƃuᴉʞool noʎ ǝɹɐ ʇɐɥʍ
+--> silent event who
+>> :sakura.jp.as.dal.net 352 cmeston #help ~prince prince.ind.st halcyon.il.us.dal.net prince H :3 Yesterday is gone forever, & tomorrow is uncertain
+--> silent event who
+>> :sakura.jp.as.dal.net 352 cmeston #help nando dalnet lion.tx.us.dal.net Nando G* :2 Keep calm and let Nando handle it
+--> silent event who
+>> :sakura.jp.as.dal.net 352 cmeston #help maahir e955-48d-d7d8-9e6c-b2e1.shell.oddprotocol.org sakura.jp.as.dal.net Maahir H :0 maahir
 --> silent event who
 >> :sakura.jp.as.dal.net 352 cmeston #help Arfie DALnet kiwi.ix.nz.dal.net Arfie G* :3 John Doe
 --> silent event who
->> :sakura.jp.as.dal.net 352 cmeston #help ~Shadow bbb4-251-fd22-557e-969e.241.80.ip atw.hu.eu.dal.net Shadowless G :5 Sergeant Pavliashvili
+>> :sakura.jp.as.dal.net 352 cmeston #help ~quassel 467.dedi.hostingby.design nonstop.ix.me.dal.net AvocetVIS G :5 nunya
+--> silent event who
+>> :sakura.jp.as.dal.net 352 cmeston #help ~Herry f632-51c4-64f3-93aa-fee0.via.cloaked.host punch.wa.us.dal.net Herry-AFK H :5 I am an extraordinary person
+--> silent event who
+>> :sakura.jp.as.dal.net 352 cmeston #help ~allen f8e3-4518-2740-7b2b-3fae.242.46.ip atw.hu.eu.dal.net RaZmOkET G :5 Allen
+--> silent event who
+>> :sakura.jp.as.dal.net 352 cmeston #help ~RsInc f75c-4a9f-3d27-c9b2-c5a8.107.172.ip lion.tx.us.dal.net RaimondRaj H :2 11®10aimondRaj 11§10c®Îþt 11I10nc
+--> silent event who
+>> :sakura.jp.as.dal.net 352 cmeston #help ~qwebirc 8283-13d4-3e74-d69c-aa1e.sgnwmi.sbcglobal.net halcyon.il.us.dal.net MikeDbes H :3 http://www.dal.net:9090/
+--> silent event who
+>> :sakura.jp.as.dal.net 352 cmeston #help sjanse 8859-8581-269a-2cd-d6c.2096.c206.2a02.ip sakura.jp.as.dal.net sjanse H :0 sjanse
 --> silent event who
 >> :sakura.jp.as.dal.net 352 cmeston #help holbrook dalnet paradigm.hub.dal.net Holbrook H*+ :4 Holbrook Bunting
 --> silent event who
@@ -132,13 +160,11 @@
 --> silent event who
 >> :sakura.jp.as.dal.net 352 cmeston #help humility c96d-df90-ddac-91bc-b938.61.45.ip atw.hu.eu.dal.net humility H+ :5 humility
 --> silent event who
->> :sakura.jp.as.dal.net 352 cmeston #help r0cky d822-abe-3bf7-6e3-306e.2077.a140.2605.ip atw.hu.eu.dal.net D|aBol|C G :5 4,1|15Powered by 4,01#15DWBouncers4,01|
---> silent event who
 >> :sakura.jp.as.dal.net 352 cmeston #help kisser irc.monster atw.hu.eu.dal.net kisser H :5 Patience ensures victory
 --> silent event who
 >> :sakura.jp.as.dal.net 352 cmeston #help angelz 1576-4091-45d5-ab11-3099.inspirenet.org atw.hu.eu.dal.net Guest14329 H :5 angelz
 --> silent event who
->> :sakura.jp.as.dal.net 352 cmeston #help sid268081 eedd-fbc1-83ea-8aa6-f35e.lymington.irccloud.com atw.hu.eu.dal.net Koragg G :5 IRCCloud
+>> :sakura.jp.as.dal.net 352 cmeston #help sid268081 eedd-fbc1-83ea-8aa6-f35e.lymington.irccloud.com atw.hu.eu.dal.net Koragg H :5 IRCCloud
 --> silent event who
 >> :sakura.jp.as.dal.net 352 cmeston #help ~Robus aa41-7cdc-67db-982f-2cd0.ip-91-121-91.eu bitcoin.uk.eu.dal.net Robus H :5 Robus
 --> silent event who
@@ -150,23 +176,9 @@
 --> silent event who
 >> :sakura.jp.as.dal.net 352 cmeston #help WatfordJC 4785-759a-e7ef-78f7-e25.aka.johncook.uk lion.tx.us.dal.net JAWC H :2 John Cook
 --> silent event who
->> :sakura.jp.as.dal.net 352 cmeston #help ~me 54b-e17-7f-778c-1ed6.rev.sfr.net sakura.jp.as.dal.net mezen H :0 realname
---> silent event who
 >> :sakura.jp.as.dal.net 352 cmeston #help ~Joss 51b4-9afe-52f7-73f4-2d9.233.81.ip halcyon.il.us.dal.net Joss H :3 Birdman
 --> silent event who
 >> :sakura.jp.as.dal.net 352 cmeston #help ~LadyPink a91-9666-7755-2b99-7565.freshchat.org halcyon.il.us.dal.net Lady_Pinkpearl H :3 Lady Pink Pearl
---> silent event who
->> :sakura.jp.as.dal.net 352 cmeston #help zero-one c198-c497-a519-7d9-f262.awfulnet.org lair.nl.eu.dal.net Mag G :2 zero-one
---> silent event who
->> :sakura.jp.as.dal.net 352 cmeston #help prince prince.ind.st lair.nl.eu.dal.net Prince H :2 Yesterday is gone forever, & tomorrow is uncertain
---> silent event who
->> :sakura.jp.as.dal.net 352 cmeston #help nando dalnet lair.nl.eu.dal.net Nando G* :2 Keep calm and let Nando handle it
---> silent event who
->> :sakura.jp.as.dal.net 352 cmeston #help ChiQuiTiTa 789f-14e0-aaf5-6b6b-78b2.vps.ovh.net lair.nl.eu.dal.net ChiQuiTiTa G :2 13SoY Una ChiCa ChiQuiTiTa TierNa DulCe
---> silent event who
->> :sakura.jp.as.dal.net 352 cmeston #help gabs 9932-321f-71a9-14ba-a753.do.it.cx lair.nl.eu.dal.net GabruMalaysia H@ :2 Gabs
---> silent event who
->> :sakura.jp.as.dal.net 352 cmeston #help ~err ethicalslacker.net lair.nl.eu.dal.net Errr G :2 4ʇɐ ƃuᴉʞool noʎ ǝɹɐ ʇɐɥʍ
 --> silent event who
 >> :sakura.jp.as.dal.net 352 cmeston #help fusl 6d14-48e9-550-4234-cfa5.in-addr.arpa.li lion.tx.us.dal.net Fusl H :2 fusl
 --> silent event who
@@ -182,17 +194,13 @@
 --> silent event who
 >> :sakura.jp.as.dal.net 352 cmeston #help Hobbyboy 255e-2ffe-ad75-75bf-43af.hobbyboy.co.uk lion.tx.us.dal.net Hobbyboy G :2 Andrew
 --> silent event who
->> :sakura.jp.as.dal.net 352 cmeston #help spectre tilde.team lion.tx.us.dal.net pat H :2 enigma
+>> :sakura.jp.as.dal.net 352 cmeston #help spectre tilde.team lion.tx.us.dal.net pat G :2 enigma
 --> silent event who
 >> :sakura.jp.as.dal.net 352 cmeston #help ByeBye chatdalnet.online lion.tx.us.dal.net eSiR G :2 Moses
 --> silent event who
 >> :sakura.jp.as.dal.net 352 cmeston #help ~Gokturk ac8-ea33-dcef-2e20-e847.hybridirc.com lion.tx.us.dal.net Gokturk H :2 Gokturk Yilmaz - Gokturk@hybridirc.com
 --> silent event who
->> :sakura.jp.as.dal.net 352 cmeston #help depeche 5960-10fb-152a-1e57-fe1e.thunderirc.net lion.tx.us.dal.net depeche H :2 empty
---> silent event who
 >> :sakura.jp.as.dal.net 352 cmeston #help sps dalnet lion.tx.us.dal.net sps H*@ :2 Warrior of God
---> silent event who
->> :sakura.jp.as.dal.net 352 cmeston #help ~wyatt 1bb1-d144-afd0-f2d7-5858.251.198.ip punch.wa.us.dal.net wyatt H :5 wyatt
 --> silent event who
 >> :sakura.jp.as.dal.net 352 cmeston #help ~ekin d39e-e516-727d-5e2b-7f0.39.89.ip bifrost.ca.us.dal.net ekin H :5 ekin
 --> silent event who
@@ -200,13 +208,7 @@
 --> silent event who
 >> :sakura.jp.as.dal.net 352 cmeston #help yoonix eea3-d9f0-bce4-dcfc-f76c.corrupted.net jingo.ix.us.dal.net yoonix H :3 Casey Jones
 --> silent event who
->> :sakura.jp.as.dal.net 352 cmeston #help ~RsInc f75c-4a9f-3d27-c9b2-c5a8.107.172.ip nonstop.ix.me.dal.net RaimondRaj H :5 11®10aimondRaj 11§10c®Îþt 11I10nc
---> silent event who
->> :sakura.jp.as.dal.net 352 cmeston #help ~Herry f632-51c4-64f3-93aa-fee0.via.cloaked.host nonstop.ix.me.dal.net Herry-AFK H :5 I am an extraordinary person
---> silent event who
 >> :sakura.jp.as.dal.net 352 cmeston #help ~firebugs fad4-aa65-ed46-fb1b-b4e.16.154.ip serenity.fl.us.dal.net firebugs G :4 The Fated One!
---> silent event who
->> :sakura.jp.as.dal.net 352 cmeston #help ~quassel 467.dedi.hostingby.design nonstop.ix.me.dal.net AvocetVIS G :5 nunya
 --> silent event who
 >> :sakura.jp.as.dal.net 352 cmeston #help ~Smurf 994c-46dd-8de2-e6f7-8e68.unixmachine.com punch.wa.us.dal.net Guest41500 H :5 Still Alive
 --> silent event who
@@ -261,6 +263,9 @@
 << PING sakura.jp.as.dal.net
 >> :sakura.jp.as.dal.net PONG sakura.jp.as.dal.net :cmeston
 --> lag pong
+>> :turlututu!~cmeston@998f-94c0-9d79-666d-1cb8.210.62.ip JOIN :#help
+<< PRIVMSG #help :coucou
+>> :turlututu!~cmeston@998f-94c0-9d79-666d-1cb8.210.62.ip PRIVMSG #help :hi
 << PING sakura.jp.as.dal.net
 >> :sakura.jp.as.dal.net PONG sakura.jp.as.dal.net :cmeston
 --> lag pong
@@ -276,4 +281,129 @@
 << PING sakura.jp.as.dal.net
 >> :sakura.jp.as.dal.net PONG sakura.jp.as.dal.net :cmeston
 --> lag pong
-<< QUIT :leaving
+>> :flower_girl95!~my_user@5ac9-373a-1dbe-79e-c1a5.242.117.ip JOIN :#help
+>> :flower_girl95!~my_user@5ac9-373a-1dbe-79e-c1a5.242.117.ip QUIT :Client closed connection
+<< PING sakura.jp.as.dal.net
+>> :sakura.jp.as.dal.net PONG sakura.jp.as.dal.net :cmeston
+--> lag pong
+<< PING sakura.jp.as.dal.net
+>> :sakura.jp.as.dal.net PONG sakura.jp.as.dal.net :cmeston
+--> lag pong
+<< PING sakura.jp.as.dal.net
+>> :sakura.jp.as.dal.net PONG sakura.jp.as.dal.net :cmeston
+--> lag pong
+<< PING sakura.jp.as.dal.net
+>> :sakura.jp.as.dal.net PONG sakura.jp.as.dal.net :cmeston
+--> lag pong
+<< PING sakura.jp.as.dal.net
+>> :sakura.jp.as.dal.net PONG sakura.jp.as.dal.net :cmeston
+--> lag pong
+<< PING sakura.jp.as.dal.net
+>> :sakura.jp.as.dal.net PONG sakura.jp.as.dal.net :cmeston
+--> lag pong
+<< PING sakura.jp.as.dal.net
+>> :sakura.jp.as.dal.net PONG sakura.jp.as.dal.net :cmeston
+--> lag pong
+<< PING sakura.jp.as.dal.net
+>> :sakura.jp.as.dal.net PONG sakura.jp.as.dal.net :cmeston
+--> lag pong
+<< PING sakura.jp.as.dal.net
+>> :sakura.jp.as.dal.net PONG sakura.jp.as.dal.net :cmeston
+--> lag pong
+<< PING sakura.jp.as.dal.net
+>> :sakura.jp.as.dal.net PONG sakura.jp.as.dal.net :cmeston
+--> lag pong
+<< PING sakura.jp.as.dal.net
+>> :sakura.jp.as.dal.net PONG sakura.jp.as.dal.net :cmeston
+--> lag pong
+<< PING sakura.jp.as.dal.net
+>> :sakura.jp.as.dal.net PONG sakura.jp.as.dal.net :cmeston
+--> lag pong
+<< PING sakura.jp.as.dal.net
+>> :sakura.jp.as.dal.net PONG sakura.jp.as.dal.net :cmeston
+--> lag pong
+<< PING sakura.jp.as.dal.net
+>> :sakura.jp.as.dal.net PONG sakura.jp.as.dal.net :cmeston
+--> lag pong
+<< PRIVMSG #help :cc
+<< PING sakura.jp.as.dal.net
+>> :sakura.jp.as.dal.net PONG sakura.jp.as.dal.net :cmeston
+--> lag pong
+<< PING sakura.jp.as.dal.net
+>> :sakura.jp.as.dal.net PONG sakura.jp.as.dal.net :cmeston
+--> lag pong
+<< PING sakura.jp.as.dal.net
+>> :sakura.jp.as.dal.net PONG sakura.jp.as.dal.net :cmeston
+--> lag pong
+<< PING sakura.jp.as.dal.net
+>> :sakura.jp.as.dal.net PONG sakura.jp.as.dal.net :cmeston
+--> lag pong
+<< PING sakura.jp.as.dal.net
+>> :sakura.jp.as.dal.net PONG sakura.jp.as.dal.net :cmeston
+--> lag pong
+<< PING sakura.jp.as.dal.net
+>> :sakura.jp.as.dal.net PONG sakura.jp.as.dal.net :cmeston
+--> lag pong
+<< PING sakura.jp.as.dal.net
+>> :sakura.jp.as.dal.net PONG sakura.jp.as.dal.net :cmeston
+--> lag pong
+<< PING sakura.jp.as.dal.net
+>> :sakura.jp.as.dal.net PONG sakura.jp.as.dal.net :cmeston
+--> lag pong
+<< PING sakura.jp.as.dal.net
+>> :sakura.jp.as.dal.net PONG sakura.jp.as.dal.net :cmeston
+--> lag pong
+<< PING sakura.jp.as.dal.net
+>> :sakura.jp.as.dal.net PONG sakura.jp.as.dal.net :cmeston
+--> lag pong
+<< PING sakura.jp.as.dal.net
+>> :sakura.jp.as.dal.net PONG sakura.jp.as.dal.net :cmeston
+--> lag pong
+<< PING sakura.jp.as.dal.net
+>> :sakura.jp.as.dal.net PONG sakura.jp.as.dal.net :cmeston
+--> lag pong
+<< PING sakura.jp.as.dal.net
+>> :sakura.jp.as.dal.net PONG sakura.jp.as.dal.net :cmeston
+--> lag pong
+<< PING sakura.jp.as.dal.net
+>> :sakura.jp.as.dal.net PONG sakura.jp.as.dal.net :cmeston
+--> lag pong
+<< PING sakura.jp.as.dal.net
+>> :sakura.jp.as.dal.net PONG sakura.jp.as.dal.net :cmeston
+--> lag pong
+<< PING sakura.jp.as.dal.net
+>> :sakura.jp.as.dal.net PONG sakura.jp.as.dal.net :cmeston
+--> lag pong
+<< PING sakura.jp.as.dal.net
+>> :sakura.jp.as.dal.net PONG sakura.jp.as.dal.net :cmeston
+--> lag pong
+<< PING sakura.jp.as.dal.net
+>> :sakura.jp.as.dal.net PONG sakura.jp.as.dal.net :cmeston
+--> lag pong
+<< PING sakura.jp.as.dal.net
+>> :sakura.jp.as.dal.net PONG sakura.jp.as.dal.net :cmeston
+--> lag pong
+<< PING sakura.jp.as.dal.net
+>> :sakura.jp.as.dal.net PONG sakura.jp.as.dal.net :cmeston
+--> lag pong
+<< PING sakura.jp.as.dal.net
+>> :sakura.jp.as.dal.net PONG sakura.jp.as.dal.net :cmeston
+--> lag pong
+<< PING sakura.jp.as.dal.net
+>> :sakura.jp.as.dal.net PONG sakura.jp.as.dal.net :cmeston
+--> lag pong
+<< PING sakura.jp.as.dal.net
+>> :sakura.jp.as.dal.net PONG sakura.jp.as.dal.net :cmeston
+--> lag pong
+<< PING sakura.jp.as.dal.net
+>> :sakura.jp.as.dal.net PONG sakura.jp.as.dal.net :cmeston
+--> lag pong
+<< PING sakura.jp.as.dal.net
+>> :sakura.jp.as.dal.net PONG sakura.jp.as.dal.net :cmeston
+--> lag pong
+<< PING sakura.jp.as.dal.net
+>> :sakura.jp.as.dal.net PONG sakura.jp.as.dal.net :cmeston
+--> lag pong
+<< PING sakura.jp.as.dal.net
+>> :sakura.jp.as.dal.net PONG sakura.jp.as.dal.net :cmeston
+--> lag pong

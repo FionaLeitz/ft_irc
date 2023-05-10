@@ -1,0 +1,395 @@
+<< CAP LS
+<< NICK cmeston
+<< USER cmeston cmeston irc.dal.net :Chine MESTON
+>> :choopa.nj.us.dal.net NOTICE AUTH :*** Looking up your hostname...
+>> :choopa.nj.us.dal.net NOTICE AUTH :*** Checking Ident
+>> :choopa.nj.us.dal.net NOTICE AUTH :*** Couldn't look up your hostname
+>> :choopa.nj.us.dal.net NOTICE AUTH :*** No Ident response
+>> :choopa.nj.us.dal.net 433 * cmeston :Nickname is already in use.
+<< NICK cmeston_
+>> :choopa.nj.us.dal.net 001 cmeston_ :Welcome to the DALnet IRC Network cmeston_!~cmeston@62.210.33.9
+<< MODE cmeston_ +i
+<< WHOIS cmeston
+>> :choopa.nj.us.dal.net 002 cmeston_ :Your host is choopa.nj.us.dal.net, running version bahamut-2.2.2
+>> :choopa.nj.us.dal.net 003 cmeston_ :This server was created Tue Aug 23 2022 at 00:35:14 EDT
+>> :choopa.nj.us.dal.net 004 cmeston_ choopa.nj.us.dal.net bahamut-2.2.2 aAbcCdefFghHiIjkKmnoOPrRsSwxXy AbceiIjklLmMnoOpPrRsStv beIjklov
+>> :choopa.nj.us.dal.net 005 cmeston_ NETWORK=DALnet SAFELIST MAXBANS=200 MAXCHANNELS=20 CHANNELLEN=32 KICKLEN=307 NICKLEN=30 TOPICLEN=307 MODES=6 CHANTYPES=# CHANLIMIT=#:20 PREFIX=(ohv)@%+ STATUSMSG=@%+ :are available on this server
+>> :choopa.nj.us.dal.net 005 cmeston_ CASEMAPPING=ascii WATCH=128 SILENCE=10 ELIST=cmntu EXCEPTS INVEX CHANMODES=beI,k,jl,ciPAmMnOprRsSt MAXLIST=b:200,e:100,I:100 TARGMAX=DCCALLOW:,JOIN:,KICK:4,KILL:20,NOTICE:20,PART:,PRIVMSG:20,WHOIS:,WHOWAS: :are available on this server
+>> :choopa.nj.us.dal.net 251 cmeston_ :There are 86 users and 7788 invisible on 39 servers
+>> :choopa.nj.us.dal.net 252 cmeston_ 80 :IRC Operators online
+>> :choopa.nj.us.dal.net 254 cmeston_ 3870 :channels formed
+>> :choopa.nj.us.dal.net 255 cmeston_ :I have 205 clients and 1 servers
+>> :choopa.nj.us.dal.net 265 cmeston_ :Current local users: 205 Max: 2193
+>> :choopa.nj.us.dal.net 266 cmeston_ :Current global users: 7874 Max: 12809
+>> :choopa.nj.us.dal.net NOTICE cmeston_ :*** Notice -- motd was last changed at 16/3/2021 11:13
+>> :choopa.nj.us.dal.net 375 cmeston_ :- choopa.nj.us.dal.net Message of the Day - 
+>> :choopa.nj.us.dal.net 372 cmeston_ :-16/3/2021 11:13
+>> :choopa.nj.us.dal.net 372 cmeston_ :- Welcome to choopa.nj.us.dal.net!
+>> :choopa.nj.us.dal.net 372 cmeston_ :- 
+>> :choopa.nj.us.dal.net 372 cmeston_ :-   .,-:::::   ::   .:      ...         ...   ::::::::::. :::.
+>> :choopa.nj.us.dal.net 372 cmeston_ :- ,;;;'````'  ,;;   ;;,  .;;;;;;;.   .;;;;;;;. `;;;```.;;;;;`;;
+>> :choopa.nj.us.dal.net 372 cmeston_ :- [[[        ,[[[,,,[[[ ,[[     \[[,,[[     \[[,`]]nnn]]',[[ '[[,
+>> :choopa.nj.us.dal.net 372 cmeston_ :- $$$        "$$$"""$$$ $$$,     $$$$$$,     $$$ $$$""  c$$$cc$$$c
+>> :choopa.nj.us.dal.net 372 cmeston_ :- `88bo,__,o, 888   "88o"888,_ _,88P"888,_ _,88P 888o    888   888,
+>> :choopa.nj.us.dal.net 372 cmeston_ :-   "YUMMMMMP"MMM    YMM  "YMMMMMP"   "YMMMMMP"  YMMMb   YMM   ""`
+>> :choopa.nj.us.dal.net 372 cmeston_ :- 
+>> :choopa.nj.us.dal.net 372 cmeston_ :- Server generously sponsored by http://www.choopa.com/
+>> :choopa.nj.us.dal.net 372 cmeston_ :- 
+>> :choopa.nj.us.dal.net 372 cmeston_ :- By connecting to this server you agree to be bound by the terms put forth
+>> :choopa.nj.us.dal.net 372 cmeston_ :- in DALnet's Acceptable Use Policy (http://www.dal.net/aup/)
+>> :choopa.nj.us.dal.net 372 cmeston_ :- 
+>> :choopa.nj.us.dal.net 372 cmeston_ :- For questions; please contact choopa-staff@dal.net
+>> :choopa.nj.us.dal.net 376 cmeston_ :End of /MOTD command.
+>> :choopa.nj.us.dal.net NOTICE cmeston_ :*** Notice -- This server runs an open proxy monitor to prevent abuse.
+>> :choopa.nj.us.dal.net NOTICE cmeston_ :*** Notice -- If you see connections on various ports from 108.61.240.240
+>> :choopa.nj.us.dal.net NOTICE cmeston_ :*** Notice -- please disregard them, as they are the monitor in action.
+>> :choopa.nj.us.dal.net NOTICE cmeston_ :*** Notice -- For more information please visit kline.dal.net/proxy/wingate.htm
+>> :cmeston_ MODE cmeston_ :+iH
+>> :choopa.nj.us.dal.net 311 cmeston_ cmeston ~cmeston 998f-94c0-9d79-666d-1cb8.210.62.ip * :Chine MESTON
+--> nickfind event whois
+>> :choopa.nj.us.dal.net 319 cmeston_ cmeston :#help 
+--> event empty
+>> :choopa.nj.us.dal.net 312 cmeston_ cmeston sakura.jp.as.dal.net :Cherry Blossom
+--> event empty
+>> :choopa.nj.us.dal.net 318 cmeston_ cmeston :End of /WHOIS list.
+--> event empty
+<< PING choopa.nj.us.dal.net
+>> :choopa.nj.us.dal.net PONG choopa.nj.us.dal.net :cmeston_
+--> lag pong
+<< NICK toto
+>> :cmeston_!~cmeston@998f-94c0-9d79-666d-1cb8.210.62.ip NICK :toto
+>> :NickServ!service@dal.net NOTICE toto :This nick is owned by someone else. Please choose another.
+>> :NickServ!service@dal.net NOTICE toto :If this is your nick, type: /msg NickServ@services.dal.net IDENTIFY <password>
+>> :NickServ!service@dal.net NOTICE toto :Your nick will be changed in 60 seconds if you do not comply.
+>> :NickServ!service@dal.net NOTICE toto :You now have 40 seconds to change your nick. The nick you are
+>> :NickServ!service@dal.net NOTICE toto :currently using is registered to another user.
+<< NICK turlututu
+>> :toto!~cmeston@998f-94c0-9d79-666d-1cb8.210.62.ip NICK :turlututu
+<< JOIN #help
+>> :turlututu!~cmeston@998f-94c0-9d79-666d-1cb8.210.62.ip JOIN :#help
+>> :choopa.nj.us.dal.net 332 turlututu #help :6Ask your question in channel and wait patiently 3� Welcome to #Help on DALnet � 12Websites at http://help.dal.net/help � http://help.dal.net/HelpCommittee/official/ � http://docs.dal.net � 4Never go to web pages spammed on IRC, Never give out your password to anything EXCEPT nickserv
+>> :choopa.nj.us.dal.net 333 turlututu #help Coastwatcher!deception@staff.dalnet 1673477299
+>> :choopa.nj.us.dal.net 353 turlututu = #help :turlututu cmeston @phosphor Arman Fasiha papa_smurf Mugger Kacnep @Xzibit Ayukawa wyatt depeche {o_o} D|aBol|C @GabruMalaysia mezen ChiQuiTiTa @eddyk0ng Sinyo Mag Errr prince Nando Maahir Arfie AvocetVIS Herry-AFK RaZmOkET RaimondRaj MikeDbes sjanse +Holbrook campari ubuntui DkrTremos Hidden +humility kisser Guest14329 Koragg Robus Andy @Profound @darkstar JAWC Joss Lady_Pinkpearl Fusl +TimBachman Shahensha Wagoo 
+>> :choopa.nj.us.dal.net 353 turlututu = #help :Guest50702 Angelz Hobbyboy pat eSiR Gokturk @sps ekin @isupr yoonix firebugs Guest41500 Ganonk chalcedony napster jeian Crow +burnout amielca nappy Suntop KindOne ComputerTech Excalibur athary @xPsycho +electrohead Guest24635 Mobscene bosen MasterScript copycat 
+>> :choopa.nj.us.dal.net 366 turlututu #help :End of /NAMES list.
+<< MODE #help
+>> :services.dal.net 328 turlututu #help :http://help.dal.net/help/
+>> :choopa.nj.us.dal.net 324 turlututu #help +tncPlj 200 3:10
+--> chanquery mode
+<< WHO #help
+>> :choopa.nj.us.dal.net 329 turlututu #help 1111763723
+--> event 329
+>> :choopa.nj.us.dal.net 352 turlututu #help ~cmeston 998f-94c0-9d79-666d-1cb8.210.62.ip choopa.nj.us.dal.net turlututu H :0 Chine MESTON
+--> silent event who
+>> :choopa.nj.us.dal.net 352 turlututu #help ~cmeston 998f-94c0-9d79-666d-1cb8.210.62.ip sakura.jp.as.dal.net cmeston H :5 Chine MESTON
+--> silent event who
+>> :choopa.nj.us.dal.net 352 turlututu #help ~inSecure 52ac-b2b4-32ba-2dd8-84c8.f530.85f.2a02.ip sakura.jp.as.dal.net phosphor H@ :5 Pro turntablist
+--> silent event who
+>> :choopa.nj.us.dal.net 352 turlututu #help uid142073 a15e-249-6542-283-2736.tinside.irccloud.com atw.hu.eu.dal.net Arman H :6 Arman
+--> silent event who
+>> :choopa.nj.us.dal.net 352 turlututu #help uid469756 9a12-6f60-5f3c-fa60-a082.helmsley.irccloud.com atw.hu.eu.dal.net Fasiha G :6 This is cool
+--> silent event who
+>> :choopa.nj.us.dal.net 352 turlututu #help ~Shining_S 1c52-bc9a-efa5-10cb-846.65.58.ip halcyon.il.us.dal.net papa_smurf H :4 ...
+--> silent event who
+>> :choopa.nj.us.dal.net 352 turlututu #help ~Mugger e7ea-50ac-9a6c-137c-d8a8.in-addr.zen.co.uk punch.wa.us.dal.net Mugger H :2 ...
+--> silent event who
+>> :choopa.nj.us.dal.net 352 turlututu #help ~Kacnep ed4b-4a55-ba66-ac4a-5872.49.46.ip punch.wa.us.dal.net Kacnep H :2 3,0Life is a roulette!
+--> silent event who
+>> :choopa.nj.us.dal.net 352 turlututu #help ~Xzibit de13-3a3e-a167-762e-266.41.196.ip nonstop.ix.me.dal.net Xzibit H@ :2 You know but you actin` like you don`t know
+--> silent event who
+>> :choopa.nj.us.dal.net 352 turlututu #help Ayukawa staff.dalnet nonstop.ix.me.dal.net Ayukawa G* :2 I hope I get my turn with you
+--> silent event who
+>> :choopa.nj.us.dal.net 352 turlututu #help ~wyatt 1bb1-d144-afd0-f2d7-5858.251.198.ip punch.wa.us.dal.net wyatt H :2 wyatt
+--> silent event who
+>> :choopa.nj.us.dal.net 352 turlututu #help depeche 5960-10fb-152a-1e57-fe1e.thunderirc.net lair.nl.eu.dal.net depeche H :5 empty
+--> silent event who
+>> :choopa.nj.us.dal.net 352 turlututu #help o_o ircorigin.world loyalty.ix.us.dal.net {o_o} H :3 "don't stop"..."keep hungry...go wild"
+--> silent event who
+>> :choopa.nj.us.dal.net 352 turlututu #help r0cky d822-abe-3bf7-6e3-306e.2077.a140.2605.ip lion.tx.us.dal.net D|aBol|C G :5 ZNC By - WWW.4Bouncers1.Darkworld.Network
+--> silent event who
+>> :choopa.nj.us.dal.net 352 turlututu #help gabs 9932-321f-71a9-14ba-a753.do.it.cx sakura.jp.as.dal.net GabruMalaysia H@ :5 Gabs
+--> silent event who
+>> :choopa.nj.us.dal.net 352 turlututu #help ~me d7d-73b0-68dc-71bd-1a86.2955.8429.2a02.ip sakura.jp.as.dal.net mezen H :5 realname
+--> silent event who
+>> :choopa.nj.us.dal.net 352 turlututu #help ChiQuiTiTa 789f-14e0-aaf5-6b6b-78b2.vps.ovh.net lair.nl.eu.dal.net ChiQuiTiTa G :5 13SoY Una ChiCa ChiQuiTiTa TierNa DulCe
+--> silent event who
+>> :choopa.nj.us.dal.net 352 turlututu #help eddyk0ng dalnet lair.nl.eu.dal.net eddyk0ng H*@ :5 Do not argue with fools
+--> silent event who
+>> :choopa.nj.us.dal.net 352 turlututu #help znc 9c4-c718-c2f8-86e7-5aa0.88.ad80.2403.ip lion.tx.us.dal.net Sinyo H :5 sepp
+--> silent event who
+>> :choopa.nj.us.dal.net 352 turlututu #help zero-one c198-c497-a519-7d9-f262.awfulnet.org sakura.jp.as.dal.net Mag H :5 zero-one
+--> silent event who
+>> :choopa.nj.us.dal.net 352 turlututu #help ~err 23bb-bcb9-967d-2f1d-4288.1f09.470.2001.ip sakura.jp.as.dal.net Errr H :5 4ʇɐ ƃuᴉʞool noʎ ǝɹɐ ʇɐɥʍ
+--> silent event who
+>> :choopa.nj.us.dal.net 352 turlututu #help ~prince prince.ind.st halcyon.il.us.dal.net prince H :4 Yesterday is gone forever, & tomorrow is uncertain
+--> silent event who
+>> :choopa.nj.us.dal.net 352 turlututu #help nando dalnet lion.tx.us.dal.net Nando G* :5 Keep calm and let Nando handle it
+--> silent event who
+>> :choopa.nj.us.dal.net 352 turlututu #help maahir e955-48d-d7d8-9e6c-b2e1.shell.oddprotocol.org sakura.jp.as.dal.net Maahir H :5 maahir
+--> silent event who
+>> :choopa.nj.us.dal.net 352 turlututu #help Arfie DALnet kiwi.ix.nz.dal.net Arfie G* :4 John Doe
+--> silent event who
+>> :choopa.nj.us.dal.net 352 turlututu #help ~quassel 467.dedi.hostingby.design nonstop.ix.me.dal.net AvocetVIS G :2 nunya
+--> silent event who
+>> :choopa.nj.us.dal.net 352 turlututu #help ~Herry f632-51c4-64f3-93aa-fee0.via.cloaked.host punch.wa.us.dal.net Herry-AFK H :2 I am an extraordinary person
+--> silent event who
+>> :choopa.nj.us.dal.net 352 turlututu #help ~allen f8e3-4518-2740-7b2b-3fae.242.46.ip atw.hu.eu.dal.net RaZmOkET G :6 Allen
+--> silent event who
+>> :choopa.nj.us.dal.net 352 turlututu #help ~RsInc f75c-4a9f-3d27-c9b2-c5a8.107.172.ip lion.tx.us.dal.net RaimondRaj H :5 11®10aimondRaj 11§10c®Îþt 11I10nc
+--> silent event who
+>> :choopa.nj.us.dal.net 352 turlututu #help ~qwebirc 8283-13d4-3e74-d69c-aa1e.sgnwmi.sbcglobal.net halcyon.il.us.dal.net MikeDbes H :4 http://www.dal.net:9090/
+--> silent event who
+>> :choopa.nj.us.dal.net 352 turlututu #help sjanse 8859-8581-269a-2cd-d6c.2096.c206.2a02.ip sakura.jp.as.dal.net sjanse H :5 sjanse
+--> silent event who
+>> :choopa.nj.us.dal.net 352 turlututu #help holbrook dalnet paradigm.hub.dal.net Holbrook H*+ :5 Holbrook Bunting
+--> silent event who
+>> :choopa.nj.us.dal.net 352 turlututu #help campari 4cd-e493-e55b-95e-614.201.5300.2607.ip atw.hu.eu.dal.net campari G :6 Ultimo Bravo Lider
+--> silent event who
+>> :choopa.nj.us.dal.net 352 turlututu #help ~ubuntu 129.146.169.121 atw.hu.eu.dal.net ubuntui H :6 ubuntu
+--> silent event who
+>> :choopa.nj.us.dal.net 352 turlututu #help server irc.is atw.hu.eu.dal.net DkrTremos G :6 server test
+--> silent event who
+>> :choopa.nj.us.dal.net 352 turlututu #help hidden dalnet atw.hu.eu.dal.net Hidden H* :6 Unknown
+--> silent event who
+>> :choopa.nj.us.dal.net 352 turlututu #help humility c96d-df90-ddac-91bc-b938.61.45.ip atw.hu.eu.dal.net humility H+ :6 humility
+--> silent event who
+>> :choopa.nj.us.dal.net 352 turlututu #help kisser irc.monster atw.hu.eu.dal.net kisser H :6 Patience ensures victory
+--> silent event who
+>> :choopa.nj.us.dal.net 352 turlututu #help angelz 1576-4091-45d5-ab11-3099.inspirenet.org atw.hu.eu.dal.net Guest14329 H :6 angelz
+--> silent event who
+>> :choopa.nj.us.dal.net 352 turlututu #help sid268081 eedd-fbc1-83ea-8aa6-f35e.lymington.irccloud.com atw.hu.eu.dal.net Koragg H :6 IRCCloud
+--> silent event who
+>> :choopa.nj.us.dal.net 352 turlututu #help ~Robus aa41-7cdc-67db-982f-2cd0.ip-91-121-91.eu bitcoin.uk.eu.dal.net Robus H :6 Robus
+--> silent event who
+>> :choopa.nj.us.dal.net 352 turlututu #help ~saputra a99-c6cb-dcf-d9d8-e3fe.itmate.net halcyon.il.us.dal.net Andy H :4 Andy Saputra
+--> silent event who
+>> :choopa.nj.us.dal.net 352 turlututu #help Profound DALnet koala.ix.au.dal.net Profound G*@ :2 🇦🇺
+--> silent event who
+>> :choopa.nj.us.dal.net 352 turlututu #help deception staff.dalnet oper-e.dal.net darkstar H@ :2 Where does the truth lie
+--> silent event who
+>> :choopa.nj.us.dal.net 352 turlututu #help WatfordJC 4785-759a-e7ef-78f7-e25.aka.johncook.uk lion.tx.us.dal.net JAWC H :5 John Cook
+--> silent event who
+>> :choopa.nj.us.dal.net 352 turlututu #help ~Joss 51b4-9afe-52f7-73f4-2d9.233.81.ip halcyon.il.us.dal.net Joss H :4 Birdman
+--> silent event who
+>> :choopa.nj.us.dal.net 352 turlututu #help ~LadyPink a91-9666-7755-2b99-7565.freshchat.org halcyon.il.us.dal.net Lady_Pinkpearl H :4 Lady Pink Pearl
+--> silent event who
+>> :choopa.nj.us.dal.net 352 turlututu #help fusl 6d14-48e9-550-4234-cfa5.in-addr.arpa.li lion.tx.us.dal.net Fusl H :5 fusl
+--> silent event who
+>> :choopa.nj.us.dal.net 352 turlututu #help ~Vin 1fe2-581-bd9f-d91d-a1c.fidsah.org lion.tx.us.dal.net TimBachman H+ :5 peaceful
+--> silent event who
+>> :choopa.nj.us.dal.net 352 turlututu #help King 1da-e7dc-44c0-77b7-647e.usmanali.net lion.tx.us.dal.net Shahensha H :5 -= The King =-
+--> silent event who
+>> :choopa.nj.us.dal.net 352 turlututu #help wagoo dalnet lion.tx.us.dal.net Wagoo H* :5 Strumpet Apples on a Warp Pie Tangent
+--> silent event who
+>> :choopa.nj.us.dal.net 352 turlututu #help fenix shell.neonsky.net lion.tx.us.dal.net Guest50702 G :5 enigma
+--> silent event who
+>> :choopa.nj.us.dal.net 352 turlututu #help Angelz 3e1a-654f-da8d-f051-58ac.oddprotocol.org lion.tx.us.dal.net Angelz H :5 Angelz
+--> silent event who
+>> :choopa.nj.us.dal.net 352 turlututu #help Hobbyboy 255e-2ffe-ad75-75bf-43af.hobbyboy.co.uk lion.tx.us.dal.net Hobbyboy G :5 Andrew
+--> silent event who
+>> :choopa.nj.us.dal.net 352 turlututu #help spectre tilde.team lion.tx.us.dal.net pat G :5 enigma
+--> silent event who
+>> :choopa.nj.us.dal.net 352 turlututu #help ByeBye chatdalnet.online lion.tx.us.dal.net eSiR G :5 Moses
+--> silent event who
+>> :choopa.nj.us.dal.net 352 turlututu #help ~Gokturk ac8-ea33-dcef-2e20-e847.hybridirc.com lion.tx.us.dal.net Gokturk H :5 Gokturk Yilmaz - Gokturk@hybridirc.com
+--> silent event who
+>> :choopa.nj.us.dal.net 352 turlututu #help sps dalnet lion.tx.us.dal.net sps H*@ :5 Warrior of God
+--> silent event who
+>> :choopa.nj.us.dal.net 352 turlututu #help ~ekin d39e-e516-727d-5e2b-7f0.39.89.ip bifrost.ca.us.dal.net ekin H :2 ekin
+--> silent event who
+>> :choopa.nj.us.dal.net 352 turlututu #help supr e8fa-8da0-ae22-1ccd-2cb7.226.23.ip jingo.ix.us.dal.net isupr H@ :4 supr
+--> silent event who
+>> :choopa.nj.us.dal.net 352 turlututu #help yoonix eea3-d9f0-bce4-dcfc-f76c.corrupted.net jingo.ix.us.dal.net yoonix H :4 Casey Jones
+--> silent event who
+>> :choopa.nj.us.dal.net 352 turlututu #help ~firebugs fad4-aa65-ed46-fb1b-b4e.16.154.ip serenity.fl.us.dal.net firebugs G :3 The Fated One!
+--> silent event who
+>> :choopa.nj.us.dal.net 352 turlututu #help ~Smurf 994c-46dd-8de2-e6f7-8e68.unixmachine.com punch.wa.us.dal.net Guest41500 H :2 Still Alive
+--> silent event who
+>> :choopa.nj.us.dal.net 352 turlututu #help gw ce24-eab0-a86a-fb7c-f3c1.94.23.ip sakura.jp.as.dal.net Ganonk H :5 12,99M7,99a5,99s4,99G13,99a14,99n
+--> silent event who
+>> :choopa.nj.us.dal.net 352 turlututu #help chalcedony staff.dalnet oper-e.dal.net chalcedony H* :2 Thesaurus
+--> silent event who
+>> :choopa.nj.us.dal.net 352 turlututu #help ~napster shell.xshellz.com punch.wa.us.dal.net napster G :2 You Can't Kill A Real Napster.
+--> silent event who
+>> :choopa.nj.us.dal.net 352 turlututu #help jeian dalnet midnight.hub.dal.net jeian H* :3 jeian
+--> silent event who
+>> :choopa.nj.us.dal.net 352 turlututu #help uid281133 64dc-7ae7-fda-8e59-ed20.tinside.irccloud.com sakura.jp.as.dal.net Crow H :5 F̟̟̯̹̗̬̫̝̪͚ͭ̄͐ͮ͋ͅU̠̭̰̟͕̲̰̍
+--> silent event who
+>> :choopa.nj.us.dal.net 352 turlututu #help ~burnout 0fucks.com sakura.jp.as.dal.net burnout H+ :5 burnout
+--> silent event who
+>> :choopa.nj.us.dal.net 352 turlututu #help ~lepak 3c8b-89a7-9cf7-d9e1-ff34.91.103.ip punch.wa.us.dal.net amielca H :2 ZNC® Copyright © 2002-2022.
+--> silent event who
+>> :choopa.nj.us.dal.net 352 turlututu #help napster a64f-953a-290-d27a-8717.znc.today sakura.jp.as.dal.net nappy H :5 Poverty is the parent of revolution and crime.
+--> silent event who
+>> :choopa.nj.us.dal.net 352 turlututu #help Suntop 2419-3371-5446-3e0-e2bd.wizard.suntop.nu sakura.jp.as.dal.net Suntop H :5 Wizard Suntop
+--> silent event who
+>> :choopa.nj.us.dal.net 352 turlututu #help kindone 1f4f-e083-fca-59ed-91ab.183.68.ip sakura.jp.as.dal.net KindOne H :5 Sir PingTimeoutalot
+--> silent event who
+>> :choopa.nj.us.dal.net 352 turlututu #help computerte eeba-3ad1-57ff-30cf-f196.50.198.ip sakura.jp.as.dal.net ComputerTech G :5 ComputerTech
+--> silent event who
+>> :choopa.nj.us.dal.net 352 turlututu #help excalibur 23e4-f226-3da7-1065-6314.28.149.ip sakura.jp.as.dal.net Excalibur G :5 Good & Evil. There never is one without the other.
+--> silent event who
+>> :choopa.nj.us.dal.net 352 turlututu #help athary athary.my.id sakura.jp.as.dal.net athary H :5 λqopou wɑ ᴉ
+--> silent event who
+>> :choopa.nj.us.dal.net 352 turlututu #help xPsycho DALnet foxtrot.hub.dal.net xPsycho H*@ :4 Is it getting better? Do you feel the same?
+--> silent event who
+>> :choopa.nj.us.dal.net 352 turlututu #help ~t3kk3n c8b3-edb-e8b0-905f-e692.32.45.ip bifrost.ca.us.dal.net electrohead H+ :2 t3kk3n
+--> silent event who
+>> :choopa.nj.us.dal.net 352 turlututu #help ~tek aca9-32cc-db31-ed48-cd49.38.51.ip choopa.nj.us.dal.net Guest24635 H :0 !
+--> silent event who
+>> :choopa.nj.us.dal.net 352 turlututu #help Mobscene dalnet bifrost.ca.us.dal.net Mobscene H* :2 Charlie Root
+--> silent event who
+>> :choopa.nj.us.dal.net 352 turlututu #help sid269874 178f-e9b8-9463-2619-3d79.irccloud.com serenity.fl.us.dal.net bosen H :3 limited edition
+--> silent event who
+>> :choopa.nj.us.dal.net 352 turlututu #help ~MS 261b-c219-82d-351c-3ccc.219.104.ip punch.wa.us.dal.net MasterScript G :2 Thank You Whoising Me. May I Help You?
+--> silent event who
+>> :choopa.nj.us.dal.net 352 turlututu #help copycat 3a43-2d5f-769a-33f8-9644.weirdo.eu karsk.ix.eu.dal.net copycat G :3 The one and only!
+--> silent event who
+>> :choopa.nj.us.dal.net 315 turlututu #help :End of /WHO list.
+--> chanquery who end
+<< MODE #help b
+>> :choopa.nj.us.dal.net 368 turlututu #help :End of Channel Ban List
+--> chanquery ban end
+<< PING choopa.nj.us.dal.net
+>> :choopa.nj.us.dal.net PONG choopa.nj.us.dal.net :turlututu
+--> lag pong
+>> :cmeston!~cmeston@998f-94c0-9d79-666d-1cb8.210.62.ip PRIVMSG #help :coucou
+<< PRIVMSG #help :hi
+<< PING choopa.nj.us.dal.net
+>> :choopa.nj.us.dal.net PONG choopa.nj.us.dal.net :turlututu
+--> lag pong
+<< PING choopa.nj.us.dal.net
+>> :choopa.nj.us.dal.net PONG choopa.nj.us.dal.net :turlututu
+--> lag pong
+<< PING choopa.nj.us.dal.net
+>> :choopa.nj.us.dal.net PONG choopa.nj.us.dal.net :turlututu
+--> lag pong
+<< PING choopa.nj.us.dal.net
+>> :choopa.nj.us.dal.net PONG choopa.nj.us.dal.net :turlututu
+--> lag pong
+<< PING choopa.nj.us.dal.net
+>> :choopa.nj.us.dal.net PONG choopa.nj.us.dal.net :turlututu
+--> lag pong
+>> :flower_girl95!~my_user@5ac9-373a-1dbe-79e-c1a5.242.117.ip JOIN :#help
+>> :flower_girl95!~my_user@5ac9-373a-1dbe-79e-c1a5.242.117.ip QUIT :Client closed connection
+<< PING choopa.nj.us.dal.net
+>> :choopa.nj.us.dal.net PONG choopa.nj.us.dal.net :turlututu
+--> lag pong
+<< PING choopa.nj.us.dal.net
+>> :choopa.nj.us.dal.net PONG choopa.nj.us.dal.net :turlututu
+--> lag pong
+<< PING choopa.nj.us.dal.net
+>> :choopa.nj.us.dal.net PONG choopa.nj.us.dal.net :turlututu
+--> lag pong
+<< PING choopa.nj.us.dal.net
+>> :choopa.nj.us.dal.net PONG choopa.nj.us.dal.net :turlututu
+--> lag pong
+<< PING choopa.nj.us.dal.net
+>> :choopa.nj.us.dal.net PONG choopa.nj.us.dal.net :turlututu
+--> lag pong
+<< PING choopa.nj.us.dal.net
+>> :choopa.nj.us.dal.net PONG choopa.nj.us.dal.net :turlututu
+--> lag pong
+<< PING choopa.nj.us.dal.net
+>> :choopa.nj.us.dal.net PONG choopa.nj.us.dal.net :turlututu
+--> lag pong
+<< PING choopa.nj.us.dal.net
+>> :choopa.nj.us.dal.net PONG choopa.nj.us.dal.net :turlututu
+--> lag pong
+<< PING choopa.nj.us.dal.net
+>> :choopa.nj.us.dal.net PONG choopa.nj.us.dal.net :turlututu
+--> lag pong
+<< PING choopa.nj.us.dal.net
+>> :choopa.nj.us.dal.net PONG choopa.nj.us.dal.net :turlututu
+--> lag pong
+<< PING choopa.nj.us.dal.net
+>> :choopa.nj.us.dal.net PONG choopa.nj.us.dal.net :turlututu
+--> lag pong
+<< PING choopa.nj.us.dal.net
+>> :choopa.nj.us.dal.net PONG choopa.nj.us.dal.net :turlututu
+--> lag pong
+<< PING choopa.nj.us.dal.net
+>> :choopa.nj.us.dal.net PONG choopa.nj.us.dal.net :turlututu
+--> lag pong
+<< PING choopa.nj.us.dal.net
+>> :choopa.nj.us.dal.net PONG choopa.nj.us.dal.net :turlututu
+--> lag pong
+>> :cmeston!~cmeston@998f-94c0-9d79-666d-1cb8.210.62.ip PRIVMSG #help :cc
+<< PING choopa.nj.us.dal.net
+>> :choopa.nj.us.dal.net PONG choopa.nj.us.dal.net :turlututu
+--> lag pong
+<< PING choopa.nj.us.dal.net
+>> :choopa.nj.us.dal.net PONG choopa.nj.us.dal.net :turlututu
+--> lag pong
+<< PING choopa.nj.us.dal.net
+>> :choopa.nj.us.dal.net PONG choopa.nj.us.dal.net :turlututu
+--> lag pong
+<< PING choopa.nj.us.dal.net
+>> :choopa.nj.us.dal.net PONG choopa.nj.us.dal.net :turlututu
+--> lag pong
+<< PING choopa.nj.us.dal.net
+>> :choopa.nj.us.dal.net PONG choopa.nj.us.dal.net :turlututu
+--> lag pong
+<< PING choopa.nj.us.dal.net
+>> :choopa.nj.us.dal.net PONG choopa.nj.us.dal.net :turlututu
+--> lag pong
+<< PING choopa.nj.us.dal.net
+>> :choopa.nj.us.dal.net PONG choopa.nj.us.dal.net :turlututu
+--> lag pong
+<< PING choopa.nj.us.dal.net
+>> :choopa.nj.us.dal.net PONG choopa.nj.us.dal.net :turlututu
+--> lag pong
+<< PING choopa.nj.us.dal.net
+>> :choopa.nj.us.dal.net PONG choopa.nj.us.dal.net :turlututu
+--> lag pong
+<< PING choopa.nj.us.dal.net
+>> :choopa.nj.us.dal.net PONG choopa.nj.us.dal.net :turlututu
+--> lag pong
+<< PING choopa.nj.us.dal.net
+>> :choopa.nj.us.dal.net PONG choopa.nj.us.dal.net :turlututu
+--> lag pong
+<< PING choopa.nj.us.dal.net
+>> :choopa.nj.us.dal.net PONG choopa.nj.us.dal.net :turlututu
+--> lag pong
+<< PING choopa.nj.us.dal.net
+>> :choopa.nj.us.dal.net PONG choopa.nj.us.dal.net :turlututu
+--> lag pong
+<< PING choopa.nj.us.dal.net
+>> :choopa.nj.us.dal.net PONG choopa.nj.us.dal.net :turlututu
+--> lag pong
+<< PING choopa.nj.us.dal.net
+>> :choopa.nj.us.dal.net PONG choopa.nj.us.dal.net :turlututu
+--> lag pong
+<< PING choopa.nj.us.dal.net
+>> :choopa.nj.us.dal.net PONG choopa.nj.us.dal.net :turlututu
+--> lag pong
+<< PING choopa.nj.us.dal.net
+>> :choopa.nj.us.dal.net PONG choopa.nj.us.dal.net :turlututu
+--> lag pong
+<< PING choopa.nj.us.dal.net
+>> :choopa.nj.us.dal.net PONG choopa.nj.us.dal.net :turlututu
+--> lag pong
+<< PING choopa.nj.us.dal.net
+>> :choopa.nj.us.dal.net PONG choopa.nj.us.dal.net :turlututu
+--> lag pong
+<< PING choopa.nj.us.dal.net
+>> :choopa.nj.us.dal.net PONG choopa.nj.us.dal.net :turlututu
+--> lag pong
+<< PING choopa.nj.us.dal.net
+>> :choopa.nj.us.dal.net PONG choopa.nj.us.dal.net :turlututu
+--> lag pong
+<< PING choopa.nj.us.dal.net
+>> :choopa.nj.us.dal.net PONG choopa.nj.us.dal.net :turlututu
+--> lag pong
+<< PING choopa.nj.us.dal.net
+>> :choopa.nj.us.dal.net PONG choopa.nj.us.dal.net :turlututu
+--> lag pong
+<< PING choopa.nj.us.dal.net
+>> :choopa.nj.us.dal.net PONG choopa.nj.us.dal.net :turlututu
+--> lag pong
+<< PING choopa.nj.us.dal.net
+>> :choopa.nj.us.dal.net PONG choopa.nj.us.dal.net :turlututu
+--> lag pong
+<< PING choopa.nj.us.dal.net
+>> :choopa.nj.us.dal.net PONG choopa.nj.us.dal.net :turlututu
+--> lag pong

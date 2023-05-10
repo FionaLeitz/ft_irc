@@ -119,6 +119,7 @@ struct pollfd	*check_communication( struct pollfd *fds, int *socket_nbr ) {
 			clients.insert( std::map<int, t_client>::value_type( fds[*socket_nbr].fd, new_client ) );
 			(*socket_nbr)++;
             std::cout << "Connexion acceptée depuis " << inet_ntoa(clientAddress.sin_addr) << ":" << ntohs(clientAddress.sin_port) << std::endl;
+			std::cout << "Son fd est : " <<  new_client.fd << std::endl;
 		}
 		for ( int i = 1; i < *socket_nbr; i++ ) {
 			/* Verification de demande de communication */
@@ -140,7 +141,7 @@ struct pollfd	*check_communication( struct pollfd *fds, int *socket_nbr ) {
 				else
 				{
 					std::string &	ref = clients.find( fds[i].fd )->second.buffer;
-					std::cout << "Successfully received a message of size " << ret << " from client ! "<< std::endl;
+					std::cout << "Successfully received a message of size " << ret << " from client with fd " <<  fds[i].fd << " ! "<< std::endl;
 					ref.insert( ref.size(), buffer );
 					size_t	position = ref.rfind( "\r\n" );
 					if ( position == ref.size() - 2 ) {
@@ -160,13 +161,14 @@ struct pollfd	*check_communication( struct pollfd *fds, int *socket_nbr ) {
 						if (ref.find("coucou") != std::string::npos)
 						{
 							std::cout << "!!!!!!!!!" << std::endl;
+							std::cout << nick << " veut rejoindre un channel" << std::endl;
 							response = RPL_JOIN(nick, username, "#joli_channel");
 							// std::cout << "###########" << std::endl << response << std::endl << RPL_JOIN(nick, username, "#joli_channel") << std::endl << std::endl;
 							send(fds[i].fd, response.c_str(), response.length(), 0);
 						}
 						else if (ref.find("MODE") != std::string::npos)
 						{
-							response = ":server 324 " + nick + " #joli_channel +nt -i\r\n";
+							response = ":server 324 " + nick + " #joli_channel +nt \r\n";
 							send(fds[i].fd, response.c_str(), response.length(), 0);
 						}
 						else if (ref.find("WHO") != std::string::npos)
@@ -179,7 +181,7 @@ struct pollfd	*check_communication( struct pollfd *fds, int *socket_nbr ) {
 							ret = ref.find("#joli_channel :") + 15;
 							message = ref.substr(ret, ref.find("\r\n") - ret);
 							std::cout << "message = " << message << std::endl;
-							response = ":server PRIVMSG #joli_channel :" + message +"\r\n";
+							response = RPL_MSG(nick, username, "#help", message);
 							send(fds[i].fd, response.c_str(), response.length(), 0);
 						}
 						ret = ref.find("\r\n");
