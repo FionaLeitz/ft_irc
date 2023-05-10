@@ -6,6 +6,6 @@ class	Client {
 
 	private:
 	
-}
+};
 
 #endif
