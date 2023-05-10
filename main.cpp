@@ -1,4 +1,5 @@
 #include "headers/irc.h"
+#include "headers/Client.hpp"
 
 /*
 struct sockaddr_in {
@@ -86,7 +87,7 @@ struct pollfd	*check_communication( struct pollfd *fds, int *socket_nbr ) {
 	struct sockaddr_in		clientAddress;
 	char					buffer[1024];			// limite d'une reception ???
 	socklen_t 				clientAddressLength = sizeof(clientAddress);
-	std::map<int, t_client>	clients;
+	std::map<int, Client>	clients;
 
 	int					pos;
 	std::string			nick;
@@ -94,7 +95,6 @@ struct pollfd	*check_communication( struct pollfd *fds, int *socket_nbr ) {
 	std::string			response;
 	std::string			message;
 
-	// while ( end < 10 )
 	while ( 1 )
 	{
 		ret = poll(fds, *socket_nbr, -1);
@@ -106,7 +106,7 @@ struct pollfd	*check_communication( struct pollfd *fds, int *socket_nbr ) {
         if (fds[0].revents & POLLIN)
 		{
 			/* Acceptation de la première connexion entrante */
-			t_client	new_client;
+			// Client	new_client;
 			fds = new_tab( fds, *socket_nbr );
 			fds[*socket_nbr].events = POLLIN;
             fds[*socket_nbr].fd = accept(fds[0].fd, (struct sockaddr *)&clientAddress, &clientAddressLength);
@@ -115,8 +115,9 @@ struct pollfd	*check_communication( struct pollfd *fds, int *socket_nbr ) {
 				std::cerr << "Error while executing accept() : " << strerror(errno) << std::endl;
 				return NULL;
 			}
-			new_client.fd = fds[*socket_nbr].fd;
-			clients.insert( std::map<int, t_client>::value_type( fds[*socket_nbr].fd, new_client ) );
+			// new_client.fd = fds[*socket_nbr].fd;
+			Client new_client( fds[*socket_nbr].fd );
+			clients.insert( std::map<int, Client>::value_type( fds[*socket_nbr].fd, new_client ) );
 			(*socket_nbr)++;
             std::cout << "Connexion acceptée depuis " << inet_ntoa(clientAddress.sin_addr) << ":" << ntohs(clientAddress.sin_port) << std::endl;
 		}
@@ -139,9 +140,10 @@ struct pollfd	*check_communication( struct pollfd *fds, int *socket_nbr ) {
 				}
 				else
 				{
-					std::string &	ref = clients.find( fds[i].fd )->second.buffer;
 					std::cout << "Successfully received a message of size " << ret << " from client ! "<< std::endl;
-					ref.insert( ref.size(), buffer );
+					clients.find( fds[i].fd )->second.add_buff( buffer );
+					const std::string &	ref = clients.find( fds[i].fd )->second.getBuffer();
+					// ref.insert( ref.size(), buffer );
 					size_t	position = ref.rfind( "\r\n" );
 					if ( position == ref.size() - 2 ) {
 						std::cout << "Message reçu : " << ref << std::endl;
@@ -192,7 +194,7 @@ struct pollfd	*check_communication( struct pollfd *fds, int *socket_nbr ) {
 							pos = ret + 2;
 							ret = ref.find("\r\n", ret + 2);
 						}
-						ref.clear();
+						clients.find( fds[i].fd )->second.clear();
 					}
 				}
 			}
