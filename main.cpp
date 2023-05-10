@@ -31,8 +31,8 @@ struct pollfd	*new_tab( struct pollfd *fds, int socket_nbr ) {
 	return new_tab;
 }
 
-// int	create_server_link( char *port ) {
-int	create_server_link( void ) {
+int	create_server_link( char *port ) {
+// int	create_server_link( void ) {
 
 	int					server_socket;
 	struct sockaddr_in	serverAddress;
@@ -49,8 +49,8 @@ int	create_server_link( void ) {
 	std::memset( &serverAddress, 0, sizeof( serverAddress ) );
 	serverAddress.sin_family = AF_INET;
 	serverAddress.sin_addr.s_addr = htonl( INADDR_LOOPBACK );
-	serverAddress.sin_port = htons( 3630 );
-	// serverAddress.sin_port = htons( atoi( port ) );
+	// serverAddress.sin_port = htons( 3630 );
+	serverAddress.sin_port = htons( atoi( port ) );
 
     /* Attribution de l'adresse IP et du port à la socket */
 	ret = bind( server_socket, (struct sockaddr *)&serverAddress, sizeof(serverAddress) );
@@ -79,13 +79,18 @@ void	end_close( struct pollfd *fds, int socket_nbr ) {
 		close( fds[socket_nbr].fd );
 }
 
-struct pollfd	*check_communication( struct pollfd *fds, int *socket_nbr ) {
-	int					ret;
-	struct sockaddr_in	clientAddress;
-	char				buffer[256];
-	socklen_t 			clientAddressLength = sizeof(clientAddress);
 
-	while (1)
+
+struct pollfd	*check_communication( struct pollfd *fds, int *socket_nbr ) {
+	int						ret;
+	struct sockaddr_in		clientAddress;
+	char					buffer[1024];			// limite d'une reception ???
+	socklen_t 				clientAddressLength = sizeof(clientAddress);
+	int						end = 0;
+	std::map<int, t_client>	clients;
+
+	// while ( end < 10 )
+	while ( 1 )
 	{
 		ret = poll(fds, *socket_nbr, -1);
         if (ret < 0)
@@ -96,6 +101,7 @@ struct pollfd	*check_communication( struct pollfd *fds, int *socket_nbr ) {
         if (fds[0].revents & POLLIN)
 		{
 			/* Acceptation de la première connexion entrante */
+			t_client	new_client;
 			fds = new_tab( fds, *socket_nbr );
 			fds[*socket_nbr].events = POLLIN;
             fds[*socket_nbr].fd = accept(fds[0].fd, (struct sockaddr *)&clientAddress, &clientAddressLength);
@@ -104,6 +110,8 @@ struct pollfd	*check_communication( struct pollfd *fds, int *socket_nbr ) {
 				std::cerr << "Error while executing accept() : " << strerror(errno) << std::endl;
 				return NULL;
 			}
+			new_client.fd = fds[*socket_nbr].fd;
+			clients.insert( std::map<int, t_client>::value_type( fds[*socket_nbr].fd, new_client ) );
 			(*socket_nbr)++;
             std::cout << "Connexion acceptée depuis " << inet_ntoa(clientAddress.sin_addr) << ":" << ntohs(clientAddress.sin_port) << std::endl;
 		}
@@ -111,8 +119,8 @@ struct pollfd	*check_communication( struct pollfd *fds, int *socket_nbr ) {
 			/* Verification de demande de communication */
 			if (fds[i].revents & POLLIN)
 			{
-				bzero(buffer, 256);
-				ret = recv(fds[i].fd, buffer, sizeof(buffer), 0);
+				bzero( buffer, 1024 );
+				ret = recv( fds[i].fd, &buffer[end], sizeof(buffer), 0 );
 				if (ret == -1)
 				{
 					std::cerr << "Error while receiving the message with recv() : " << strerror(errno) << std::endl;
@@ -127,7 +135,12 @@ struct pollfd	*check_communication( struct pollfd *fds, int *socket_nbr ) {
 				else
 				{
 					std::cout << "Successfully received a message of size " << ret << " from client ! "<< std::endl;
-					std::cout << "Message reçu : " << buffer << std::endl;
+					clients.find( fds[i].fd )->second.buffer.insert( clients.find( fds[i].fd )->second.buffer.size(), buffer );
+					size_t	position = clients.find( fds[i].fd )->second.buffer.rfind( "\r\n" );
+					if ( position == clients.find( fds[i].fd )->second.buffer.size() - 2 ) {
+						std::cout << "Message reçu : " << clients.find( fds[i].fd )->second.buffer << std::endl;
+						clients.find( fds[i].fd )->second.buffer.clear();
+					}
 				}
 			}
 		}
@@ -135,20 +148,31 @@ struct pollfd	*check_communication( struct pollfd *fds, int *socket_nbr ) {
 	return fds;
 }
 
+int	parse_port( char *port ) {
+	int count = 0;
+	for ( ; isdigit(port[count]) != 0; count++ );
+	if ( port[count] != '\0' )
+		return -1;
+	return 0;
+}	
+
 int	main( int argc, char **argv ) {
 	struct pollfd		*fds = new pollfd[1];
 	int					socket_nbr[1];
 
-	(void)argc;
-	(void)argv;
-	// if ( argc != 2 ) {
-	// 	std::cout << "Error number of arguments" << std::endl;
-	// 	return 1;
-	// }
+	// (void)argc;
+	// (void)argv;
+	if ( argc != 2 ) {
+		std::cout << "Error number of arguments" << std::endl;
+		return 1;
+	}
+	if ( parse_port( argv[1] ) == -1 ) {
+		std::cout << "Error port" << std::endl;
+		return 1;
+	}
 
-	// fds[0].fd = create_server_link( argv[1] );
-
-	fds[0].fd = create_server_link();
+	fds[0].fd = create_server_link( argv[1] );
+	// fds[0].fd = create_server_link();
 	if ( fds[0].fd == -1 )
 		return -1;
 	fds[0].events = POLLIN;

@@ -575,3 +575,37 @@ LIEN FONCTIONS
               "<channel> :End of channel ban list"
 
 http://abcdrfc.free.fr/rfc-vf/rfc1459.html#422
+
+
+TO DO LIST :
+	- On en est ou ? Discution sur ce qu'il y a a faire
+	- Definir les besoins des clients (channel, username, nickname, mode, ...)
+	- Les channels, on a besoin de quoi pour eux ?
+	- Le mot de passe en paramettre, ou le rentrer en tant que client ?
+
+	- Commande client server
+		PASS			-> met un mot de passe de connection
+		AUTHENTICATE	-> ???
+		NICK			-> change le nickname de l'utilisateur
+		USER			-> a la connection, specifie le username, hostname, real name, et mode de base du client
+		OPER			-> authentifie un client en tant que operateur (moderateur)
+		QUIT			-> se deconnecte
+		CAP				-> ???
+		PING / PONG		-> verifie la connection (repond PONG)
+
+	- Commande channel
+		JOIN	-> rejoins les channels en arguments, les cree s'ils n'existent pas
+		PART	-> quitte les channels en arguments
+		MODE	-> paramettre le mode du channel (utilisable pour les users)
+		TOPIC	-> paramettre le topic du channel
+		NAMES	-> liste tous les nicknames des clients (du channel en argument, ou tout le monde si pas d'argument)
+		LIST	-> liste tous les channels du server (si une liste de channels en argument, liste les topics)
+		INVITE	-> invite un nickname dans un channel (si le channel existe, il faut faire partie du channel pour inviter)
+		KICK	-> vire le client (en argument) du channel (en argument) (il faut etre operateur du channel)
+
+	- Commande client / client
+		PRIVMSG	-> envoie un message a la target (en argument), qui est un user ou un channel
+
+	- Operateur (client avec des privileges, moderateur)
+		KILL	-> deconnecte un autre client de force
+		RESTART	-> redemarre le server (risque)
