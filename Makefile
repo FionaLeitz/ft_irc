@@ -11,6 +11,7 @@ SRCDIR	= ./src/
 INCDIR	= ./includes/
 
 all: $(OBJ) $(NAME)
+	@bash ./dessin.sh
 
 %.o: %.cpp
 	$(CCXX) $(CXXFLAGS) -o $@ -c $<
