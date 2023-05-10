@@ -11,12 +11,13 @@
 # include <poll.h>
 # include <stdio.h>
 # include <cstdlib>
+# include <map>
 
 typedef struct	s_client {
 	std::string	username;
 	std::string	nickname;
 	std::string	buffer;
-
+	int			fd;
 }			t_client;
 
 #endif

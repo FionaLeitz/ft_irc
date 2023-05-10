@@ -82,11 +82,12 @@ void	end_close( struct pollfd *fds, int socket_nbr ) {
 
 
 struct pollfd	*check_communication( struct pollfd *fds, int *socket_nbr ) {
-	int					ret;
-	struct sockaddr_in	clientAddress;
-	char				buffer[256];
-	socklen_t 			clientAddressLength = sizeof(clientAddress);
-	int					end = 0;
+	int						ret;
+	struct sockaddr_in		clientAddress;
+	char					buffer[1024];			// limite d'une reception ???
+	socklen_t 				clientAddressLength = sizeof(clientAddress);
+	int						end = 0;
+	std::map<int, t_client>	clients;
 
 	// while ( end < 10 )
 	while ( 1 )
@@ -100,6 +101,7 @@ struct pollfd	*check_communication( struct pollfd *fds, int *socket_nbr ) {
         if (fds[0].revents & POLLIN)
 		{
 			/* Acceptation de la première connexion entrante */
+			t_client	new_client;
 			fds = new_tab( fds, *socket_nbr );
 			fds[*socket_nbr].events = POLLIN;
             fds[*socket_nbr].fd = accept(fds[0].fd, (struct sockaddr *)&clientAddress, &clientAddressLength);
@@ -108,6 +110,8 @@ struct pollfd	*check_communication( struct pollfd *fds, int *socket_nbr ) {
 				std::cerr << "Error while executing accept() : " << strerror(errno) << std::endl;
 				return NULL;
 			}
+			new_client.fd = fds[*socket_nbr].fd;
+			clients.insert( std::map<int, t_client>::value_type( fds[*socket_nbr].fd, new_client ) );
 			(*socket_nbr)++;
             std::cout << "Connexion acceptée depuis " << inet_ntoa(clientAddress.sin_addr) << ":" << ntohs(clientAddress.sin_port) << std::endl;
 		}
@@ -115,7 +119,8 @@ struct pollfd	*check_communication( struct pollfd *fds, int *socket_nbr ) {
 			/* Verification de demande de communication */
 			if (fds[i].revents & POLLIN)
 			{
-				ret = recv(fds[i].fd, &buffer[end], sizeof(buffer), 0);
+				bzero( buffer, 1024 );
+				ret = recv( fds[i].fd, &buffer[end], sizeof(buffer), 0 );
 				if (ret == -1)
 				{
 					std::cerr << "Error while receiving the message with recv() : " << strerror(errno) << std::endl;
@@ -130,17 +135,16 @@ struct pollfd	*check_communication( struct pollfd *fds, int *socket_nbr ) {
 				else
 				{
 					std::cout << "Successfully received a message of size " << ret << " from client ! "<< std::endl;
-					if ( strstr( buffer, "\r\n" ) != NULL ) {
-						std::cout << "Message reçu : " << buffer << std::endl;
-						bzero(buffer, 256);
+					clients.find( fds[i].fd )->second.buffer.insert( clients.find( fds[i].fd )->second.buffer.size(), buffer );
+					size_t	position = clients.find( fds[i].fd )->second.buffer.rfind( "\r\n" );
+					if ( position == clients.find( fds[i].fd )->second.buffer.size() - 2 ) {
+						std::cout << "Message reçu : " << clients.find( fds[i].fd )->second.buffer << std::endl;
+						clients.find( fds[i].fd )->second.buffer.clear();
 					}
-					else
-						end = strlen( buffer );
 				}
 			}
 		}
 	}
-	// std::cout << buffer << std::endl;
 	return fds;
 }
 
