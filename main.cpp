@@ -86,8 +86,13 @@ struct pollfd	*check_communication( struct pollfd *fds, int *socket_nbr ) {
 	struct sockaddr_in		clientAddress;
 	char					buffer[1024];			// limite d'une reception ???
 	socklen_t 				clientAddressLength = sizeof(clientAddress);
-	int						end = 0;
 	std::map<int, t_client>	clients;
+
+	int					pos;
+	std::string			nick;
+	std::string			username;
+	std::string			response;
+	std::string			message;
 
 	// while ( end < 10 )
 	while ( 1 )
@@ -120,7 +125,7 @@ struct pollfd	*check_communication( struct pollfd *fds, int *socket_nbr ) {
 			if (fds[i].revents & POLLIN)
 			{
 				bzero( buffer, 1024 );
-				ret = recv( fds[i].fd, &buffer[end], sizeof(buffer), 0 );
+				ret = recv( fds[i].fd, buffer, sizeof(buffer), 0 );
 				if (ret == -1)
 				{
 					std::cerr << "Error while receiving the message with recv() : " << strerror(errno) << std::endl;
@@ -134,12 +139,60 @@ struct pollfd	*check_communication( struct pollfd *fds, int *socket_nbr ) {
 				}
 				else
 				{
+					std::string &	ref = clients.find( fds[i].fd )->second.buffer;
 					std::cout << "Successfully received a message of size " << ret << " from client ! "<< std::endl;
-					clients.find( fds[i].fd )->second.buffer.insert( clients.find( fds[i].fd )->second.buffer.size(), buffer );
-					size_t	position = clients.find( fds[i].fd )->second.buffer.rfind( "\r\n" );
-					if ( position == clients.find( fds[i].fd )->second.buffer.size() - 2 ) {
-						std::cout << "Message reçu : " << clients.find( fds[i].fd )->second.buffer << std::endl;
-						clients.find( fds[i].fd )->second.buffer.clear();
+					ref.insert( ref.size(), buffer );
+					size_t	position = ref.rfind( "\r\n" );
+					if ( position == ref.size() - 2 ) {
+						std::cout << "Message reçu : " << ref << std::endl;
+						if(ref.find("USER") != std::string::npos)
+						{
+							// #IRC connection handshake consists of sending NICK and USER messages. All IRC messages must end in \r\n
+							ret = ref.find("NICK") + 5;
+							nick = ref.substr(ret, ref.find("USER") - 2 - ret);
+							ret = ref.find("USER") + 5;
+							username = ref.substr(ret, ref.find(" ", ret + 5) - ret);
+							response = RPL_WELCOME(nick, username);
+							std::cout << "\tnickname = " << nick << "\n\tusername = " << username << std::endl;
+							send(fds[i].fd, response.c_str(), response.length(), 0);
+							//jsp si utile ou pas ?
+						}
+						if (ref.find("coucou") != std::string::npos)
+						{
+							std::cout << "!!!!!!!!!" << std::endl;
+							response = RPL_JOIN(nick, username, "#joli_channel");
+							// std::cout << "###########" << std::endl << response << std::endl << RPL_JOIN(nick, username, "#joli_channel") << std::endl << std::endl;
+							send(fds[i].fd, response.c_str(), response.length(), 0);
+						}
+						else if (ref.find("MODE") != std::string::npos)
+						{
+							response = ":server 324 " + nick + " #joli_channel +nt -i\r\n";
+							send(fds[i].fd, response.c_str(), response.length(), 0);
+						}
+						else if (ref.find("WHO") != std::string::npos)
+						{
+							response = ":server 352 " + nick + " #joli_channel " + nick + " user host server " + nick + " H :0 " + nick + "\r\n";
+							send(fds[i].fd, response.c_str(), response.length(), 0);
+						}
+						else if (ref.find("PRIVMSG") != std::string::npos)
+						{
+							ret = ref.find("#joli_channel :") + 15;
+							message = ref.substr(ret, ref.find("\r\n") - ret);
+							std::cout << "message = " << message << std::endl;
+							response = ":server PRIVMSG #joli_channel :" + message +"\r\n";
+							send(fds[i].fd, response.c_str(), response.length(), 0);
+						}
+						ret = ref.find("\r\n");
+						pos = 0;
+						
+						while (ret != -1)
+						{
+							std::cout << "Commande recue (ref[" << pos << "] -- ref[" << ret - 1 << "]) : " 
+							<< ref.substr(pos, ret - pos) << std::endl;
+							pos = ret + 2;
+							ret = ref.find("\r\n", ret + 2);
+						}
+						ref.clear();
 					}
 				}
 			}
