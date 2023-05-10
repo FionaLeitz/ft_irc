@@ -7,6 +7,11 @@
 #include <errno.h>
 #include <arpa/inet.h>
 #include <poll.h>
+
+#define USER_ID(nickname, username) (nickname + "!" + username + "@host")
+#define RPL_WELCOME(nickname, username) (":server 001 " + nickname + " :Welcome to the test IRC Network " + USER_ID(nickname, username) + "\r\n")
+#define RPL_JOIN(nickname, username, channel) (":" + USER_ID(nickname, username) + " JOIN " + channel + "\r\n")
+
 /*
 struct sockaddr_in {
 	short	sin_family;		// famille d'adresses : AF_INET   
@@ -34,6 +39,12 @@ int main() {
 	int					ret;
 	struct pollfd		fds[2];
 	char				buffer[256];
+	std::string			buff;
+	int					pos;
+	std::string			nick;
+	std::string			username;
+	std::string			response;
+	std::string			message;
 
 	/* Création de la socket d'ecoute du serveur */
     serverSocket = socket(AF_INET, SOCK_STREAM, 0);
@@ -42,12 +53,11 @@ int main() {
         std::cerr << "Failed to create socket : " << errno << std::endl;
         return (1);
     }
-
     /* Préparation de l'adresse IP et du port du serveur */
 
     std::memset(&serverAddress, 0, sizeof(serverAddress));
     serverAddress.sin_family = AF_INET; // toujours cette valeur mais jsp pourquoi
-    serverAddress.sin_addr.s_addr = htonl(INADDR_LOOPBACK); // conversion depuis l'ordre des octets de l'hôte vers celui du réseau (pour un uint32)
+    serverAddress.sin_addr.s_addr = htonl(INADDR_ANY); // conversion depuis l'ordre des octets de l'hôte vers celui du réseau (pour un uint32)
 	//  Lorsqu'on indique INADDR_ANY lors de l'attachement, la socket sera affectée à toutes les interfaces locales.
 	// INADDR_LOOPBACK : localhost
 	// autre adresse (je crois):
@@ -104,12 +114,13 @@ int main() {
             std::cout << "Connexion acceptée depuis " << inet_ntoa(clientAddress.sin_addr) << ":" << ntohs(clientAddress.sin_port) << std::endl;
 			fds[1].fd = clientSocket;
 			fds[1].events = POLLIN;
-			//  send(clientSocket, ":localhost 001 cmeston :Welcome to the test IRC server cmeston\r\n", sizeof(":localhost 001 cmeston :Welcome to the test IRC server cmeston\r\n"), 0);
 		}
 		if (fds[1].revents & POLLIN)
 		{
+			buff.clear();
 			bzero(buffer, 256);
 			ret = recv(clientSocket, buffer, sizeof(buffer), 0);
+			buff.insert(0, buffer);
 			if (ret == -1)
 			{
 				std::cerr << "Error while receiving the message with recv() : " << strerror(errno) << std::endl;
@@ -119,17 +130,59 @@ int main() {
 			{
 				std::cout << "Client has left the chat" << std::endl;
 				close (clientSocket);
-				break ;
 			}
 			else
 			{
 				std::cout << "Successfully received a message of size " << ret << " from client ! "<< std::endl;
-				std::cout << "Message reçu : " << buffer << std::endl;
-				if (strncmp(buffer, "coucou", 6) == 0)
+				std::cout << "Message reçu : " << buff << std::endl;
+				if(buff.find("USER") != std::string::npos)
+				{
+					// #IRC connection handshake consists of sending NICK and USER messages. All IRC messages must end in \r\n
+					ret = buff.find("NICK") + 5;
+					nick = buff.substr(ret, buff.find("USER") - 2 - ret);
+					ret = buff.find("USER") + 5;
+					username = buff.substr(ret, buff.find(" ", ret + 5) - ret);
+					response = RPL_WELCOME(nick, username);
+					std::cout << "\tnickname = " << nick << "\n\tusername = " << username << std::endl;
+					send(clientSocket, response.c_str(), response.length(), 0);
+					 //jsp si utile ou pas ?
+				}
+				if (buff.find("coucou") != std::string::npos)
 				{
 					std::cout << "!!!!!!!!!" << std::endl;
-					send(clientSocket, ":cmeston!user@host JOIN #joli_channel\r\n", sizeof(":cmeston!user@host JOIN #joli_channel\r\n"), 0);
+					response = RPL_JOIN(nick, username, "#joli_channel");
+					// std::cout << "###########" << std::endl << response << std::endl << RPL_JOIN(nick, username, "#joli_channel") << std::endl << std::endl;
+					send(clientSocket, response.c_str(), response.length(), 0);
 				}
+				else if (buff.find("MODE") != std::string::npos)
+				{
+					response = ":server 324 " + nick + " #joli_channel +nt -i\r\n";
+					send(clientSocket, response.c_str(), response.length(), 0);
+				}
+				else if (buff.find("WHO") != std::string::npos)
+				{
+					response = ":server 352 " + nick + " #joli_channel " + nick + " user host server " + nick + " H :0 " + nick + "\r\n";
+					send(clientSocket, response.c_str(), response.length(), 0);
+				}
+				else if (buff.find("PRIVMSG") != std::string::npos)
+				{
+					ret = buff.find("#joli_channel :") + 15;
+					message = buff.substr(ret, buff.find("\r\n") - ret);
+					std::cout << "message = " << message << std::endl;
+					response = ":server PRIVMSG #joli_channel :" + message +"\r\n";
+					send(clientSocket, response.c_str(), response.length(), 0);
+				}
+				ret = buff.find("\r\n");
+				pos = 0;
+				
+				while (ret != -1)
+				{
+					std::cout << "Commande recue (buff[" << pos << "] -- buff[" << ret - 1 << "]) : " 
+					<< buff.substr(pos, ret - pos) << std::endl;
+					pos = ret + 2;
+					ret = buff.find("\r\n", ret + 2);
+				}
+				
 			}
 
 		}

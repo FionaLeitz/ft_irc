@@ -530,6 +530,53 @@ LIEN FONCTIONS
 	les clients connectés au serveur.
 
 
+
+
+	ce qui se passe quand le client fait /join #help :
+
+<< JOIN #help
+	>> :cmeston!~cmeston@1973-cabf-c594-efa1-695e.210.62.ip JOIN :#help
+	>> :server_name 332 cmeston #help :6Ask your question in channel and wait patiently 3� Welcome to #Help on DALnet � 12Websites at http://help.dal.net/help � http://help.dal.net/HelpCommittee/official/ � http://docs.dal.net � 4Never go to web pages spammed on IRC, Never give out your password to anything EXCEPT nickserv
+	>> :server_name 333 cmeston #help Coastwatcher!deception@staff.dalnet 1673477299
+	>> :server_name 353 cmeston = #help :cmeston MikeDbes maahir_ Ateeb DaRkSaMuRai KoRniChe sjanse {o_o} Ayukawa Mugger @Xzibit @eddyk0ng Arman Noypi Arfie Shadowless +Holbrook campari ubuntui DkrTremos Hidden +humility D|aBol|C kisser Guest14329 Koragg Robus Andy @Profound @darkstar JAWC mezen Joss Lady_Pinkpearl Mag Prince Nando ChiQuiTiTa @GabruMalaysia Errr Fusl +TimBachman Shahensha Wagoo Guest50702 Angelz Hobbyboy pat eSiR Gokturk depeche @sps 
+	>> :server_name 353 cmeston = #help :wyatt ekin @isupr yoonix RaimondRaj Herry-AFK firebugs AvocetVIS Guest41500 Ganonk chalcedony napster jeian Crow +burnout amielca copycat MasterScript bosen Mobscene Guest24635 +electrohead @xPsycho athary Excalibur ComputerTech nappy Suntop KindOne 
+	>> :server_name 366 cmeston #help :End of /NAMES list.
+<< MODE #help
+	>> :server_name 324 cmeston #help +tncPlj 200 3:10
+<< WHO #help
+	>> :server_name 329 cmeston #help 1111763723
+	...
+	>> :server_name 315 cmeston #help :End of /WHO list.
+	--> chanquery who end
+<< MODE #help b
+	>> :server_name 368 cmeston #help :End of Channel Ban List
+	--> chanquery ban end
+
+
+332    RPL_TOPIC
+			"<channel> :<topic>"
+
+353    RPL_NAMREPLY
+              "( "=" / "*" / "@" ) <channel>
+               :[ "@" / "+" ] <nick> *( " " [ "@" / "+" ] <nick> )
+         - "@" is used for secret channels, "*" for private
+           channels, and "=" for others (public channels).
+
+366    RPL_ENDOFNAMES
+	          "<channel> :End of NAMES list"
+
+324    RPL_CHANNELMODEIS
+              "<channel> <mode> <mode params>"
+
+315    RPL_ENDOFWHO
+              "<name> :End of WHO list"
+
+368    RPL_ENDOFBANLIST
+              "<channel> :End of channel ban list"
+
+http://abcdrfc.free.fr/rfc-vf/rfc1459.html#422
+
+
 TO DO LIST :
 	- On en est ou ? Discution sur ce qu'il y a a faire
 	- Definir les besoins des clients (channel, username, nickname, mode, ...)
