@@ -12,6 +12,7 @@
 # include <stdio.h>
 # include <cstdlib>
 # include <map>
+# include <vector>
 # include <cctype>
 
 #define USER_ID(nickname, username) (nickname + "!" + username + "@host")
