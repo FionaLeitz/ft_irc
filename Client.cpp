@@ -47,3 +47,11 @@ const std::string &	Client::getBuffer( void ) const {
 const int &	Client::getFd( void ) const {
 	return this->_fd;
 }
+
+void	Client::setNickname(std::string nick) {
+	this->_nickname = nick;
+}
+
+void	Client::setUsername(std::string username) {
+	this->_username = username;
+}
