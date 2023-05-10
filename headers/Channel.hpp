@@ -5,6 +5,11 @@ class	Channel {
 	public:
 
 	private:
+		std::stringname
+		MODE
+		topic
+		liste des gens ?
+		
 };
 
 #endif
