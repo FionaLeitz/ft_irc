@@ -1,4 +1,4 @@
-#include "../headers/Client.hpp"
+#include "../headers/irc.h"
 
 Client::Client( void ) {}
 

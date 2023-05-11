@@ -14,6 +14,8 @@
 # include <map>
 # include <vector>
 # include <cctype>
+# include "Client.hpp"
+# include "Channel.hpp"
 
 #define USER_ID(nickname, username) (nickname + "!" + username + "@host")
 #define RPL_WELCOME(nickname, username) (":server 001 " + nickname + " :Welcome to the test IRC Network " + USER_ID(nickname, username) + "\r\n")
@@ -21,11 +23,10 @@
 #define RPL_MSG(nickname, username, dest, message)(":" + USER_ID(nickname, username) + " PRIVMSG " + dest + " :" + message + "\r\n");
 
 
-typedef struct	s_client {
-	std::string	username;
-	std::string	nickname;
-	std::string	buffer;
-	int			fd;
-}			t_client;
+typedef struct	s_context {
+	// a changer, int vers std::string pour le nickname
+	std::map<int, Client>	clients;
+	std::map<std::string, Channel>	channels;
+}			t_context;
 
 #endif
