@@ -8,6 +8,8 @@ class	Client {
 		Client( int fd );
 		Client( const Client & value );
 		~Client( void );
+
+		Client &		operator=( const Client & rhs );
 		
 		void			add_buff( char *buffer );
 		void			clear( void );
@@ -26,8 +28,6 @@ class	Client {
 		int			_fd;
 
 		Client( void );
-
-		Client &		operator=( const Client & rhs );
 	
 };
 

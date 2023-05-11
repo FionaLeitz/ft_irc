@@ -1,8 +1,8 @@
 NAME	= ircserv
 
-SRC		=	main.cpp		\
-			Client.cpp		\
-			Channel.cpp		\
+SRC		=	srcs/main.cpp			\
+			srcs/Client.cpp			\
+			srcs/Channel.cpp		\
 
 OBJ	= $(SRC:%.cpp=%.o)
 
