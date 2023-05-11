@@ -191,8 +191,8 @@ struct pollfd	*check_communication( struct pollfd *fds, int *socket_nbr ) {
 							ret = ref.find("#joli_channel :") + 15;
 							message = ref.substr(ret, ref.find("\r\n") - ret);
 							std::cout << "message = " << message << std::endl;
-							// response = RPL_MSG(clients.find(fds[i].fd)->second.getNickname(), clients.find(fds[i].fd)->second.getUsername(), "#help", message);
-							response = RPL_MSG((*tmp).getNickname(), (*tmp).getUsername(), "#help", message);
+							// response = ":" + clients.find(fds[i].fd)->second.getNickname() + " PRIVMSG #joli_channel :" + message +"\r\n";
+							response = ":" + (*tmp).getNickname() + " PRIVMSG #joli_channel :" + message +"\r\n";
 							send(fds[i + 1].fd, response.c_str(), response.length(), 0);
 						}
 						ret = ref.find("\r\n");
