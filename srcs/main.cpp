@@ -152,7 +152,7 @@ struct pollfd	*check_communication( struct pollfd *fds, int *socket_nbr ) {
 							ret = ref.find("NICK") + 5;
 							nick = ref.substr(ret, ref.find("USER") - 2 - ret);
 							ret = ref.find("USER") + 5;
-							username = ref.substr(ret, ref.find(" ", ret + 5) - ret);
+							username = ref.substr(ret, ref.find(" ", ret) - ret);
 							response = RPL_WELCOME(nick, username);
 							std::cout << "\tnickname = " << nick << "\n\tusername = " << username << std::endl;
 							(*tmp).setNickname(nick);
@@ -176,7 +176,7 @@ struct pollfd	*check_communication( struct pollfd *fds, int *socket_nbr ) {
 						}
 						else if (ref.find("WHO") != std::string::npos)
 						{
-							response = ":server 352 " + (*tmp).getNickname() + " #joli_channel " + (*tmp).getNickname() + " user host server " + (*tmp).getNickname() + " H :0 " + (*tmp).getNickname() + "\r\n";
+							response = ":server 352 " + (*tmp).getNickname() + " #joli_channel " + (*tmp).getNickname() + " user host server toto" + (*tmp).getNickname() + " H :0 " + (*tmp).getNickname() + "\r\n";
 							send(fds[i].fd, response.c_str(), response.length(), 0);
 						}
 						else if (ref.find("PRIVMSG") != std::string::npos)
