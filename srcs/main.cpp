@@ -104,7 +104,219 @@ int	incoming_connections(struct pollfd **fds, int *socket_nbr, t_context &contex
 	return 0;
 }
 
-struct pollfd	*check_communication( struct pollfd *fds, int *socket_nbr ) {
+// int	client_request(int *socket_nbr, struct pollfd **fds)
+// {
+// 	for ( int i = 1; i < *socket_nbr; i++ ) {
+// 			/* Verification de demande de communication */
+// 			if ((*fds)[i].revents & POLLIN)
+// 			{
+// 				bzero( buffer, 1024 );
+// 				ret = recv( (*fds)[i].fd, buffer, sizeof(buffer), 0 );
+// 				if (ret == -1)
+// 				{
+// 					std::cerr << "Error while receiving the message with recv() : " << strerror(errno) << std::endl;
+// 					end_close( fds, *socket_nbr );
+// 					return NULL;
+// 				}
+// 				else if (ret == 0)
+// 				{
+// 					std::cout << "Client has left the chat" << std::endl;
+// 					close ((*fds)[i].fd);
+// 				}
+// 				else
+// 				{
+// 					std::cout << "Successfully received a message of size " << ret << " from client ! "<< std::endl;
+// 					Client *	tmp = &context.clients.find((*fds)[i].fd)->second;
+// 					(*tmp).add_buff( buffer );
+// 					const std::string &	ref = (*tmp).getBuffer();
+// 					size_t	position = ref.rfind( "\r\n" );
+// 					if ( position == ref.size() - 2 ) {
+// 						std::cout << "Message reçu : " << ref << std::endl;
+// 						if(ref.find("USER") != std::string::npos)
+// 						{
+// 							// #IRC connection handshake consists of sending NICK and USER messages. All IRC messages must end in \r\n
+// 							ret = ref.find("NICK") + 5;
+// 							nick = ref.substr(ret, ref.find("USER") - 2 - ret);
+// 							ret = ref.find("USER") + 5;
+// 							username = ref.substr(ret, ref.find(" ", ret) - ret);
+// 							response = RPL_WELCOME(nick, username);
+// 							std::cout << "\tnickname = " << nick << "\n\tusername = " << username << std::endl;
+// 							(*tmp).setNickname(nick);
+// 							(*tmp).setUsername(username);
+// 							std::cout << "DANS LA CLASSE CLIENT" << "\tnickname = " << (*tmp).getNickname() << "\n\tusername = " << (*tmp).getUsername() << std::endl;
+// 							send((*fds)[i].fd, response.c_str(), response.length(), 0);
+// 							//jsp si utile ou pas ?
+// 						}
+// 						if (ref.find("JOIN") != std::string::npos)
+// 						{
+// 							std::cout << "!!!!!!!!!" << std::endl;
+// 							std::cout << (*tmp).getNickname() << " veut rejoindre un channel" << std::endl;
+// 							response = RPL_JOIN((*tmp).getNickname(), (*tmp).getUsername(), "#joli_channel");
+// 							// std::cout << "###########" << std::endl << response << std::endl << RPL_JOIN(nick, username, "#joli_channel") << std::endl << std::endl;
+// 							send((*fds)[i].fd, response.c_str(), response.length(), 0);
+// 						}
+// 						else if (ref.find("MODE") != std::string::npos)
+// 						{
+// 							response = ":server 324 " + (*tmp).getNickname() + " #joli_channel +nt \r\n";
+// 							send((*fds)[i].fd, response.c_str(), response.length(), 0);
+// 						}
+// 						else if (ref.find("WHO") != std::string::npos)
+// 						{
+// 							response = ":server 352 " + (*tmp).getNickname() + " #joli_channel " + (*tmp).getNickname() + " user host server toto" + (*tmp).getNickname() + " H :0 " + (*tmp).getNickname() + "\r\n";
+// 							send((*fds)[i].fd, response.c_str(), response.length(), 0);
+// 						}
+// 						else if (ref.find("PRIVMSG") != std::string::npos)
+// 						{
+// 							ret = ref.find("#joli_channel :") + 15;
+// 							message = ref.substr(ret, ref.find("\r\n") - ret);
+// 							std::cout << "message = " << message << std::endl;
+// 							response = ":" + (*tmp).getNickname() + " PRIVMSG #joli_channel :" + message +"\r\n";
+							
+// 							send(fds[i + 1].fd, response.c_str(), response.length(), 0);
+// 						}
+// 						ret = ref.find("\r\n");
+// 						pos = 0;
+						
+// 						while (ret != -1)
+// 						{
+// 							std::cout << "Commande recue (ref[" << pos << "] -- ref[" << ret - 1 << "]) : " 
+// 							<< ref.substr(pos, ret - pos) << std::endl;
+// 							pos = ret + 2;
+// 							ret = ref.find("\r\n", ret + 2);
+// 						}
+// 						(*tmp).clear();
+// 					}
+// 				}
+// 			}
+// 		}
+// }
+
+ 
+//     // Exemple de chaîne d'entrée
+//     std::string input(argv[1]);
+
+//     // Parsing de la chaîne d'entrée
+//     std::istringstream iss(input);
+//     std::string actionStr;
+//     std::string arguments;
+//     iss >> actionStr >> arguments;
+
+//     // Conversion de l'action en valeur d'énumération
+//     enum Action { USER, JOIN, MODE };
+//     Action action;
+//     if (actionStr == "USER")
+//         action = USER;
+//     else if (actionStr == "JOIN")
+//         action = JOIN;
+//     else if (actionStr == "MODE")
+//         action = MODE;
+//     else {
+//         std::cout << "Action non reconnue." << std::endl;
+//         return 0;
+//     }
+
+//     // Recherche de la fonction correspondante et appel si trouvée
+//     if (action >= 0 && action < sizeof(functionPointers) / sizeof(functionPointers[0])) {
+//         functionPointers[action](arguments);
+//     } else {
+//         std::cout << "Action non reconnue." << std::endl;
+//     }
+
+//     return 0;
+// }
+
+void	ft_handshake(Client *tmp, struct pollfd *fds, int i)
+{
+	int			ret;
+	std::string	nick;
+	std::string	username;
+	std::string	response;
+	const std::string &	ref = (*tmp).getBuffer();
+
+	// #IRC connection handshake consists of sending NICK and USER messages. All IRC messages must end in \r\n
+	
+	ret = ref.find("NICK") + 5;
+	nick = ref.substr(ret, ref.find("USER") - 2 - ret);
+	ret = ref.find("USER") + 5;
+	username = ref.substr(ret, ref.find(" ", ret) - ret);
+	response = RPL_WELCOME(nick, username);
+	std::cout << "\tnickname = " << nick << "\n\tusername = " << username << std::endl;
+	(*tmp).setNickname(nick);
+	(*tmp).setUsername(username);
+	std::cout << "DANS LA CLASSE CLIENT" << "\tnickname = " << (*tmp).getNickname() << "\n\tusername = " << (*tmp).getUsername() << std::endl;
+	send(fds[i].fd, response.c_str(), response.length(), 0);
+	//jsp si utile ou pas ?
+}
+
+void	ft_user(Client *tmp, struct pollfd *fds, int i, std::string *args)
+{
+	std::cout << "function ft_user called" << std::endl;
+	(void)tmp;
+	(void)fds;
+	(void)i;
+	(void)args;
+}
+
+void	ft_join(Client *tmp, struct pollfd *fds, int i, std::string *args)
+{
+	std::string	response;
+
+	std::cout << "Received command JOIN w args " << args[0] << " and " << args[1] << std::endl;
+	std::cout << (*tmp).getNickname() << " veut rejoindre le channel" << args[0] << std::endl;
+	response = RPL_JOIN((*tmp).getNickname(), (*tmp).getUsername(), args[0]);
+	send(fds[i].fd, response.c_str(), response.length(), 0);
+}
+
+void	ft_mode(Client *tmp, struct pollfd *fds, int i, std::string *args)
+{
+	std::cout << "Received command MODE w args " << args[0] << " and " << args[1] << std::endl;
+	std::string	response;
+
+	response = ":server 324 " + (*tmp).getNickname() + " " + args[0] + " +nt \r\n";
+	send(fds[i].fd, response.c_str(), response.length(), 0);
+}
+
+void	ft_who(Client *tmp, struct pollfd *fds, int i, std::string *args)
+{
+	std::cout << "Received command WHO w args " << args[0] << " and " << args[1] << std::endl;
+	std::string	response;
+
+	response = ":server 352 " + (*tmp).getNickname() + " " + args[0] + " " + (*tmp).getNickname() + " user host server toto" + (*tmp).getNickname() + " H :0 " + (*tmp).getNickname() + "\r\n";
+	send(fds[i].fd, response.c_str(), response.length(), 0);
+}
+
+void	ft_privmsg(Client *tmp, struct pollfd *fds, int i, std::string *args)
+{
+	std::cout << "Received command PRIVMSG w args " << args[0] << " and " << args[1] << std::endl;
+	std::string dest;
+	std::string	message;
+	std::string	response;
+
+	dest = args[0];
+	message = args[1];
+	message = message.substr(1, message.size() - 2); // retire le ':' au debut du message
+	std::cout << "\tmessage = " << message << "\n\tdestinataire = " << dest << std::endl;
+	response = ":" + (*tmp).getNickname() + " PRIVMSG #joli_channel :" + message +"\r\n";
+	send(fds[i + 1].fd, response.c_str(), response.length(), 0);
+}
+
+void	t_func_initialize(t_func_ptr *fTab)
+{
+	fTab[0].name = "USER";
+	fTab[0].ptr = &ft_user;
+	fTab[1].name = "JOIN";
+	fTab[1].ptr = &ft_join;
+	fTab[2].name = "MODE";
+	fTab[2].ptr = &ft_mode;
+	fTab[3].name = "WHO";
+	fTab[3].ptr = &ft_who;
+	fTab[4].name = "PRIVMSG";
+	fTab[4].ptr = &ft_privmsg;
+
+}
+
+struct pollfd	*check_communication( struct pollfd *fds, int *socket_nbr )
+{
 	int						ret;
 	// struct sockaddr_in		clientAddress;
 	char					buffer[1024];			// limite d'une reception ???
@@ -119,7 +331,10 @@ struct pollfd	*check_communication( struct pollfd *fds, int *socket_nbr ) {
 	std::string			response;
 	std::string			message;
 
-	std::cout << "DANS LE MAIN" << " fds[0] = " << fds[0].fd << std::endl;
+	t_func_ptr fTab[6];
+	t_func_initialize(fTab);
+	// void (*funcTab[])(Client *tmp, struct pollfd *fds, int i) = { ft_user, ft_join, ft_mode, ft_who, ft_privmsg };
+
 	while ( 1 )
 	{
 		ret = poll(fds, *socket_nbr, -1);
@@ -153,53 +368,52 @@ struct pollfd	*check_communication( struct pollfd *fds, int *socket_nbr ) {
 					(*tmp).add_buff( buffer );
 					const std::string &	ref = (*tmp).getBuffer();
 					size_t	position = ref.rfind( "\r\n" );
-					if ( position == ref.size() - 2 ) {
+					if ( position == ref.size() - 2 )
+					{
 						std::cout << "Message reçu : " << ref << std::endl;
-						if(ref.find("USER") != std::string::npos)
+
+						// Recherche de la fonction correspondante et appel si trouvée
+						t_func_ptr fTab[6];
+						t_func_initialize(fTab);
+						std::istringstream iss(ref);
+						std::string cmd;
+						std::string args[2];
+						int			j;
+
+						iss >> cmd >> args[0] >> args[1];
+						for(j = 0; j < 5; j++)				
 						{
-							// #IRC connection handshake consists of sending NICK and USER messages. All IRC messages must end in \r\n
-							ret = ref.find("NICK") + 5;
-							nick = ref.substr(ret, ref.find("USER") - 2 - ret);
-							ret = ref.find("USER") + 5;
-							username = ref.substr(ret, ref.find(" ", ret) - ret);
-							response = RPL_WELCOME(nick, username);
-							std::cout << "\tnickname = " << nick << "\n\tusername = " << username << std::endl;
-							(*tmp).setNickname(nick);
-							(*tmp).setUsername(username);
-							std::cout << "DANS LA CLASSE CLIENT" << "\tnickname = " << (*tmp).getNickname() << "\n\tusername = " << (*tmp).getUsername() << std::endl;
-							send(fds[i].fd, response.c_str(), response.length(), 0);
-							//jsp si utile ou pas ?
+							if (cmd == fTab[j].name)
+							{
+								(*(fTab[j].ptr))(tmp, fds, i, args);
+								break ;
+							}
 						}
-						if (ref.find("coucou") != std::string::npos)
+						if (j == 5)
 						{
-							std::cout << "!!!!!!!!!" << std::endl;
-							std::cout << (*tmp).getNickname() << " veut rejoindre un channel" << std::endl;
-							response = RPL_JOIN((*tmp).getNickname(), (*tmp).getUsername(), "#joli_channel");
-							// std::cout << "###########" << std::endl << response << std::endl << RPL_JOIN(nick, username, "#joli_channel") << std::endl << std::endl;
-							send(fds[i].fd, response.c_str(), response.length(), 0);
+							if (ref.find("NICK") != std::string::npos && ref.find("USER") != std::string::npos)
+								ft_handshake(tmp, fds, i);
+							else 
+							{
+								std::cout << "Action non reconnue : " << ref << std::endl;
+							}
 						}
-						else if (ref.find("MODE") != std::string::npos)
+						/*
+						enum Action { USER, JOIN, MODE, WHO, PRIVMSG, NONE};
+						Action				action;
+						if (action >= 0 && action < sizeof(funcTab) / sizeof(funcTab[0]))
 						{
-							response = ":server 324 " + (*tmp).getNickname() + " #joli_channel +nt \r\n";
-							send(fds[i].fd, response.c_str(), response.length(), 0);
+							funcTab[action](tmp, fds, i);
 						}
-						else if (ref.find("WHO") != std::string::npos)
+						else if (ref.find("CAPS") != std::string::npos)
+							ft_handshake(tmp, fds, i);
+						else 
 						{
-							response = ":server 352 " + (*tmp).getNickname() + " #joli_channel " + (*tmp).getNickname() + " user host server toto" + (*tmp).getNickname() + " H :0 " + (*tmp).getNickname() + "\r\n";
-							send(fds[i].fd, response.c_str(), response.length(), 0);
+							std::cout << "Action non reconnue : " << ref << std::endl;
 						}
-						else if (ref.find("PRIVMSG") != std::string::npos)
-						{
-							ret = ref.find("#joli_channel :") + 15;
-							message = ref.substr(ret, ref.find("\r\n") - ret);
-							std::cout << "message = " << message << std::endl;
-							response = ":" + (*tmp).getNickname() + " PRIVMSG #joli_channel :" + message +"\r\n";
-							
-							send(fds[i + 1].fd, response.c_str(), response.length(), 0);
-						}
+						*/
 						ret = ref.find("\r\n");
 						pos = 0;
-						
 						while (ret != -1)
 						{
 							std::cout << "Commande recue (ref[" << pos << "] -- ref[" << ret - 1 << "]) : " 
