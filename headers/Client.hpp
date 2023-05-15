@@ -6,6 +6,7 @@ class	Client {
 	public:
 		Client( int fd );
 		Client( const Client & value );
+		Client( const Client & value, struct sockaddr_in &ip);
 		~Client( void );
 
 		Client &		operator=( const Client & rhs );
@@ -19,12 +20,14 @@ class	Client {
 		const int &					getFd( void ) const;
 		void						setNickname(std::string nick);
 		void						setUsername(std::string username);
+		const struct sockaddr_in	&getIp(void) const;
 
 	private:
-		std::string	_username;
-		std::string	_nickname;
-		std::string	_buffer;
-		int			_fd;
+		std::string				_username;
+		std::string				_nickname;
+		std::string				_buffer;
+		int						_fd;
+		struct sockaddr_in		_ip;
 
 		Client( void );
 	

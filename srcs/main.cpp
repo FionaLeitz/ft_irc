@@ -78,13 +78,37 @@ void	end_close( struct pollfd *fds, int socket_nbr ) {
 		close( fds[socket_nbr].fd );
 }
 
+int	incoming_connections(struct pollfd **fds, int *socket_nbr, t_context &context)
+{
+	struct sockaddr_in		clientAddress;
+	socklen_t 				clientAddressLength = sizeof(clientAddress);
 
+	if ((*fds)[0].revents & POLLIN)
+	{
+		/* Acceptation de la première connexion entrante */
+		*fds = new_tab( *fds, *socket_nbr );
+		(*fds)[*socket_nbr].events = POLLIN;
+        (*fds)[*socket_nbr].fd = accept((*fds)[0].fd, (struct sockaddr *)&clientAddress, &clientAddressLength);
+        if ((*fds)[*socket_nbr].fd == -1)
+		{
+			std::cerr << "Error while executing accept() : " << strerror(errno) << std::endl;
+			return 1;
+		}
+		Client new_client((*fds)[*socket_nbr].fd, clientAddress);
+		context.clients.insert( std::map<int, Client>::value_type( (*fds)[*socket_nbr].fd, new_client ) );
+		(*socket_nbr)++;
+        // std::cout << "Connexion acceptée depuis " << inet_ntoa(clientAddress.sin_addr) << ":" << ntohs(clientAddress.sin_port) << std::endl;
+		std::cout << "Connexion acceptée depuis " << inet_ntoa(new_client.getIp().sin_addr) << ":" << ntohs(new_client.getIp().sin_port) << std::endl;
+		std::cout << "Son fd est : " <<  new_client.getFd() << std::endl;
+	}
+	return 0;
+}
 
 struct pollfd	*check_communication( struct pollfd *fds, int *socket_nbr ) {
 	int						ret;
-	struct sockaddr_in		clientAddress;
+	// struct sockaddr_in		clientAddress;
 	char					buffer[1024];			// limite d'une reception ???
-	socklen_t 				clientAddressLength = sizeof(clientAddress);
+	// socklen_t 				clientAddressLength = sizeof(clientAddress);
 	t_context				context;
 	// std::map<int, Client>	clients;
 	// std::map<std::string, Channel>	channels;
@@ -95,6 +119,7 @@ struct pollfd	*check_communication( struct pollfd *fds, int *socket_nbr ) {
 	std::string			response;
 	std::string			message;
 
+	std::cout << "DANS LE MAIN" << " fds[0] = " << fds[0].fd << std::endl;
 	while ( 1 )
 	{
 		ret = poll(fds, *socket_nbr, -1);
@@ -103,23 +128,7 @@ struct pollfd	*check_communication( struct pollfd *fds, int *socket_nbr ) {
             std::cerr << "Error while executing poll() : " << strerror(errno) << std::endl;
             return NULL;
         }
-        if (fds[0].revents & POLLIN)
-		{
-			/* Acceptation de la première connexion entrante */
-			fds = new_tab( fds, *socket_nbr );
-			fds[*socket_nbr].events = POLLIN;
-            fds[*socket_nbr].fd = accept(fds[0].fd, (struct sockaddr *)&clientAddress, &clientAddressLength);
-            if (fds[*socket_nbr].fd == -1)
-			{
-				std::cerr << "Error while executing accept() : " << strerror(errno) << std::endl;
-				return NULL;
-			}
-			Client new_client(fds[*socket_nbr].fd);
-			context.clients.insert( std::map<int, Client>::value_type( fds[*socket_nbr].fd, new_client ) );
-			(*socket_nbr)++;
-            std::cout << "Connexion acceptée depuis " << inet_ntoa(clientAddress.sin_addr) << ":" << ntohs(clientAddress.sin_port) << std::endl;
-			std::cout << "Son fd est : " <<  new_client.getFd() << std::endl;
-		}
+		incoming_connections(&fds, socket_nbr, context);
 		for ( int i = 1; i < *socket_nbr; i++ ) {
 			/* Verification de demande de communication */
 			if (fds[i].revents & POLLIN)
