@@ -78,7 +78,7 @@ void	end_close( struct pollfd *fds, int socket_nbr ) {
 		close( fds[socket_nbr].fd );
 }
 
-
+void	quit( std::map<int, Client> clients, int fd, std::string message, int fd2 );
 
 struct pollfd	*check_communication( struct pollfd *fds, int *socket_nbr ) {
 	int						ret;
@@ -161,7 +161,7 @@ struct pollfd	*check_communication( struct pollfd *fds, int *socket_nbr ) {
 							send(fds[i].fd, response.c_str(), response.length(), 0);
 							//jsp si utile ou pas ?
 						}
-						if (ref.find("coucou") != std::string::npos)
+						if (ref.find("JOIN") != std::string::npos)
 						{
 							std::cout << "!!!!!!!!!" << std::endl;
 							std::cout << (*tmp).getNickname() << " veut rejoindre un channel" << std::endl;
@@ -186,7 +186,15 @@ struct pollfd	*check_communication( struct pollfd *fds, int *socket_nbr ) {
 							std::cout << "message = " << message << std::endl;
 							response = ":" + (*tmp).getNickname() + " PRIVMSG #joli_channel :" + message +"\r\n";
 							
+							std::cout << "response = " << response << std::endl;
 							send(fds[i + 1].fd, response.c_str(), response.length(), 0);
+						}
+						else if (ref.find("QUIT") != std::string::npos)
+						{
+							std::cout << "WE ARE QUITTING ! " << ref << std::endl;
+							ret = ref.find("QUIT :") + 6;
+							message = ref.substr(ret, ref.find("\r\n") - ret);
+							quit( context.clients, fds[i].fd, message, fds[i + 1].fd );
 						}
 						ret = ref.find("\r\n");
 						pos = 0;

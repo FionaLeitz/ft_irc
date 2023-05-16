@@ -3,6 +3,7 @@ NAME	= ircserv
 SRC		=	srcs/main.cpp			\
 			srcs/Client.cpp			\
 			srcs/Channel.cpp		\
+			srcs/quit.cpp			\
 
 OBJ	= $(SRC:%.cpp=%.o)
 

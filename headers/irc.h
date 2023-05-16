@@ -21,6 +21,8 @@
 #define RPL_WELCOME(nickname, username) (":server 001 " + nickname + " :Welcome to the test IRC Network " + USER_ID(nickname, username) + "\r\n")
 #define RPL_JOIN(nickname, username, channel) (":" + USER_ID(nickname, username) + " JOIN " + channel + "\r\n")
 #define RPL_MSG(nickname, username, dest, message)(":" + USER_ID(nickname, username) + " PRIVMSG " + dest + " :" + message + "\r\n");
+#define RPL_QUIT(nickname, username, message) (":" + USER_ID(nickname, username) + " QUIT Quit :" + message + "\r\n")
+// #define RPL_QUIT(nickname, message) (":" + nickname + " QUIT #joli_channel :" + message + "\r\n")
 
 
 typedef struct	s_context {
