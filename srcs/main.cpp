@@ -169,20 +169,31 @@ void	ft_user(Client *tmp, struct pollfd *fds, int i, std::string *args)
 	send(fds[i].fd, response.c_str(), response.length(), 0);
 }
 
-void	t_func_initialize(t_func_ptr *fTab)
+void	ft_pass(Client *tmp, struct pollfd *fds, int i, std::string *args)
 {
-	fTab[0].name = "USER";
-	fTab[0].ptr = &ft_user;
-	fTab[1].name = "JOIN";
-	fTab[1].ptr = &ft_join;
-	fTab[2].name = "MODE";
-	fTab[2].ptr = &ft_mode;
-	fTab[3].name = "WHO";
-	fTab[3].ptr = &ft_who;
-	fTab[4].name = "PRIVMSG";
-	fTab[4].ptr = &ft_privmsg;
-	fTab[5].name = "NICK";
-	fTab[5].ptr = &ft_nick;
+	std::cout << "Received command PASS w args " << args[0] << " and " << args[1] << std::endl;
+	std::string	response;
+
+	(*tmp).setUsername(args[0]);
+	response = RPL_WELCOME((*tmp).getNickname(), (*tmp).getUsername());
+	send(fds[i].fd, response.c_str(), response.length(), 0);
+}
+
+
+void	t_func_initialize(t_func_ptr *funcTab)
+{
+	funcTab[0].name = "USER";
+	funcTab[0].ptr = &ft_user;
+	funcTab[1].name = "JOIN";
+	funcTab[1].ptr = &ft_join;
+	funcTab[2].name = "MODE";
+	funcTab[2].ptr = &ft_mode;
+	funcTab[3].name = "WHO";
+	funcTab[3].ptr = &ft_who;
+	funcTab[4].name = "PRIVMSG";
+	funcTab[4].ptr = &ft_privmsg;
+	funcTab[5].name = "NICK";
+	funcTab[5].ptr = &ft_nick;
 
 }
 
@@ -216,8 +227,8 @@ int	client_request(int *socket_nbr, struct pollfd **fds, Client *tmp, std::strin
 		std::cout << "Message reçu : " << ref << std::endl;
 
 		// Recherche de la fonction correspondante et appel si trouvée
-		t_func_ptr fTab[6];
-		t_func_initialize(fTab);
+		t_func_ptr funcTab[6];
+		t_func_initialize(funcTab);
 		std::istringstream iss(ref);
 		std::string cmd;
 		std::string args[2];
@@ -229,9 +240,9 @@ int	client_request(int *socket_nbr, struct pollfd **fds, Client *tmp, std::strin
 		iss >> cmd >> args[0] >> args[1];  // on decoupe la string en 3 parties : cmd, args[0] et args[1];
 		for(j = 0; j < 6; j++)				// si la commande fait partie des operateurs
 		{
-			if (cmd == fTab[j].name)
+			if (cmd == funcTab[j].name)
 			{
-				(*(fTab[j].ptr))(tmp, *fds, i, args);
+				(*(funcTab[j].ptr))(tmp, *fds, i, args);
 				break ;
 			}
 		}
@@ -329,7 +340,7 @@ void	check_clients_sockets(int *socket_nbr, struct pollfd **fds, char *buffer, t
 
 void	quit( std::map<int, Client> clients, int fd, std::string message, int fd2 );
 
-struct pollfd	*check_communication( struct pollfd *fds, int *socket_nbr )
+struct pollfd	*check_communication( struct pollfd *fds, int *socket_nbr, int password)
 {
 	int						ret;
 	// struct sockaddr_in		clientAddress;
@@ -344,8 +355,9 @@ struct pollfd	*check_communication( struct pollfd *fds, int *socket_nbr )
 	std::string			response;
 	std::string			message;
 
-	t_func_ptr fTab[6];
-	t_func_initialize(fTab);
+	t_func_ptr funcTab[6];
+	t_func_initialize(funcTab);
+	context.password = password;
 	// void (*funcTab[])(Client *tmp, struct pollfd *fds, int i) = { ft_user, ft_join, ft_mode, ft_who, ft_privmsg };
 
 	while (1)
@@ -381,7 +393,7 @@ int	main( int argc, char **argv ) {
 	struct pollfd		*fds = new pollfd[1];
 	int					socket_nbr[1];
 
-	if ( argc != 2 ) {
+	if ( argc != 3 ) {
 		std::cout << "Error number of arguments" << std::endl;
 		return 1;
 	}
@@ -396,7 +408,7 @@ int	main( int argc, char **argv ) {
 	fds[0].events = POLLIN;
 	
 	*socket_nbr = 1;
-	fds = check_communication( fds, socket_nbr );
+	fds = check_communication( fds, socket_nbr, atoi(argv[2]));
 	if ( fds == NULL )
 		return -1;
 
