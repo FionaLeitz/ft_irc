@@ -105,15 +105,6 @@ int	incoming_connections(struct pollfd **fds, int *socket_nbr, t_context &contex
 	return 0;
 }
 
-void	ft_user(Client *tmp, struct pollfd *fds, int i, std::string *args)
-{
-	std::cout << "function ft_user called" << std::endl;
-	(void)tmp;
-	(void)fds;
-	(void)i;
-	(void)args;
-}
-
 void	ft_join(Client *tmp, struct pollfd *fds, int i, std::string *args)
 {
 	std::string	response;
@@ -151,10 +142,31 @@ void	ft_privmsg(Client *tmp, struct pollfd *fds, int i, std::string *args)
 
 	dest = args[0];
 	message = args[1];
-	message = message.substr(1, message.size() - 2); // retire le ':' au debut du message
+	message = message.substr(1, message.size() - 1); // retire le ':' au debut du message
 	std::cout << "\tmessage = " << message << "\n\tdestinataire = " << dest << std::endl;
 	response = ":" + (*tmp).getNickname() + " PRIVMSG " + dest + " :" + message +"\r\n";
 	send(fds[i + 1].fd, response.c_str(), response.length(), 0);
+}
+
+void	ft_nick(Client *tmp, struct pollfd *fds, int i, std::string *args)
+{
+	std::cout << "Received command NICK w args " << args[0] << " and " << args[1] << std::endl;
+	// std::string	response;
+	(void)i;
+	(void)fds;
+
+	(*tmp).setNickname(args[0]);
+	// send(fds[i].fd, response.c_str(), response.length(), 0);
+}
+
+void	ft_user(Client *tmp, struct pollfd *fds, int i, std::string *args)
+{
+	std::cout << "Received command USER w args " << args[0] << " and " << args[1] << std::endl;
+	std::string	response;
+
+	(*tmp).setUsername(args[0]);
+	response = RPL_WELCOME((*tmp).getNickname(), (*tmp).getUsername());
+	send(fds[i].fd, response.c_str(), response.length(), 0);
 }
 
 void	t_func_initialize(t_func_ptr *fTab)
@@ -169,6 +181,8 @@ void	t_func_initialize(t_func_ptr *fTab)
 	fTab[3].ptr = &ft_who;
 	fTab[4].name = "PRIVMSG";
 	fTab[4].ptr = &ft_privmsg;
+	fTab[5].name = "NICK";
+	fTab[5].ptr = &ft_nick;
 
 }
 
@@ -195,6 +209,8 @@ void	ft_handshake(Client *tmp, struct pollfd *fds, int i)
 	//jsp si utile ou pas ?
 }
 
+
+
 int	client_request(int *socket_nbr, struct pollfd **fds, Client *tmp, std::string ref, int i)
 {
 		std::cout << "Message reçu : " << ref << std::endl;
@@ -206,12 +222,12 @@ int	client_request(int *socket_nbr, struct pollfd **fds, Client *tmp, std::strin
 		std::string cmd;
 		std::string args[2];
 		int			j;
-		int			ret;
-		int			pos;
+		// int			ret;
+		// int			pos;
 		(void)socket_nbr;
 
 		iss >> cmd >> args[0] >> args[1];  // on decoupe la string en 3 parties : cmd, args[0] et args[1];
-		for(j = 0; j < 5; j++)				// si la commande fait partie des operateurs
+		for(j = 0; j < 6; j++)				// si la commande fait partie des operateurs
 		{
 			if (cmd == fTab[j].name)
 			{
@@ -219,15 +235,14 @@ int	client_request(int *socket_nbr, struct pollfd **fds, Client *tmp, std::strin
 				break ;
 			}
 		}
-		if (j == 5)
-		{
-			if (ref.find("NICK") != std::string::npos && ref.find("USER") != std::string::npos) // si c'est le handshake de debut
-				ft_handshake(tmp, *fds, i);
-			else 
+		// if (j == 5)
+		// {
+		// 	if (ref.find("NICK") != std::string::npos && ref.find("USER") != std::string::npos) // si c'est le handshake de debut
+		// 		ft_handshake(tmp, *fds, i);
+			if (j == 6)
 			{
 				std::cout << "Action non reconnue : " << ref << std::endl;
 			}
-		}
 		/*
 		autre methode :
 						enum Action { USER, JOIN, MODE, WHO, PRIVMSG, NONE};
@@ -243,22 +258,24 @@ int	client_request(int *socket_nbr, struct pollfd **fds, Client *tmp, std::strin
 							std::cout << "Action non reconnue : " << ref << std::endl;
 						}
 						*/
-		ret = ref.find("\r\n");
-		pos = 0;
-		while (ret != -1)
-		{
-			std::cout << "Commande recue (ref[" << pos << "] -- ref[" << ret - 1 << "]) : " 
-			<< ref.substr(pos, ret - pos) << std::endl;
-			pos = ret + 2;
-			ret = ref.find("\r\n", ret + 2);
-			(*tmp).clear();
-		}
+		// ret = ref.find("\r\n");
+		// pos = 0;
+		// while (ret != -1)
+		// {
+		// 	std::cout << "Commande recue (ref[" << pos << "] -- ref[" << ret - 1 << "]) : " 
+		// 	<< ref.substr(pos, ret - pos) << std::endl;
+		// 	pos = ret + 2;
+		// 	ret = ref.find("\r\n", ret + 2);
+		// 	(*tmp).clear();
+		// }
 		return 0;
 }
 
 void	check_clients_sockets(int *socket_nbr, struct pollfd **fds, char *buffer, t_context *context)
 {
-	int ret;
+	int 		ret;
+	int			pos;
+	std::string cmd;
 
 	/* Verification de demande de communication */
 	for ( int i = 1; i < *socket_nbr; i++ )
@@ -286,9 +303,27 @@ void	check_clients_sockets(int *socket_nbr, struct pollfd **fds, char *buffer, t
 				const std::string &ref = (*tmp).getBuffer();
 				size_t	position = ref.rfind( "\r\n" );
 				if ( position == ref.size() - 2 )
-					client_request(socket_nbr, fds, tmp, ref, i);
+				{
+					ret = ref.find("\r\n");
+					pos = 0;
+					while (ret != -1)
+					{
+						cmd = ref.substr(pos, ret - pos);
+						std::cout << "Commande recue (ref[" << pos << "] -- ref[" << ret - 1 << "]) : " 
+						<< cmd << std::endl;
+						client_request(socket_nbr, fds, tmp, cmd, i);
+						pos = ret + 2;
+						ret = ref.find("\r\n", ret + 2);
+					}
+									(*tmp).clear();
+					
 				}
+
+				
+			}
+						
 		}
+
 	}
 }
 
