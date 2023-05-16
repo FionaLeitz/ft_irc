@@ -277,3 +277,87 @@
 >> :sakura.jp.as.dal.net PONG sakura.jp.as.dal.net :cmeston
 --> lag pong
 << QUIT :leaving
+<< CAP LS
+<< NICK cmeston
+<< USER cmeston cmeston irc.dal.net :Chine MESTON
+>> :lion.tx.us.dal.net NOTICE AUTH :*** Looking up your hostname...
+>> :lion.tx.us.dal.net NOTICE AUTH :*** Checking Ident
+>> :lion.tx.us.dal.net NOTICE AUTH :*** Found your hostname
+>> :lion.tx.us.dal.net NOTICE AUTH :*** No Ident response
+>> :lion.tx.us.dal.net 001 cmeston :Welcome to the DALnet IRC Network cmeston!~cmeston@62.210.33.161
+<< MODE cmeston +i
+>> :lion.tx.us.dal.net 002 cmeston :Your host is lion.tx.us.dal.net, running version bahamut-2.2.2
+>> :lion.tx.us.dal.net 003 cmeston :This server was created Mon Oct 10 2022 at 22:48:49 EDT
+>> :lion.tx.us.dal.net 004 cmeston lion.tx.us.dal.net bahamut-2.2.2 aAbcCdefFghHiIjkKmnoOPrRsSwxXy AbceiIjklLmMnoOpPrRsStv beIjklov
+>> :lion.tx.us.dal.net 005 cmeston NETWORK=DALnet SAFELIST MAXBANS=200 MAXCHANNELS=50 CHANNELLEN=32 KICKLEN=307 NICKLEN=30 TOPICLEN=307 MODES=6 CHANTYPES=# CHANLIMIT=#:50 PREFIX=(ohv)@%+ STATUSMSG=@%+ :are available on this server
+>> :lion.tx.us.dal.net 005 cmeston CASEMAPPING=ascii WATCH=128 SILENCE=10 ELIST=cmntu EXCEPTS INVEX CHANMODES=beI,k,jl,ciPAmMnOprRsSt MAXLIST=b:200,e:100,I:100 TARGMAX=DCCALLOW:,JOIN:,KICK:4,KILL:20,NOTICE:20,PART:,PRIVMSG:20,WHOIS:,WHOWAS: :are available on this server
+>> :lion.tx.us.dal.net 251 cmeston :There are 79 users and 7774 invisible on 39 servers
+>> :lion.tx.us.dal.net 252 cmeston 78 :IRC Operators online
+>> :lion.tx.us.dal.net 254 cmeston 3855 :channels formed
+>> :lion.tx.us.dal.net 255 cmeston :I have 1686 clients and 1 servers
+>> :lion.tx.us.dal.net 265 cmeston :Current local users: 1686 Max: 3398
+>> :lion.tx.us.dal.net 266 cmeston :Current global users: 7853 Max: 12060
+>> :lion.tx.us.dal.net NOTICE cmeston :*** Notice -- motd was last changed at 16/4/2022 12:15
+>> :lion.tx.us.dal.net 375 cmeston :- lion.tx.us.dal.net Message of the Day - 
+>> :lion.tx.us.dal.net 372 cmeston :-16/4/2022 12:15
+>> :lion.tx.us.dal.net 372 cmeston :-      Welcome to,
+>> :lion.tx.us.dal.net 372 cmeston :-       _ _
+>> :lion.tx.us.dal.net 372 cmeston :-      | (_)            
+>> :lion.tx.us.dal.net 372 cmeston :-      | |_  ___  _ __  
+>> :lion.tx.us.dal.net 372 cmeston :-      | | |/ _ \| '_ \ 
+>> :lion.tx.us.dal.net 372 cmeston :-      | | | (_) | | | |
+>> :lion.tx.us.dal.net 372 cmeston :-      |_|_|\___/|_| |_|.tx.us.dal.net 
+>> :lion.tx.us.dal.net 372 cmeston :- 
+>> :lion.tx.us.dal.net 372 cmeston :-       * Host..............: lion.dal.net | lion-v6.dal.net
+>> :lion.tx.us.dal.net 372 cmeston :-       * Ports.............: 6667 - 6669, 7000 | SSL - 6697
+>> :lion.tx.us.dal.net 372 cmeston :- 
+>> :lion.tx.us.dal.net 372 cmeston :-    Welcome to DALnet, by connecting to this network you agree to 
+>> :lion.tx.us.dal.net 372 cmeston :-    abide by its acceptable use policy, visit : http://www.dal.net/aup
+>> :lion.tx.us.dal.net 372 cmeston :- 
+>> :lion.tx.us.dal.net 372 cmeston :-      "This server has been sponsored by Psychz Networks"
+>> :lion.tx.us.dal.net 372 cmeston :- 
+>> :lion.tx.us.dal.net 372 cmeston :-            ---===[https://www.psychz.net/]===---
+>> :lion.tx.us.dal.net 372 cmeston :- 
+>> :lion.tx.us.dal.net 372 cmeston :-    -------------------------------------------------------------------
+>> :lion.tx.us.dal.net 372 cmeston :-    [%] Server Staff  =-  
+>> :lion.tx.us.dal.net 372 cmeston :- 
+>> :lion.tx.us.dal.net 372 cmeston :-    .::. Administrator....:
+>> :lion.tx.us.dal.net 372 cmeston :-                           sps
+>> :lion.tx.us.dal.net 372 cmeston :-       
+>> :lion.tx.us.dal.net 372 cmeston :-    .::. Operators........: 
+>> :lion.tx.us.dal.net 372 cmeston :-                           eddyk0ng
+>> :lion.tx.us.dal.net 372 cmeston :-                           Nando
+>> :lion.tx.us.dal.net 372 cmeston :-                           RallyMaster
+>> :lion.tx.us.dal.net 372 cmeston :-                           Wagoo
+>> :lion.tx.us.dal.net 372 cmeston :-                           Wheemp
+>> :lion.tx.us.dal.net 372 cmeston :-    -------------------------------------------------------------------
+>> :lion.tx.us.dal.net 372 cmeston :-    [%] Server Policies  =-
+>> :lion.tx.us.dal.net 372 cmeston :- 
+>> :lion.tx.us.dal.net 372 cmeston :-    a. No spamming or advertising allowed, if found you will be banned 
+>> :lion.tx.us.dal.net 372 cmeston :-       from this server/network.
+>> :lion.tx.us.dal.net 372 cmeston :-    b. No malicious bots, including flood and nick/channel chasers
+>> :lion.tx.us.dal.net 372 cmeston :-    c. No channel filler bots/clients/psybncs
+>> :lion.tx.us.dal.net 372 cmeston :-       #  A channel filler is a client, bnc, or bot which is connected
+>> :lion.tx.us.dal.net 372 cmeston :-          just to fill a channel and make it look bigger
+>> :lion.tx.us.dal.net 372 cmeston :-    d. Operator impersonation will not be tolerated and cause you to be
+>> :lion.tx.us.dal.net 372 cmeston :-       banned from this server/network.
+>> :lion.tx.us.dal.net 372 cmeston :- 
+>> :lion.tx.us.dal.net 372 cmeston :-            "REMEMBER IRC IS A PRIVILEGE, NOT A RIGHT"
+>> :lion.tx.us.dal.net 372 cmeston :-    --------------------------------------------------------------------
+>> :lion.tx.us.dal.net 372 cmeston :-    For IRC Operator assistance /join #Operhelp
+>> :lion.tx.us.dal.net 372 cmeston :- 
+>> :lion.tx.us.dal.net 372 cmeston :-    For DALnet and General IRC related help, goto #Help
+>> :lion.tx.us.dal.net 372 cmeston :- 
+>> :lion.tx.us.dal.net 372 cmeston :-    For multi-lingual documentation - [http://docs.dal.net]
+>> :lion.tx.us.dal.net 372 cmeston :- 
+>> :lion.tx.us.dal.net 372 cmeston :-    If you have any questions/issues related to this server,           
+>> :lion.tx.us.dal.net 372 cmeston :-    contact us using: lion-staff@dal.net
+>> :lion.tx.us.dal.net 372 cmeston :- 
+>> :lion.tx.us.dal.net 372 cmeston :-    Thank you, hope you enjoy your stay!
+>> :lion.tx.us.dal.net 372 cmeston :- 
+>> :lion.tx.us.dal.net 376 cmeston :End of /MOTD command.
+>> :cmeston MODE cmeston :+iH
+<< PING lion.tx.us.dal.net
+>> :lion.tx.us.dal.net PONG lion.tx.us.dal.net :cmeston
+--> lag pong
+<< QUIT :bybye

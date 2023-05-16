@@ -9,6 +9,14 @@ Client::Client( const Client & value ) {
 	this->_fd = value.getFd();
 }
 
+Client::Client( const Client & value, struct sockaddr_in &ip) {
+	this->_username = value.getUsername();
+	this->_nickname = value.getNickname();
+	this->_buffer = value.getBuffer();
+	this->_fd = value.getFd();
+	this->_ip = ip;
+}
+
 Client &	Client::operator=( const Client & rhs ) {
 	this->_username = rhs.getUsername();
 	this->_nickname = rhs.getNickname();
@@ -54,4 +62,8 @@ void	Client::setNickname(std::string nick) {
 
 void	Client::setUsername(std::string username) {
 	this->_username = username;
+}
+
+const struct sockaddr_in	&Client::getIp( void ) const {
+	return this->_ip;
 }

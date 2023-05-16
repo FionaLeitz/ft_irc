@@ -16,6 +16,7 @@
 # include <cctype>
 # include "Client.hpp"
 # include "Channel.hpp"
+# include <sstream>
 
 #define USER_ID(nickname, username) (nickname + "!" + username + "@host")
 #define RPL_WELCOME(nickname, username) (":server 001 " + nickname + " :Welcome to the test IRC Network " + USER_ID(nickname, username) + "\r\n")
@@ -30,5 +31,11 @@ typedef struct	s_context {
 	std::map<int, Client>	clients;
 	std::map<std::string, Channel>	channels;
 }			t_context;
+
+typedef struct s_func_ptr
+{
+	std::string	name;
+	void (*ptr)(Client *tmp, struct pollfd *fds, int i, std::string *args);
+}	t_func_ptr;
 
 #endif
