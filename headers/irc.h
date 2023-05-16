@@ -36,15 +36,15 @@ typedef struct	s_context {
 typedef struct s_func_ptr
 {
 	std::string	name;
-	void (*ptr)(Client *tmp, struct pollfd *fds, int i, std::string *args);
+	void (*ptr)(t_context *context, Client *tmp, struct pollfd *fds, int i, std::string *args);
 }	t_func_ptr;
 
 void	ft_quit( std::map<int, Client> clients, int fd, std::string message, int fd2 );
-void	ft_user(Client *tmp, struct pollfd *fds, int i, std::string *args);
-void	ft_nick(Client *tmp, struct pollfd *fds, int i, std::string *args);
-void	ft_privmsg(Client *tmp, struct pollfd *fds, int i, std::string *args);
-void	ft_who(Client *tmp, struct pollfd *fds, int i, std::string *args);
-void	ft_mode(Client *tmp, struct pollfd *fds, int i, std::string *args);
-void	ft_join(Client *tmp, struct pollfd *fds, int i, std::string *args);
+void	ft_user(t_context *context, Client *tmp, struct pollfd *fds, int i, std::string *args);
+void	ft_nick(t_context *context, Client *tmp, struct pollfd *fds, int i, std::string *args);
+void	ft_privmsg(t_context *context, Client *tmp, struct pollfd *fds, int i, std::string *args);
+void	ft_who(t_context *context, Client *tmp, struct pollfd *fds, int i, std::string *args);
+void	ft_mode(t_context *context, Client *tmp, struct pollfd *fds, int i, std::string *args);
+void	ft_join(t_context *context, Client *tmp, struct pollfd *fds, int i, std::string *args);
 
 #endif

@@ -171,15 +171,7 @@ int	incoming_connections(struct pollfd **fds, int *socket_nbr, t_context &contex
 // 	send(fds[i].fd, response.c_str(), response.length(), 0);
 // }
 
-void	ft_pass(Client *tmp, struct pollfd *fds, int i, std::string *args)
-{
-	std::cout << "Received command PASS w args " << args[0] << " and " << args[1] << std::endl;
-	std::string	response;
 
-	(*tmp).setUsername(args[0]);
-	response = RPL_WELCOME((*tmp).getNickname(), (*tmp).getUsername());
-	send(fds[i].fd, response.c_str(), response.length(), 0);
-}
 
 
 void	t_func_initialize(t_func_ptr *funcTab)
@@ -226,7 +218,7 @@ void	ft_handshake(Client *tmp, struct pollfd *fds, int i)
 
 
 
-int	client_request(int *socket_nbr, struct pollfd **fds, Client *tmp, std::string ref, int i)
+int	client_request(int *socket_nbr, struct pollfd **fds, Client *tmp, std::string ref, int i, t_context *context)
 {
 		std::cout << "Message reçu : " << ref << std::endl;
 
@@ -246,7 +238,7 @@ int	client_request(int *socket_nbr, struct pollfd **fds, Client *tmp, std::strin
 		{
 			if (cmd == funcTab[j].name)
 			{
-				(*(funcTab[j].ptr))(tmp, *fds, i, args);
+				(*(funcTab[j].ptr))(context, tmp, *fds, i, args);
 				break ;
 			}
 		}
@@ -326,7 +318,7 @@ void	check_clients_sockets(int *socket_nbr, struct pollfd **fds, char *buffer, t
 						cmd = ref.substr(pos, ret - pos);
 						std::cout << "Commande recue (ref[" << pos << "] -- ref[" << ret - 1 << "]) : " 
 						<< cmd << std::endl;
-						client_request(socket_nbr, fds, tmp, cmd, i);
+						client_request(socket_nbr, fds, tmp, cmd, i, context);
 						pos = ret + 2;
 						ret = ref.find("\r\n", ret + 2);
 					}
