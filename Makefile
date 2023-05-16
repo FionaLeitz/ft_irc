@@ -4,6 +4,12 @@ SRC		=	srcs/main.cpp			\
 			srcs/Client.cpp			\
 			srcs/Channel.cpp		\
 			srcs/quit.cpp			\
+			srcs/user.cpp			\
+			srcs/nick.cpp			\
+			srcs/privmsg.cpp		\
+			srcs/who.cpp			\
+			srcs/mode.cpp			\
+			srcs/join.cpp			\
 
 OBJ	= $(SRC:%.cpp=%.o)
 

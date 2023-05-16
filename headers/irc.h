@@ -22,7 +22,7 @@
 #define RPL_WELCOME(nickname, username) (":server 001 " + nickname + " :Welcome to the test IRC Network " + USER_ID(nickname, username) + "\r\n")
 #define RPL_JOIN(nickname, username, channel) (":" + USER_ID(nickname, username) + " JOIN " + channel + "\r\n")
 #define RPL_MSG(nickname, username, dest, message)(":" + USER_ID(nickname, username) + " PRIVMSG " + dest + " :" + message + "\r\n");
-#define RPL_QUIT(nickname, username, message) (":" + USER_ID(nickname, username) + " QUIT Quit :" + message + "\r\n")
+#define RPL_QUIT(nickname, username, message) (":server 301 " + USER_ID(nickname, username) + " QUIT Quit :" + message + "\r\n")
 // #define RPL_QUIT(nickname, message) (":" + nickname + " QUIT #joli_channel :" + message + "\r\n")
 
 
@@ -38,5 +38,13 @@ typedef struct s_func_ptr
 	std::string	name;
 	void (*ptr)(Client *tmp, struct pollfd *fds, int i, std::string *args);
 }	t_func_ptr;
+
+void	ft_quit( std::map<int, Client> clients, int fd, std::string message, int fd2 );
+void	ft_user(Client *tmp, struct pollfd *fds, int i, std::string *args);
+void	ft_nick(Client *tmp, struct pollfd *fds, int i, std::string *args);
+void	ft_privmsg(Client *tmp, struct pollfd *fds, int i, std::string *args);
+void	ft_who(Client *tmp, struct pollfd *fds, int i, std::string *args);
+void	ft_mode(Client *tmp, struct pollfd *fds, int i, std::string *args);
+void	ft_join(Client *tmp, struct pollfd *fds, int i, std::string *args);
 
 #endif
