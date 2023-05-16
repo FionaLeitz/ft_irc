@@ -29,9 +29,102 @@ _IWHITE=$'\x1b[47m'
 while IFS= read -r line
 do
 	prefix=$(echo "$line" | cut -c 1-20)
-	red=$(echo "$line" | cut -c 21-41)
+	red=$(echo "$line" | cut -c 21-25)
+	yellow=$(echo "$line" | cut -c 26-28)
+	green=$(echo "$line" | cut -c 29-31)
+	blue=$(echo "$line" | cut -c 32-34)
+	purple=$(echo "$line" | cut -c 35-41)
 	suffix=$(echo "$line" | cut -c 42-)
 	echo -n "$prefix"
-	echo -n "${_RED} $red ${_END}";
+	echo -n "                      ";
+	echo -e "$suffix"
+done < dessin
+sleep 0.02;
+clear;
+while IFS= read -r line
+do
+	prefix=$(echo "$line" | cut -c 1-20)
+	red=$(echo "$line" | cut -c 21-25)
+	yellow=$(echo "$line" | cut -c 26-28)
+	green=$(echo "$line" | cut -c 29-31)
+	blue=$(echo "$line" | cut -c 32-34)
+	purple=$(echo "$line" | cut -c 35-41)
+	suffix=$(echo "$line" | cut -c 42-)
+	echo -n "$prefix"
+	echo -n "${_RED}$red${_END}";
+	echo -n "                 ";
+	echo -e "$suffix"
+done < dessin
+sleep 0.02;
+clear;
+while IFS= read -r line
+do
+	prefix=$(echo "$line" | cut -c 1-20)
+	red=$(echo "$line" | cut -c 21-25)
+	yellow=$(echo "$line" | cut -c 26-28)
+	green=$(echo "$line" | cut -c 29-31)
+	blue=$(echo "$line" | cut -c 32-34)
+	purple=$(echo "$line" | cut -c 35-41)
+	suffix=$(echo "$line" | cut -c 42-)
+	echo -n "$prefix"
+	echo -n "${_RED}$red${_END}";
+	echo -n "${_YELLOW}$yellow${_END}";
+	echo -n "               ";
+	echo -e "$suffix"
+done < dessin
+sleep 0.02;
+clear;
+while IFS= read -r line
+do
+	prefix=$(echo "$line" | cut -c 1-20)
+	red=$(echo "$line" | cut -c 21-25)
+	yellow=$(echo "$line" | cut -c 26-28)
+	green=$(echo "$line" | cut -c 29-31)
+	blue=$(echo "$line" | cut -c 32-34)
+	purple=$(echo "$line" | cut -c 35-41)
+	suffix=$(echo "$line" | cut -c 42-)
+	echo -n "$prefix"
+	echo -n "${_RED}$red${_END}";
+	echo -n "${_YELLOW}$yellow${_END}";
+	echo -n "${_GREEN}$green${_END}";
+	echo -n "           ";
+	echo -e "$suffix"
+done < dessin
+sleep 0.02;
+clear;
+while IFS= read -r line
+do
+	prefix=$(echo "$line" | cut -c 1-20)
+	red=$(echo "$line" | cut -c 21-25)
+	yellow=$(echo "$line" | cut -c 26-28)
+	green=$(echo "$line" | cut -c 29-31)
+	blue=$(echo "$line" | cut -c 32-34)
+	purple=$(echo "$line" | cut -c 35-41)
+	suffix=$(echo "$line" | cut -c 42-)
+	echo -n "$prefix"
+	echo -n "${_RED}$red${_END}";
+	echo -n "${_YELLOW}$yellow${_END}";
+	echo -n "${_GREEN}$green${_END}";
+	echo -n "${_BLUE}$blue${_END}";
+	echo -n "         ";
+	echo -e "$suffix"
+done < dessin
+sleep 0.02;
+clear;
+while IFS= read -r line
+do
+	prefix=$(echo "$line" | cut -c 1-20)
+	red=$(echo "$line" | cut -c 21-25)
+	yellow=$(echo "$line" | cut -c 26-28)
+	green=$(echo "$line" | cut -c 29-31)
+	blue=$(echo "$line" | cut -c 32-34)
+	purple=$(echo "$line" | cut -c 35-41)
+	suffix=$(echo "$line" | cut -c 42-)
+	echo -n "$prefix"
+	echo -n "${_RED}$red${_END}";
+	echo -n "${_YELLOW}$yellow${_END}";
+	echo -n "${_GREEN}$green${_END}";
+	echo -n "${_BLUE}$blue${_END}";
+	echo -n "${_PURPLE}$purple${_END}";
 	echo -e "$suffix"
 done < dessin
