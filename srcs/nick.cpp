@@ -1,9 +1,12 @@
 #include "../headers/irc.h"
 
-void	nick( Client client, std::string new_nick ) {
-	client.setNickname( new_nick );
-	// est ce qu'on peut changer une key dans une map ? Si oui, changer la string associee
-	// au client dans la map de clients
-	// si non, supprimer le client de la map, puis le rajouter avec son nouveau nick
-	// devoir changer dans tous les channels ? Pas plus simple que ca ?
+void	ft_nick(Client *tmp, struct pollfd *fds, int i, std::string *args)
+{
+	std::cout << "Received command NICK w args " << args[0] << " and " << args[1] << std::endl;
+	// std::string	response;
+	(void)i;
+	(void)fds;
+
+	(*tmp).setNickname(args[0]);
+	// send(fds[i].fd, response.c_str(), response.length(), 0);
 }

@@ -609,3 +609,7 @@ TO DO LIST :
 	- Operateur (client avec des privileges, moderateur)
 		KILL	-> deconnecte un autre client de force
 		RESTART	-> redemarre le server (risque)
+
+
+
+Attention, si deux commandes a la suite ( /QUIT /JOIN ), il prend le join et c'est tout

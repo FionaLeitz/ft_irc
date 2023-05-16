@@ -1,6 +1,6 @@
 #include "../headers/irc.h"
 
-void	quit( std::map<int, Client> clients, int fd, std::string message, int fd2 ) {
+void	ft_quit( std::map<int, Client> clients, int fd, std::string message, int fd2 ) {
 	std::map<int, Client>::iterator	it = clients.find( fd );
 	std::string	response = RPL_QUIT(it->second.getNickname(), it->second.getUsername(), message);
 	std::cout << "RPL QUIT = " << response << std::endl;

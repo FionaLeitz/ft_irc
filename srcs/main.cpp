@@ -105,69 +105,71 @@ int	incoming_connections(struct pollfd **fds, int *socket_nbr, t_context &contex
 	return 0;
 }
 
-void	ft_join(Client *tmp, struct pollfd *fds, int i, std::string *args)
-{
-	std::string	response;
+// void	ft_join(Client *tmp, struct pollfd *fds, int i, std::string *args)
+// {
+// 	std::string	response;
 
-	std::cout << "Received command JOIN w args " << args[0] << " and " << args[1] << std::endl;
-	std::cout << (*tmp).getNickname() << " veut rejoindre le channel" << args[0] << std::endl;
-	response = RPL_JOIN((*tmp).getNickname(), (*tmp).getUsername(), args[0]);
-	send(fds[i].fd, response.c_str(), response.length(), 0);
-}
+// 	std::cout << "Received command JOIN w args " << args[0] << " and " << args[1] << std::endl;
+// 	std::cout << (*tmp).getNickname() << " veut rejoindre le channel" << args[0] << std::endl;
+// 	response = RPL_JOIN((*tmp).getNickname(), (*tmp).getUsername(), args[0]);
+// 	send(fds[i].fd, response.c_str(), response.length(), 0);
+// }
 
-void	ft_mode(Client *tmp, struct pollfd *fds, int i, std::string *args)
-{
-	std::cout << "Received command MODE w args " << args[0] << " and " << args[1] << std::endl;
-	std::string	response;
+// void	ft_mode(Client *tmp, struct pollfd *fds, int i, std::string *args)
+// {
+// 	std::cout << "Received command MODE w args " << args[0] << " and " << args[1] << std::endl;
+// 	std::string	response;
 
-	response = ":server 324 " + (*tmp).getNickname() + " " + args[0] + " +nt \r\n";
-	send(fds[i].fd, response.c_str(), response.length(), 0);
-}
+// 	response = ":server 324 " + (*tmp).getNickname() + " " + args[0] + " +nt \r\n";
+// 	send(fds[i].fd, response.c_str(), response.length(), 0);
+// }
 
-void	ft_who(Client *tmp, struct pollfd *fds, int i, std::string *args)
-{
-	std::cout << "Received command WHO w args " << args[0] << " and " << args[1] << std::endl;
-	std::string	response;
+// void	ft_who(Client *tmp, struct pollfd *fds, int i, std::string *args)
+// {
+// 	std::cout << "Received command WHO w args " << args[0] << " and " << args[1] << std::endl;
+// 	std::string	response;
 
-	response = ":server 352 " + (*tmp).getNickname() + " " + args[0] + " " + (*tmp).getNickname() + " user host server toto" + (*tmp).getNickname() + " H :0 " + (*tmp).getNickname() + "\r\n";
-	send(fds[i].fd, response.c_str(), response.length(), 0);
-}
+// 	response = ":server 352 " + (*tmp).getNickname() + " " + args[0] + " " + (*tmp).getNickname() + " user host server toto" + (*tmp).getNickname() + " H :0 " + (*tmp).getNickname() + "\r\n";
+// 	send(fds[i].fd, response.c_str(), response.length(), 0);
+// }
 
-void	ft_privmsg(Client *tmp, struct pollfd *fds, int i, std::string *args)
-{
-	std::cout << "Received command PRIVMSG w args " << args[0] << " and " << args[1] << std::endl;
-	std::string dest;
-	std::string	message;
-	std::string	response;
+// void	ft_privmsg(Client *tmp, struct pollfd *fds, int i, std::string *args)
+// {
+// 	std::cout << "Received command PRIVMSG w args " << args[0] << " and " << args[1] << std::endl;
+// 	std::string dest;
+// 	std::string	message;
+// 	std::string	response;
 
-	dest = args[0];
-	message = args[1];
-	message = message.substr(1, message.size() - 1); // retire le ':' au debut du message
-	std::cout << "\tmessage = " << message << "\n\tdestinataire = " << dest << std::endl;
-	response = ":" + (*tmp).getNickname() + " PRIVMSG " + dest + " :" + message +"\r\n";
-	send(fds[i + 1].fd, response.c_str(), response.length(), 0);
-}
+// 	dest = args[0];
+// 	message = args[1];
+// 	message = message.substr(1, message.size() - 1); // retire le ':' au debut du message
+// 	std::cout << "\tmessage = " << message << "\n\tdestinataire = " << dest << std::endl;
+// 	response = ":" + (*tmp).getNickname() + " PRIVMSG " + dest + " :" + message +"\r\n";
+// 	send(fds[i + 1].fd, response.c_str(), response.length(), 0);
+// }
 
-void	ft_nick(Client *tmp, struct pollfd *fds, int i, std::string *args)
-{
-	std::cout << "Received command NICK w args " << args[0] << " and " << args[1] << std::endl;
-	// std::string	response;
-	(void)i;
-	(void)fds;
+// void	ft_nick(Client *tmp, struct pollfd *fds, int i, std::string *args)
+// {
+// 	std::cout << "Received command NICK w args " << args[0] << " and " << args[1] << std::endl;
+// 	// std::string	response;
+// 	(void)i;
+// 	(void)fds;
 
-	(*tmp).setNickname(args[0]);
-	// send(fds[i].fd, response.c_str(), response.length(), 0);
-}
+// 	(*tmp).setNickname(args[0]);
+// 	// send(fds[i].fd, response.c_str(), response.length(), 0);
+// }
 
-void	ft_user(Client *tmp, struct pollfd *fds, int i, std::string *args)
-{
-	std::cout << "Received command USER w args " << args[0] << " and " << args[1] << std::endl;
-	std::string	response;
+// void	ft_user(Client *tmp, struct pollfd *fds, int i, std::string *args)
+// {
+// 	std::cout << "Received command USER w args " << args[0] << " and " << args[1] << std::endl;
+// 	std::string	response;
 
-	(*tmp).setUsername(args[0]);
-	response = RPL_WELCOME((*tmp).getNickname(), (*tmp).getUsername());
-	send(fds[i].fd, response.c_str(), response.length(), 0);
-}
+// 	// if ( (*tmp).getUsername() != "\0" )
+// 	// 	std::cout << "ERROR !!!" << std::endl;
+// 	(*tmp).setUsername(args[0]);
+// 	response = RPL_WELCOME((*tmp).getNickname(), (*tmp).getUsername());
+// 	send(fds[i].fd, response.c_str(), response.length(), 0);
+// }
 
 void	t_func_initialize(t_func_ptr *fTab)
 {
@@ -183,6 +185,8 @@ void	t_func_initialize(t_func_ptr *fTab)
 	fTab[4].ptr = &ft_privmsg;
 	fTab[5].name = "NICK";
 	fTab[5].ptr = &ft_nick;
+	// fTab[6].name = "QUIT";
+	// fTab[6].ptr = &ft_quit;
 
 }
 
@@ -326,8 +330,6 @@ void	check_clients_sockets(int *socket_nbr, struct pollfd **fds, char *buffer, t
 
 	}
 }
-
-void	quit( std::map<int, Client> clients, int fd, std::string message, int fd2 );
 
 struct pollfd	*check_communication( struct pollfd *fds, int *socket_nbr )
 {
