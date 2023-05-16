@@ -10,6 +10,8 @@ SRC		=	srcs/main.cpp			\
 			srcs/who.cpp			\
 			srcs/mode.cpp			\
 			srcs/join.cpp			\
+			srcs/pass.cpp			\
+
 
 OBJ	= $(SRC:%.cpp=%.o)
 

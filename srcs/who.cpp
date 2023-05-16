@@ -1,7 +1,8 @@
 #include "../headers/irc.h"
 
-void	ft_who(Client *tmp, struct pollfd *fds, int i, std::string *args)
+void	ft_who(t_context *context, Client *tmp, struct pollfd *fds, int i, std::string *args)
 {
+	(void)context;
 	std::cout << "Received command WHO w args " << args[0] << " and " << args[1] << std::endl;
 	std::string	response;
 

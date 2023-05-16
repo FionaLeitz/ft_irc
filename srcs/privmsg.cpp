@@ -1,7 +1,8 @@
 #include "../headers/irc.h"
 
-void	ft_privmsg(Client *tmp, struct pollfd *fds, int i, std::string *args)
+void	ft_privmsg(t_context *context, Client *tmp, struct pollfd *fds, int i, std::string *args)
 {
+	(void)context;
 	std::cout << "Received command PRIVMSG w args " << args[0] << " and " << args[1] << std::endl;
 	std::string dest;
 	std::string	message;

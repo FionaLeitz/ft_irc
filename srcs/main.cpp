@@ -188,8 +188,10 @@ void	t_func_initialize(t_func_ptr *funcTab)
 	funcTab[4].ptr = &ft_privmsg;
 	funcTab[5].name = "NICK";
 	funcTab[5].ptr = &ft_nick;
-	// fTab[6].name = "QUIT";
-	// fTab[6].ptr = &ft_quit;
+	funcTab[6].name = "PASS";
+	funcTab[6].ptr = &ft_pass;
+	funcTab[7].name = "QUIT";
+	funcTab[7].ptr = &ft_quit;
 
 }
 
@@ -223,7 +225,7 @@ int	client_request(int *socket_nbr, struct pollfd **fds, Client *tmp, std::strin
 		std::cout << "Message reçu : " << ref << std::endl;
 
 		// Recherche de la fonction correspondante et appel si trouvée
-		t_func_ptr funcTab[6];
+		t_func_ptr funcTab[8];
 		t_func_initialize(funcTab);
 		std::istringstream iss(ref);
 		std::string cmd;
@@ -242,14 +244,10 @@ int	client_request(int *socket_nbr, struct pollfd **fds, Client *tmp, std::strin
 				break ;
 			}
 		}
-		// if (j == 5)
-		// {
-		// 	if (ref.find("NICK") != std::string::npos && ref.find("USER") != std::string::npos) // si c'est le handshake de debut
-		// 		ft_handshake(tmp, *fds, i);
-			if (j == 6)
-			{
-				std::cout << "Action non reconnue : " << ref << std::endl;
-			}
+		if (j == 6)
+		{
+			std::cout << "Action non reconnue : " << ref << std::endl;
+		}
 		/*
 		autre methode :
 						enum Action { USER, JOIN, MODE, WHO, PRIVMSG, NONE};
