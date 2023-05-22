@@ -87,8 +87,12 @@ void	Channel::sendMessage(std::string response, int currentFd)
 	std::map<std::string, Client>::const_iterator it;
     for (it = this->_clientlist.begin(); it != this->_clientlist.end(); ++it)
     {
+		
 		fd = it->second.getFd();
 		if (fd != currentFd)
+		{
+			std::cout << "sending message to " << fd << std::endl;
 			send(fd, response.c_str(), response.length(), 0);
+		}
     }
 }

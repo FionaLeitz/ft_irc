@@ -25,6 +25,7 @@ void	ft_quit(t_context *context, Client *tmp, struct pollfd *fds, int i, std::st
 	//pour tous les channels dans lequel se trouve l'utilisateur
 	for (std::vector<std::string>::const_iterator it2 = (*tmp).getChannelList().begin(); it2 != (*tmp).getChannelList().end(); ++it2)
 	{
+		std::cout << "sending goodbye to channel " << *it2 << std::endl;
 		context->channels[*it2].sendMessage(response, (*tmp).getFd());
 		// send(fds[i + 1].fd, response.c_str(), response.length(), 0);
 	}
