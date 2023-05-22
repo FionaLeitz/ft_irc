@@ -21,5 +21,8 @@ void	ft_privmsg(t_context *context, Client *tmp, struct pollfd *fds, int i, std:
 		// sendToAllClients(context->channels[dest].getClientlist(), message);
 	}
 	else
+	{
 		send(fds[i + 1].fd, response.c_str(), response.length(), 0);
+	}
+
 }

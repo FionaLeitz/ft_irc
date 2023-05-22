@@ -67,3 +67,27 @@ void	Client::setUsername(std::string username) {
 const struct sockaddr_in	&Client::getIp( void ) const {
 	return this->_ip;
 }
+
+const std::vector<std::string>	&Client::getChannelList(void) const
+{
+	return this->_channelList;
+}
+
+void	Client::addChannel(std::string name)
+{
+	_channelList.push_back(name);
+}
+
+void	Client::removeChannel(std::string name)
+{
+	std::vector<std::string>::iterator it;
+
+	 for (it = _channelList.begin(); it != _channelList.end(); ++it)
+	 {
+        if (*it == name)
+		{
+            _channelList.erase(it);
+			break ;
+        }
+    }
+}
