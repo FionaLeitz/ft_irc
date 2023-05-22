@@ -70,3 +70,25 @@ void	Channel::setMode( std::string mode ) {
 void	Channel::setTopic( std::string topic ) {
 	this->_topic = topic;
 }
+
+void Channel::appliquerFonction(FunctionType function)
+{
+    std::map<std::string, Client>::iterator it;
+    for (it = _clientlist.begin(); it != _clientlist.end(); ++it)
+    {
+        function(it->second);
+    }
+}
+
+void	Channel::sendMessage(std::string response, int currentFd)
+{
+	int	fd;
+
+	std::map<std::string, Client>::const_iterator it;
+    for (it = this->_clientlist.begin(); it != this->_clientlist.end(); ++it)
+    {
+		fd = it->second.getFd();
+		if (fd != currentFd)
+			send(fd, response.c_str(), response.length(), 0);
+    }
+}

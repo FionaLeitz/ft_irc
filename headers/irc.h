@@ -2,6 +2,7 @@
 # define IRC_H
 
 # include <iostream>
+# include <algorithm>
 # include <cstring>
 # include <sys/socket.h>
 # include <netinet/in.h>
@@ -48,5 +49,7 @@ void	ft_who(t_context *context, Client *tmp, struct pollfd *fds, int i, std::str
 void	ft_mode(t_context *context, Client *tmp, struct pollfd *fds, int i, std::string *args);
 void	ft_join(t_context *context, Client *tmp, struct pollfd *fds, int i, std::string *args);
 void	ft_pass(t_context *context, Client *tmp, struct pollfd *fds, int i, std::string *args);
+
+void	sendToAllClients(const std::map<std::string, Client> &clientList, std::string response);
 
 #endif

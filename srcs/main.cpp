@@ -47,7 +47,7 @@ int	create_server_link( char *port ) {
     /* Préparation de l'adresse IP et du port du serveur */
 	std::memset( &serverAddress, 0, sizeof( serverAddress ) );
 	serverAddress.sin_family = AF_INET;
-	serverAddress.sin_addr.s_addr = htonl( INADDR_LOOPBACK );
+	serverAddress.sin_addr.s_addr = htonl( INADDR_ANY );
 	// serverAddress.sin_port = htons( 3630 );
 	serverAddress.sin_port = htons( atoi( port ) );
 
@@ -271,7 +271,7 @@ struct pollfd	*check_communication( struct pollfd *fds, int *socket_nbr, int pas
 	// socklen_t 				clientAddressLength = sizeof(clientAddress);
 	t_context				context;
 	// std::map<int, Client>	clients;
-	// std::map<std::string, Channel>	channels;
+	std::map<std::string, Channel>	channels;
 
 	std::string			nick;
 	std::string			username;
@@ -281,6 +281,7 @@ struct pollfd	*check_communication( struct pollfd *fds, int *socket_nbr, int pas
 	t_func_ptr funcTab[8];
 	t_func_initialize(funcTab);
 	context.password = password;
+	context.channels = channels;
 	// void (*funcTab[])(Client *tmp, struct pollfd *fds, int i) = { ft_user, ft_join, ft_mode, ft_who, ft_privmsg };
 
 	while (1)

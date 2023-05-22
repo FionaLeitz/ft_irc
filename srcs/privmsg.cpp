@@ -2,7 +2,6 @@
 
 void	ft_privmsg(t_context *context, Client *tmp, struct pollfd *fds, int i, std::string *args)
 {
-	(void)context;
 	std::cout << "Received command PRIVMSG w args " << args[0] << " and " << args[1] << std::endl;
 	std::cout << "	client buff is  " << (*tmp).getBuffer() << std::endl;
 	std::string dest;
@@ -16,5 +15,11 @@ void	ft_privmsg(t_context *context, Client *tmp, struct pollfd *fds, int i, std:
 	// message = message.substr(1, message.size() - 1); // retire le ':' au debut du message
 	std::cout << "\tmessage = " << message << "\n\tdestinataire = " << dest << std::endl;
 	response = ":" + (*tmp).getNickname() + " PRIVMSG " + dest + " :" + message +"\r\n";
-	send(fds[i + 1].fd, response.c_str(), response.length(), 0);
+	if (dest[0] == '#')
+	{
+		context->channels[dest].sendMessage(response, (*tmp).getFd());
+		// sendToAllClients(context->channels[dest].getClientlist(), message);
+	}
+	else
+		send(fds[i + 1].fd, response.c_str(), response.length(), 0);
 }
