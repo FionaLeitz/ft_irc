@@ -7,7 +7,7 @@ void	ft_user(t_context *context, Client *tmp, struct pollfd *fds, int i, std::st
 	std::string	response;
 
 	if ( (*tmp).getUsername() != "\0" ) {
-		// std::cout << "ERROR !!!" << std::endl;
+		// a rajouter, une deconnection
 		response = ":server 462 " + USER_ID( (*tmp).getNickname(), (*tmp).getUsername() ) + " :You may not reregister\r\n";
 		send(fds[i].fd, response.c_str(), response.length(), 0);
 		return ;

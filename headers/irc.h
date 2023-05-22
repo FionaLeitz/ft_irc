@@ -23,8 +23,8 @@
 #define RPL_WELCOME(nickname, username) (":server 001 " + nickname + " :Welcome to the test IRC Network " + USER_ID(nickname, username) + "\r\n")
 #define RPL_JOIN(nickname, username, channel) (":" + USER_ID(nickname, username) + " JOIN " + channel + "\r\n")
 #define RPL_MSG(nickname, username, dest, message)(":" + USER_ID(nickname, username) + " PRIVMSG " + dest + " :" + message + "\r\n");
-#define RPL_QUIT(nickname, username, message) (":server 301 " + USER_ID(nickname, username) + " QUIT Quit :" + message + "\r\n")
-// #define RPL_QUIT(nickname, message) (":" + nickname + " QUIT #joli_channel :" + message + "\r\n")
+// #define RPL_QUIT(nickname, username, message) (":server 301 " + USER_ID(nickname, username) + " QUIT Quit :" + message + "\r\n")
+#define RPL_QUIT(nickname, username, message) (":server 301 " + USER_ID(nickname, username) + " " + nickname + " Quit: " + message + "\r\n")
 
 
 typedef struct	s_context {
@@ -32,6 +32,7 @@ typedef struct	s_context {
 	std::map<int, Client>			clients;
 	std::map<std::string, Channel>	channels;
 	int								password;
+	int								socket_nbr[1];
 }			t_context;
 
 typedef struct s_func_ptr

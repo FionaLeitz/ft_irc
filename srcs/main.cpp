@@ -79,7 +79,7 @@ void	end_close( struct pollfd *fds, int socket_nbr ) {
 }
 
 
-int	incoming_connections(struct pollfd **fds, int *socket_nbr, t_context &context)
+int	incoming_connections(struct pollfd **fds, t_context &context)
 {
 	struct sockaddr_in		clientAddress;
 	socklen_t 				clientAddressLength = sizeof(clientAddress);
@@ -87,17 +87,18 @@ int	incoming_connections(struct pollfd **fds, int *socket_nbr, t_context &contex
 	if ((*fds)[0].revents & POLLIN)
 	{
 		/* Acceptation de la première connexion entrante */
-		*fds = new_tab( *fds, *socket_nbr );
-		(*fds)[*socket_nbr].events = POLLIN;
-        (*fds)[*socket_nbr].fd = accept((*fds)[0].fd, (struct sockaddr *)&clientAddress, &clientAddressLength);
-        if ((*fds)[*socket_nbr].fd == -1)
+		*fds = new_tab( *fds, context.socket_nbr[0]);
+		(*fds)[context.socket_nbr[0]].events = POLLIN;
+		(*fds)[context.socket_nbr[0]].revents = 0;
+        (*fds)[context.socket_nbr[0]].fd = accept((*fds)[0].fd, (struct sockaddr *)&clientAddress, &clientAddressLength);
+        if ((*fds)[context.socket_nbr[0]].fd == -1)
 		{
 			std::cerr << "Error while executing accept() : " << strerror(errno) << std::endl;
 			return 1;
 		}
-		Client new_client((*fds)[*socket_nbr].fd, clientAddress);
-		context.clients.insert( std::map<int, Client>::value_type( (*fds)[*socket_nbr].fd, new_client ) );
-		(*socket_nbr)++;
+		Client new_client((*fds)[context.socket_nbr[0]].fd, clientAddress);
+		context.clients.insert( std::map<int, Client>::value_type( (*fds)[context.socket_nbr[0]].fd, new_client ) );
+		(context.socket_nbr[0])++;
         // std::cout << "Connexion acceptée depuis " << inet_ntoa(clientAddress.sin_addr) << ":" << ntohs(clientAddress.sin_port) << std::endl;
 		std::cout << "Connexion acceptée depuis " << inet_ntoa(new_client.getIp().sin_addr) << ":" << ntohs(new_client.getIp().sin_port) << std::endl;
 		std::cout << "Son fd est : " <<  new_client.getFd() << std::endl;
@@ -151,7 +152,7 @@ void	ft_handshake(Client *tmp, struct pollfd *fds, int i)
 
 
 
-int	client_request(int *socket_nbr, struct pollfd **fds, Client *tmp, std::string ref, int i, t_context *context)
+int	client_request( struct pollfd **fds, Client *tmp, std::string ref, int i, t_context *context)
 {
 		std::cout << "Message reçu : " << ref << std::endl;
 
@@ -164,7 +165,6 @@ int	client_request(int *socket_nbr, struct pollfd **fds, Client *tmp, std::strin
 		int			j;
 		// int			ret;
 		// int			pos;
-		(void)socket_nbr;
 
 		iss >> cmd >> args[0] >> args[1];  // on decoupe la string en 3 parties : cmd, args[0] et args[1];
 		for(j = 0; j < 8; j++)				// si la commande fait partie des operateurs
@@ -207,14 +207,14 @@ int	client_request(int *socket_nbr, struct pollfd **fds, Client *tmp, std::strin
 		return 0;
 }
 
-void	check_clients_sockets(int *socket_nbr, struct pollfd **fds, char *buffer, t_context *context)
+void	check_clients_sockets(struct pollfd **fds, char *buffer, t_context *context)
 {
 	int 		ret;
 	int			pos;
 	std::string cmd;
 
 	/* Verification de demande de communication */
-	for ( int i = 1; i < *socket_nbr; i++ )
+	for ( int i = 1; i < context->socket_nbr[0]; i++ )
 	{
 		if ((*fds)[i].revents & POLLIN)
 		{
@@ -223,12 +223,13 @@ void	check_clients_sockets(int *socket_nbr, struct pollfd **fds, char *buffer, t
 			if (ret == -1)
 			{
 				std::cerr << "Error while receiving the message with recv() : " << strerror(errno) << std::endl;
-				end_close(*fds, *socket_nbr );
+				end_close(*fds, context->socket_nbr[0] );
 				return ;
 			}
 			else if (ret == 0)
 			{
 				std::cout << "Client has left the chat" << std::endl;
+				context->socket_nbr[0]--;
 				close ((*fds)[i].fd);
 			}
 			else
@@ -247,15 +248,16 @@ void	check_clients_sockets(int *socket_nbr, struct pollfd **fds, char *buffer, t
 						cmd = ref.substr(pos, ret - pos);
 						std::cout << "Commande recue (ref[" << pos << "] -- ref[" << ret - 1 << "]) : " 
 						<< cmd << std::endl;
-						client_request(socket_nbr, fds, tmp, cmd, i, context);
+						client_request(fds, tmp, cmd, i, context);
+						if (context->clients.find((*fds)[i].fd) == context->clients.end() )
+							break;
+						
 						pos = ret + 2;
 						ret = ref.find("\r\n", ret + 2);
 					}
-									(*tmp).clear();
-					
+					if ( ret == -1 )
+						(*tmp).clear();
 				}
-
-				
 			}
 						
 		}
@@ -282,19 +284,21 @@ struct pollfd	*check_communication( struct pollfd *fds, int *socket_nbr, int pas
 	t_func_initialize(funcTab);
 	context.password = password;
 	context.channels = channels;
+	context.socket_nbr[0] = *socket_nbr;
 	// void (*funcTab[])(Client *tmp, struct pollfd *fds, int i) = { ft_user, ft_join, ft_mode, ft_who, ft_privmsg };
 
 	while (1)
 	{
-		ret = poll(fds, *socket_nbr, -1);
+		ret = poll(fds, context.socket_nbr[0], -1);
         if (ret < 0)
 		{
             std::cerr << "Error while executing poll() : " << strerror(errno) << std::endl;
             return NULL;
         }
-		incoming_connections(&fds, socket_nbr, context);
-		check_clients_sockets(socket_nbr, &fds, buffer, &context);
+		incoming_connections(&fds, context);
+		check_clients_sockets(&fds, buffer, &context);
 	}
+	*socket_nbr = context.socket_nbr[0];
 	return fds;
 }
 
