@@ -18,16 +18,21 @@ class	Client {
 		const std::string &			getNickname( void ) const;
 		const std::string &			getBuffer( void ) const;
 		const int &					getFd( void ) const;
+
 		void						setNickname(std::string nick);
 		void						setUsername(std::string username);
 		const struct sockaddr_in	&getIp(void) const;
+		const std::vector<std::string>	&getChannelList(void) const;
+		void						addChannel(std::string name);
+		void						removeChannel(std::string name);
 
 	private:
-		std::string				_username;
-		std::string				_nickname;
-		std::string				_buffer;
-		int						_fd;
-		struct sockaddr_in		_ip;
+		std::string					_username;
+		std::string					_nickname;
+		std::string					_buffer;
+		int							_fd;
+		struct sockaddr_in			_ip;
+		std::vector<std::string>	_channelList;
 
 		Client( void );
 	
