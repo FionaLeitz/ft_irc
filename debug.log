@@ -361,3 +361,308 @@
 >> :lion.tx.us.dal.net PONG lion.tx.us.dal.net :cmeston
 --> lag pong
 << QUIT :bybye
+<< CAP LS
+<< NICK cmeston
+<< USER cmeston cmeston irc.dal.net :Chine MESTON
+>> :serenity.fl.us.dal.net NOTICE AUTH :*** Looking up your hostname...
+>> :serenity.fl.us.dal.net NOTICE AUTH :*** Checking Ident
+>> :serenity.fl.us.dal.net NOTICE AUTH :*** Found your hostname
+>> :serenity.fl.us.dal.net NOTICE AUTH :*** No Ident response
+>> :serenity.fl.us.dal.net 001 cmeston :Welcome to the DALnet IRC Network cmeston!~cmeston@62.210.33.191
+<< MODE cmeston +i
+>> :serenity.fl.us.dal.net 002 cmeston :Your host is serenity.fl.us.dal.net, running version bahamut-2.2.2
+>> :serenity.fl.us.dal.net 003 cmeston :This server was created Tue 23 Aug UTC at 2022 04:42:56 AM
+>> :serenity.fl.us.dal.net 004 cmeston serenity.fl.us.dal.net bahamut-2.2.2 aAbcCdefFghHiIjkKmnoOPrRsSwxXy AbceiIjklLmMnoOpPrRsStv beIjklov
+>> :serenity.fl.us.dal.net 005 cmeston NETWORK=DALnet SAFELIST MAXBANS=200 MAXCHANNELS=50 CHANNELLEN=32 KICKLEN=307 NICKLEN=30 TOPICLEN=307 MODES=6 CHANTYPES=# CHANLIMIT=#:50 PREFIX=(ohv)@%+ STATUSMSG=@%+ :are available on this server
+>> :serenity.fl.us.dal.net 005 cmeston CASEMAPPING=ascii WATCH=128 SILENCE=10 ELIST=cmntu EXCEPTS INVEX CHANMODES=beI,k,jl,ciPAmMnOprRsSt MAXLIST=b:200,e:100,I:100 TARGMAX=DCCALLOW:,JOIN:,KICK:4,KILL:20,NOTICE:20,PART:,PRIVMSG:20,WHOIS:,WHOWAS: :are available on this server
+>> :serenity.fl.us.dal.net 251 cmeston :There are 97 users and 8010 invisible on 37 servers
+>> :serenity.fl.us.dal.net 252 cmeston 80 :IRC Operators online
+>> :serenity.fl.us.dal.net 254 cmeston 3914 :channels formed
+>> :serenity.fl.us.dal.net 255 cmeston :I have 227 clients and 1 servers
+>> :serenity.fl.us.dal.net 265 cmeston :Current local users: 227 Max: 1393
+>> :serenity.fl.us.dal.net 266 cmeston :Current global users: 8107 Max: 12060
+>> :serenity.fl.us.dal.net NOTICE cmeston :*** Notice -- motd was last changed at 30/11/2020 19:09
+>> :serenity.fl.us.dal.net 375 cmeston :- serenity.fl.us.dal.net Message of the Day - 
+>> :serenity.fl.us.dal.net 372 cmeston :-30/11/2020 19:09
+>> :serenity.fl.us.dal.net 372 cmeston :- serenity.fl.us.dal.net
+>> :serenity.fl.us.dal.net 372 cmeston :- sponsored by: Kape, Inc & Datapacket.com
+>> :serenity.fl.us.dal.net 372 cmeston :- admin: Mustang
+>> :serenity.fl.us.dal.net 372 cmeston :- 
+>> :serenity.fl.us.dal.net 372 cmeston :- Please abide by DALnet's Acceptable Use Policy:
+>> :serenity.fl.us.dal.net 372 cmeston :- https://www.dal.net/aup
+>> :serenity.fl.us.dal.net 372 cmeston :- 
+>> :serenity.fl.us.dal.net 372 cmeston :- 
+>> :serenity.fl.us.dal.net 376 cmeston :End of /MOTD command.
+>> :cmeston MODE cmeston :+iH
+<< PING serenity.fl.us.dal.net
+>> :serenity.fl.us.dal.net PONG serenity.fl.us.dal.net :cmeston
+--> lag pong
+<< NICK ch
+>> :cmeston!~cmeston@45cb-3072-bdd-cd6-2d58.210.62.ip NICK :ch
+>> :NickServ!service@dal.net NOTICE ch :This nick is owned by someone else. Please choose another.
+>> :NickServ!service@dal.net NOTICE ch :If this is your nick, type: /msg NickServ@services.dal.net IDENTIFY <password>
+>> :NickServ!service@dal.net NOTICE ch :Your nick will be changed in 60 seconds if you do not comply.
+<< JOIN #help
+>> :ch!~cmeston@45cb-3072-bdd-cd6-2d58.210.62.ip JOIN :#help
+>> :serenity.fl.us.dal.net 332 ch #help :6Ask your question in channel and wait patiently 3� Welcome to #Help on DALnet � 12Websites at http://help.dal.net/help � http://help.dal.net/HelpCommittee/official/ � http://docs.dal.net � 4Never go to web pages spammed on IRC, Never give out your password to anything EXCEPT nickserv
+>> :serenity.fl.us.dal.net 333 ch #help Coastwatcher!deception@staff.dalnet 1673477299
+>> :serenity.fl.us.dal.net 353 ch = #help :ch weed_guy Guest41087 AvocetVIS KoRniChe @eddyk0ng athary JAWC Guest40824 {o_o} @GabruMalaysia sjanse Sinyo firebugs RallyMaster mezen pat Errr Guest01882 ChiQuiTiTa depeche @xPsycho KindOne Suntop nappy ComputerTech Excalibur +burnout Crow Ganonk Mag Fusl +EldridgeColeman Shahensha Wagoo Guest50702 Angelz Hobbyboy ByeBye Gokturk Nando @sps Sara_Ks chalcedony Ayukawa wyatt prince Arfie Herry-AFK RaZmOkET +Holbrook 
+>> :serenity.fl.us.dal.net 353 ch = #help :campari ubuntui DkrTremos Hidden +humility kisser Koragg Robus Andy @Profound @darkstar Lady_Pinkpearl ekin @isupr yoonix Guest41500 napster jeian amielca +electrohead Guest24635 bosen copycat 
+>> :serenity.fl.us.dal.net 366 ch #help :End of /NAMES list.
+<< MODE #help
+>> :serenity.fl.us.dal.net 324 ch #help +tncPlj 200 3:10
+--> chanquery mode
+<< WHO #help
+>> :serenity.fl.us.dal.net 329 ch #help 1111763723
+--> event 329
+>> :services.dal.net 328 ch #help :http://help.dal.net/help/
+>> :serenity.fl.us.dal.net 352 ch #help ~cmeston 45cb-3072-bdd-cd6-2d58.210.62.ip serenity.fl.us.dal.net ch H :0 Chine MESTON
+--> silent event who
+>> :serenity.fl.us.dal.net 352 ch #help ~OvO 7dc6-2489-194c-69bf-6e12.9c1b.4088.2409.ip lion.tx.us.dal.net weed_guy H :3 realname
+--> silent event who
+>> :serenity.fl.us.dal.net 352 ch #help ~MS 261b-c219-82d-351c-3ccc.219.104.ip punch.wa.us.dal.net Guest41087 G :3 Thank You Whoising Me. May I Help You?
+--> silent event who
+>> :serenity.fl.us.dal.net 352 ch #help ~quassel 467.dedi.hostingby.design nonstop.ix.me.dal.net AvocetVIS H :3 nunya
+--> silent event who
+>> :serenity.fl.us.dal.net 352 ch #help ~Marhba 17f8-ae5b-716e-f3cf-407f.158.102.ip lion.tx.us.dal.net KoRniChe H :3 Marhba User
+--> silent event who
+>> :serenity.fl.us.dal.net 352 ch #help eddyk0ng dalnet lion.tx.us.dal.net eddyk0ng H*@ :3 Do not argue with fools
+--> silent event who
+>> :serenity.fl.us.dal.net 352 ch #help athary kick.me.eu.org sakura.jp.as.dal.net athary G :2 λqopou wɑ ᴉ
+--> silent event who
+>> :serenity.fl.us.dal.net 352 ch #help ~WatfordJC 4785-759a-e7ef-78f7-e25.aka.johncook.uk halcyon.il.us.dal.net JAWC H :3 John Cook
+--> silent event who
+>> :serenity.fl.us.dal.net 352 ch #help ~angelz 1576-4091-45d5-ab11-3099.inspirenet.org halcyon.il.us.dal.net Guest40824 H :3 angelz
+--> silent event who
+>> :serenity.fl.us.dal.net 352 ch #help debian ee59-386d-44b0-660-1c65.75.51.ip lion.tx.us.dal.net {o_o} H :3 Never laugh at live dragons.
+--> silent event who
+>> :serenity.fl.us.dal.net 352 ch #help gabs 9932-321f-71a9-14ba-a753.do.it.cx sakura.jp.as.dal.net GabruMalaysia H@ :2 Gabs
+--> silent event who
+>> :serenity.fl.us.dal.net 352 ch #help sjanse 7ad6-cc50-61a-19b-f66d.znc.today atw.hu.eu.dal.net sjanse H :5 sjanse
+--> silent event who
+>> :serenity.fl.us.dal.net 352 ch #help znc 9c4-c718-c2f8-86e7-5aa0.88.ad80.2403.ip lair.nl.eu.dal.net Sinyo H :4 sepp
+--> silent event who
+>> :serenity.fl.us.dal.net 352 ch #help ~firebugs fad4-aa65-ed46-fb1b-b4e.16.154.ip sakura.jp.as.dal.net firebugs G :2 The Fated One!
+--> silent event who
+>> :serenity.fl.us.dal.net 352 ch #help rally dalnet lion.tx.us.dal.net RallyMaster H :3 Th꠮�v��
+--> silent event who
+>> :serenity.fl.us.dal.net 352 ch #help ~me 67cc-eb8e-c86c-56f5-9557.rev.sfr.net serenity.fl.us.dal.net mezen H :0 realname
+--> silent event who
+>> :serenity.fl.us.dal.net 352 ch #help spectre fb43-364a-1ef9-c923-9e41.60.5300.2607.ip lion.tx.us.dal.net pat H :3 enigma
+--> silent event who
+>> :serenity.fl.us.dal.net 352 ch #help ~err ethicalslacker.net atw.hu.eu.dal.net Errr G :5 4ʇɐ ƃuᴉʞool noʎ ǝɹɐ ʇɐɥʍ
+--> silent event who
+>> :serenity.fl.us.dal.net 352 ch #help r0cky 4479-dd1f-16b3-fee1-68e.Bouncers.DarkWorld.Network lion.tx.us.dal.net Guest01882 G :3 ZNC By - WWW.4Bouncers1.Darkworld.Network
+--> silent event who
+>> :serenity.fl.us.dal.net 352 ch #help ChiQuiTiTa 789f-14e0-aaf5-6b6b-78b2.vps.ovh.net lair.nl.eu.dal.net ChiQuiTiTa G :4 13SoY Una ChiCa ChiQuiTiTa TierNa DulCe
+--> silent event who
+>> :serenity.fl.us.dal.net 352 ch #help depeche 5960-10fb-152a-1e57-fe1e.thunderirc.net lair.nl.eu.dal.net depeche H :4 empty
+--> silent event who
+>> :serenity.fl.us.dal.net 352 ch #help xPsycho DALnet foxtrot.hub.dal.net xPsycho H*@ :3 Is it getting better? Do you feel the same?
+--> silent event who
+>> :serenity.fl.us.dal.net 352 ch #help kindone 1f4f-e083-fca-59ed-91ab.183.68.ip sakura.jp.as.dal.net KindOne H :2 Sir PingTimeoutalot
+--> silent event who
+>> :serenity.fl.us.dal.net 352 ch #help Suntop 2419-3371-5446-3e0-e2bd.wizard.suntop.nu sakura.jp.as.dal.net Suntop H :2 Wizard Suntop
+--> silent event who
+>> :serenity.fl.us.dal.net 352 ch #help napster a64f-953a-290-d27a-8717.znc.today sakura.jp.as.dal.net nappy H :2 Poverty is the parent of revolution and crime.
+--> silent event who
+>> :serenity.fl.us.dal.net 352 ch #help computerte eeba-3ad1-57ff-30cf-f196.50.198.ip sakura.jp.as.dal.net ComputerTech G :2 ComputerTech
+--> silent event who
+>> :serenity.fl.us.dal.net 352 ch #help excalibur 23e4-f226-3da7-1065-6314.28.149.ip sakura.jp.as.dal.net Excalibur G :2 Good & Evil. There never is one without the other.
+--> silent event who
+>> :serenity.fl.us.dal.net 352 ch #help ~burnout 0fucks.com sakura.jp.as.dal.net burnout H+ :2 burnout
+--> silent event who
+>> :serenity.fl.us.dal.net 352 ch #help uid281133 64dc-7ae7-fda-8e59-ed20.tinside.irccloud.com sakura.jp.as.dal.net Crow H :2 F̟̟̯̹̗̬̫̝̪͚ͭ̄͐ͮ͋ͅU̠̭̰̟͕̲̰̍
+--> silent event who
+>> :serenity.fl.us.dal.net 352 ch #help gw ce24-eab0-a86a-fb7c-f3c1.94.23.ip sakura.jp.as.dal.net Ganonk H :2 12,99M7,99a5,99s4,99G13,99a14,99n
+--> silent event who
+>> :serenity.fl.us.dal.net 352 ch #help zero-one c198-c497-a519-7d9-f262.awfulnet.org sakura.jp.as.dal.net Mag H :2 zero-one
+--> silent event who
+>> :serenity.fl.us.dal.net 352 ch #help fusl 6d14-48e9-550-4234-cfa5.in-addr.arpa.li lion.tx.us.dal.net Fusl H :3 fusl
+--> silent event who
+>> :serenity.fl.us.dal.net 352 ch #help ~Vin 1fe2-581-bd9f-d91d-a1c.fidsah.org lion.tx.us.dal.net EldridgeColeman H+ :3 peaceful
+--> silent event who
+>> :serenity.fl.us.dal.net 352 ch #help King 1da-e7dc-44c0-77b7-647e.usmanali.net lion.tx.us.dal.net Shahensha H :3 -= The King =-
+--> silent event who
+>> :serenity.fl.us.dal.net 352 ch #help wagoo dalnet lion.tx.us.dal.net Wagoo H* :3 Strumpet Apples on a Warp Pie Tangent
+--> silent event who
+>> :serenity.fl.us.dal.net 352 ch #help fenix shell.neonsky.net lion.tx.us.dal.net Guest50702 G :3 enigma
+--> silent event who
+>> :serenity.fl.us.dal.net 352 ch #help Angelz 3e1a-654f-da8d-f051-58ac.oddprotocol.org lion.tx.us.dal.net Angelz H :3 Angelz
+--> silent event who
+>> :serenity.fl.us.dal.net 352 ch #help Hobbyboy 255e-2ffe-ad75-75bf-43af.hobbyboy.co.uk lion.tx.us.dal.net Hobbyboy G :3 Andrew
+--> silent event who
+>> :serenity.fl.us.dal.net 352 ch #help ByeBye chatdalnet.online lion.tx.us.dal.net ByeBye G :3 Moses
+--> silent event who
+>> :serenity.fl.us.dal.net 352 ch #help ~Gokturk ac8-ea33-dcef-2e20-e847.hybridirc.com lion.tx.us.dal.net Gokturk H :3 Gokturk Yilmaz - Gokturk@hybridirc.com
+--> silent event who
+>> :serenity.fl.us.dal.net 352 ch #help nando dalnet lion.tx.us.dal.net Nando G* :3 Keep calm and let Nando handle it
+--> silent event who
+>> :serenity.fl.us.dal.net 352 ch #help sps dalnet lion.tx.us.dal.net sps H*@ :3 Warrior of God
+--> silent event who
+>> :serenity.fl.us.dal.net 352 ch #help Sara_KS staff.dalnet oper-e.dal.net Sara_Ks H* :3 Koala
+--> silent event who
+>> :serenity.fl.us.dal.net 352 ch #help chalcedony staff.dalnet oper-e.dal.net chalcedony H* :3 Thesaurus
+--> silent event who
+>> :serenity.fl.us.dal.net 352 ch #help Ayukawa staff.dalnet nonstop.ix.me.dal.net Ayukawa G* :3 I hope I get my turn with you
+--> silent event who
+>> :serenity.fl.us.dal.net 352 ch #help ~wyatt 1bb1-d144-afd0-f2d7-5858.251.198.ip punch.wa.us.dal.net wyatt H :3 wyatt
+--> silent event who
+>> :serenity.fl.us.dal.net 352 ch #help ~prince prince.ind.st halcyon.il.us.dal.net prince H :3 Yesterday is gone forever, & tomorrow is uncertain
+--> silent event who
+>> :serenity.fl.us.dal.net 352 ch #help Arfie DALnet kiwi.ix.nz.dal.net Arfie G* :3 John Doe
+--> silent event who
+>> :serenity.fl.us.dal.net 352 ch #help ~Herry f632-51c4-64f3-93aa-fee0.via.cloaked.host punch.wa.us.dal.net Herry-AFK H :3 I am an extraordinary person
+--> silent event who
+>> :serenity.fl.us.dal.net 352 ch #help ~allen f8e3-4518-2740-7b2b-3fae.242.46.ip atw.hu.eu.dal.net RaZmOkET G :5 Allen
+--> silent event who
+>> :serenity.fl.us.dal.net 352 ch #help holbrook dalnet paradigm.hub.dal.net Holbrook H*+ :4 Holbrook Bunting
+--> silent event who
+>> :serenity.fl.us.dal.net 352 ch #help campari 4cd-e493-e55b-95e-614.201.5300.2607.ip atw.hu.eu.dal.net campari G :5 Ultimo Bravo Lider
+--> silent event who
+>> :serenity.fl.us.dal.net 352 ch #help ~ubuntu 129.146.169.121 atw.hu.eu.dal.net ubuntui H :5 ubuntu
+--> silent event who
+>> :serenity.fl.us.dal.net 352 ch #help server irc.is atw.hu.eu.dal.net DkrTremos G :5 server test
+--> silent event who
+>> :serenity.fl.us.dal.net 352 ch #help hidden dalnet atw.hu.eu.dal.net Hidden H* :5 Unknown
+--> silent event who
+>> :serenity.fl.us.dal.net 352 ch #help humility c96d-df90-ddac-91bc-b938.61.45.ip atw.hu.eu.dal.net humility H+ :5 humility
+--> silent event who
+>> :serenity.fl.us.dal.net 352 ch #help kisser irc.monster atw.hu.eu.dal.net kisser H :5 Patience ensures victory
+--> silent event who
+>> :serenity.fl.us.dal.net 352 ch #help sid268081 eedd-fbc1-83ea-8aa6-f35e.lymington.irccloud.com atw.hu.eu.dal.net Koragg H :5 IRCCloud
+--> silent event who
+>> :serenity.fl.us.dal.net 352 ch #help ~Robus aa41-7cdc-67db-982f-2cd0.ip-91-121-91.eu bitcoin.uk.eu.dal.net Robus H :5 Robus
+--> silent event who
+>> :serenity.fl.us.dal.net 352 ch #help ~saputra a99-c6cb-dcf-d9d8-e3fe.itmate.net halcyon.il.us.dal.net Andy H :3 Andy Saputra
+--> silent event who
+>> :serenity.fl.us.dal.net 352 ch #help Profound DALnet koala.ix.au.dal.net Profound G*@ :3 🇦🇺
+--> silent event who
+>> :serenity.fl.us.dal.net 352 ch #help deception staff.dalnet oper-e.dal.net darkstar H@ :3 Where does the truth lie
+--> silent event who
+>> :serenity.fl.us.dal.net 352 ch #help ~LadyPink a91-9666-7755-2b99-7565.freshchat.org halcyon.il.us.dal.net Lady_Pinkpearl H :3 Lady Pink Pearl
+--> silent event who
+>> :serenity.fl.us.dal.net 352 ch #help ~ekin d39e-e516-727d-5e2b-7f0.39.89.ip bifrost.ca.us.dal.net ekin H :3 ekin
+--> silent event who
+>> :serenity.fl.us.dal.net 352 ch #help supr e8fa-8da0-ae22-1ccd-2cb7.226.23.ip jingo.ix.us.dal.net isupr H@ :3 supr
+--> silent event who
+>> :serenity.fl.us.dal.net 352 ch #help yoonix eea3-d9f0-bce4-dcfc-f76c.corrupted.net jingo.ix.us.dal.net yoonix H :3 Casey Jones
+--> silent event who
+>> :serenity.fl.us.dal.net 352 ch #help ~Smurf 994c-46dd-8de2-e6f7-8e68.unixmachine.com punch.wa.us.dal.net Guest41500 H :3 Still Alive
+--> silent event who
+>> :serenity.fl.us.dal.net 352 ch #help ~napster shell.xshellz.com punch.wa.us.dal.net napster G :3 You Can't Kill A Real Napster.
+--> silent event who
+>> :serenity.fl.us.dal.net 352 ch #help jeian dalnet midnight.hub.dal.net jeian H* :2 jeian
+--> silent event who
+>> :serenity.fl.us.dal.net 352 ch #help ~lepak 3c8b-89a7-9cf7-d9e1-ff34.91.103.ip punch.wa.us.dal.net amielca H :3 ZNC® Copyright © 2002-2022.
+--> silent event who
+>> :serenity.fl.us.dal.net 352 ch #help ~t3kk3n c8b3-edb-e8b0-905f-e692.32.45.ip bifrost.ca.us.dal.net electrohead H+ :3 t3kk3n
+--> silent event who
+>> :serenity.fl.us.dal.net 352 ch #help ~tek aca9-32cc-db31-ed48-cd49.38.51.ip choopa.nj.us.dal.net Guest24635 H :3 !
+--> silent event who
+>> :serenity.fl.us.dal.net 352 ch #help sid269874 178f-e9b8-9463-2619-3d79.irccloud.com serenity.fl.us.dal.net bosen H :0 limited edition
+--> silent event who
+>> :serenity.fl.us.dal.net 352 ch #help copycat 3a43-2d5f-769a-33f8-9644.weirdo.eu karsk.ix.eu.dal.net copycat G :2 The one and only!
+--> silent event who
+>> :serenity.fl.us.dal.net 315 ch #help :End of /WHO list.
+--> chanquery who end
+<< MODE #help b
+>> :serenity.fl.us.dal.net 368 ch #help :End of Channel Ban List
+--> chanquery ban end
+>> :NickServ!service@dal.net NOTICE ch :You now have 40 seconds to change your nick. The nick you are
+>> :NickServ!service@dal.net NOTICE ch :currently using is registered to another user.
+>> :NickServ!service@dal.net NOTICE ch :You now have 20 seconds to change your nick. If you do not
+>> :NickServ!service@dal.net NOTICE ch :comply, I will change your nick for you. This is your final warning.
+>> :services.dal.net 433 ch ch :Nickname is registered to someone else.
+<< PING serenity.fl.us.dal.net
+>> :serenity.fl.us.dal.net PONG serenity.fl.us.dal.net :ch
+--> lag pong
+>> :NickServ!service@dal.net NOTICE ch :Your nick has been changed to Guest03658. For more help on services,
+>> :NickServ!service@dal.net NOTICE ch :please visit http://www.dal.net/services
+>> :ch!~cmeston@45cb-3072-bdd-cd6-2d58.210.62.ip NICK :Guest03658
+<< PING serenity.fl.us.dal.net
+>> :serenity.fl.us.dal.net PONG serenity.fl.us.dal.net :Guest03658
+--> lag pong
+<< PING serenity.fl.us.dal.net
+>> :serenity.fl.us.dal.net PONG serenity.fl.us.dal.net :Guest03658
+--> lag pong
+<< PING serenity.fl.us.dal.net
+>> :serenity.fl.us.dal.net PONG serenity.fl.us.dal.net :Guest03658
+--> lag pong
+<< PING serenity.fl.us.dal.net
+>> :serenity.fl.us.dal.net PONG serenity.fl.us.dal.net :Guest03658
+--> lag pong
+<< PING serenity.fl.us.dal.net
+>> :serenity.fl.us.dal.net PONG serenity.fl.us.dal.net :Guest03658
+--> lag pong
+<< PING serenity.fl.us.dal.net
+>> :serenity.fl.us.dal.net PONG serenity.fl.us.dal.net :Guest03658
+--> lag pong
+<< PING serenity.fl.us.dal.net
+>> :serenity.fl.us.dal.net PONG serenity.fl.us.dal.net :Guest03658
+--> lag pong
+<< PING serenity.fl.us.dal.net
+>> :serenity.fl.us.dal.net PONG serenity.fl.us.dal.net :Guest03658
+--> lag pong
+<< PING serenity.fl.us.dal.net
+>> :serenity.fl.us.dal.net PONG serenity.fl.us.dal.net :Guest03658
+--> lag pong
+<< PING serenity.fl.us.dal.net
+>> :serenity.fl.us.dal.net PONG serenity.fl.us.dal.net :Guest03658
+--> lag pong
+<< PING serenity.fl.us.dal.net
+>> :serenity.fl.us.dal.net PONG serenity.fl.us.dal.net :Guest03658
+--> lag pong
+<< PING serenity.fl.us.dal.net
+>> :serenity.fl.us.dal.net PONG serenity.fl.us.dal.net :Guest03658
+--> lag pong
+<< PING serenity.fl.us.dal.net
+>> :serenity.fl.us.dal.net PONG serenity.fl.us.dal.net :Guest03658
+--> lag pong
+<< PING serenity.fl.us.dal.net
+>> :serenity.fl.us.dal.net PONG serenity.fl.us.dal.net :Guest03658
+--> lag pong
+<< PING serenity.fl.us.dal.net
+>> :serenity.fl.us.dal.net PONG serenity.fl.us.dal.net :Guest03658
+--> lag pong
+<< PING serenity.fl.us.dal.net
+>> :serenity.fl.us.dal.net PONG serenity.fl.us.dal.net :Guest03658
+--> lag pong
+<< PING serenity.fl.us.dal.net
+>> :serenity.fl.us.dal.net PONG serenity.fl.us.dal.net :Guest03658
+--> lag pong
+<< PING serenity.fl.us.dal.net
+>> :serenity.fl.us.dal.net PONG serenity.fl.us.dal.net :Guest03658
+--> lag pong
+<< PING serenity.fl.us.dal.net
+>> :serenity.fl.us.dal.net PONG serenity.fl.us.dal.net :Guest03658
+--> lag pong
+<< PING serenity.fl.us.dal.net
+>> :serenity.fl.us.dal.net PONG serenity.fl.us.dal.net :Guest03658
+--> lag pong
+<< PING serenity.fl.us.dal.net
+>> :serenity.fl.us.dal.net PONG serenity.fl.us.dal.net :Guest03658
+--> lag pong
+<< PING serenity.fl.us.dal.net
+>> :serenity.fl.us.dal.net PONG serenity.fl.us.dal.net :Guest03658
+--> lag pong
+<< PING serenity.fl.us.dal.net
+>> :serenity.fl.us.dal.net PONG serenity.fl.us.dal.net :Guest03658
+--> lag pong
+>> :phosphor!~inSecure@f9f4-46ea-d492-abd1-370.f550.85f.2a02.ip JOIN :#Help
+>> :ChanServ!service@dal.net MODE #help +o phosphor
+<< PING serenity.fl.us.dal.net
+>> :serenity.fl.us.dal.net PONG serenity.fl.us.dal.net :Guest03658
+--> lag pong
+<< PING serenity.fl.us.dal.net
+>> :serenity.fl.us.dal.net PONG serenity.fl.us.dal.net :Guest03658
+--> lag pong
+<< PING serenity.fl.us.dal.net
+>> :serenity.fl.us.dal.net PONG serenity.fl.us.dal.net :Guest03658
+--> lag pong
+<< PING serenity.fl.us.dal.net
+>> :serenity.fl.us.dal.net PONG serenity.fl.us.dal.net :Guest03658
+--> lag pong
+<< PING serenity.fl.us.dal.net
+>> :serenity.fl.us.dal.net PONG serenity.fl.us.dal.net :Guest03658
+--> lag pong

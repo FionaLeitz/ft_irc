@@ -39,7 +39,6 @@ void	ft_join(t_context *context, Client *tmp, struct pollfd *fds, int i, std::st
 	(*tmp).addChannel(args[0]);
 	response = RPL_JOIN((*tmp).getNickname(), (*tmp).getUsername(), args[0]);
 	send(fds[i].fd, response.c_str(), response.length(), 0);
-	std::cout << "Clients of channel " << args[0] << " are : " ;
-	context->channels[args[0]].appliquerFonction(afficherNomClient);
+	// context->channels[args[0]].appliquerFonction(afficherNomClient);
 	
 }

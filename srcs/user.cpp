@@ -14,6 +14,4 @@ void	ft_user(t_context *context, Client *tmp, struct pollfd *fds, int i, std::st
 	(*tmp).setUsername(args[0]);
 	response = RPL_WELCOME((*tmp).getNickname(), (*tmp).getUsername());
 	send(fds[i].fd, response.c_str(), response.length(), 0);
-	std::cout << "	SIZE of fds = " << sizeof(fds) << std::endl;
-	std::cout << "	SIZE of struct = " <<sizeof(struct pollfd)<< std::endl;
 }

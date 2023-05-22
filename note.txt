@@ -531,30 +531,40 @@ LIEN FONCTIONS
 
 
 
-
 	ce qui se passe quand le client fait /join #help :
 
-<< JOIN #help
-	>> :cmeston!~cmeston@1973-cabf-c594-efa1-695e.210.62.ip JOIN :#help
-	>> :server_name 332 cmeston #help :6Ask your question in channel and wait patiently 3� Welcome to #Help on DALnet � 12Websites at http://help.dal.net/help � http://help.dal.net/HelpCommittee/official/ � http://docs.dal.net � 4Never go to web pages spammed on IRC, Never give out your password to anything EXCEPT nickserv
-	>> :server_name 333 cmeston #help Coastwatcher!deception@staff.dalnet 1673477299
-	>> :server_name 353 cmeston = #help :cmeston MikeDbes maahir_ Ateeb DaRkSaMuRai KoRniChe sjanse {o_o} Ayukawa Mugger @Xzibit @eddyk0ng Arman Noypi Arfie Shadowless +Holbrook campari ubuntui DkrTremos Hidden +humility D|aBol|C kisser Guest14329 Koragg Robus Andy @Profound @darkstar JAWC mezen Joss Lady_Pinkpearl Mag Prince Nando ChiQuiTiTa @GabruMalaysia Errr Fusl +TimBachman Shahensha Wagoo Guest50702 Angelz Hobbyboy pat eSiR Gokturk depeche @sps 
-	>> :server_name 353 cmeston = #help :wyatt ekin @isupr yoonix RaimondRaj Herry-AFK firebugs AvocetVIS Guest41500 Ganonk chalcedony napster jeian Crow +burnout amielca copycat MasterScript bosen Mobscene Guest24635 +electrohead @xPsycho athary Excalibur ComputerTech nappy Suntop KindOne 
-	>> :server_name 366 cmeston #help :End of /NAMES list.
 << MODE #help
-	>> :server_name 324 cmeston #help +tncPlj 200 3:10
+	>> :server_name 324 <nickname> <#channel> +tncPlj 200 3:10
+	--> chanquery mode
 << WHO #help
-	>> :server_name 329 cmeston #help 1111763723
+	>> :server_name 329 <nickname> <#channel> 1111763723
+
+	>> :server_name 352 <client> <#channel> <~username> <host> 							 	<server_name> 		  <nickname> <flags> :<hopcount> <realname>
+	>> :server_name 352 ch		  #help		 ~cmeston	45cb-3072-bdd-cd6-2d58.210.62.ip 	server_name 		  ch 	     H 		 :0 		  Chine MESTON
+	>> :fus.dal.net 352 ch 		  #help		 ~MS		261b-c219-82d-351c-3ccc.219.104.ip	punch.wa.us.dal.net   Guest41087 G		 :3			  Thank You Whoising Me. May I Help You?
+	>> :fus.dal.net 352 ch		  #help		 ~quassel	467.dedi.hostingby.design 			nonstop.ix.me.dal.net AvocetVIS  H		 :3			  nunya
+	>> :fus.dal.net 352 ch 		  #help		 ~Marhba	17f8-ae5b-716e-f3cf-407f.158.102.ip	lion.tx.us.dal.net	  KoRniChe	 H		 :3			  Marhba User
 	...
-	>> :server_name 315 cmeston #help :End of /WHO list.
-	--> chanquery who end
+	>> :server_name 315 ch #help :End of /WHO list.
 << MODE #help b
 	>> :server_name 368 cmeston #help :End of Channel Ban List
-	--> chanquery ban end
 
 
-332    RPL_TOPIC
+329		RPL_CREATIONTIME (329)
+			"<client> <channel> <creationtime>"
+
+
+332		RPL_TOPIC
 			"<channel> :<topic>"
+
+352		RPL_WHOREPLY (352)
+			"<client> <channel> <username> <host> <server> <nick> <flags> :<hopcount> <realname>"
+			<flags> contains the following characters, in this order:
+				1. Away status: the letter H ('H', 0x48) to indicate that the user is here, or the letter G ('G', 0x47) to indicate that the user is gone.
+				2. Optionally, a literal asterisk character ('*', 0x2A) to indicate that the user is a server operator.
+				3. Optionally, the highest channel membership prefix that the client has in <channel>, if the client has one.
+				4. Optionally, one or more user mode characters and other arbitrary server-specific flags.
+
 
 353    RPL_NAMREPLY
               "( "=" / "*" / "@" ) <channel>

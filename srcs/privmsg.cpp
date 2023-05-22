@@ -24,24 +24,17 @@ void	ft_privmsg(t_context *context, Client *tmp, struct pollfd *fds, int i, std:
 	dest = args[0];
 	message = args[1];
 	message = (*tmp).getBuffer();
-	// message = message.substr(message.find(dest) + dest.size() + 1);
-	message = message.substr(1, message.size() - 1); // retire le ':' au debut du message
+	message = message.substr(message.find(dest) + dest.length() + 1);
+	if (message[0] == ':')		// retire le ':' au debut du message s'il y en a un
+		message = message.substr(1, message.size() - 1); 
 	std::cout << "\tmessage = " << message << "\n\tdestinataire = " << dest << std::endl;
 	response = ":" + (*tmp).getNickname() + " PRIVMSG " + dest + " :" + message +"\r\n";
 	if (dest[0] == '#')
 	{
 		context->channels[dest].sendMessage(response, (*tmp).getFd());
-		// sendToAllClients(context->channels[dest].getClientlist(), message);
 	}
 	else {
 		int	fd = nickname_fd( dest, context->clients );
-		message.clear();
-		message = (*tmp).getBuffer();
-		message = message.substr(message.find(dest) + dest.size() + 1);
-		response.clear();
-		if ( message[0] == ':')
-			message = message.substr(1, message.size() - 1);
-		response = ":" + (*tmp).getNickname() + " PRIVMSG " + dest + " :" + message +"\r\n";
 		if ( fd != -1 )
 			send(fd, response.c_str(), response.length(), 0);
 		else
