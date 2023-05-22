@@ -12,7 +12,6 @@
 
 void	ft_quit(t_context *context, Client *tmp, struct pollfd *fds, int i, std::string *args)
 {
-	// std::cout << "On essaye de QUIT la !" << std::endl;
 	std::cout << "Received command PRIVMSG w args " << args[0] << " and " << args[1] << std::endl;
 	std::string						response;
 	std::map<int, Client>::iterator	it;
