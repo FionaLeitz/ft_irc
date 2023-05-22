@@ -12,15 +12,23 @@
 
 void	ft_quit(t_context *context, Client *tmp, struct pollfd *fds, int i, std::string *args)
 {
+	// std::cout << "On essaye de QUIT la !" << std::endl;
 	std::cout << "Received command PRIVMSG w args " << args[0] << " and " << args[1] << std::endl;
 	std::string						response;
 	std::map<int, Client>::iterator	it;
 	int								j;
+	(void)args;
 
 	it = context->clients.find(fds[i].fd);
-	response = RPL_QUIT((*tmp).getNickname(), (*tmp).getUsername(), args[0]);
+	std::string	message = (*tmp).getBuffer();
+	message = message.substr(message.find(":") + 1);
+	response = RPL_QUIT((*tmp).getNickname(), (*tmp).getUsername(), message);
+	send(fds[i + 1].fd, response.c_str(), response.length(), 0);
 	std::cout << "RPL QUIT = " << response << std::endl;
+	close( fds[i].fd );
+	context->clients.erase(fds[i].fd);
 	(void)j;
+
 	// envoyer a tous les channels du client qui QUIT
 	// while (fds[j])
 	// 	{
