@@ -12,6 +12,13 @@ int		findClientFd(const std::map<int, Client> &clientList, std::string nick)
 		return (-1);
 }
 
+
+// << MODE #ez +o tuutuutu
+// >> :cmeston_!~cmeston@2618-2ed8-f8de-36d4-9088.210.62.ip MODE #ez +o tuutuutu
+// << WHO #ez
+// >> :hash.ix.nl.dal.net 352 cmeston_ #ez ~cmeston 2618-2ed8-f8de-36d4-9088.210.62.ip punch.wa.us.dal.net tuutuutu H@ :4 Chine MESTON
+// >> :hash.ix.nl.dal.net 352 cmeston_ #ez ~cmeston 2618-2ed8-f8de-36d4-9088.210.62.ip hash.ix.nl.dal.net cmeston_ H@ :0 Chine MESTON
+
 void	ft_kick(t_context *context, Client *tmp, struct pollfd *fds, int i, std::string *args) {
 	(void)fds;
 	(void)i;
