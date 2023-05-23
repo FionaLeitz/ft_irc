@@ -4,7 +4,8 @@ void	ft_ping(t_context *context, Client *tmp, struct pollfd *fds, int i, std::st
 	(void)context;
 	(void)fds;
 	(void)i;
-	(void)args;
-
-	std::cout << "Client "<<tmp->getNickname() << "is trying to use the ping command." << std::endl;
+	
+	std::string	response = RPL_PING(tmp->getNickname(), tmp->getUsername(), args[0]);
+	send(tmp->getFd(), response.c_str(), response.length(), 0);
 }
+

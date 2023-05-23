@@ -24,8 +24,11 @@
 #define RPL_JOIN(nickname, username, channel) (":" + USER_ID(nickname, username) + " JOIN " + channel + "\r\n")
 #define RPL_MSG(nickname, username, dest, message) (":" + USER_ID(nickname, username) + " PRIVMSG " + dest + " :" + message + "\r\n")
 #define RPL_QUIT(nickname, username, message) (":server 301 " + USER_ID(nickname, username) + " " + nickname + " Quit: " + message + "\r\n")
+#define RPL_PING(nickname, username, token) (":" + USER_ID(nickname, username) + " PONG server_name " + token + "\r\n")
 #define ERR_NOSUCHNICK(nickname, username, target) (":server 401 " + USER_ID(nickname, username) + " " + target + " :No such nick\r\n")
 #define ERR_NOSUCHCHANNEL(nickname, username, target) (":server 401 " + USER_ID(nickname, username) + " " + target + " :No such channel\r\n")
+#define ERR_NOTEXTTOSEND(nickname, username) (":server 412 " + USER_ID(nickname, username) + " :No text to send\r\n")
+#define ERR_NEEDMOREPARAMS(nickname, username, command) (":server 461 " + USER_ID(nickname, username) + " " + command + " :Not enough parameters\r\n")
 
 
 typedef struct	s_context {

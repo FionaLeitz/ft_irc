@@ -6,5 +6,5 @@ void	ft_part(t_context *context, Client *tmp, struct pollfd *fds, int i, std::st
 	(void)i;
 	(void)args;
 
-	std::cout << "Client "<<tmp->getNickname() << "is trying to use the part command." << std::endl;
+	std::cout << "Client "<<tmp->getNickname() << " is trying to use the part command." << std::endl;
 }

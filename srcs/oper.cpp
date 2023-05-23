@@ -6,7 +6,7 @@ void	ft_oper(t_context *context, Client *tmp, struct pollfd *fds, int i, std::st
 	(void)i;
 	(void)args;
 
-	std::cout << "Client "<<tmp->getNickname() << "is trying to use the oper command." << std::endl;
+	std::cout << "Client "<<tmp->getNickname() << " is trying to use the oper command." << std::endl;
 }
 
 // void	oper( Client client, /*liste de channels passer en argument*/) {
