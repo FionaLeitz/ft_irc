@@ -666,3 +666,7 @@
 << PING serenity.fl.us.dal.net
 >> :serenity.fl.us.dal.net PONG serenity.fl.us.dal.net :Guest03658
 --> lag pong
+<< PING serenity.fl.us.dal.net
+>> :serenity.fl.us.dal.net PONG serenity.fl.us.dal.net :Guest03658
+--> lag pong
+<< QUIT :Lost terminal

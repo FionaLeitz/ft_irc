@@ -24,7 +24,6 @@ class	Channel {
 		const std::string &						getMode( void ) const;
 		const std::string &						getTopic( void ) const;
 		const std::map<std::string, Client> &	getClientlist( void ) const;
-		// const std::map<std::string, Client> &	getClientName( void ) const;
 		const std::map<std::string, Client> &	getOperators( void ) const;
 
 		void									setMode( std::string mode );
@@ -32,6 +31,7 @@ class	Channel {
 
 		void									appliquerFonction(FunctionType function);
 		void									sendMessage(std::string response, int currentFd);
+		bool									isUserThere(std::string nick);
 
 
 	private:

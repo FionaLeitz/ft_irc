@@ -298,7 +298,7 @@ struct pollfd	*check_communication( struct pollfd *fds, int *socket_nbr, int pas
 	std::string			response;
 	std::string			message;
 
-	// t_func_ptr funcTab[8];
+	// t_func_ptr funcTab[18];
 	// t_func_initialize(funcTab);
 	context.password = password;
 	context.channels = channels;
