@@ -31,6 +31,8 @@ class	Channel {
 
 		void									appliquerFonction(FunctionType function);
 		void									sendMessage(std::string response, int currentFd);
+		void									sendToAll(std::string response);
+		void									sendToOne(std::string response, int fd);
 		bool									isUserThere(std::string nick);
 
 

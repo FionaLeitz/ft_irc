@@ -7,6 +7,7 @@ void	ft_kick(t_context *context, Client *tmp, struct pollfd *fds, int i, std::st
 	std::string channel;
 	std::string user;
 	std::string reason;
+	std::string response;
 
 	std::cout << "Client "<< tmp->getNickname() << " is trying to use the KICK command w args " << args[0] << " and " << args[1] << std::endl;
 
@@ -28,26 +29,24 @@ void	ft_kick(t_context *context, Client *tmp, struct pollfd *fds, int i, std::st
 	//trouver le channel
 	if (context->channels.find(args[0]) == context->channels.end())
 	{
-		std::cout << "No such channel" << std::endl; //remplacer par send err
+		response = ERR_NOSUCHCHANNEL(tmp->getNickname(), tmp->getUsername(), args[0]);
+		std::cout << "RPL ERR_CHANNEL: " << response << std::endl;
+		send(tmp->getFd(), response.c_str(), response.length(), 0);
 		return ;
-		// ERR_NOSUCHCHANNEL (403)
-//   "<client> <channel> :No such channel"
-
 	}
 	//si channel ok, trouver user dans le channel
 	if (!context->channels[args[0]].isUserThere(args[1]))
 	{
-		std::cout << "No such user" << std::endl; //remplacer par send err
+		response = ERR_USERNOTINCHANNEL(tmp->getNickname(), tmp->getUsername(), args[0], args[1]);
+		std::cout << "RPL ERR_USERNOT: " << response << std::endl;
+		send(tmp->getFd(), response.c_str(), response.length(), 0);
 		return ;
-		// ERR_USERNOTINCHANNEL (441)
-  		// "<client> <nick> <channel> :They aren't on that channel"
-		// Returned when a client tries to perform a channel+nick affecting command, when the nick isn’t joined to the channel (for example, MODE #channel +o nick).
 	}
 	std::cout << "Kicking " << args[1] << std::endl;
-
-
-
-
+	response = RPL_KICK(tmp->getNickname(), tmp->getUsername(), args[0], args[1], reason);
+	std::cout << "RPL : " << response << std::endl;
+	context->channels[args[0]].sendToAll(response);
+	// >> :totousse!~cmeston@2618-2ed8-f8de-36d4-9088.210.62.ip KICK #wewewe cmeston_ :totousse
 }
 
 // void	kick( Client operator, std::string nick, Channel channel ) {
@@ -68,7 +67,7 @@ void	ft_kick(t_context *context, Client *tmp, struct pollfd *fds, int i, std::st
 // in channel : KICK user
 //  #waoooooow :No such nick
 //  #waoooooow :You're not channel operator / #wewewe :You must be a channel op or higher to kick a more privileged user.
-// tutusse has kicked tutux from #waoooooow (tutusse)
+// tutusse has kicked tutux from #waoooooow (tutusse) / !- cmeston_ was kicked from #wewewe by totousse [totousse]
 //  You have been kicked from #waoooooow by tutusse (tutusse
 
 /*
