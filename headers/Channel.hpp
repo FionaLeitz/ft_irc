@@ -30,9 +30,8 @@ class	Channel {
 		void									setTopic( std::string topic );
 
 		void									appliquerFonction(FunctionType function);
-		void									sendMessage(std::string response, int currentFd);
-		void									sendToAll(std::string response);
-		void									sendToOne(std::string response, int fd);
+		void									sendMessage(std::string response, int currentFd);  // envoie a tout le monde sauf l'expediteur
+		void									sendToAll(std::string response);				   // envoie a tout le monde
 		bool									isUserThere(std::string nick);
 
 

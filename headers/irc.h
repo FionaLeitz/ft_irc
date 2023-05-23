@@ -29,7 +29,13 @@
 
 #define RPL_PING(nickname, username, token) (":" + USER_ID(nickname, username) + " PONG server_name " + token + "\r\n")
 #define ERR_NOSUCHNICK(nickname, username, target) (":server 401 " + USER_ID(nickname, username) + " " + target + " :No such nick\r\n")
-#define ERR_NOSUCHCHANNEL(nickname, username, target) (":server 401 " + USER_ID(nickname, username) + " " + target + " :No such channel\r\n")
+#define ERR_NOSUCHCHANNEL(nickname, username, target) (":server 403 " + USER_ID(nickname, username) + " " + target + " :No such channel\r\n")
+#define ERR_USERNOTINCHANNEL(nickname, username, channel, target) (":server 441 " + USER_ID(nickname, username) + " " + channel + " " + target + " :They aren't on that channel\r\n")
+// #define ERR_USERNOTINCHANNEL(nickname, username, channel, target) (":server 441 " + USER_ID(nickname, username) + " " + target + " :They aren't on that channel\r\n")
+// 	normalement comme ca, et le msg d'erreur arrive sur l'onglet principal (et non pas sur le channel)
+// ca semble etre ca sur les vrais serveurs
+#define ERR_NOTEXTTOSEND(nickname, username) (":server 412 " + USER_ID(nickname, username) + " :No text to send\r\n")
+#define ERR_NEEDMOREPARAMS(nickname, username, command) (":server 461 " + USER_ID(nickname, username) + " " + command + " :Not enough parameters\r\n")
 
 
 typedef struct	s_context {

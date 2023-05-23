@@ -7,6 +7,7 @@ class	Client {
 		Client( int fd );
 		Client( const Client & value );
 		Client( const Client & value, struct sockaddr_in &ip);
+		Client( void );
 		~Client( void );
 
 		Client &		operator=( const Client & rhs );
@@ -33,8 +34,6 @@ class	Client {
 		int							_fd;
 		struct sockaddr_in			_ip;
 		std::vector<std::string>	_channelList;
-
-		Client( void );
 	
 };
 

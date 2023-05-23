@@ -101,13 +101,6 @@ void	Channel::sendToAll(std::string response)
     	send(it->second.getFd(), response.c_str(), response.length(), 0);
 }
 
-void	Channel::sendToOne(std::string response, int fd)
-{
-	std::map<std::string, Client>::const_iterator	it;
-
-    send(fd, response.c_str(), response.length(), 0);
-}
-
 bool	Channel::isUserThere(std::string nick)
 {
 	if (this->_clientlist.find(nick) == this->_clientlist.end())

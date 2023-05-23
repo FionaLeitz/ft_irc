@@ -26,6 +26,8 @@ void	ft_mode(t_context *context, Client *tmp, struct pollfd *fds, int i, std::st
 	}
 	int	plus[5];
 	int	minus[5];
+				(void)minus;
+			(void)plus;
 	char sign = '+';
 	// ordre i t k o l
 	for ( int count = 0; args[1].c_str()[i] != '\0'; count++ ) {
@@ -33,8 +35,9 @@ void	ft_mode(t_context *context, Client *tmp, struct pollfd *fds, int i, std::st
 			sign = '+';
 		else if (args[1].c_str()[i] == '-')
 			sign = '-';
-		else if
+		// else if
 			// on va vraiment faire un if pour chaque lettre la ? c'est degueulasse
+
 	}
 	if ( args[1][0] == '+' ) {
 
