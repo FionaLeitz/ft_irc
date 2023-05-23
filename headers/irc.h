@@ -22,9 +22,10 @@
 #define USER_ID(nickname, username) (nickname + "!" + username + "@host")
 #define RPL_WELCOME(nickname, username) (":server 001 " + nickname + " :Welcome to the test IRC Network " + USER_ID(nickname, username) + "\r\n")
 #define RPL_JOIN(nickname, username, channel) (":" + USER_ID(nickname, username) + " JOIN " + channel + "\r\n")
-#define RPL_MSG(nickname, username, dest, message)(":" + USER_ID(nickname, username) + " PRIVMSG " + dest + " :" + message + "\r\n");
-// #define RPL_QUIT(nickname, username, message) (":server 301 " + USER_ID(nickname, username) + " QUIT Quit :" + message + "\r\n")
+#define RPL_MSG(nickname, username, dest, message) (":" + USER_ID(nickname, username) + " PRIVMSG " + dest + " :" + message + "\r\n")
 #define RPL_QUIT(nickname, username, message) (":server 301 " + USER_ID(nickname, username) + " " + nickname + " Quit: " + message + "\r\n")
+#define ERR_NOSUCHNICK(nickname, username, target) (":server 401 " + USER_ID(nickname, username) + " " + target + " :No such nick\r\n")
+#define ERR_NOSUCHCHANNEL(nickname, username, target) (":server 401 " + USER_ID(nickname, username) + " " + target + " :No such channel\r\n")
 
 
 typedef struct	s_context {
