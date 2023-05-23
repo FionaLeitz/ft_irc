@@ -31,18 +31,22 @@ void	ft_privmsg(t_context *context, Client *tmp, struct pollfd *fds, int i, std:
 	response = ":" + (*tmp).getNickname() + " PRIVMSG " + dest + " :" + message +"\r\n";
 	if (dest[0] == '#')
 	{
-		context->channels[dest].sendMessage(response, (*tmp).getFd());
+		if ( context->channels.find(dest) != context->channels.end() )
+			context->channels[dest].sendMessage(response, (*tmp).getFd());
+		else {
+			response.clear();
+			response = ERR_NOSUCHCHANNEL(tmp->getNickname(), tmp->getUsername(), dest);
+			send(tmp->getFd(), response.c_str(), response.length(), 0);
+		}
 	}
 	else {
 		int	fd = nickname_fd( dest, context->clients );
 		if ( fd != -1 )
 			send(fd, response.c_str(), response.length(), 0);
-		else
-			std::cout << "ERROR PRIVMSG : nickname does not exist" << std::endl;
+		else {
+			response.clear();
+			response = ERR_NOSUCHNICK(tmp->getNickname(), tmp->getUsername(), dest);
+			send(tmp->getFd(), response.c_str(), response.length(), 0);
+		}
 	}
 }
-
-		// response = ":" + (*tmp).getNickname() + " " + message + "\r\n";
-		// int	fd = nickname_fd( dest, context->clients );
-		// if ( fd != -1 )
-		// 	send(fd, response.c_str(), response.length(), 0);
