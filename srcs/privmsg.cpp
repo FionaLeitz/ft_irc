@@ -22,7 +22,6 @@ void	ft_privmsg(t_context *context, Client *tmp, struct pollfd *fds, int i, std:
 	(void)i;
 
 	dest = args[0];
-	message = args[1];
 	message = (*tmp).getBuffer();
 	message = message.substr(message.find(dest) + dest.length() + 1);
 	if (message[0] == ':')		// retire le ':' au debut du message s'il y en a un

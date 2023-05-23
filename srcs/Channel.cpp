@@ -96,3 +96,10 @@ void	Channel::sendMessage(std::string response, int currentFd)
 		}
     }
 }
+
+bool	Channel::isUserThere(std::string nick)
+{
+	if (this->_clientlist.find(nick) == this->_clientlist.end())
+		return false;
+	return true;
+}

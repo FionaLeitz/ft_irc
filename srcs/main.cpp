@@ -187,7 +187,7 @@ int	client_request( struct pollfd **fds, Client *tmp, std::string ref, int i, t_
 		// int			pos;
 
 		iss >> cmd >> args[0] >> args[1];  // on decoupe la string en 3 parties : cmd, args[0] et args[1];
-		for(j = 0; j < 8; j++)				// si la commande fait partie des operateurs
+		for(j = 0; j < 18; j++)				// si la commande fait partie des operateurs
 		{
 			if (cmd == funcTab[j].name)
 			{
@@ -195,7 +195,7 @@ int	client_request( struct pollfd **fds, Client *tmp, std::string ref, int i, t_
 				break ;
 			}
 		}
-		if (j == 8)
+		if (j == 18)
 		{
 			std::cout << "Action non reconnue : " << ref << std::endl;
 		}
@@ -300,8 +300,8 @@ struct pollfd	*check_communication( struct pollfd *fds, int *socket_nbr, int pas
 	std::string			response;
 	std::string			message;
 
-	t_func_ptr funcTab[8];
-	t_func_initialize(funcTab);
+	// t_func_ptr funcTab[18];
+	// t_func_initialize(funcTab);
 	context.password = password;
 	context.channels = channels;
 	context.socket_nbr[0] = *socket_nbr;
