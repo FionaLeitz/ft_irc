@@ -6,7 +6,7 @@ void	ft_names(t_context *context, Client *tmp, struct pollfd *fds, int i, std::s
 	(void)i;
 	(void)args;
 
-	std::cout << "Client "<<tmp->getNickname() << "is trying to use the names command." << std::endl;
+	std::cout << "Client "<<tmp->getNickname() << " is trying to use the names command." << std::endl;
 }
 
 // void	names_all( Client client, std::map<std::string, Client> clients) {

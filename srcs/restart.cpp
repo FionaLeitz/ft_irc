@@ -6,5 +6,5 @@ void	ft_restart(t_context *context, Client *tmp, struct pollfd *fds, int i, std:
 	(void)i;
 	(void)args;
 
-	std::cout << "Client "<<tmp->getNickname() << "is trying to use the restart command." << std::endl;
+	std::cout << "Client "<<tmp->getNickname() << " is trying to use the restart command." << std::endl;
 }

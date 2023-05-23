@@ -279,9 +279,7 @@ void	check_clients_sockets(struct pollfd **fds, char *buffer, t_context *context
 						(*tmp).clear();
 				}
 			}
-						
 		}
-
 	}
 }
 

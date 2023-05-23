@@ -21,6 +21,11 @@ void	ft_privmsg(t_context *context, Client *tmp, struct pollfd *fds, int i, std:
 	(void)fds;
 	(void)i;
 
+	if ( args[1].empty() ) {
+		response = ERR_NOTEXTTOSEND(tmp->getNickname(), tmp->getUsername() );
+		send(tmp->getFd(), response.c_str(), response.length(), 0);
+		return ;
+	}
 	dest = args[0];
 	message = (*tmp).getBuffer();
 	message = message.substr(message.find(dest) + dest.length() + 1);
