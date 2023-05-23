@@ -11,6 +11,16 @@ SRC		=	srcs/main.cpp			\
 			srcs/mode.cpp			\
 			srcs/join.cpp			\
 			srcs/pass.cpp			\
+			srcs/invite.cpp			\
+			srcs/kick.cpp			\
+			srcs/kill.cpp			\
+			srcs/list.cpp			\
+			srcs/names.cpp			\
+			srcs/oper.cpp			\
+			srcs/part.cpp			\
+			srcs/ping.cpp			\
+			srcs/restart.cpp		\
+			srcs/topic.cpp			\
 
 
 OBJ	= $(SRC:%.cpp=%.o)

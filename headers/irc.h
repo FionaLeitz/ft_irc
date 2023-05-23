@@ -41,7 +41,6 @@ typedef struct s_func_ptr
 	void (*ptr)(t_context *context, Client *tmp, struct pollfd *fds, int i, std::string *args);
 }	t_func_ptr;
 
-// void	ft_quit( std::map<int, Client> clients, int fd, std::string message, int fd2 );
 void	ft_quit(t_context *context, Client *tmp, struct pollfd *fds, int i, std::string *args);
 void	ft_user(t_context *context, Client *tmp, struct pollfd *fds, int i, std::string *args);
 void	ft_nick(t_context *context, Client *tmp, struct pollfd *fds, int i, std::string *args);
@@ -50,6 +49,17 @@ void	ft_who(t_context *context, Client *tmp, struct pollfd *fds, int i, std::str
 void	ft_mode(t_context *context, Client *tmp, struct pollfd *fds, int i, std::string *args);
 void	ft_join(t_context *context, Client *tmp, struct pollfd *fds, int i, std::string *args);
 void	ft_pass(t_context *context, Client *tmp, struct pollfd *fds, int i, std::string *args);
+void	ft_invite(t_context *context, Client *tmp, struct pollfd *fds, int i, std::string *args);
+void	ft_kick(t_context *context, Client *tmp, struct pollfd *fds, int i, std::string *args);
+void	ft_kill(t_context *context, Client *tmp, struct pollfd *fds, int i, std::string *args);
+void	ft_list(t_context *context, Client *tmp, struct pollfd *fds, int i, std::string *args);
+void	ft_names(t_context *context, Client *tmp, struct pollfd *fds, int i, std::string *args);
+void	ft_oper(t_context *context, Client *tmp, struct pollfd *fds, int i, std::string *args);
+void	ft_part(t_context *context, Client *tmp, struct pollfd *fds, int i, std::string *args);
+void	ft_ping(t_context *context, Client *tmp, struct pollfd *fds, int i, std::string *args);
+void	ft_restart(t_context *context, Client *tmp, struct pollfd *fds, int i, std::string *args);
+void	ft_topic(t_context *context, Client *tmp, struct pollfd *fds, int i, std::string *args);
+
 
 void	sendToAllClients(const std::map<std::string, Client> &clientList, std::string response);
 

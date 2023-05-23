@@ -108,22 +108,42 @@ int	incoming_connections(struct pollfd **fds, t_context &context)
 
 void	t_func_initialize(t_func_ptr *funcTab)
 {
-	funcTab[0].name = "USER";
-	funcTab[0].ptr = &ft_user;
+	funcTab[0].name = "INVITE";
+	funcTab[0].ptr = &ft_invite;
 	funcTab[1].name = "JOIN";
 	funcTab[1].ptr = &ft_join;
-	funcTab[2].name = "MODE";
-	funcTab[2].ptr = &ft_mode;
-	funcTab[3].name = "WHO";
-	funcTab[3].ptr = &ft_who;
-	funcTab[4].name = "PRIVMSG";
-	funcTab[4].ptr = &ft_privmsg;
-	funcTab[5].name = "NICK";
-	funcTab[5].ptr = &ft_nick;
-	funcTab[6].name = "PASS";
-	funcTab[6].ptr = &ft_pass;
-	funcTab[7].name = "QUIT";
-	funcTab[7].ptr = &ft_quit;
+	funcTab[2].name = "KICK";
+	funcTab[2].ptr = &ft_kick;
+	funcTab[3].name = "KILL";
+	funcTab[3].ptr = &ft_kill;
+	funcTab[4].name = "LIST";
+	funcTab[4].ptr = &ft_list;
+	funcTab[5].name = "MODE";
+	funcTab[5].ptr = &ft_mode;
+	funcTab[6].name = "NAMES";
+	funcTab[6].ptr = &ft_names;
+	funcTab[7].name = "NICK";
+	funcTab[7].ptr = &ft_nick;
+	funcTab[8].name = "OPER";
+	funcTab[8].ptr = &ft_oper;
+	funcTab[9].name = "PART";
+	funcTab[9].ptr = &ft_part;
+	funcTab[10].name = "PASS";
+	funcTab[10].ptr = &ft_pass;
+	funcTab[11].name = "PING";
+	funcTab[11].ptr = &ft_ping;
+	funcTab[12].name = "PRIVMSG";
+	funcTab[12].ptr = &ft_privmsg;
+	funcTab[13].name = "QUIT";
+	funcTab[13].ptr = &ft_quit;
+	funcTab[14].name = "RESTART";
+	funcTab[14].ptr = &ft_restart;
+	funcTab[15].name = "TOPIC";
+	funcTab[15].ptr = &ft_topic;
+	funcTab[16].name = "USER";
+	funcTab[16].ptr = &ft_user;
+	funcTab[17].name = "WHO";
+	funcTab[17].ptr = &ft_who;
 
 }
 
@@ -157,7 +177,7 @@ int	client_request( struct pollfd **fds, Client *tmp, std::string ref, int i, t_
 		std::cout << "Message reçu : " << ref << std::endl;
 
 		// Recherche de la fonction correspondante et appel si trouvée
-		t_func_ptr funcTab[8];
+		t_func_ptr funcTab[18];
 		t_func_initialize(funcTab);
 		std::istringstream iss(ref);
 		std::string cmd;
