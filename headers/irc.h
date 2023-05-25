@@ -26,6 +26,9 @@
 #define	RPL_KICK(nickname, username, channel, target, reason)(":" + USER_ID(nickname, username) + " KICK " + channel + " " + target + " :" + reason + "\r\n")
 #define RPL_MSG(nickname, username, dest, message) (":" + USER_ID(nickname, username) + " PRIVMSG " + dest + " :" + message + "\r\n")
 #define RPL_QUIT(nickname, username, message) (":server 301 " + USER_ID(nickname, username) + " " + nickname + " Quit: " + message + "\r\n")
+#define RPL_TOPIC(nickname, channel, topic) (":server 332 " + nickname + " " + channel + " :" + topic + "\r\n")
+#define RPL_NOTOPIC(nickname, channel) (":server 331 " + nickname + " " + channel + " :No topic is set\r\n")
+#define RPL_CHANGETOPIC(nickname, username, channel, topic) (":" + USER_ID(nickname, username) + " TOPIC " + channel + " " + topic + "\r\n")
 
 #define RPL_PING(nickname, username, token) (":" + USER_ID(nickname, username) + " PONG server_name " + token + "\r\n")
 #define ERR_NOSUCHNICK(nickname, username, target) (":server 401 " + USER_ID(nickname, username) + " " + target + " :No such nick\r\n")

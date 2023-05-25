@@ -1,419 +1,92 @@
 << CAP LS
 << NICK cmeston
 << USER cmeston cmeston irc.dal.net :Chine MESTON
->> :lion.tx.us.dal.net NOTICE AUTH :*** Looking up your hostname...
->> :lion.tx.us.dal.net NOTICE AUTH :*** Checking Ident
->> :lion.tx.us.dal.net NOTICE AUTH :*** Found your hostname
->> :lion.tx.us.dal.net NOTICE AUTH :*** No Ident response
->> :lion.tx.us.dal.net 001 cmeston :Welcome to the DALnet IRC Network cmeston!~cmeston@62.210.33.161
+>> :halcyon.il.us.dal.net NOTICE AUTH :*** Looking up your hostname...
+>> :halcyon.il.us.dal.net NOTICE AUTH :*** Found your hostname
+>> :halcyon.il.us.dal.net 001 cmeston :Welcome to the DALnet IRC Network cmeston!~cmeston@62.210.33.127
 << MODE cmeston +i
->> :lion.tx.us.dal.net 002 cmeston :Your host is lion.tx.us.dal.net, running version bahamut-2.2.2
->> :lion.tx.us.dal.net 003 cmeston :This server was created Mon Oct 10 2022 at 22:48:49 EDT
->> :lion.tx.us.dal.net 004 cmeston lion.tx.us.dal.net bahamut-2.2.2 aAbcCdefFghHiIjkKmnoOPrRsSwxXy AbceiIjklLmMnoOpPrRsStv beIjklov
->> :lion.tx.us.dal.net 005 cmeston NETWORK=DALnet SAFELIST MAXBANS=200 MAXCHANNELS=50 CHANNELLEN=32 KICKLEN=307 NICKLEN=30 TOPICLEN=307 MODES=6 CHANTYPES=# CHANLIMIT=#:50 PREFIX=(ohv)@%+ STATUSMSG=@%+ :are available on this server
->> :lion.tx.us.dal.net 005 cmeston CASEMAPPING=ascii WATCH=128 SILENCE=10 ELIST=cmntu EXCEPTS INVEX CHANMODES=beI,k,jl,ciPAmMnOprRsSt MAXLIST=b:200,e:100,I:100 TARGMAX=DCCALLOW:,JOIN:,KICK:4,KILL:20,NOTICE:20,PART:,PRIVMSG:20,WHOIS:,WHOWAS: :are available on this server
->> :lion.tx.us.dal.net 251 cmeston :There are 89 users and 7967 invisible on 34 servers
->> :lion.tx.us.dal.net 252 cmeston 77 :IRC Operators online
->> :lion.tx.us.dal.net 254 cmeston 3884 :channels formed
->> :lion.tx.us.dal.net 255 cmeston :I have 1712 clients and 1 servers
->> :lion.tx.us.dal.net 265 cmeston :Current local users: 1712 Max: 3398
->> :lion.tx.us.dal.net 266 cmeston :Current global users: 8056 Max: 12060
->> :lion.tx.us.dal.net NOTICE cmeston :*** Notice -- motd was last changed at 16/4/2022 12:15
->> :lion.tx.us.dal.net 375 cmeston :- lion.tx.us.dal.net Message of the Day - 
->> :lion.tx.us.dal.net 372 cmeston :-16/4/2022 12:15
->> :lion.tx.us.dal.net 372 cmeston :-      Welcome to,
->> :lion.tx.us.dal.net 372 cmeston :-       _ _
->> :lion.tx.us.dal.net 372 cmeston :-      | (_)            
->> :lion.tx.us.dal.net 372 cmeston :-      | |_  ___  _ __  
->> :lion.tx.us.dal.net 372 cmeston :-      | | |/ _ \| '_ \ 
->> :lion.tx.us.dal.net 372 cmeston :-      | | | (_) | | | |
->> :lion.tx.us.dal.net 372 cmeston :-      |_|_|\___/|_| |_|.tx.us.dal.net 
->> :lion.tx.us.dal.net 372 cmeston :- 
->> :lion.tx.us.dal.net 372 cmeston :-       * Host..............: lion.dal.net | lion-v6.dal.net
->> :lion.tx.us.dal.net 372 cmeston :-       * Ports.............: 6667 - 6669, 7000 | SSL - 6697
->> :lion.tx.us.dal.net 372 cmeston :- 
->> :lion.tx.us.dal.net 372 cmeston :-    Welcome to DALnet, by connecting to this network you agree to 
->> :lion.tx.us.dal.net 372 cmeston :-    abide by its acceptable use policy, visit : http://www.dal.net/aup
->> :lion.tx.us.dal.net 372 cmeston :- 
->> :lion.tx.us.dal.net 372 cmeston :-      "This server has been sponsored by Psychz Networks"
->> :lion.tx.us.dal.net 372 cmeston :- 
->> :lion.tx.us.dal.net 372 cmeston :-            ---===[https://www.psychz.net/]===---
->> :lion.tx.us.dal.net 372 cmeston :- 
->> :lion.tx.us.dal.net 372 cmeston :-    -------------------------------------------------------------------
->> :lion.tx.us.dal.net 372 cmeston :-    [%] Server Staff  =-  
->> :lion.tx.us.dal.net 372 cmeston :- 
->> :lion.tx.us.dal.net 372 cmeston :-    .::. Administrator....:
->> :lion.tx.us.dal.net 372 cmeston :-                           sps
->> :lion.tx.us.dal.net 372 cmeston :-       
->> :lion.tx.us.dal.net 372 cmeston :-    .::. Operators........: 
->> :lion.tx.us.dal.net 372 cmeston :-                           eddyk0ng
->> :lion.tx.us.dal.net 372 cmeston :-                           Nando
->> :lion.tx.us.dal.net 372 cmeston :-                           RallyMaster
->> :lion.tx.us.dal.net 372 cmeston :-                           Wagoo
->> :lion.tx.us.dal.net 372 cmeston :-                           Wheemp
->> :lion.tx.us.dal.net 372 cmeston :-    -------------------------------------------------------------------
->> :lion.tx.us.dal.net 372 cmeston :-    [%] Server Policies  =-
->> :lion.tx.us.dal.net 372 cmeston :- 
->> :lion.tx.us.dal.net 372 cmeston :-    a. No spamming or advertising allowed, if found you will be banned 
->> :lion.tx.us.dal.net 372 cmeston :-       from this server/network.
->> :lion.tx.us.dal.net 372 cmeston :-    b. No malicious bots, including flood and nick/channel chasers
->> :lion.tx.us.dal.net 372 cmeston :-    c. No channel filler bots/clients/psybncs
->> :lion.tx.us.dal.net 372 cmeston :-       #  A channel filler is a client, bnc, or bot which is connected
->> :lion.tx.us.dal.net 372 cmeston :-          just to fill a channel and make it look bigger
->> :lion.tx.us.dal.net 372 cmeston :-    d. Operator impersonation will not be tolerated and cause you to be
->> :lion.tx.us.dal.net 372 cmeston :-       banned from this server/network.
->> :lion.tx.us.dal.net 372 cmeston :- 
->> :lion.tx.us.dal.net 372 cmeston :-            "REMEMBER IRC IS A PRIVILEGE, NOT A RIGHT"
->> :lion.tx.us.dal.net 372 cmeston :-    --------------------------------------------------------------------
->> :lion.tx.us.dal.net 372 cmeston :-    For IRC Operator assistance /join #Operhelp
->> :lion.tx.us.dal.net 372 cmeston :- 
->> :lion.tx.us.dal.net 372 cmeston :-    For DALnet and General IRC related help, goto #Help
->> :lion.tx.us.dal.net 372 cmeston :- 
->> :lion.tx.us.dal.net 372 cmeston :-    For multi-lingual documentation - [http://docs.dal.net]
->> :lion.tx.us.dal.net 372 cmeston :- 
->> :lion.tx.us.dal.net 372 cmeston :-    If you have any questions/issues related to this server,           
->> :lion.tx.us.dal.net 372 cmeston :-    contact us using: lion-staff@dal.net
->> :lion.tx.us.dal.net 372 cmeston :- 
->> :lion.tx.us.dal.net 372 cmeston :-    Thank you, hope you enjoy your stay!
->> :lion.tx.us.dal.net 372 cmeston :- 
->> :lion.tx.us.dal.net 376 cmeston :End of /MOTD command.
+>> :halcyon.il.us.dal.net 002 cmeston :Your host is halcyon.il.us.dal.net, running version bahamut-2.2.2
+>> :halcyon.il.us.dal.net 003 cmeston :This server was created Tue Aug 23 2022 at 04:57:06 UTC
+>> :halcyon.il.us.dal.net 004 cmeston halcyon.il.us.dal.net bahamut-2.2.2 aAbcCdefFghHiIjkKmnoOPrRsSwxXy AbceiIjklLmMnoOpPrRsStv beIjklov
+>> :halcyon.il.us.dal.net 005 cmeston NETWORK=DALnet SAFELIST MAXBANS=200 MAXCHANNELS=50 CHANNELLEN=32 KICKLEN=307 NICKLEN=30 TOPICLEN=307 MODES=6 CHANTYPES=# CHANLIMIT=#:50 PREFIX=(ohv)@%+ STATUSMSG=@%+ :are available on this server
+>> :halcyon.il.us.dal.net 005 cmeston CASEMAPPING=ascii WATCH=128 SILENCE=10 ELIST=cmntu EXCEPTS INVEX CHANMODES=beI,k,jl,ciPAmMnOprRsSt MAXLIST=b:200,e:100,I:100 TARGMAX=DCCALLOW:,JOIN:,KICK:4,KILL:20,NOTICE:20,PART:,PRIVMSG:20,WHOIS:,WHOWAS: :are available on this server
+>> :halcyon.il.us.dal.net 251 cmeston :There are 76 users and 8059 invisible on 36 servers
+>> :halcyon.il.us.dal.net 252 cmeston 68 :IRC Operators online
+>> :halcyon.il.us.dal.net 254 cmeston 3883 :channels formed
+>> :halcyon.il.us.dal.net 255 cmeston :I have 647 clients and 1 servers
+>> :halcyon.il.us.dal.net 265 cmeston :Current local users: 647 Max: 4111
+>> :halcyon.il.us.dal.net 266 cmeston :Current global users: 8135 Max: 16706
+>> :halcyon.il.us.dal.net NOTICE cmeston :*** Notice -- motd was last changed at 15/11/2022 15:00
+>> :halcyon.il.us.dal.net 375 cmeston :- halcyon.il.us.dal.net Message of the Day - 
+>> :halcyon.il.us.dal.net 372 cmeston :-15/11/2022 15:00
+>> :halcyon.il.us.dal.net 372 cmeston :-              _  _ ____ _    ____ _ _ ____ __ _
+>> :halcyon.il.us.dal.net 372 cmeston :-              |--| |--| |___ |___  Y  [__] | \|
+>> :halcyon.il.us.dal.net 372 cmeston :- 
+>> :halcyon.il.us.dal.net 372 cmeston :-                 [ halcyon.il.us.dal.net    ]
+>> :halcyon.il.us.dal.net 372 cmeston :- 
+>> :halcyon.il.us.dal.net 372 cmeston :-                 [ Accessible via...        ]
+>> :halcyon.il.us.dal.net 372 cmeston :-                 [ ipv4: halcyon.dal.net    ]
+>> :halcyon.il.us.dal.net 372 cmeston :-                 [ ipv6: halcyon-v6.dal.net ]
+>> :halcyon.il.us.dal.net 372 cmeston :- 
+>> :halcyon.il.us.dal.net 372 cmeston :- Welcome to DALnet!  By connecting to this network, you agree to abide
+>> :halcyon.il.us.dal.net 372 cmeston :- by its acceptable use policy, available here: http://www.dal.net/aup
+>> :halcyon.il.us.dal.net 372 cmeston :- 
+>> :halcyon.il.us.dal.net 372 cmeston :- Server Policies:
+>> :halcyon.il.us.dal.net 372 cmeston :- 
+>> :halcyon.il.us.dal.net 372 cmeston :-    *   We reserve the right to deny access to this server without
+>> :halcyon.il.us.dal.net 372 cmeston :-        warning or explanation
+>> :halcyon.il.us.dal.net 372 cmeston :-    *   No malicious bots, including flood and nick/channel chasers
+>> :halcyon.il.us.dal.net 372 cmeston :-    *   No channel filler bots/clients/psybncs
+>> :halcyon.il.us.dal.net 372 cmeston :-          - A channel filler is a client, bnc, or bot which is
+>> :halcyon.il.us.dal.net 372 cmeston :-            connected just to fill a channel and make it look
+>> :halcyon.il.us.dal.net 372 cmeston :-            bigger
+>> :halcyon.il.us.dal.net 372 cmeston :-    *   Operator impersonation, spamming, or any other abuse will
+>> :halcyon.il.us.dal.net 372 cmeston :-        cause you to be banned from this server
+>> :halcyon.il.us.dal.net 372 cmeston :-    *   Abide by DALnet's AUP (www.dal.net/aup)
+>> :halcyon.il.us.dal.net 372 cmeston :-    *   Please have fun and enjoy DALnet!
+>> :halcyon.il.us.dal.net 372 cmeston :- 
+>> :halcyon.il.us.dal.net 372 cmeston :-      ///admins////////////////////////////////////////
+>> :halcyon.il.us.dal.net 372 cmeston :-      //                                             //
+>> :halcyon.il.us.dal.net 372 cmeston :-      //  [ brandon - administrator             ]    //
+>> :halcyon.il.us.dal.net 372 cmeston :-      //  [ klb     - assistant administrator   ]    //
+>> :halcyon.il.us.dal.net 372 cmeston :-      //                                             //
+>> :halcyon.il.us.dal.net 372 cmeston :-      ///operators/////////////////////////////////////
+>> :halcyon.il.us.dal.net 372 cmeston :-      //                                             //
+>> :halcyon.il.us.dal.net 372 cmeston :-      //  [ guppy  ] [ oldcrow  ] [ rasengan ]       //
+>> :halcyon.il.us.dal.net 372 cmeston :-      //  [ s2pid  ] [ lilmiss  ] [ kiraela  ]       //
+>> :halcyon.il.us.dal.net 372 cmeston :-      //  [ DTC    ]                                 //
+>> :halcyon.il.us.dal.net 372 cmeston :-      //                                             //
+>> :halcyon.il.us.dal.net 372 cmeston :-      /////////////////////////////////////////////////
+>> :halcyon.il.us.dal.net 372 cmeston :- 
+>> :halcyon.il.us.dal.net 372 cmeston :- 
+>> :halcyon.il.us.dal.net 372 cmeston :- For IRCop assistance, please /join #operhelp or message one of our
+>> :halcyon.il.us.dal.net 372 cmeston :- friendly server staff listed above.
+>> :halcyon.il.us.dal.net 372 cmeston :- 
+>> :halcyon.il.us.dal.net 372 cmeston :- For multilingual information:  <http://docs.dal.net/>
+>> :halcyon.il.us.dal.net 372 cmeston :- 
+>> :halcyon.il.us.dal.net 372 cmeston :- Thank you for using DALnet!  We hope you have a pleasant day.
+>> :halcyon.il.us.dal.net 376 cmeston :End of /MOTD command.
 >> :cmeston MODE cmeston :+iH
-<< PING lion.tx.us.dal.net
->> :lion.tx.us.dal.net PONG lion.tx.us.dal.net :cmeston
+<< PING halcyon.il.us.dal.net
+>> :halcyon.il.us.dal.net PONG halcyon.il.us.dal.net :cmeston
 --> lag pong
-<< CAP LS
-<< NICK cmeston
-<< USER cmeston cmeston irc.dal.net :Chine MESTON
->> :hash.ix.nl.dal.net NOTICE AUTH :*** Looking up your hostname...
->> :hash.ix.nl.dal.net NOTICE AUTH :*** Checking Ident
->> :hash.ix.nl.dal.net NOTICE AUTH :*** Found your hostname
->> :hash.ix.nl.dal.net NOTICE AUTH :*** No Ident response
->> :hash.ix.nl.dal.net 433 * cmeston :Nickname is already in use.
-<< NICK cmeston_
->> :hash.ix.nl.dal.net 001 cmeston_ :Welcome to the DALnet IRC Network cmeston_!~cmeston@62.210.33.161
-<< MODE cmeston_ +i
-<< WHOIS cmeston
-
->> :cmeston_ MODE cmeston_ :+iH
->> :hash.ix.nl.dal.net 311 cmeston_ cmeston ~cmeston 2618-2ed8-f8de-36d4-9088.210.62.ip * :Chine MESTON
---> nickfind event whois
->> :hash.ix.nl.dal.net 312 cmeston_ cmeston lion.tx.us.dal.net :bliss
---> event empty
->> :hash.ix.nl.dal.net 318 cmeston_ cmeston :End of /WHOIS list.
---> event empty
-<< PING hash.ix.nl.dal.net
->> :hash.ix.nl.dal.net PONG hash.ix.nl.dal.net :cmeston_
---> lag pong
-<< JOIN #ez
->> :cmeston_!~cmeston@2618-2ed8-f8de-36d4-9088.210.62.ip JOIN :#ez
->> :hash.ix.nl.dal.net 353 cmeston_ = #ez :@cmeston_ 
->> :hash.ix.nl.dal.net 366 cmeston_ #ez :End of /NAMES list.
-<< MODE #ez
->> :hash.ix.nl.dal.net 324 cmeston_ #ez + 
+<< JOIN #aaaa
+>> :cmeston!~cmeston@ecc-b03d-a3d6-12a8-9792.210.62.ip JOIN :#aaaa
+>> :halcyon.il.us.dal.net 353 cmeston = #aaaa :@cmeston 
+>> :halcyon.il.us.dal.net 366 cmeston #aaaa :End of /NAMES list.
+<< MODE #aaaa
+>> :halcyon.il.us.dal.net 324 cmeston #aaaa + 
 --> chanquery mode
-<< WHO #ez
->> :hash.ix.nl.dal.net 329 cmeston_ #ez 1684852645
+<< WHO #aaaa
+>> :halcyon.il.us.dal.net 329 cmeston #aaaa 1685030358
 --> event 329
->> :hash.ix.nl.dal.net 352 cmeston_ #ez ~cmeston 2618-2ed8-f8de-36d4-9088.210.62.ip hash.ix.nl.dal.net cmeston_ H@ :0 Chine MESTON
+>> :halcyon.il.us.dal.net 352 cmeston #aaaa ~cmeston ecc-b03d-a3d6-12a8-9792.210.62.ip halcyon.il.us.dal.net cmeston H@ :0 Chine MESTON
 --> silent event who
->> :hash.ix.nl.dal.net 315 cmeston_ #ez :End of /WHO list.
+>> :halcyon.il.us.dal.net 315 cmeston #aaaa :End of /WHO list.
 --> chanquery who end
-<< MODE #ez b
->> :hash.ix.nl.dal.net 368 cmeston_ #ez :End of Channel Ban List
+<< MODE #aaaa b
+>> :halcyon.il.us.dal.net 368 cmeston #aaaa :End of Channel Ban List
 --> chanquery ban end
-<< PING lion.tx.us.dal.net
->> :lion.tx.us.dal.net PONG lion.tx.us.dal.net :cmeston
---> lag pong
-<< PING hash.ix.nl.dal.net
->> :hash.ix.nl.dal.net PONG hash.ix.nl.dal.net :cmeston_
---> lag pong
-<< PING lion.tx.us.dal.net
->> :lion.tx.us.dal.net PONG lion.tx.us.dal.net :cmeston
---> lag pong
-<< PING hash.ix.nl.dal.net
->> :hash.ix.nl.dal.net PONG hash.ix.nl.dal.net :cmeston_
---> lag pong
-<< PING lion.tx.us.dal.net
->> :lion.tx.us.dal.net PONG lion.tx.us.dal.net :cmeston
---> lag pong
-<< PING hash.ix.nl.dal.net
->> :hash.ix.nl.dal.net PONG hash.ix.nl.dal.net :cmeston_
---> lag pong
-<< PING lion.tx.us.dal.net
->> :lion.tx.us.dal.net PONG lion.tx.us.dal.net :cmeston
---> lag pong
-<< PING hash.ix.nl.dal.net
->> :hash.ix.nl.dal.net PONG hash.ix.nl.dal.net :cmeston_
---> lag pong
-<< PING lion.tx.us.dal.net
->> :lion.tx.us.dal.net PONG lion.tx.us.dal.net :cmeston
---> lag pong
-<< PING hash.ix.nl.dal.net
->> :hash.ix.nl.dal.net PONG hash.ix.nl.dal.net :cmeston_
---> lag pong
-<< PING lion.tx.us.dal.net
->> :lion.tx.us.dal.net PONG lion.tx.us.dal.net :cmeston
---> lag pong
-<< PING hash.ix.nl.dal.net
->> :hash.ix.nl.dal.net PONG hash.ix.nl.dal.net :cmeston_
---> lag pong
-<< PING lion.tx.us.dal.net
->> :lion.tx.us.dal.net PONG lion.tx.us.dal.net :cmeston
---> lag pong
-<< PING hash.ix.nl.dal.net
->> :hash.ix.nl.dal.net PONG hash.ix.nl.dal.net :cmeston_
---> lag pong
->> :tuutuutu!~cmeston@2618-2ed8-f8de-36d4-9088.210.62.ip JOIN :#ez
-<< PING lion.tx.us.dal.net
->> :lion.tx.us.dal.net PONG lion.tx.us.dal.net :cmeston
---> lag pong
-<< MODE cmeston_
->> :hash.ix.nl.dal.net 221 cmeston_ +iH
-<< MODE tuutuutu
->> :hash.ix.nl.dal.net 502 cmeston_ :Can't change mode for other users
-<< KICK #ez tuutuutu :
->> :cmeston_!~cmeston@2618-2ed8-f8de-36d4-9088.210.62.ip KICK #ez tuutuutu :cmeston_
-<< PING hash.ix.nl.dal.net
->> :hash.ix.nl.dal.net PONG hash.ix.nl.dal.net :cmeston_
---> lag pong
-<< PING lion.tx.us.dal.net
->> :lion.tx.us.dal.net PONG lion.tx.us.dal.net :cmeston
---> lag pong
-<< info
->> :hash.ix.nl.dal.net 371 cmeston_ :IRC --
->> :hash.ix.nl.dal.net 371 cmeston_ :Based on the original code written by Jarkko Oikarinen
->> :hash.ix.nl.dal.net 371 cmeston_ :Copyright 1988, 1989, 1990, 1991 University of Oulu, Computing Center
->> :hash.ix.nl.dal.net 371 cmeston_ :
->> :hash.ix.nl.dal.net 371 cmeston_ :This program is free software; you can redistribute it and/or
->> :hash.ix.nl.dal.net 371 cmeston_ :modify it under the terms of the GNU General Public License as
->> :hash.ix.nl.dal.net 371 cmeston_ :published by the Free Software Foundation; either version 1, or
->> :hash.ix.nl.dal.net 371 cmeston_ :(at your option) any later version.
->> :hash.ix.nl.dal.net 371 cmeston_ :
->> :hash.ix.nl.dal.net 371 cmeston_ :Regular expression support is provided by the PCRE library package,
->> :hash.ix.nl.dal.net 371 cmeston_ :which is open source software, written by Philip Hazel, and copyright
->> :hash.ix.nl.dal.net 371 cmeston_ :by the University of Cambridge, England.
->> :hash.ix.nl.dal.net 371 cmeston_ :
->> :hash.ix.nl.dal.net 371 cmeston_ :If you encouter a serious security related bug, please mail coders@dal.net
->> :hash.ix.nl.dal.net 371 cmeston_ :Send all other bug reports and inquiries to dalnet-src@dal.net
->> :hash.ix.nl.dal.net 371 cmeston_ :
->> :hash.ix.nl.dal.net 371 cmeston_ :The following people currently compose the bahamut team and
->> :hash.ix.nl.dal.net 371 cmeston_ :actively maintain the bahamut codebase:
->> :hash.ix.nl.dal.net 371 cmeston_ :Holbrook            Holbrook Bunting    holbrook@dal.net
->> :hash.ix.nl.dal.net 371 cmeston_ :Kobi_S              Kobi Shmueli        kobi@dal.net
->> :hash.ix.nl.dal.net 371 cmeston_ :Quension            Trevor Talbot       quension@dal.net
->> :hash.ix.nl.dal.net 371 cmeston_ :RuneB               Ned T. Crigler      runeb@dal.net
->> :hash.ix.nl.dal.net 371 cmeston_ :skill               Emilio A. Escobar   skill@dal.net
->> :hash.ix.nl.dal.net 371 cmeston_ :xPsycho             Ryan Smith          xpsycho@dal.net
->> :hash.ix.nl.dal.net 371 cmeston_ :
->> :hash.ix.nl.dal.net 371 cmeston_ :The following people have contributed code or support
->> :hash.ix.nl.dal.net 371 cmeston_ :to the bahamut team:
->> :hash.ix.nl.dal.net 371 cmeston_ :aClient             Diane Bruce         db@koruna.varner.com
->> :hash.ix.nl.dal.net 371 cmeston_ :Dakal               David Knepper       dakal@dal.net
->> :hash.ix.nl.dal.net 371 cmeston_ :Dalvenjah           Sven Nielsen        dalvenjah@dal.net
->> :hash.ix.nl.dal.net 371 cmeston_ :epiphani            Aaron Wiebe         epiphani@dal.net
->> :hash.ix.nl.dal.net 371 cmeston_ :lucas               Lucas Madar         lucas@dal.net
->> :hash.ix.nl.dal.net 371 cmeston_ :MSofty              Mark Salerno        msofty@dal.net
->> :hash.ix.nl.dal.net 371 cmeston_ :Raistlin_Majere     Jason Slagle        raistlin@bahamut.net
->> :hash.ix.nl.dal.net 371 cmeston_ :Rakarra             Ian Westcott        rakarra@dal.net
->> :hash.ix.nl.dal.net 371 cmeston_ :sedition            David Parton        sedition@dal.net
->> :hash.ix.nl.dal.net 371 cmeston_ :White_Dragon        Chip Norkus         wd@dal.net
->> :hash.ix.nl.dal.net 371 cmeston_ :
->> :hash.ix.nl.dal.net 371 cmeston_ :The following people have contributed ideas or testing to the
->> :hash.ix.nl.dal.net 371 cmeston_ :bahamut project:
->> :hash.ix.nl.dal.net 371 cmeston_ :driz                David Friedman      driz@dal.net
->> :hash.ix.nl.dal.net 371 cmeston_ :drone               Mike Wilson         drone@dal.net
->> :hash.ix.nl.dal.net 371 cmeston_ :habit               Melinda Thompson    habit@dal.net
->> :hash.ix.nl.dal.net 371 cmeston_ :Kevin               Kevin Turner        kevin@dal.net
->> :hash.ix.nl.dal.net 371 cmeston_ :
->> :hash.ix.nl.dal.net 371 cmeston_ :
->> :hash.ix.nl.dal.net 371 cmeston_ :Developers and Contributors for previous versions:
->> :hash.ix.nl.dal.net 371 cmeston_ :Chris A. Bongaarts  Chris Behrens       Diane Bruce
->> :hash.ix.nl.dal.net 371 cmeston_ :Johannes Erdfelt    Roger Espel Llima   Jon Lusky
->> :hash.ix.nl.dal.net 371 cmeston_ :Michael Pearce      Brian Kraemer       Joan Touzet
->> :hash.ix.nl.dal.net 371 cmeston_ :Chris Portman       Keith Fralick       Sam Noble
->> :hash.ix.nl.dal.net 371 cmeston_ :Taner Halicioglu    Chris Behrens       Darren Reed
->> :hash.ix.nl.dal.net 371 cmeston_ :Markku Savela       Greg Lindahl        Jarkko Oikarinen
->> :hash.ix.nl.dal.net 371 cmeston_ :Armin Gruner        Matthew Green       Chuck Kane
->> :hash.ix.nl.dal.net 371 cmeston_ :Matt Lyle           Vesa Ruokonen       Nicolas PIOCH
->> :hash.ix.nl.dal.net 371 cmeston_ :Stellan Klebom      Dan Goodwin         Mike Bolotski
->> :hash.ix.nl.dal.net 371 cmeston_ :Ian Frechette       Markku Jarvinen     Kimmo Suominen
->> :hash.ix.nl.dal.net 371 cmeston_ :Jeff Trim           Vijay Subramaniam   Karl Kleinpaste
->> :hash.ix.nl.dal.net 371 cmeston_ :Bill Wisner         Tom Davis           Hugo Calendar
->> :hash.ix.nl.dal.net 371 cmeston_ :Tom Hopkins         Stephen van den Berg
->> :hash.ix.nl.dal.net 371 cmeston_ :Bo Adler            Michael Sandrof     Jon Solomon
->> :hash.ix.nl.dal.net 371 cmeston_ :Jan Peterson        Helen Rose          Paul Graham
->> :hash.ix.nl.dal.net 371 cmeston_ :
->> :hash.ix.nl.dal.net 371 cmeston_ :Thanks also goes to those persons not mentioned here who have added
->> :hash.ix.nl.dal.net 371 cmeston_ :their advice, opinions, and code to IRC.
->> :hash.ix.nl.dal.net 371 cmeston_ :Thanks also to those who provide the kind sys admins who let me and
->> :hash.ix.nl.dal.net 371 cmeston_ :others continue to develop IRC.
->> :hash.ix.nl.dal.net 371 cmeston_ :
->> :hash.ix.nl.dal.net 371 cmeston_ :
->> :hash.ix.nl.dal.net 371 cmeston_ :Birth Date: Tue Aug 23 2022 at 04:51:39 AM UTC, compile #2
->> :hash.ix.nl.dal.net 371 cmeston_ :On-line since Fri Apr 21 00:49:36 2023
->> :hash.ix.nl.dal.net 374 cmeston_ :End of /INFO list.
-<< lusers
->> :hash.ix.nl.dal.net 251 cmeston_ :There are 90 users and 7981 invisible on 38 servers
->> :hash.ix.nl.dal.net 252 cmeston_ 80 :IRC Operators online
->> :hash.ix.nl.dal.net 254 cmeston_ 3922 :channels formed
->> :hash.ix.nl.dal.net 255 cmeston_ :I have 17 clients and 1 servers
->> :hash.ix.nl.dal.net 265 cmeston_ :Current local users: 17 Max: 93
->> :hash.ix.nl.dal.net 266 cmeston_ :Current global users: 8071 Max: 12060
-<< PING hash.ix.nl.dal.net
->> :hash.ix.nl.dal.net PONG hash.ix.nl.dal.net :cmeston_
---> lag pong
-<< PRIVMSG #ez :ACTION 
-<< PING lion.tx.us.dal.net
->> :lion.tx.us.dal.net PONG lion.tx.us.dal.net :cmeston
---> lag pong
-<< MODE cmeston_
->> :hash.ix.nl.dal.net 221 cmeston_ +iH
-<< MODE cmeston_ +o
-<< MODE cmeston_
->> :hash.ix.nl.dal.net 221 cmeston_ +iH
->> :tuutuutu!~cmeston@2618-2ed8-f8de-36d4-9088.210.62.ip JOIN :#ez
-<< MODE tuutuutu +O
->> :hash.ix.nl.dal.net 502 cmeston_ :Can't change mode for other users
-<< MODE tuutuutu +o
->> :hash.ix.nl.dal.net 502 cmeston_ :Can't change mode for other users
-<< PING hash.ix.nl.dal.net
->> :hash.ix.nl.dal.net PONG hash.ix.nl.dal.net :cmeston_
---> lag pong
-<< TOPIC #ez :blabla
->> :cmeston_!~cmeston@2618-2ed8-f8de-36d4-9088.210.62.ip TOPIC #ez :blabla
-<< PING lion.tx.us.dal.net
->> :lion.tx.us.dal.net PONG lion.tx.us.dal.net :cmeston
---> lag pong
-<< MODE cmeston_ +oHi
->> :hash.ix.nl.dal.net NOTICE cmeston_ :*** Notice -- You cannot change user mode H while joined to any channels.
-<< MODE cmeston_ +oi
-<< MODE cmeston_ +oi
-<< MODE cmeston_
->> :hash.ix.nl.dal.net 221 cmeston_ +iH
-<< MODE cmeston_ #ez
->> :hash.ix.nl.dal.net 501 cmeston_ :Unknown MODE flag
-<< MODE #ez
->> :hash.ix.nl.dal.net 324 cmeston_ #ez + 
->> :hash.ix.nl.dal.net 329 cmeston_ #ez 1684852645
-<< PING hash.ix.nl.dal.net
->> :hash.ix.nl.dal.net PONG hash.ix.nl.dal.net :cmeston_
---> FAILED mode user
---> lag pong
-<< PING lion.tx.us.dal.net
->> :lion.tx.us.dal.net PONG lion.tx.us.dal.net :cmeston
---> lag pong
-<< PING hash.ix.nl.dal.net
->> :hash.ix.nl.dal.net PONG hash.ix.nl.dal.net :cmeston_
---> FAILED mode user
---> FAILED mode user
---> FAILED mode user
---> FAILED mode user
---> lag pong
-<< PING lion.tx.us.dal.net
->> :lion.tx.us.dal.net PONG lion.tx.us.dal.net :cmeston
---> lag pong
-<< WHO #ez
->> :hash.ix.nl.dal.net 352 cmeston_ #ez ~cmeston 2618-2ed8-f8de-36d4-9088.210.62.ip punch.wa.us.dal.net tuutuutu H :4 Chine MESTON
->> :hash.ix.nl.dal.net 352 cmeston_ #ez ~cmeston 2618-2ed8-f8de-36d4-9088.210.62.ip hash.ix.nl.dal.net cmeston_ H@ :0 Chine MESTON
->> :hash.ix.nl.dal.net 315 cmeston_ #ez :End of /WHO list.
-<< PING hash.ix.nl.dal.net
->> :hash.ix.nl.dal.net PONG hash.ix.nl.dal.net :cmeston_
---> lag pong
-<< PING lion.tx.us.dal.net
->> :lion.tx.us.dal.net PONG lion.tx.us.dal.net :cmeston
---> lag pong
-<< PING hash.ix.nl.dal.net
->> :hash.ix.nl.dal.net PONG hash.ix.nl.dal.net :cmeston_
---> lag pong
-<< PING lion.tx.us.dal.net
->> :lion.tx.us.dal.net PONG lion.tx.us.dal.net :cmeston
---> lag pong
-<< PING hash.ix.nl.dal.net
->> :hash.ix.nl.dal.net PONG hash.ix.nl.dal.net :cmeston_
---> lag pong
-<< PING lion.tx.us.dal.net
->> :lion.tx.us.dal.net PONG lion.tx.us.dal.net :cmeston
---> lag pong
-<< MODE #ez +o tuutuutu
->> :cmeston_!~cmeston@2618-2ed8-f8de-36d4-9088.210.62.ip MODE #ez +o tuutuutu
-<< WHO #ez
->> :hash.ix.nl.dal.net 352 cmeston_ #ez ~cmeston 2618-2ed8-f8de-36d4-9088.210.62.ip punch.wa.us.dal.net tuutuutu H@ :4 Chine MESTON
->> :hash.ix.nl.dal.net 352 cmeston_ #ez ~cmeston 2618-2ed8-f8de-36d4-9088.210.62.ip hash.ix.nl.dal.net cmeston_ H@ :0 Chine MESTON
->> :hash.ix.nl.dal.net 315 cmeston_ #ez :End of /WHO list.
-<< PING hash.ix.nl.dal.net
->> :hash.ix.nl.dal.net PONG hash.ix.nl.dal.net :cmeston_
---> lag pong
-<< PING lion.tx.us.dal.net
->> :lion.tx.us.dal.net PONG lion.tx.us.dal.net :cmeston
---> lag pong
-<< PING hash.ix.nl.dal.net
->> :hash.ix.nl.dal.net PONG hash.ix.nl.dal.net :cmeston_
---> lag pong
-<< PING lion.tx.us.dal.net
->> :lion.tx.us.dal.net PONG lion.tx.us.dal.net :cmeston
---> lag pong
-<< WHOIS cmeston_
->> :hash.ix.nl.dal.net 311 cmeston_ cmeston_ ~cmeston 2618-2ed8-f8de-36d4-9088.210.62.ip * :Chine MESTON
---> whois event
->> :hash.ix.nl.dal.net 338 cmeston_ cmeston_ :is actually ~cmeston@62.210.33.161 [62.210.33.161]
---> whois default event
->> :hash.ix.nl.dal.net 319 cmeston_ cmeston_ :@#ez 
---> whois default event
->> :hash.ix.nl.dal.net 312 cmeston_ cmeston_ hash.ix.nl.dal.net :DALnet IX Client Server
---> whois default event
->> :hash.ix.nl.dal.net 317 cmeston_ cmeston_ 501 1684852604 :seconds idle, signon time
---> whois default event
->> :hash.ix.nl.dal.net 318 cmeston_ cmeston_ :End of /WHOIS list.
---> whois end
-<< WHOIS cmeston_
->> :hash.ix.nl.dal.net 311 cmeston_ cmeston_ ~cmeston 2618-2ed8-f8de-36d4-9088.210.62.ip * :Chine MESTON
---> whois event
->> :hash.ix.nl.dal.net 338 cmeston_ cmeston_ :is actually ~cmeston@62.210.33.161 [62.210.33.161]
---> whois default event
->> :hash.ix.nl.dal.net 319 cmeston_ cmeston_ :@#ez 
---> whois default event
->> :hash.ix.nl.dal.net 312 cmeston_ cmeston_ hash.ix.nl.dal.net :DALnet IX Client Server
---> whois default event
->> :hash.ix.nl.dal.net 317 cmeston_ cmeston_ 518 1684852604 :seconds idle, signon time
---> whois default event
->> :hash.ix.nl.dal.net 318 cmeston_ cmeston_ :End of /WHOIS list.
---> whois end
-<< WHOIS tuutuutu
->> :hash.ix.nl.dal.net 311 cmeston_ tuutuutu ~cmeston 2618-2ed8-f8de-36d4-9088.210.62.ip * :Chine MESTON
---> whois event
->> :hash.ix.nl.dal.net 319 cmeston_ tuutuutu :@#ez 
---> whois default event
->> :hash.ix.nl.dal.net 312 cmeston_ tuutuutu punch.wa.us.dal.net : Shovel ready since 1998! 
---> whois default event
->> :hash.ix.nl.dal.net 318 cmeston_ tuutuutu :End of /WHOIS list.
---> whois end
-<< PING hash.ix.nl.dal.net
->> :hash.ix.nl.dal.net PONG hash.ix.nl.dal.net :cmeston_
---> lag pong
-<< PING lion.tx.us.dal.net
->> :lion.tx.us.dal.net PONG lion.tx.us.dal.net :cmeston
---> lag pong
-<< PING hash.ix.nl.dal.net
->> :hash.ix.nl.dal.net PONG hash.ix.nl.dal.net :cmeston_
---> lag pong
-<< PING lion.tx.us.dal.net
->> :lion.tx.us.dal.net PONG lion.tx.us.dal.net :cmeston
---> lag pong
-<< PING hash.ix.nl.dal.net
->> :hash.ix.nl.dal.net PONG hash.ix.nl.dal.net :cmeston_
---> lag pong
-<< PING lion.tx.us.dal.net
->> :lion.tx.us.dal.net PONG lion.tx.us.dal.net :cmeston
---> lag pong
-<< PING hash.ix.nl.dal.net
->> :hash.ix.nl.dal.net PONG hash.ix.nl.dal.net :cmeston_
---> lag pong
-<< PING lion.tx.us.dal.net
->> :lion.tx.us.dal.net PONG lion.tx.us.dal.net :cmeston
---> lag pong
-<< PING hash.ix.nl.dal.net
->> :hash.ix.nl.dal.net PONG hash.ix.nl.dal.net :cmeston_
---> lag pong
-<< PING lion.tx.us.dal.net
->> :lion.tx.us.dal.net PONG lion.tx.us.dal.net :cmeston
---> lag pong
+<< TOPIC #aaaa :  
+>> :cmeston!~cmeston@ecc-b03d-a3d6-12a8-9792.210.62.ip TOPIC #aaaa :  
+<< QUIT :leaving
