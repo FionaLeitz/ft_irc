@@ -39,36 +39,45 @@ void	ft_topic(t_context *context, Client *tmp, struct pollfd *fds, int i, std::s
 	if (args[1].empty())
 	{
 		//check topic
-		if (context->channels[args[1]].getTopic().empty())
+		if (context->channels[args[0]].getTopic().empty())
 			response = RPL_NOTOPIC(tmp->getNickname(), args[0]);
 		else
 			response = 	RPL_TOPIC(tmp->getNickname(), args[0], context->channels[args[0]].getTopic());
 		send(fds[i].fd, response.c_str(), response.length(), 0);
 	}
-		/*
-		if (context->channels[args[1]].getTopic().empty())
-			response = RPL_NOTOPIC(tmp->getNickname(), tmp->getUsername(),args[0]);
-		else
-			response = RPL_TOPIC(tmp->getNickname(), tmp->getUsername(), args[0], context->channels[args[0]].getTopic());
-	}
-	else if (args[1].length() == 1)
-	{
-		//clear topic
-		response = RPL_CHANGETOPIC(tmp->getNickname(), tmp->getUsername(), args[0], args[1]);
-		context->channels[args[1]].setTopic(args[1].substr(1, args[1].size() - 1));
-		context->channels[args[1]].sendToAll(response);
-		response = RPL_TOPIC(tmp->getNickname(), tmp->getUsername(), args[0], context->channels[args[0]].getTopic());
-	}
+	// else if (args[1].length() == 1)
+	// {
+	// 	//clear topic
+	// 	response = ":server TOPIC #u : \r\n";
+
+	// 	context->channels[args[0]].setTopic(args[1].substr(1, args[1].size() - 1));
+	// 	context->channels[args[0]].sendToAll(response);
+	// 	// response = RPL_TOPIC(tmp->getNickname(), tmp->getUsername(), args[0], context->channels[args[0]].getTopic());
+	// }
 	else
 	{
 		// change topic
-		response = RPL_CHANGETOPIC(tmp->getNickname(), tmp->getUsername(), args[0], args[1]);
-		context->channels[args[1]].setTopic(args[1].substr(1, args[1].size() - 1));
-		context->channels[args[1]].sendToAll(response);
-		response = RPL_TOPIC(tmp->getNickname(), tmp->getUsername(), args[0], context->channels[args[0]].getTopic());
+		response = RPL_CHANGETOPIC(tmp->getNickname(), tmp->getUsername(),args[0], args[1]);
+		if (args[1].size() > 1)
+			context->channels[args[0]].setTopic(args[1].substr(1, args[1].size() - 1));
+		else
+			context->channels[args[0]].setTopic(" ");
+		context->channels[args[0]].sendToAll(response);
 		// :cmeston!~cmeston@ecc-b03d-a3d6-12a8-9792.210.62.ip TOPIC #aaaa :  
 	}
-	std::cout << "Reply = "<< response << std::endl;
-	context->channels[args[1]].sendToAll(response);
-	*/
+	// context->channels[args[1]].sendToAll(response);
 }
+/*
+>> /topic
+<< #u :No topic is set.
+>> /topic [space][space]
+<< toto has changed the topic to:  
+>> /topic
+<<  Topic for #u is:  
+* Topic for #u set by toto!t@IRC4Fun-ucb.f6d.210.62.IP (Thu May 25 18:46:38 2023)
+>> /topic Bonjour
+<<  toto has changed the topic to: Bonjour
+>> /topic
+<< Topic for #z is: Bonjour
+* Topic for #z set by toto!t@IRC4Fun-ucb.f6d.210.62.IP (Thu May 25 18:48:23 2023)
+*/
