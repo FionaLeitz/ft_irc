@@ -24,28 +24,69 @@ void	ft_mode(t_context *context, Client *tmp, struct pollfd *fds, int i, std::st
 		send(tmp->getFd(), response.c_str(), response.length(), 0);
 		return ;
 	}
-	int	plus[5];
-	int	minus[5];
-				(void)minus;
-			(void)plus;
-	char sign = '+';
-	// ordre i t k o l
-	for ( int count = 0; args[1].c_str()[i] != '\0'; count++ ) {
-		if (args[1].c_str()[i] == '+')
-			sign = '+';
-		else if (args[1].c_str()[i] == '-')
-			sign = '-';
-		// else if
-			// on va vraiment faire un if pour chaque lettre la ? c'est degueulasse
+	// iklot
+	int	letters[5];
+	
+	letters[0] = args[1].rfind( 'i' );
+	letters[1] = args[1].rfind( 'k' );
+	letters[2] = args[1].rfind( 'l' );
+	letters[3] = args[1].rfind( 'o' );
+	letters[4] = args[1].rfind( 't' );
+	
+	for (int count = 0; count < 5; count++) {
+		int	plus = args[1].rfind('+');
+		int minus = args[1].rfind('-');
+		if (letters[count] == -1)
+			letters[count] = 0;
+		else {
+			while (1) {
+				if ( letters[count] > plus && plus >= minus ) {
+					letters[count] = 1;
+					break ;
+				}
+				else if ( letters[count] > minus && minus > plus ) {
+					letters[count] = -1;
+					break ;
+				}
+				else {
+					if (plus != -1)
+						plus = args[1].rfind('+', plus - 1);
+					if (minus != -1)
+						minus = args[1].rfind('-', minus - 1);
+				}
+			}
+		}
+	}
+	std::cout << "FLAGS ? i=" << letters[0]<<" k="<<letters[1]<<" l="<<letters[2]<<" o="<<letters[3]<<" t="<<letters[4]<< std::endl;
+	std::string	flags = chan->getMode();
+	if (letters[0] == 1 && flags.find('i') == flags.npos)
+		flags += 'i';
+	else if (letters[0] == -1 && flags.find('i') != flags.npos)
+		flags.erase(flags.find('i'), 1);
+	if (letters[1] == 1 && flags.find('k') == flags.npos)
+		flags += 'k';
+	else if (letters[1] == -1 && flags.find('k') != flags.npos)
+		flags.erase(flags.find('k'), 1);
+	if (letters[2] == 1 && flags.find('l') == flags.npos)
+		flags += 'l';
+	else if (letters[2] == -1 && flags.find('l') != flags.npos)
+		flags.erase(flags.find('l'), 1);
+	if (letters[3] == 1 && flags.find('o') == flags.npos)
+		flags += 'o';
+	else if (letters[3] == -1 && flags.find('o') != flags.npos)
+		flags.erase(flags.find('o'), 1);
+	if (letters[4] == 1 && flags.find('t') == flags.npos)
+		flags += 't';
+	else if (letters[4] == -1 && flags.find('t') != flags.npos)
+		flags.erase(flags.find('t'), 1);
+	std::cout << "LES NOUVEAUX FLAGS : " << flags << std::endl;
+	// for (int count = 0; count < 5; count++) {
+	// 	if (letters[count] == 1)
+	// 		flags +=
+	// }
 
-	}
-	if ( args[1][0] == '+' ) {
+	// std::cout << "letters numbers = " << letters[0] << " "<< letters[1] << " "<< letters[2] << " "<< letters[3] << " "<< letters[4] << " "<<std::endl;
 
-		// parcourir la string pour trouver "itkol" et les ajouter avec setMode(recreer une string entiere)
-	}
-	else if ( args[1][0] == '-' ) {
-		// parcourir la string pour trouver "itkol" et les retirer avec setMode(recreer une string entiere)
-	}
 	// message de reponse
 }
 
