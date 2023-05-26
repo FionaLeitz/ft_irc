@@ -55,6 +55,14 @@ const std::string &	Channel::getTopic( void ) const {
 	return this->_topic;
 }
 
+const std::string &	Channel::getPassword( void ) const {
+	return this->_password;
+}
+
+const int &	Channel::getSizemax( void ) const {
+	return this->_sizemax;
+}
+
 const std::map<std::string, Client> &	Channel::getClientlist( void ) const {
 	return this->_clientlist;
 }
@@ -69,6 +77,14 @@ void	Channel::setMode( std::string mode ) {
 
 void	Channel::setTopic( std::string topic ) {
 	this->_topic = topic;
+}
+
+void	Channel::setPassword( std::string password ) {
+	this->_password = password;
+}
+
+void	Channel::setSizemax( int sizemax ) {
+	this->_sizemax = sizemax;
 }
 
 void Channel::appliquerFonction(FunctionType function)

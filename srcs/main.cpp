@@ -320,10 +320,10 @@ struct pollfd	*check_communication( struct pollfd *fds, int *socket_nbr, int pas
 	return fds;
 }
 
-int	parse_port( char *port ) {
+int	parse_number( const char *number ) {
 	int count = 0;
-	for ( ; isdigit(port[count]) != 0; count++ );
-	if ( port[count] != '\0' )
+	for ( ; isdigit(number[count]) != 0; count++ );
+	if ( number[count] != '\0' )
 		return -1;
 	return 0;
 }	
@@ -336,7 +336,7 @@ int	main( int argc, char **argv ) {
 		std::cout << "Error number of arguments" << std::endl;
 		return 1;
 	}
-	if ( parse_port( argv[1] ) == -1 ) {
+	if ( parse_number( argv[1] ) == -1 ) {
 		std::cout << "Error port" << std::endl;
 		return 1;
 	}
