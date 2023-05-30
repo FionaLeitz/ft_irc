@@ -74,7 +74,10 @@ void	verify_valid_pass_size_operator( Client *tmp, int *letters_int, std::string
 			letters_int[4] = -1;
 		}
 		else
+		{
 			std::cout << "Il va falloir faire quelque que chose pour definir les operators des chans." << std::endl;
+			chan[0]->add_operator(new_args[oper]);
+		}
 	}
 	if ( letters_int[2] == 1 ) {
 		if ( new_args[size].size() == 0 ) {
@@ -103,6 +106,8 @@ void	ft_mode(t_context *context, Client *tmp, struct pollfd *fds, int i, std::st
 	(void)fds;
 
 	if ( check_args( context, tmp, args, &chan ) == -1 )
+		return ;
+	if (context->channels[args[0]].isUserOperator(*tmp) == false)
 		return ;
 
 	char		letters_char[5] = {'i','k','l','t','o'};
@@ -198,6 +203,3 @@ void	ft_mode(t_context *context, Client *tmp, struct pollfd *fds, int i, std::st
 // 		argument, un nombre max de gens sur ce changer
 // 		si join un chan qui n'a plus de place, "Cannot join #e (User limit reached)"
 //		ERR_CHANNELISFULL (471)
-
-
-// totox sets mode +i on #tututut

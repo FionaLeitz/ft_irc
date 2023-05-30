@@ -30,11 +30,10 @@ void	ft_topic(t_context *context, Client *tmp, struct pollfd *fds, int i, std::s
   	TOPIC #test :                   ; Clearing the topic on "#test"
   	TOPIC #test                     ; Checking the topic for "#test"
 */
-
-	(void)context;
 	std::string response;
 
 	std::cout << "Client "<<tmp->getNickname() << " is trying to use the topic command w args " << args[0] << " and " << args[1] << std::endl;
+
 	std::cout << "length == "<< args[1].length() << std::endl;
 	if (args[1].empty())
 	{
@@ -48,6 +47,8 @@ void	ft_topic(t_context *context, Client *tmp, struct pollfd *fds, int i, std::s
 	else
 	{
 		// change topic
+		if (context->channels[args[0]].isUserOperator(*tmp) == false)
+			return ;
 		response = RPL_CHANGETOPIC(tmp->getNickname(), tmp->getUsername(),args[0], args[1]);
 		if (args[1].size() > 1)
 			context->channels[args[0]].setTopic(args[1].substr(1, args[1].size() - 1));

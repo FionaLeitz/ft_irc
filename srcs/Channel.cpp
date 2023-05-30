@@ -32,7 +32,7 @@ void	Channel::add_client( Client new_client ) {
 }
 
 void	Channel::add_operator( std::string new_client ) {
-	this->_operators.push_back( new_client );
+	this->_operators.insert( new_client );
 }
 
 void	Channel::suppress_client( std::string nick ) {
@@ -40,7 +40,7 @@ void	Channel::suppress_client( std::string nick ) {
 }
 
 void	Channel::suppress_operator( std::string nick ) {
-	this->_operators.remove( nick );
+	this->_operators.erase( nick );
 }
 
 const std::string &	Channel::getName( void ) const {
@@ -67,7 +67,7 @@ const std::map<std::string, Client> &	Channel::getClientlist( void ) const {
 	return this->_clientlist;
 }
 
-const std::list<std::string> &	Channel::getOperators( void ) const {
+const std::set<std::string> &	Channel::getOperators( void ) const {
 	return this->_operators;
 }
 
@@ -122,4 +122,23 @@ bool	Channel::isUserThere(std::string nick)
 	if (this->_clientlist.find(nick) == this->_clientlist.end())
 		return false;
 	return true;
+}
+
+
+bool	Channel::isUserOperator(const Client &client) const {
+
+	std::string response;
+
+	if (this->_operators.find(client.getNickname()) != this->_operators.end()) //si le user est un operateur du channel
+		{
+			std::cout << "OK c'est bien un operateur" << std::endl;
+			return true ;
+		}
+	else
+		{
+			std::cout << "ce n'est pas un operateur !!" << std::endl;
+			response = ERR_CHANOPRIVSNEEDED(client.getNickname(), this->_name);
+			send(client.getFd(), response.c_str(), response.size(), 0);
+			return false ;
+		}
 }

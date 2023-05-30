@@ -7,7 +7,8 @@ void	ft_invite(t_context *context, Client *tmp, struct pollfd *fds, int i, std::
 	std::string response;
 	int			fd;
 	std::cout << "Client "<<tmp->getNickname() << " is trying to use the invite command w args " << args[0] <<  " and " << args[1] << std::endl;
-
+	if (context->channels[args[0]].isUserOperator(*tmp) == false)
+		return ;
 	response = RPL_INVITE_MSG(tmp->getNickname(), tmp->getUsername(), args[0], args[1]);
 	fd = findClientFd(context->clients, args[0]);
 	if (fd == -1 )

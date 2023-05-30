@@ -11,7 +11,24 @@ int		findClientFd(const std::map<int, Client> &clientList, std::string nick)
 		}
 		return (-1);
 }
+/*
+bool	check_operator(const Channel &channel, const Client &client) {
 
+std::string response;
+
+if (channel.getOperators().find(client.getNickname()) != channel.getOperators().end()) //si le user est un operateur du channel
+	{
+		std::cout << "OK c'est bien un operateur" << std::endl;
+		return true ;
+	}
+else
+	{
+		std::cout << "ce n'est pas un operateur !!" << std::endl;
+		response = ERR_CHANOPRIVSNEEDED(client.getNickname(), channel.getName());
+		send(client.getFd(), response.c_str(), response.size(), 0);
+		return false ;
+	}
+}*/
 
 // << MODE #ez +o tuutuutu
 // >> :cmeston_!~cmeston@2618-2ed8-f8de-36d4-9088.210.62.ip MODE #ez +o tuutuutu
@@ -30,9 +47,8 @@ void	ft_kick(t_context *context, Client *tmp, struct pollfd *fds, int i, std::st
 
 	std::cout << "Client "<< tmp->getNickname() << " is trying to use the KICK command w args " << args[0] << " and " << args[1] << std::endl;
 
-	// ERR_NEEDMOREPARAMS (461)
-//   "<client> <command> :Not enough parameters"
-
+	if (context->channels[args[0]].isUserOperator(*tmp) == false)
+		return ;
 	channel = args[0];
 	user = args[1];
 	reason = ((*tmp).getBuffer());
@@ -40,11 +56,17 @@ void	ft_kick(t_context *context, Client *tmp, struct pollfd *fds, int i, std::st
 	reason = reason.substr(args[1].length() + 1);
 	std::cout << "Trying to kick " << user << " from channel " << channel << " with reason : " << reason << std::endl;
 
-	//droits 
-		// ERR_CHANOPRIVSNEEDED (482)
-		//   "<client> <channel> :You're not channel operator"
-		// Indicates that a command failed because the client does not have the appropriate channel privileges. This numeric can apply for different prefixes such as halfop, operator, etc. The text used in the last param of this message may vary.
-
+	if (context->channels[args[0]].getOperators().find(tmp->getNickname()) != context->channels[args[0]].getOperators().end()) //si le user est un operateur du channel
+	{
+		std::cout << "OK c'est bien un operateur" << std::endl;
+	}
+	else
+	{
+		std::cout << "ce n'est pas un operateur !!" << std::endl;
+		response = ERR_CHANOPRIVSNEEDED(tmp->getNickname(), args[0]);
+		send(tmp->getFd(), response.c_str(), response.size(), 0);
+		return ;
+	}
 	//trouver le channel
 	if (context->channels.find(args[0]) == context->channels.end())
 	{

@@ -26,7 +26,7 @@ class	Channel {
 		const std::string &						getPassword( void ) const;
 		const int &								getSizemax( void ) const;
 		const std::map<std::string, Client> &	getClientlist( void ) const;
-		const std::list<std::string> &			getOperators( void ) const;
+		const std::set<std::string> &			getOperators( void ) const;
 
 		void									setMode( std::string mode );
 		void									setTopic( std::string topic );
@@ -37,6 +37,7 @@ class	Channel {
 		void									sendMessage(std::string response, int currentFd);  // envoie a tout le monde sauf l'expediteur
 		void									sendToAll(std::string response);				   // envoie a tout le monde
 		bool									isUserThere(std::string nick);
+		bool									isUserOperator(const Client &client) const;
 
 
 	private:
@@ -46,7 +47,7 @@ class	Channel {
 		std::string						_password;
 		int								_sizemax;
 		std::map<std::string, Client>	_clientlist;
-		std::list<std::string>			_operators;
+		std::set<std::string>			_operators;
 
 
 	

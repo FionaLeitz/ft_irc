@@ -38,6 +38,9 @@ void	ft_join(t_context *context, Client *tmp, struct pollfd *fds, int i, std::st
 	else if ( context->channels[args[0]].getMode().find("k") != std::string::npos ) {
 		std::cout << "ON VEUT UN PASSWORD !" << std::endl;
 		if ( args[1] != context->channels[args[0]].getPassword() ) {
+			response = ERR_BADCHANNELKEY(tmp->getNickname(), args[0]);
+			std::cout << response << std::endl;
+			send(tmp->getFd(), response.c_str(), response.size(), 0);
 			// message d'erreur : Cannot join #e (Requires keyword
 			return ;
 		}
