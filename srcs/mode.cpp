@@ -16,14 +16,14 @@ int	check_args( t_context *context, Client *tmp, std::string *args, Channel	**ch
 	}
 	*chan = &it->second;
 	if ( args[1].empty() ) {
-		response = ":server 324 " + (*tmp).getNickname() + " " + args[0] + " +" + (*chan)->getMode() + "\r\n";
+		response = RPL_CHANNELMODEIS((*tmp).getNickname(), args[0], " +", (*chan)->getMode());
 		send(tmp->getFd(), response.c_str(), response.length(), 0);
 		return -1;
 	}
 	return 0;
 }
 
-void	pass_and_size( std::string cpy, std::string *new_arg0, std::string *new_arg1 ) {
+void	pass_size_operator( std::string cpy, std::string *new_arg0, std::string *new_arg1, std::string *new_arg2 ) {
 	int	save = cpy.find_first_not_of( " \r\n" );
 	if (save == -1)
 		save = cpy.size();
@@ -41,10 +41,19 @@ void	pass_and_size( std::string cpy, std::string *new_arg0, std::string *new_arg
 	if (save == -1)
 		save = cpy.size();
 	*new_arg1 = cpy.substr(0, save);
+	cpy = cpy.substr(new_arg1->size());
+	save = cpy.find_first_not_of( " \r\n" );
+	if (save == -1)
+		save = cpy.size();
+	cpy = cpy.substr(save);
+	save = cpy.find_first_of(" \r\n");
+	if (save == -1)
+		save = cpy.size();
+	*new_arg2 = cpy.substr(0, save);
 	return ;
 }
 
-void	verify_valid_pass_and_size( int *letters_int, std::string *new_args, Channel **chan, int pass, int size ) {
+void	verify_valid_pass_size_operator(Client *tmp, int *letters_int, std::string *new_args, Channel **chan, int pass, int size, int oper ) {
 	if ( letters_int[1] != 0 ) {
 		if ( new_args[pass].size() == 0 ) {
 			std::cout << "Il manque le mot de passe..." << std::endl;
@@ -53,6 +62,15 @@ void	verify_valid_pass_and_size( int *letters_int, std::string *new_args, Channe
 		}
 		else
 			(*chan)->setPassword(new_args[pass]);
+	}
+	if ( letters_int[4] != 0 ) {
+		if ( new_args[oper].size() == 0 ) {
+			std::cout << "Il manque le nick de l'operator..." << std::endl;
+			// #e o * :You must specify a parameter for the op mode. Syntax: <nick>.
+			letters_int[4] = -1;
+		}
+		else
+			std::cout << "Il va falloir faire quelque que chose pour definir les operators des chans." << std::endl;
 	}
 	if ( letters_int[2] == 1 ) {
 		if ( new_args[size].size() == 0 ) {
@@ -80,19 +98,33 @@ void	ft_mode(t_context *context, Client *tmp, struct pollfd *fds, int i, std::st
 	if ( check_args( context, tmp, args, &chan ) == -1 )
 		return ;
 
-	char		letters_char[5] = {'i','k','l','o','t'};
+	char		letters_char[5] = {'i','k','l','t','o'};
 	int			letters_int[5];
-	std::string	new_args[2];
 	letters_int[0] = args[1].rfind( 'i' );
 	letters_int[1] = args[1].rfind( 'k' );	// password
 	letters_int[2] = args[1].rfind( 'l' );	// number
-	letters_int[3] = args[1].rfind( 'o' );
-	letters_int[4] = args[1].rfind( 't' );
+	letters_int[3] = args[1].rfind( 't' );
+	letters_int[4] = args[1].rfind( 'o' );	// j'ai oublie ca !
 
-	int	pass = letters_int[1] > letters_int[2];
-	int	size = letters_int[1] < letters_int[2];
+	std::string	new_args[3];
+	int	pass = 0;
+	int	size = 0;
+	int	oper = 0;
+
+	if (letters_int[1] > letters_int[2])
+		pass++;
+	else if (letters_int[1] != letters_int[2])
+		size++;
+	if (letters_int[1] > letters_int[4])
+		pass++;
+	else if (letters_int[1] != letters_int[4])
+		oper++;
+	if (letters_int[2] > letters_int[4])
+		size++;
+	else if (letters_int[2] != letters_int[4])
+		oper++;
 	
-	pass_and_size( tmp->getBuffer().substr(tmp->getBuffer().find(args[1]) + args[1].size() + 1), &new_args[0], &new_args[1]);
+	pass_size_operator( tmp->getBuffer().substr(tmp->getBuffer().find(args[1]) + args[1].size() + 1), &new_args[0], &new_args[1], &new_args[2] );
 
 	for (int count = 0; count < 5; count++) {
 		int	plus = args[1].rfind('+');
@@ -118,10 +150,11 @@ void	ft_mode(t_context *context, Client *tmp, struct pollfd *fds, int i, std::st
 			}
 		}
 	}
-	verify_valid_pass_and_size( letters_int, new_args, &chan, pass, size );
+	verify_valid_pass_size_operator( tmp, letters_int, new_args, &chan, pass, size, oper );
 
 	std::string	flags = chan->getMode();
-	for (int count = 0; count < 5; count++) {
+	for (int count = 0; count < 4; count++) {
+		std::string	response;
 		if (letters_int[count] == 1 && flags.find(letters_char[count]) == flags.npos) {
 			flags += letters_char[count];
 			// titi sets mode +t on #e ==> un envoi pour chaque nouvelle lettre
@@ -131,9 +164,9 @@ void	ft_mode(t_context *context, Client *tmp, struct pollfd *fds, int i, std::st
 			// titi sets mode -t on #e ==>un envoi pour chaque nouvelle lettre
 		}
 	}
-	std::cout << "LES NOUVEAUX FLAGS : " << flags << std::endl;
 	chan->setMode( flags );
-
+	std::string	response = RPL_CHANNELMODEIS(tmp->getNickname(), args[0], " +", chan->getMode());
+	send(tmp->getFd(), response.c_str(), response.length(), 0);
 }
 
 // si besoin d'arguments, voir les args suivants (dans le meme ordre que la string)
