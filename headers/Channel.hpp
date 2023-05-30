@@ -16,7 +16,7 @@ class	Channel {
 		Channel &		operator=( const Channel & rhs );
 
 		void				add_client( Client new_client );
-		void				add_operator( Client new_client );
+		void				add_operator( std::string new_client );
 		void				suppress_client( std::string nick );
 		void				suppress_operator( std::string nick );
 
@@ -26,7 +26,7 @@ class	Channel {
 		const std::string &						getPassword( void ) const;
 		const int &								getSizemax( void ) const;
 		const std::map<std::string, Client> &	getClientlist( void ) const;
-		const std::map<std::string, Client> &	getOperators( void ) const;
+		const std::list<std::string> &			getOperators( void ) const;
 
 		void									setMode( std::string mode );
 		void									setTopic( std::string topic );
@@ -46,7 +46,7 @@ class	Channel {
 		std::string						_password;
 		int								_sizemax;
 		std::map<std::string, Client>	_clientlist;
-		std::map<std::string, Client>	_operators;
+		std::list<std::string>			_operators;
 
 
 	

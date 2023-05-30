@@ -15,9 +15,10 @@
 # include <map>
 # include <vector>
 # include <cctype>
+# include <sstream>
+# include <list>
 # include "Client.hpp"
 # include "Channel.hpp"
-# include <sstream>
 
 #define USER_ID(nickname, username) (nickname + "!" + username + "@host")
 

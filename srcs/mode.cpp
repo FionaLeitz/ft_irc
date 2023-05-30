@@ -50,10 +50,11 @@ void	pass_size_operator( std::string cpy, std::string *new_arg0, std::string *ne
 	if (save == -1)
 		save = cpy.size();
 	*new_arg2 = cpy.substr(0, save);
+	std::cout << "premier argument : " << *new_arg0 << ", deuxieme argument : " << *new_arg1 << ", troisieme argument : " << *new_arg2 << std::endl;
 	return ;
 }
 
-void	verify_valid_pass_size_operator(Client *tmp, int *letters_int, std::string *new_args, Channel **chan, int pass, int size, int oper ) {
+void	verify_valid_pass_size_operator( int *letters_int, std::string *new_args, Channel **chan, int pass, int size, int oper ) {
 	if ( letters_int[1] != 0 ) {
 		if ( new_args[pass].size() == 0 ) {
 			std::cout << "Il manque le mot de passe..." << std::endl;
@@ -111,19 +112,19 @@ void	ft_mode(t_context *context, Client *tmp, struct pollfd *fds, int i, std::st
 	int	size = 0;
 	int	oper = 0;
 
-	if (letters_int[1] > letters_int[2])
+	if (letters_int[1] > letters_int[2] && letters_int[2] != -1 )
 		pass++;
-	else if (letters_int[1] != letters_int[2])
+	else if (letters_int[2] != -1 && letters_int[1] != -1)
 		size++;
-	if (letters_int[1] > letters_int[4])
+	if (letters_int[4] > letters_int[1] && letters_int[1] != -1 )
+		oper++;
+	else if (letters_int[1] != -1  && letters_int[4] != -1)
 		pass++;
-	else if (letters_int[1] != letters_int[4])
-		oper++;
-	if (letters_int[2] > letters_int[4])
+	if (letters_int[2] > letters_int[4] && letters_int[4] != -1 )
 		size++;
-	else if (letters_int[2] != letters_int[4])
+	else if (letters_int[4] != -1 && letters_int[2] != -1)
 		oper++;
-	
+
 	pass_size_operator( tmp->getBuffer().substr(tmp->getBuffer().find(args[1]) + args[1].size() + 1), &new_args[0], &new_args[1], &new_args[2] );
 
 	for (int count = 0; count < 5; count++) {
@@ -150,7 +151,7 @@ void	ft_mode(t_context *context, Client *tmp, struct pollfd *fds, int i, std::st
 			}
 		}
 	}
-	verify_valid_pass_size_operator( tmp, letters_int, new_args, &chan, pass, size, oper );
+	verify_valid_pass_size_operator( letters_int, new_args, &chan, pass, size, oper );
 
 	std::string	flags = chan->getMode();
 	for (int count = 0; count < 4; count++) {

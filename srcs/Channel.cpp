@@ -23,7 +23,7 @@ Channel::~Channel( void ) {
 Channel::Channel( std::string name, std::string mode, Client new_client ) :
 	_name( name ), _mode( mode ) {
 	this->add_client( new_client );
-	this->add_operator( new_client );
+	this->add_operator( new_client.getNickname() );
 	// this->_clientlist.insert( std::map<std::string, Client>::value_type( new_client.getNickname(), new_client ) );
 }
 
@@ -31,8 +31,8 @@ void	Channel::add_client( Client new_client ) {
 	this->_clientlist.insert( std::map<std::string, Client>::value_type( new_client.getNickname(), new_client ) );
 }
 
-void	Channel::add_operator( Client new_client ) {
-	this->_operators.insert( std::map<std::string, Client>::value_type( new_client.getNickname(), new_client ) );
+void	Channel::add_operator( std::string new_client ) {
+	this->_operators.push_back( new_client );
 }
 
 void	Channel::suppress_client( std::string nick ) {
@@ -40,7 +40,7 @@ void	Channel::suppress_client( std::string nick ) {
 }
 
 void	Channel::suppress_operator( std::string nick ) {
-	this->_operators.erase( nick );
+	this->_operators.remove( nick );
 }
 
 const std::string &	Channel::getName( void ) const {
@@ -67,7 +67,7 @@ const std::map<std::string, Client> &	Channel::getClientlist( void ) const {
 	return this->_clientlist;
 }
 
-const std::map<std::string, Client> &	Channel::getOperators( void ) const {
+const std::list<std::string> &	Channel::getOperators( void ) const {
 	return this->_operators;
 }
 
