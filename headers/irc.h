@@ -27,7 +27,7 @@
 #define RPL_NOTOPIC(nickname, channel) (":server 331 " + nickname + " " + channel + " :No topic is set\r\n")
 #define RPL_TOPIC(nickname, channel, topic) (":server 332 " + nickname + " " + channel + " :" + topic + "\r\n")
 #define RPL_CHANNELMODEIS(nickname, channel, sign, mode) (":server 324 " + nickname + " " + channel + sign + mode + "\r\n")
-#define RPL_INVITING(nickname, channel, target) (":server 341 " + nickname " " + channel + " :Inviting " + target + " to join " + channel + "\r\n")
+#define RPL_INVITING(nickname, channel, target) (":server 341 " + nickname + " " + target + " :join " + channel + "\r\n")
 
 #define ERR_NOSUCHNICK(nickname, username, target) (":server 401 " + USER_ID(nickname, username) + " " + target + " :No such nick\r\n")
 #define ERR_NOSUCHCHANNEL(nickname, username, target) (":server 403 " + USER_ID(nickname, username) + " " + target + " :No such channel\r\n")
@@ -40,7 +40,8 @@
 #define	RPL_KICK(nickname, username, channel, target, reason)(":" + USER_ID(nickname, username) + " KICK " + channel + " " + target + " :" + reason + "\r\n")
 #define RPL_MSG(nickname, username, dest, message) (":" + USER_ID(nickname, username) + " PRIVMSG " + dest + " :" + message + "\r\n")
 #define RPL_CHANGETOPIC(nickname, username, channel, topic) (":" + USER_ID(nickname, username) + " TOPIC " + channel + " " + topic + "\r\n")
-#define RPL_PING(nickname, username, token) (":" + USER_ID(nickname, username) + " PONG server_name " + token + "\r\n")
+#define RPL_PING(nickname, username, token) (":" + USER_D(nickname, username) + " PONG server_name " + token + "\r\n")
+#define RPL_INVITE_MSG(nickname, username, target, channel) (":" + USER_ID(nickname, username) + " INVITE " + target + " :" + channel + "\r\n")
 
 // #define ERR_USERNOTINCHANNEL(nickname, username, channel, target) (":server 441 " + USER_ID(nickname, username) + " " + target + " :They aren't on that channel\r\n")
 // normalement comme ca, et le msg d'erreur arrive sur l'onglet principal (et non pas sur le channel)
@@ -91,7 +92,7 @@ void	ft_ping(t_context *context, Client *tmp, struct pollfd *fds, int i, std::st
 void	ft_restart(t_context *context, Client *tmp, struct pollfd *fds, int i, std::string *args);
 void	ft_topic(t_context *context, Client *tmp, struct pollfd *fds, int i, std::string *args);
 
-
+int		findClientFd(const std::map<int, Client> &clientList, std::string nick);
 void	sendToAllClients(const std::map<std::string, Client> &clientList, std::string response);
 
 #endif
