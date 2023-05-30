@@ -40,7 +40,7 @@
 #define	RPL_KICK(nickname, username, channel, target, reason)(":" + USER_ID(nickname, username) + " KICK " + channel + " " + target + " :" + reason + "\r\n")
 #define RPL_MSG(nickname, username, dest, message) (":" + USER_ID(nickname, username) + " PRIVMSG " + dest + " :" + message + "\r\n")
 #define RPL_CHANGETOPIC(nickname, username, channel, topic) (":" + USER_ID(nickname, username) + " TOPIC " + channel + " " + topic + "\r\n")
-#define RPL_PING(nickname, username, token) (":" + USER_D(nickname, username) + " PONG server_name " + token + "\r\n")
+#define RPL_PING(nickname, username, token) (":" + USER_ID(nickname, username) + " PONG server_name " + token + "\r\n")
 #define RPL_INVITE_MSG(nickname, username, target, channel) (":" + USER_ID(nickname, username) + " INVITE " + target + " :" + channel + "\r\n")
 
 // #define ERR_USERNOTINCHANNEL(nickname, username, channel, target) (":server 441 " + USER_ID(nickname, username) + " " + target + " :They aren't on that channel\r\n")

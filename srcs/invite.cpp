@@ -15,12 +15,8 @@ void	ft_invite(t_context *context, Client *tmp, struct pollfd *fds, int i, std::
 	int ret = send(fd, response.c_str(), response.size(), 0);
 	std::cout << " ret = " << ret << " errno: " << errno << " " << response << std::endl;
 	if (ret == -1 && errno == 9)
-	{
-		std::cout << "coucou" << std::endl;
 		response = ERR_NOSUCHNICK(tmp->getNickname(), tmp->getUsername(), args[0]);
-	}
 	else
 		response = RPL_INVITING(tmp->getNickname(), args[1], args[0]);
 	send(tmp->getFd(), response.c_str(), response.size(), 0);
-	// You've invited #tutututtutu to Inviting tototox to join #tutututtutu (server)
 }

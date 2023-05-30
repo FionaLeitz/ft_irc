@@ -34,6 +34,8 @@ class	Client {
 		int							_fd;
 		struct sockaddr_in			_ip;
 		std::vector<std::string>	_channelList;
+		// std::map<std::string>	_channelList;
+		// std::vector<std::string>	_inviteChannelList;
 	
 };
 
