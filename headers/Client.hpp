@@ -23,9 +23,13 @@ class	Client {
 		void						setNickname(std::string nick);
 		void						setUsername(std::string username);
 		const struct sockaddr_in	&getIp(void) const;
-		const std::vector<std::string>	&getChannelList(void) const;
+		// const std::vector<std::string>	&getChannelList(void) const;
+		const std::map<std::string, int>	&getChannelList(void) const;
 		void						addChannel(std::string name);
+		void						addInviteChannel(std::string name);
 		void						removeChannel(std::string name);
+
+		void						printChannelList(void) const;
 
 	private:
 		std::string					_username;
@@ -33,8 +37,8 @@ class	Client {
 		std::string					_buffer;
 		int							_fd;
 		struct sockaddr_in			_ip;
-		std::vector<std::string>	_channelList;
-		// std::map<std::string>	_channelList;
+		// std::vector<std::string>	_channelList;
+		std::map<std::string, int>	_channelList;		//nom du channel, int pour dire si le user est membre ou est invite a rejoindre (1 = membre, 0 = invite mais pas encore membre)
 		// std::vector<std::string>	_inviteChannelList;
 	
 };

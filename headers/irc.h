@@ -35,6 +35,7 @@
 #define ERR_USERNOTINCHANNEL(nickname, username, channel, target) (":server 441 " + USER_ID(nickname, username) + " " + channel + " " + target + " :They aren't on that channel\r\n")
 #define ERR_NEEDMOREPARAMS(nickname, channel, command) (":server 461 " + nickname + " " + channel + " " + command + " :Not enough parameters\r\n")
 #define ERR_NEEDMOREPARAMS_MODE(nickname, channel, command, mode, syntax) (":server 461 " + nickname + " " + channel + " " + command + " :You must specify a parameter for the " + mode + " mode. Syntax: <" + syntax + ">.\r\n")
+#define ERR_INVALIDMODEPARAM(nickname, username, channel, mode) (":server 696 " + nickname + " " + channel + " :Invalid " + mode + " mode parameter(s).\r\n")
 
 #define RPL_JOIN(nickname, username, channel) (":" + USER_ID(nickname, username) + " JOIN " + channel + "\r\n")
 #define	RPL_KICK(nickname, username, channel, target, reason)(":" + USER_ID(nickname, username) + " KICK " + channel + " " + target + " :" + reason + "\r\n")
@@ -42,6 +43,7 @@
 #define RPL_CHANGETOPIC(nickname, username, channel, topic) (":" + USER_ID(nickname, username) + " TOPIC " + channel + " " + topic + "\r\n")
 #define RPL_PING(nickname, username, token) (":" + USER_ID(nickname, username) + " PONG server_name " + token + "\r\n")
 #define RPL_INVITE_MSG(nickname, username, target, channel) (":" + USER_ID(nickname, username) + " INVITE " + target + " :" + channel + "\r\n")
+#define RPL_MODE(nickname, username, channel, mode) (":" + USER_ID(nickname, username) + " MODE " + channel + " " + mode + "\r\n")
 
 // #define ERR_USERNOTINCHANNEL(nickname, username, channel, target) (":server 441 " + USER_ID(nickname, username) + " " + target + " :They aren't on that channel\r\n")
 // normalement comme ca, et le msg d'erreur arrive sur l'onglet principal (et non pas sur le channel)
@@ -49,10 +51,6 @@
 
 
 
-// :tototo!~cmeston@2618-2ed8-f8de-36d4-9088.210.62.ip MODE #tututu +k 1
-#define RPL_MODE(nickname, username, channel, modes, args) (":" + USER_ID(nickname, username) + " MODE " + channel + " " + modes + " " + args + "\r\n")
-// :serverhostname 696 nickname #channel :Invalid mode parameter(s)
-#define ERR_INVALIDMODEPARAM(nickname, username, channel, mode) (":server 696 " + nickname + " " + channel + " :Invalid " + mode + " mode parameter(s).\r\n")
 
 
 

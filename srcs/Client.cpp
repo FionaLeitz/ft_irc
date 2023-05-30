@@ -68,26 +68,52 @@ const struct sockaddr_in	&Client::getIp( void ) const {
 	return this->_ip;
 }
 
-const std::vector<std::string>	&Client::getChannelList(void) const
+// const std::vector<std::string>	&Client::getChannelList(void) const
+// {
+// 	return this->_channelList;
+// }
+
+const std::map<std::string, int>	&Client::getChannelList(void) const
 {
 	return this->_channelList;
 }
 
 void	Client::addChannel(std::string name)
 {
-	_channelList.push_back(name);
+	_channelList[name] = 1;
 }
+
+void	Client::addInviteChannel(std::string name)
+{
+	_channelList[name] = 0;
+}
+
+// void	Client::removeChannel(std::string name)
+// {
+// 	std::vector<std::string>::iterator it;
+
+// 	 for (it = _channelList.begin(); it != _channelList.end(); ++it)
+// 	 {
+//         if (*it == name)
+// 		{
+//             _channelList.erase(it);
+// 			break ;
+//         }
+//     }
+// }
 
 void	Client::removeChannel(std::string name)
 {
-	std::vector<std::string>::iterator it;
+	std::map<std::string, int>::iterator it;
 
-	 for (it = _channelList.begin(); it != _channelList.end(); ++it)
-	 {
-        if (*it == name)
-		{
-            _channelList.erase(it);
-			break ;
-        }
+ 	it = _channelList.find(name);
+  	_channelList.erase (it);
+}
+
+void	Client::printChannelList(void) const
+{
+       // parcours la map et affiche les clés et les valeurs
+    for (std::map<std::string, int>::const_iterator it = _channelList.begin(); it != _channelList.end(); ++it) {
+        std::cout << it->first << " (" << it->second << ")" << std::endl;
     }
 }

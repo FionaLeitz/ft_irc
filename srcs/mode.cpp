@@ -171,6 +171,10 @@ void	ft_mode(t_context *context, Client *tmp, struct pollfd *fds, int i, std::st
 		}
 	}
 	chan->setMode( flags );
+	std::string response = RPL_MODE(tmp->getNickname(), tmp->getUsername(), chan->getName(), args[1]); // remplacer args[1] par ce qui a ete effectivement change
+																										// par exemple, si le mode etait deja t, et que le user fait +it, on ne doit mettre que +i ici
+	chan->sendToAll(response);
+
 	// std::string	response = RPL_CHANNELMODEIS(tmp->getNickname(), args[0], " +", chan->getMode());
 	// send(tmp->getFd(), response.c_str(), response.length(), 0);
 }
@@ -194,3 +198,6 @@ void	ft_mode(t_context *context, Client *tmp, struct pollfd *fds, int i, std::st
 // 		argument, un nombre max de gens sur ce changer
 // 		si join un chan qui n'a plus de place, "Cannot join #e (User limit reached)"
 //		ERR_CHANNELISFULL (471)
+
+
+// totox sets mode +i on #tututut

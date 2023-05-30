@@ -22,11 +22,13 @@ void	ft_quit(t_context *context, Client *tmp, struct pollfd *fds, int i, std::st
 	message = message.substr(message.find(":") + 1);
 	response = RPL_QUIT((*tmp).getNickname(), (*tmp).getUsername(), message);
 	//pour tous les channels dans lequel se trouve l'utilisateur
-	for (std::vector<std::string>::const_iterator it2 = (*tmp).getChannelList().begin(); it2 != (*tmp).getChannelList().end(); ++it2)
+	for (std::map<std::string, int>::const_iterator it2 = (*tmp).getChannelList().begin(); it2 != (*tmp).getChannelList().end(); ++it2)
 	{
-		std::cout << "sending goodbye to channel " << *it2 << std::endl;
-		context->channels[*it2].sendMessage(response, (*tmp).getFd());
-		// send(fds[i + 1].fd, response.c_str(), response.length(), 0);
+		if (it2->second == 1)
+		{
+			std::cout << "sending goodbye to channel " << it2->first << std::endl;
+			context->channels[it2->first].sendMessage(response, (*tmp).getFd());
+		}
 	}
 	std::cout << "RPL QUIT = " << response << std::endl;
 	// context->channels[dest].sendMessage(response, (*tmp).getFd());
