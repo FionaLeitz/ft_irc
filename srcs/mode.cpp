@@ -54,7 +54,7 @@ void	pass_size_operator( std::string cpy, std::string *new_arg0, std::string *ne
 	return ;
 }
 
-void	verify_valid_pass_size_operator( int *letters_int, std::string *new_args, Channel **chan, int pass, int size, int oper ) {
+void	verify_valid_pass_size_operator( Client *tmp, int *letters_int, std::string *new_args, Channel **chan, int pass, int size, int oper ) {
 	if ( letters_int[1] != 0 ) {
 		if ( new_args[pass].size() == 0 ) {
 			// std::string response = ERR_INVALIDMODEPARAM(tmp->getNickname(), tmp->getUsername(), chan[0]->getName());
@@ -156,7 +156,7 @@ void	ft_mode(t_context *context, Client *tmp, struct pollfd *fds, int i, std::st
 			}
 		}
 	}
-	verify_valid_pass_size_operator( letters_int, new_args, &chan, pass, size, oper );
+	verify_valid_pass_size_operator( tmp, letters_int, new_args, &chan, pass, size, oper );
 
 	std::string	flags = chan->getMode();
 	for (int count = 0; count < 4; count++) {

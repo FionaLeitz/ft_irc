@@ -37,9 +37,13 @@ void	ft_join(t_context *context, Client *tmp, struct pollfd *fds, int i, std::st
 	}
 	else if ( context->channels[args[0]].getMode().find("k") != std::string::npos ) {
 		std::cout << "ON VEUT UN PASSWORD !" << std::endl;
+		if ( args[1] != context->channels[args[0]].getPassword() ) {
+			// message d'erreur : Cannot join #e (Requires keyword
+			return ;
+		}
+		std::cout << "I have the password" << std::endl;
 	}
-	else
-		context->channels[args[0]].add_client((*tmp));
+	context->channels[args[0]].add_client((*tmp));
 	(*tmp).addChannel(args[0]);
 	response = RPL_JOIN((*tmp).getNickname(), (*tmp).getUsername(), args[0]);
 	send(fds[i].fd, response.c_str(), response.length(), 0);
