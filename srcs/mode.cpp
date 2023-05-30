@@ -156,7 +156,7 @@ void	ft_mode(t_context *context, Client *tmp, struct pollfd *fds, int i, std::st
 			}
 		}
 	}
-	verify_valid_pass_size_operator(tmp, letters_int, new_args, &chan, pass, size, oper );
+	verify_valid_pass_size_operator( letters_int, new_args, &chan, pass, size, oper );
 
 	std::string	flags = chan->getMode();
 	for (int count = 0; count < 4; count++) {
