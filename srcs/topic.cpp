@@ -45,15 +45,6 @@ void	ft_topic(t_context *context, Client *tmp, struct pollfd *fds, int i, std::s
 			response = 	RPL_TOPIC(tmp->getNickname(), args[0], context->channels[args[0]].getTopic());
 		send(fds[i].fd, response.c_str(), response.length(), 0);
 	}
-	// else if (args[1].length() == 1)
-	// {
-	// 	//clear topic
-	// 	response = ":server TOPIC #u : \r\n";
-
-	// 	context->channels[args[0]].setTopic(args[1].substr(1, args[1].size() - 1));
-	// 	context->channels[args[0]].sendToAll(response);
-	// 	// response = RPL_TOPIC(tmp->getNickname(), tmp->getUsername(), args[0], context->channels[args[0]].getTopic());
-	// }
 	else
 	{
 		// change topic
