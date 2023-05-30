@@ -57,8 +57,9 @@ void	pass_size_operator( std::string cpy, std::string *new_arg0, std::string *ne
 void	verify_valid_pass_size_operator( int *letters_int, std::string *new_args, Channel **chan, int pass, int size, int oper ) {
 	if ( letters_int[1] != 0 ) {
 		if ( new_args[pass].size() == 0 ) {
-			std::cout << "Il manque le mot de passe..." << std::endl;
-			// #e k * :You must specify a parameter for the key mode. Syntax: <key>.
+			// std::string response = ERR_INVALIDMODEPARAM(tmp->getNickname(), tmp->getUsername(), chan[0]->getName());
+			std::string response = ERR_NEEDMOREPARAMS_MODE(tmp->getNickname(), chan[0]->getName(), "k", "key", "key");
+			send(tmp->getFd(), response.c_str(), response.length(), 0);
 			letters_int[1] = -1;
 		}
 		else
@@ -66,8 +67,10 @@ void	verify_valid_pass_size_operator( int *letters_int, std::string *new_args, C
 	}
 	if ( letters_int[4] != 0 ) {
 		if ( new_args[oper].size() == 0 ) {
-			std::cout << "Il manque le nick de l'operator..." << std::endl;
 			// #e o * :You must specify a parameter for the op mode. Syntax: <nick>.
+			std::string response = ERR_NEEDMOREPARAMS_MODE(tmp->getNickname(), chan[0]->getName(), "o", "op", "nick");
+			send(tmp->getFd(), response.c_str(), response.length(), 0);
+
 			letters_int[4] = -1;
 		}
 		else
@@ -75,13 +78,16 @@ void	verify_valid_pass_size_operator( int *letters_int, std::string *new_args, C
 	}
 	if ( letters_int[2] == 1 ) {
 		if ( new_args[size].size() == 0 ) {
-			std::cout << "Il manque la size max..." << std::endl;
 			// #e l * :You must specify a parameter for the limit mode. Syntax: <limit>.
+			std::string response = ERR_NEEDMOREPARAMS_MODE(tmp->getNickname(), chan[0]->getName(), "l", "limit", "limit");
+			send(tmp->getFd(), response.c_str(), response.length(), 0);
 			letters_int[2] = -1;
 		}
 		else if (parse_number(new_args[size].c_str()) == -1) {
 			std::cout << "La size n'est pas un nombre..." << std::endl;
 			// #e l rew :Invalid limit mode parameter. Syntax: <limit>
+			std::string response = ERR_INVALIDMODEPARAM(tmp->getNickname(), tmp->getUsername(), chan[0]->getName(), "limit");
+			send(tmp->getFd(), response.c_str(), response.length(), 0);
 			letters_int[2] = -1;
 		}
 		else
@@ -126,7 +132,6 @@ void	ft_mode(t_context *context, Client *tmp, struct pollfd *fds, int i, std::st
 		oper++;
 
 	pass_size_operator( tmp->getBuffer().substr(tmp->getBuffer().find(args[1]) + args[1].size() + 1), &new_args[0], &new_args[1], &new_args[2] );
-
 	for (int count = 0; count < 5; count++) {
 		int	plus = args[1].rfind('+');
 		int minus = args[1].rfind('-');
@@ -166,8 +171,8 @@ void	ft_mode(t_context *context, Client *tmp, struct pollfd *fds, int i, std::st
 		}
 	}
 	chan->setMode( flags );
-	std::string	response = RPL_CHANNELMODEIS(tmp->getNickname(), args[0], " +", chan->getMode());
-	send(tmp->getFd(), response.c_str(), response.length(), 0);
+	// std::string	response = RPL_CHANNELMODEIS(tmp->getNickname(), args[0], " +", chan->getMode());
+	// send(tmp->getFd(), response.c_str(), response.length(), 0);
 }
 
 // si besoin d'arguments, voir les args suivants (dans le meme ordre que la string)
