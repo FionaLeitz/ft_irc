@@ -627,16 +627,17 @@ Attention, si deux commandes a la suite ( /QUIT /JOIN ), il prend le join et c'e
 - check nickname a la connexion voir s'il exste deja
 
 INVITE : - souci de verification d'operator
-		- - que se passe-t-il si on fait /invie dans un channel qui n'a pas de mode +i ?
+		- que se passe-t-il si on fait /invie dans un channel qui n'a pas de mode +i ?
 JOIN :	- join plusieurs channels en meme temps, avec les mdp associes si besoin
 		- checker si le user peut rejoindre le channel (limite de channels, limite de membres, mdp, invite only, banni...)
-		- une fois le channel rejoint, envoyer a la personne qui join le topic (RPL_TOPIC (332)) et le RPL_TOPICWHOTIME (333)) (ou rien si pas de topic)
+		- une fois le channel rejoint, envoyer a la personne qui join le topic (RPL_TOPIC (332)) et le RPL_TOPICWHOTIME (333) (ou rien si pas de topic)
 		- (a faire ou pas ? ) Servers MAY restrict the number of channels a client may be joined to at one time. This limit SHOULD be defined in the CHANLIMIT RPL_ISUPPORT
 		parameter. If the client cannot join this channel because they would be over their limit, they will receive an ERR_TOOMANYCHANNELS (405)
 		reply and the command will fail.
 		- (a faire ou pas ?) argument "0" (/join 0 ?) qui quitte tous les channels dans lequel est le user
 		- liste des users dans hexchat
 MODE : 	- avertir une personne qu'il est devenu operator (et les autres aussi)
+		- afficher le nouveau mot de passe a tout le mode (en ce moment il y a un trou dans la phrase)
 NICK : 	- si le nickname est deja utilise, ERR_NICKNAMEINUSE
 		- si le nickname n'est pas valide, ERR_ERRONEUSNICKNAME (peut etre interdire # : et espace (ca se gere deja je crois))
 		- si pas d'argument (pas de nickname communique) ERR_NONICKNAMEGIVEN
@@ -646,6 +647,7 @@ NICK : 	- si le nickname est deja utilise, ERR_NICKNAMEINUSE
 				the <source> of the message will be the old nickname
 				[ [ "!" user ] "@" host ] of the user who is changing their nickname."
 PASS : 	- si le mot de passe est mauvais, pas de connection ERR_PASSWMISMATCH (464)
+PRIVMSG :	- on le recoit pas s'il n'est pas en majuscule
 KICK :	- eventuellement rajouter un caractere special quand on est operateur (ex : "cmeston_ H :0 Chine MESTON" -->  "cmeston_ H@ :0 Chine MESTON")
 TOPIC : - ne prend que le premier mot du topic
 NAMES : - adapter les variables symbol et prefix en fonction du statut du channel (public, secret, prive) et de l'user (chanop, founder, protected, halfop, voice)
@@ -668,3 +670,8 @@ COMMANDE PAS DU TOUT FAITE :
 			- autre tentative de OPER hors localhost, on verifie que le nom et le mot de passe existe deja, et bim. C'est bon ou c'est pas bon.
 		part
 		restart
+
+
+TRUC EN PLUS :	- la liste des gens en ligne sur la droite du channel ?
+				- les signaux sur notre server
+				- 
