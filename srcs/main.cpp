@@ -100,9 +100,7 @@ int	incoming_connections(struct pollfd **fds, t_context &context)
 		context.clients.insert( std::map<int, Client>::value_type( (*fds)[context.socket_nbr[0]].fd, new_client ) );
 		(context.socket_nbr[0])++;
         // std::cout << "Connexion acceptée depuis " << inet_ntoa(clientAddress.sin_addr) << ":" << ntohs(clientAddress.sin_port) << std::endl;
-		std::stringstream ss;
-		ss << inet_ntoa(clientAddress.sin_addr) << ":" << ntohs(clientAddress.sin_port);
-		new_client.setHost(ss.str());
+	
 		std::cout << "Connexion acceptée depuis " << inet_ntoa(new_client.getIp().sin_addr) << ":" << ntohs(new_client.getIp().sin_port) << std::endl;
 		std::cout << "Connexion acceptée depuis " << new_client.getHost() << std::endl;
 		std::cout << "Son fd est : " <<  new_client.getFd() << std::endl;
@@ -191,6 +189,7 @@ int	client_request( struct pollfd **fds, Client *tmp, std::string ref, int i, t_
 		// int			pos;
 
 		iss >> cmd >> args[0] >> args[1];  // on decoupe la string en 3 parties : cmd, args[0] et args[1];
+		std::cout << "ARGS[0] : " << args[0] << " ARGS[1]: " << args[1] << std::endl;
 		for(j = 0; j < 18; j++)				// si la commande fait partie des operateurs
 		{
 			if (cmd == funcTab[j].name)

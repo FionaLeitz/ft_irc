@@ -17,12 +17,23 @@ IRCd configuration.
 */
 
 void	ft_oper(t_context *context, Client *tmp, struct pollfd *fds, int i, std::string *args) {
-	(void)context;
 	(void)fds;
 	(void)i;
-	(void)args;
+	(void)context;
 
+	std::string response;
 	std::cout << "Client "<<tmp->getNickname() << " is trying to use the oper command." << std::endl;
+	if (args[0].size() == 0 || args[1].size() == 0)
+	{
+		response = ERR_NEEDMOREPARAMS(tmp->getNickname(), "", "OPER");
+		send(tmp->getFd(), response.c_str(), response.size(), 0);
+		return ;
+	}
+	// - if wrong password for the given name --> ERR_PASSWDMISMATCH
+	std::cout << "Trying to log as operator with name: " << args[0] << ", password: " << args[1] << ", and host: " << tmp->getHost() << std::endl;
+ // - if wrong host for the given name --> ERR_NOOPERHOST
+// - if valid name and valid password and valid host --> RPL_YOUREOPER +  MODE message indicating their new user mode
+
 }
 
 // void	oper( Client client, /*liste de channels passer en argument*/) {
