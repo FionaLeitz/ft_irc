@@ -68,6 +68,9 @@ typedef struct	s_context {
 	std::map<std::string, Channel>	channels;
 	int								password;
 	int								socket_nbr[1];
+	std::string						op_name;
+	std::string						op_password;
+	std::string						op_host;
 }			t_context;
 
 typedef struct s_func_ptr
@@ -99,5 +102,6 @@ void	ft_topic(t_context *context, Client *tmp, struct pollfd *fds, int i, std::s
 
 int		findClientFd(const std::map<int, Client> &clientList, std::string nick);
 void	sendToAllClients(const std::map<std::string, Client> &clientList, std::string response);
+std::list<std::string>	ft_split( std::string to_split, std::string separate );
 
 #endif

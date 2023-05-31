@@ -15,15 +15,15 @@ std::list<std::string>	ft_split( std::string to_split, std::string separate ) {
 	return my_list;
 }
 
-int	main( int argc, char **argv ) {
-	if ( argc != 3 )
-		return 1;
-	std::list<std::string>	test = ft_split( argv[1], argv[2] );
+// int	main( int argc, char **argv ) {
+// 	if ( argc != 3 )
+// 		return 1;
+// 	std::list<std::string>	test = ft_split( argv[1], argv[2] );
 
-	std::list<std::string>::iterator	it = test.begin();
-	std::list<std::string>::iterator	ite = test.end();
-	for ( ; it != ite; it++ )
-		std::cout << (*it) << std::endl;
+// 	std::list<std::string>::iterator	it = test.begin();
+// 	std::list<std::string>::iterator	ite = test.end();
+// 	for ( ; it != ite; it++ )
+// 		std::cout << (*it) << std::endl;
 
-	return 0;
-}
+// 	return 0;
+// }

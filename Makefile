@@ -21,6 +21,7 @@ SRC		=	srcs/main.cpp			\
 			srcs/ping.cpp			\
 			srcs/restart.cpp		\
 			srcs/topic.cpp			\
+			srcs/tools.cpp			\
 
 
 OBJ	= $(SRC:%.cpp=%.o)

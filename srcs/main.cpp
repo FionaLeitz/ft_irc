@@ -306,6 +306,9 @@ struct pollfd	*check_communication( struct pollfd *fds, int *socket_nbr, int pas
 	context.password = password;
 	context.channels = channels;
 	context.socket_nbr[0] = *socket_nbr;
+	context.op_name = "admin";
+	context.op_password = "321";
+	context.op_host = "127.0.0.1 localhost";
 	// void (*funcTab[])(Client *tmp, struct pollfd *fds, int i) = { ft_user, ft_join, ft_mode, ft_who, ft_privmsg };
 
 	while (1)
