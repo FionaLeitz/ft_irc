@@ -16,8 +16,4 @@ void	ft_who(t_context *context, Client *tmp, struct pollfd *fds, int i, std::str
 	std::cout << response << std::endl;
 	send(fds[i].fd, response.c_str(), response.length(), 0);
 }
-/*
-response = :server 352 toto #u titi host  server titi H :0 realname
-response = :server 352 toto #u toto host  server toto H :0 realname
-response = :server 315 toto #u :End of /WHO list.
-*/
+

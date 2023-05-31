@@ -60,6 +60,7 @@ multiple channels in this message to clients, and SHOULD distribute these multip
 single channel name on each.
 */
 
+// void	ft_names
 void	ft_join(t_context *context, Client *tmp, struct pollfd *fds, int i, std::string *args)
 {
 	std::string	response;
@@ -88,6 +89,7 @@ void	ft_join(t_context *context, Client *tmp, struct pollfd *fds, int i, std::st
 	(*tmp).addChannel(args[0]);
 	response = RPL_JOIN((*tmp).getNickname(), (*tmp).getUsername(), args[0]);
 	context->channels[args[0]].sendToAll(response);
+	ft_names(context, tmp, fds, i, args);
 	// send(fds[i].fd, response.c_str(), response.length(), 0);
 	// context->channels[args[0]].appliquerFonction(afficherNomClient);	
 }

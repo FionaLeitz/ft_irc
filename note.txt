@@ -635,6 +635,7 @@ JOIN :	- join plusieurs channels en meme temps, avec les mdp associes si besoin
 		parameter. If the client cannot join this channel because they would be over their limit, they will receive an ERR_TOOMANYCHANNELS (405)
 		reply and the command will fail.
 		- (a faire ou pas ?) argument "0" (/join 0 ?) qui quitte tous les channels dans lequel est le user
+		- liste des users dans hexchat
 MODE : 	- avertir une personne qu'il est devenu operator (et les autres aussi)
 NICK : 	- si le nickname est deja utilise, ERR_NICKNAMEINUSE
 		- si le nickname n'est pas valide, ERR_ERRONEUSNICKNAME (peut etre interdire # : et espace (ca se gere deja je crois))
@@ -647,6 +648,7 @@ NICK : 	- si le nickname est deja utilise, ERR_NICKNAMEINUSE
 PASS : 	- si le mot de passe est mauvais, pas de connection ERR_PASSWMISMATCH (464)
 KICK :	- eventuellement rajouter un caractere special quand on est operateur (ex : "cmeston_ H :0 Chine MESTON" -->  "cmeston_ H@ :0 Chine MESTON")
 TOPIC : - ne prend que le premier mot du topic
+NAMES : - adapter les variables symbol et prefix en fonction du statut du channel (public, secret, prive) et de l'user (chanop, founder, protected, halfop, voice)
 
 
 
