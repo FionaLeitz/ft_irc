@@ -50,7 +50,7 @@ void	pass_size_operator( std::string cpy, std::string *new_arg0, std::string *ne
 	if (save == -1)
 		save = cpy.size();
 	*new_arg2 = cpy.substr(0, save);
-	std::cout << "premier argument : " << *new_arg0 << ", deuxieme argument : " << *new_arg1 << ", troisieme argument : " << *new_arg2 << std::endl;
+	// std::cout << "premier argument : " << *new_arg0 << ", deuxieme argument : " << *new_arg1 << ", troisieme argument : " << *new_arg2 << std::endl;
 	return ;
 }
 
@@ -75,7 +75,7 @@ void	verify_valid_pass_size_operator( Client *tmp, int *letters_int, std::string
 		}
 		else
 		{
-			std::cout << "Il va falloir faire quelque que chose pour definir les operators des chans." << std::endl;
+			// std::cout << "Il va falloir faire quelque que chose pour definir les operators des chans." << std::endl;
 			chan[0]->add_operator(new_args[oper]);
 		}
 	}
@@ -87,7 +87,7 @@ void	verify_valid_pass_size_operator( Client *tmp, int *letters_int, std::string
 			letters_int[2] = -1;
 		}
 		else if (parse_number(new_args[size].c_str()) == -1) {
-			std::cout << "La size n'est pas un nombre..." << std::endl;
+			// std::cout << "La size n'est pas un nombre..." << std::endl;
 			// #e l rew :Invalid limit mode parameter. Syntax: <limit>
 			std::string response = ERR_INVALIDMODEPARAM(tmp->getNickname(), tmp->getUsername(), chan[0]->getName(), "limit");
 			send(tmp->getFd(), response.c_str(), response.length(), 0);
@@ -164,20 +164,23 @@ void	ft_mode(t_context *context, Client *tmp, struct pollfd *fds, int i, std::st
 	verify_valid_pass_size_operator(tmp, letters_int, new_args, &chan, pass, size, oper );
 
 	std::string	flags = chan->getMode();
+	std::string	changes;
 	for (int count = 0; count < 4; count++) {
 		std::string	response;
 		if (letters_int[count] == 1 && flags.find(letters_char[count]) == flags.npos) {
 			flags += letters_char[count];
-			// titi sets mode +t on #e ==> un envoi pour chaque nouvelle lettre
+			changes += "+";
+			changes += letters_char[count];
 		}
 		else if (letters_int[count] == -1 && flags.find(letters_char[count]) != flags.npos) {
 			flags.erase(flags.find(letters_char[count]), 1);
-			// titi sets mode -t on #e ==>un envoi pour chaque nouvelle lettre
+			changes += "-";
+			changes += letters_char[count];
 		}
 	}
 	chan->setMode( flags );
-	std::string response = RPL_MODE(tmp->getNickname(), tmp->getUsername(), chan->getName(), args[1]); // remplacer args[1] par ce qui a ete effectivement change
-																										// par exemple, si le mode etait deja t, et que le user fait +it, on ne doit mettre que +i ici
+	std::string response = RPL_MODE(tmp->getNickname(), tmp->getUsername(), chan->getName(), changes); // remplacer args[1] par ce qui a ete effectivement change
+																									   // par exemple, si le mode etait deja t, et que le user fait +it, on ne doit mettre que +i ici
 	chan->sendToAll(response);
 
 	// std::string	response = RPL_CHANNELMODEIS(tmp->getNickname(), args[0], " +", chan->getMode());

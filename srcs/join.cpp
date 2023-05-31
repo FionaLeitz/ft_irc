@@ -36,7 +36,7 @@ void	ft_join(t_context *context, Client *tmp, struct pollfd *fds, int i, std::st
 		context->channels[args[0]].add_operator(tmp->getNickname());
 	}
 	else if ( context->channels[args[0]].getMode().find("k") != std::string::npos ) {
-		std::cout << "ON VEUT UN PASSWORD !" << std::endl;
+		// std::cout << "ON VEUT UN PASSWORD !" << std::endl;
 		if ( args[1] != context->channels[args[0]].getPassword() ) {
 			response = ERR_BADCHANNELKEY(tmp->getNickname(), args[0]);
 			std::cout << response << std::endl;
@@ -44,7 +44,7 @@ void	ft_join(t_context *context, Client *tmp, struct pollfd *fds, int i, std::st
 			// message d'erreur : Cannot join #e (Requires keyword
 			return ;
 		}
-		std::cout << "I have the password" << std::endl;
+		// std::cout << "I have the password" << std::endl;
 	}
 	context->channels[args[0]].add_client((*tmp));
 	(*tmp).addChannel(args[0]);
