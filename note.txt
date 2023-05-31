@@ -627,6 +627,7 @@ Attention, si deux commandes a la suite ( /QUIT /JOIN ), il prend le join et c'e
 INVITE : - souci de verification d'operator
 JOIN : 	- envoyer un message a tout le monde pour avertir d'un nouveau membre
 MODE : 	- avertir une personne qu'il est devenu operator (et les autres aussi)
+		- afficher le nouveau mot de passe a tout le mode (en ce moment il y a un trou dans la phrase)
 NICK : 	- si le nickname est deja utilise, ERR_NICKNAMEINUSE
 		- si le nickname n'est pas valide, ERR_ERRONEUSNICKNAME (peut etre interdire # : et espace (ca se gere deja je crois))
 		- si pas d'argument (pas de nickname communique) ERR_NONICKNAMEGIVEN
@@ -636,6 +637,7 @@ NICK : 	- si le nickname est deja utilise, ERR_NICKNAMEINUSE
 				the <source> of the message will be the old nickname
 				[ [ "!" user ] "@" host ] of the user who is changing their nickname."
 PASS : 	- si le mot de passe est mauvais, pas de connection ERR_PASSWMISMATCH (464)
+PRIVMSG :	- on le recoit pas s'il n'est pas en majuscule
 
 
 
@@ -656,3 +658,7 @@ COMMANDE PAS DU TOUT FAITE :
 		part
 		restart
 
+
+TRUC EN PLUS :	- la liste des gens en ligne sur la droite du channel ?
+				- les signaux sur notre server
+				- 
