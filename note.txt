@@ -651,14 +651,7 @@ PRIVMSG :	- on le recoit pas s'il n'est pas en majuscule
 KICK :	- eventuellement rajouter un caractere special quand on est operateur (ex : "cmeston_ H :0 Chine MESTON" -->  "cmeston_ H@ :0 Chine MESTON")
 TOPIC : - ne prend que le premier mot du topic
 NAMES : - adapter les variables symbol et prefix en fonction du statut du channel (public, secret, prive) et de l'user (chanop, founder, protected, halfop, voice)
-
-
-
-COMMANDE PAS DU TOUT FAITE :
-		kill
-		list
-		names
-		oper : "pr les operateurs serveur en fait tu as une liste d'operateurs
+OPER : oper : "pr les operateurs serveur en fait tu as une liste d'operateurs
 				ca peut etre en dur ou dans un fichier de config
 				chaque operateur a un operateur name (rien a voir avec le username) un mot de passe
 					associé ainsi qu'une liste d'host a partir desquels il peut se connecter en operateur
@@ -668,9 +661,16 @@ COMMANDE PAS DU TOUT FAITE :
 				le mode operator server ne peux pas etre assigné via la cmd MODE:
 			- seul les localhost pourront etre server operators, premiere connection avec OPER on set son nom et son mot de passe s'il est sur localhost
 			- autre tentative de OPER hors localhost, on verifie que le nom et le mot de passe existe deja, et bim. C'est bon ou c'est pas bon.
+			- comment faire autrement qu'en dur vu qu'a priori aucune fonction autorisee d'ouverture de fichier ?
+
+
+COMMANDE PAS DU TOUT FAITE :
+		kill
+		list
+		names
 		part
 		restart
 
 
 TRUC EN PLUS : - les signaux sur notre server
-				- 
+				- voir si on verifie des caracteres interdits dans le nickname
