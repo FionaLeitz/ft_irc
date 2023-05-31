@@ -100,5 +100,3 @@ void	ft_join(t_context *context, Client *tmp, struct pollfd *fds, int i, std::st
 // parameter. If the client cannot join this channel because they would be over their limit, they will receive an ERR_TOOMANYCHANNELS (405)
 // reply and the command will fail.
 // - (a faire ou pas ?) argument "0" (/join 0 ?) qui quitte tous les channels dans lequel est le user
-
-// - topic ne prend que le premier mot du topic

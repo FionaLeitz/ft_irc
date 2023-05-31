@@ -645,6 +645,8 @@ NICK : 	- si le nickname est deja utilise, ERR_NICKNAMEINUSE
 				the <source> of the message will be the old nickname
 				[ [ "!" user ] "@" host ] of the user who is changing their nickname."
 PASS : 	- si le mot de passe est mauvais, pas de connection ERR_PASSWMISMATCH (464)
+KICK :	- eventuellement rajouter un caractere special quand on est operateur (ex : "cmeston_ H :0 Chine MESTON" -->  "cmeston_ H@ :0 Chine MESTON")
+TOPIC : - ne prend que le premier mot du topic
 
 
 
@@ -664,5 +666,3 @@ COMMANDE PAS DU TOUT FAITE :
 			- autre tentative de OPER hors localhost, on verifie que le nom et le mot de passe existe deja, et bim. C'est bon ou c'est pas bon.
 		part
 		restart
-
-// - topic ne prend que le premier mot du topic
