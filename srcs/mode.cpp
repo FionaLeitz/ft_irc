@@ -10,7 +10,7 @@ int	check_args( t_context *context, Client *tmp, std::string *args, Channel	**ch
 	}
 	std::map<std::string, Channel>::iterator	it = context->channels.find(args[0]);
 	if ( it == context->channels.end() ) {
-		response = ERR_NOSUCHCHANNEL(tmp->getNickname(), tmp->getUsername(), args[0]);
+		response = ERR_NOSUCHCHANNEL(tmp->getNickname(), tmp->getUsername(), tmp->getHost(), args[0]);
 		send(tmp->getFd(), response.c_str(), response.length(), 0);
 		return -1;
 	}
@@ -179,7 +179,7 @@ void	ft_mode(t_context *context, Client *tmp, struct pollfd *fds, int i, std::st
 		}
 	}
 	chan->setMode( flags );
-	std::string response = RPL_MODE(tmp->getNickname(), tmp->getUsername(), chan->getName(), changes); // remplacer args[1] par ce qui a ete effectivement change
+	std::string response = RPL_MODE(tmp->getNickname(), tmp->getUsername(), tmp->getHost(), chan->getName(), changes); // remplacer args[1] par ce qui a ete effectivement change
 																									   // par exemple, si le mode etait deja t, et que le user fait +it, on ne doit mettre que +i ici
 	chan->sendToAll(response);
 

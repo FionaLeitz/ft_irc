@@ -626,8 +626,8 @@ Attention, si deux commandes a la suite ( /QUIT /JOIN ), il prend le join et c'e
 
 - check nickname a la connexion voir s'il exste deja
 
-INVITE : - souci de verification d'operator
-		- que se passe-t-il si on fait /invie dans un channel qui n'a pas de mode +i ?
+INVITE : - que se passe-t-il si on fait /invie dans un channel qui n'a pas de mode +i ?
+		 - messages d'erreur dans le chan principal et pas de le channel, jsp si c'est normal, a voir avec d'autres serveurs
 JOIN :	- join plusieurs channels en meme temps, avec les mdp associes si besoin
 		- checker si le user peut rejoindre le channel (limite de channels, limite de membres, mdp, invite only, banni...)
 		- une fois le channel rejoint, envoyer a la personne qui join le topic (RPL_TOPIC (332)) et le RPL_TOPICWHOTIME (333) (ou rien si pas de topic)
@@ -672,6 +672,5 @@ COMMANDE PAS DU TOUT FAITE :
 		restart
 
 
-TRUC EN PLUS :	- la liste des gens en ligne sur la droite du channel ?
-				- les signaux sur notre server
+TRUC EN PLUS : - les signaux sur notre server
 				- 

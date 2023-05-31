@@ -17,11 +17,13 @@ class	Client {
 
 		const std::string &			getUsername( void ) const;
 		const std::string &			getNickname( void ) const;
+		const std::string &			getHost( void ) const;
 		const std::string &			getBuffer( void ) const;
 		const int &					getFd( void ) const;
 
 		void						setNickname(std::string nick);
 		void						setUsername(std::string username);
+		void						setHost(std::string host);
 		const struct sockaddr_in	&getIp(void) const;
 		// const std::vector<std::string>	&getChannelList(void) const;
 		const std::map<std::string, int>	&getChannelList(void) const;
@@ -34,6 +36,7 @@ class	Client {
 	private:
 		std::string					_username;
 		std::string					_nickname;
+		std::string					_host;
 		std::string					_buffer;
 		int							_fd;
 		struct sockaddr_in			_ip;

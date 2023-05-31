@@ -20,7 +20,7 @@ void	ft_quit(t_context *context, Client *tmp, struct pollfd *fds, int i, std::st
 	it = context->clients.find(fds[i].fd);
 	std::string	message = (*tmp).getBuffer();
 	message = message.substr(message.find(":") + 1);
-	response = RPL_QUIT((*tmp).getNickname(), (*tmp).getUsername(), message);
+	response = RPL_QUIT((*tmp).getNickname(), (*tmp).getUsername(),  tmp->getHost(), message);
 	//pour tous les channels dans lequel se trouve l'utilisateur
 	for (std::map<std::string, int>::const_iterator it2 = (*tmp).getChannelList().begin(); it2 != (*tmp).getChannelList().end(); ++it2)
 	{

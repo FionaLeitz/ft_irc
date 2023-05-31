@@ -48,6 +48,10 @@ const std::string &	Client::getNickname( void ) const {
 	return this->_nickname;
 }
 
+const std::string &	Client::getHost( void ) const {
+	return this->_host;
+}
+
 const std::string &	Client::getBuffer( void ) const {
 	return this->_buffer;
 }
@@ -62,6 +66,10 @@ void	Client::setNickname(std::string nick) {
 
 void	Client::setUsername(std::string username) {
 	this->_username = username;
+}
+
+void	Client::setHost(std::string host) {
+	this->_host = host;
 }
 
 const struct sockaddr_in	&Client::getIp( void ) const {

@@ -100,7 +100,11 @@ int	incoming_connections(struct pollfd **fds, t_context &context)
 		context.clients.insert( std::map<int, Client>::value_type( (*fds)[context.socket_nbr[0]].fd, new_client ) );
 		(context.socket_nbr[0])++;
         // std::cout << "Connexion acceptée depuis " << inet_ntoa(clientAddress.sin_addr) << ":" << ntohs(clientAddress.sin_port) << std::endl;
+		std::stringstream ss;
+		ss << inet_ntoa(clientAddress.sin_addr) << ":" << ntohs(clientAddress.sin_port);
+		new_client.setHost(ss.str());
 		std::cout << "Connexion acceptée depuis " << inet_ntoa(new_client.getIp().sin_addr) << ":" << ntohs(new_client.getIp().sin_port) << std::endl;
+		std::cout << "Connexion acceptée depuis " << new_client.getHost() << std::endl;
 		std::cout << "Son fd est : " <<  new_client.getFd() << std::endl;
 	}
 	return 0;
@@ -161,7 +165,7 @@ void	ft_handshake(Client *tmp, struct pollfd *fds, int i)
 	nick = ref.substr(ret, ref.find("USER") - 2 - ret);
 	ret = ref.find("USER") + 5;
 	username = ref.substr(ret, ref.find(" ", ret) - ret);
-	response = RPL_WELCOME(nick, username);
+	response = RPL_WELCOME(nick, username, tmp->getHost());
 	std::cout << "\tnickname = " << nick << "\n\tusername = " << username << std::endl;
 	(*tmp).setNickname(nick);
 	(*tmp).setUsername(username);

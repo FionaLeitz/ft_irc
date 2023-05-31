@@ -22,7 +22,7 @@ void	ft_privmsg(t_context *context, Client *tmp, struct pollfd *fds, int i, std:
 	(void)i;
 
 	if ( args[1].empty() ) {
-		response = ERR_NOTEXTTOSEND(tmp->getNickname(), tmp->getUsername() );
+		response = ERR_NOTEXTTOSEND(tmp->getNickname(), tmp->getUsername(), tmp->getHost());
 		send(tmp->getFd(), response.c_str(), response.length(), 0);
 		return ;
 	}
@@ -39,7 +39,7 @@ void	ft_privmsg(t_context *context, Client *tmp, struct pollfd *fds, int i, std:
 			context->channels[dest].sendMessage(response, (*tmp).getFd());
 		else {
 			response.clear();
-			response = ERR_NOSUCHCHANNEL(tmp->getNickname(), tmp->getUsername(), dest);
+			response = ERR_NOSUCHCHANNEL(tmp->getNickname(), tmp->getUsername(), tmp->getHost(), dest);
 			send(tmp->getFd(), response.c_str(), response.length(), 0);
 		}
 	}
@@ -49,7 +49,7 @@ void	ft_privmsg(t_context *context, Client *tmp, struct pollfd *fds, int i, std:
 			send(fd, response.c_str(), response.length(), 0);
 		else {
 			response.clear();
-			response = ERR_NOSUCHNICK(tmp->getNickname(), tmp->getUsername(), dest);
+			response = ERR_NOSUCHNICK(tmp->getNickname(), tmp->getUsername(), tmp->getHost(), dest);
 			send(tmp->getFd(), response.c_str(), response.length(), 0);
 		}
 	}
