@@ -49,7 +49,7 @@ void	ft_privmsg(t_context *context, Client *tmp, struct pollfd *fds, int i, std:
 			send(fd, response.c_str(), response.length(), 0);
 		else {
 			response.clear();
-			response = ERR_NOSUCHNICK(tmp->getNickname(), tmp->getUsername(), tmp->getHost(), dest);
+			response = ERR_NOSUCHNICK(tmp->getNickname(), tmp->getUsername(), tmp->getHost(), "", dest);
 			send(tmp->getFd(), response.c_str(), response.length(), 0);
 		}
 	}

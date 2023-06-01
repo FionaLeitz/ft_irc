@@ -56,17 +56,22 @@ void	ft_kick(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 	reason = reason.substr(args[1].length() + 1);
 	std::cout << "Trying to kick " << user << " from channel " << channel << " with reason : " << reason << std::endl;
 
-	if (context->channels[args[0]].getOperators().find(tmp->getNickname()) != context->channels[args[0]].getOperators().end()) //si le user est un operateur du channel
-	{
-		std::cout << "OK c'est bien un operateur" << std::endl;
-	}
-	else
-	{
-		std::cout << "ce n'est pas un operateur !!" << std::endl;
-		response = ERR_CHANOPRIVSNEEDED(tmp->getNickname(), args[0]);
-		send(tmp->getFd(), response.c_str(), response.size(), 0);
-		return ;
-	}
+	// if (context->channels[args[0]].getOperators().find(tmp->getNickname()) != context->channels[args[0]].getOperators().end()) //si le user est un operateur du channel
+	// {
+	// 	std::cout << "OK c'est bien un operateur" << std::endl;
+	// }
+	// else
+	// {
+	// 	std::cout << "ce n'est pas un operateur !!" << std::endl;
+	// 	response = ERR_CHANOPRIVSNEEDED(tmp->getNickname(), args[0]);
+	// 	std::cout << "Response : " << response << std::endl;
+	// 	std::cout << "Nick : " << tmp->getNickname() << std::endl;
+	// 	std::cout << "User : " << tmp->getUsername() << std::endl;
+	// 	std::cout << "Host : " << tmp->getHost() << std::endl;
+	// 	std::cout << "Args[0] : " << args[0] << std::endl;
+	// 	send(tmp->getFd(), response.c_str(), response.size(), 0);
+	// 	return ;
+	// }
 	//trouver le channel
 	if (context->channels.find(args[0]) == context->channels.end())
 	{

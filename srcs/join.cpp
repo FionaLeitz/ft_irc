@@ -80,12 +80,12 @@ void	ft_join(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 			passwords.push_back("");
 	}
 
-	std::vector<std::string>::iterator	it = channels.begin();
-	// std::vector<std::string>::iterator	ite = channels.end();
-	std::vector<std::string>::iterator	it_mdp = passwords.begin();
-	std::vector<std::string>::iterator	ite_mdp = passwords.end();
-	for ( ; it_mdp != ite_mdp; it_mdp++ )
-		std::cout << (*it++) << " et " << (*it_mdp) << std::endl;
+	// std::vector<std::string>::iterator	it = channels.begin();
+	// // std::vector<std::string>::iterator	ite = channels.end();
+	// std::vector<std::string>::iterator	it_mdp = passwords.begin();
+	// std::vector<std::string>::iterator	ite_mdp = passwords.end();
+	// for ( ; it_mdp != ite_mdp; it_mdp++ )
+	// 	std::cout << (*it++) << " et " << (*it_mdp) << std::endl;
 
 	int	size = channels.size();
 	for ( int count = 0; count < size; count++ ) {
@@ -95,16 +95,24 @@ void	ft_join(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 			context->channels[channels[count]] = Channel(channels[count], "t", (*tmp));	//ajoute le channel a la map
 			context->channels[channels[count]].add_operator(tmp->getNickname());
 		}
-		else if ( context->channels[channels[count]].getMode().find("k") != std::string::npos ) {
-			// std::cout << "ON VEUT UN PASSWORD !" << std::endl;
-			if ( passwords[count] != context->channels[channels[count]].getPassword() ) {
-				response = ERR_BADCHANNELKEY(tmp->getNickname(), channels[count]);
-				std::cout << response << std::endl;
+		else {
+			if ( context->channels[channels[count]].getMode().find("k") != std::string::npos ) {
+				if ( passwords[count] != context->channels[channels[count]].getPassword() ) {
+					response = ERR_BADCHANNELKEY(tmp->getNickname(), channels[count]);
+					send(tmp->getFd(), response.c_str(), response.size(), 0);
+					save = 1;
+				}
+			}
+			if ( context->channels[channels[count]].getMode().find("i") != std::string::npos && save == 0 && tmp->getChannelList().find(channels[count]) == tmp->getChannelList().end() ) {
+				response = ERR_INVITEONLYCHAN(tmp->getNickname(), channels[count]);
 				send(tmp->getFd(), response.c_str(), response.size(), 0);
-				// message d'erreur : Cannot join #e (Requires keyword
 				save = 1;
 			}
-			// std::cout << "I have the password" << std::endl;
+			if ( context->channels[channels[count]].getMode().find("l") != std::string::npos && save == 0 && context->channels[channels[count]].getClientlist().size() >= context->channels[channels[count]].getSizemax() ) {
+				response = ERR_CHANNELISFULL(tmp->getNickname(), channels[count]);
+				send(tmp->getFd(), response.c_str(), response.size(), 0);
+				save = 1;
+			}
 		}
 		if ( save == 0 ) {
 			context->channels[channels[count]].add_client((*tmp));

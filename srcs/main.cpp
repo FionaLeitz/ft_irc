@@ -192,7 +192,7 @@ int	client_request( struct pollfd **fds, Client *tmp, std::string ref, int i, t_
 		args = ft_split( ref, " " );
 		cmd = args[0];
 		args.erase(args.begin());
-		std::cout << "CMD = " << cmd << " et args[0]] = " << (*args.begin()) << std::endl;
+		// std::cout << "CMD = " << cmd << " et args[0]] = " << (*args.begin()) << std::endl;
 		for(j = 0; j < 18; j++)				// si la commande fait partie des operateurs
 		{
 			if (cmd == funcTab[j].name)
