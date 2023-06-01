@@ -49,7 +49,7 @@ void	ft_topic(t_context *context, Client *tmp, struct pollfd *fds, int i, std::v
 		// change topic
 		if (context->channels[args[0]].isUserOperator(*tmp) == false)
 			return ;
-		response = RPL_CHANGETOPIC(tmp->getNickname(), tmp->getUsername(),args[0], args[1]);
+		response = RPL_CHANGETOPIC(tmp->getNickname(), tmp->getUsername(), tmp->getHost(), args[0], args[1]);
 		if (args[1].size() > 1)
 			context->channels[args[0]].setTopic(args[1].substr(1, args[1].size() - 1));
 		else

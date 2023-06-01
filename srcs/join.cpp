@@ -109,8 +109,9 @@ void	ft_join(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 		if ( save == 0 ) {
 			context->channels[channels[count]].add_client((*tmp));
 			(*tmp).addChannel(channels[count]);
-			response = RPL_JOIN((*tmp).getNickname(), (*tmp).getUsername(), channels[count]);
+			response = RPL_JOIN((*tmp).getNickname(), (*tmp).getUsername(), tmp->getHost(), channels[count]);
 			context->channels[channels[count]].sendToAll(response);
+			ft_names(context, tmp, fds, i, args);
 		}
 	}
 	// send(fds[i].fd, response.c_str(), response.length(), 0);

@@ -7,14 +7,20 @@ Client::Client( const Client & value ) {
 	this->_nickname = value.getNickname();
 	this->_buffer = value.getBuffer();
 	this->_fd = value.getFd();
+	this->_host = value.getHost();
 }
 
 Client::Client( const Client & value, struct sockaddr_in &ip) {
+	std::stringstream ss;
+
 	this->_username = value.getUsername();
 	this->_nickname = value.getNickname();
 	this->_buffer = value.getBuffer();
 	this->_fd = value.getFd();
 	this->_ip = ip;
+		
+	ss << inet_ntoa(this->_ip.sin_addr) << ":" << ntohs(this->_ip.sin_port);
+	this->_host = ss.str();
 }
 
 Client &	Client::operator=( const Client & rhs ) {
@@ -22,6 +28,7 @@ Client &	Client::operator=( const Client & rhs ) {
 	this->_nickname = rhs.getNickname();
 	this->_buffer = rhs.getBuffer();
 	this->_fd = rhs.getFd();
+	this->_host = rhs.getHost();
 	return *this;
 }
 
@@ -48,6 +55,10 @@ const std::string &	Client::getNickname( void ) const {
 	return this->_nickname;
 }
 
+const std::string &	Client::getHost( void ) const {
+	return this->_host;
+}
+
 const std::string &	Client::getBuffer( void ) const {
 	return this->_buffer;
 }
@@ -62,6 +73,10 @@ void	Client::setNickname(std::string nick) {
 
 void	Client::setUsername(std::string username) {
 	this->_username = username;
+}
+
+void	Client::setHost(std::string host) {
+	this->_host = host;
 }
 
 const struct sockaddr_in	&Client::getIp( void ) const {

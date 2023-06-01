@@ -100,7 +100,9 @@ int	incoming_connections(struct pollfd **fds, t_context &context)
 		context.clients.insert( std::map<int, Client>::value_type( (*fds)[context.socket_nbr[0]].fd, new_client ) );
 		(context.socket_nbr[0])++;
         // std::cout << "Connexion acceptée depuis " << inet_ntoa(clientAddress.sin_addr) << ":" << ntohs(clientAddress.sin_port) << std::endl;
+	
 		std::cout << "Connexion acceptée depuis " << inet_ntoa(new_client.getIp().sin_addr) << ":" << ntohs(new_client.getIp().sin_port) << std::endl;
+		std::cout << "Connexion acceptée depuis " << new_client.getHost() << std::endl;
 		std::cout << "Son fd est : " <<  new_client.getFd() << std::endl;
 	}
 	return 0;
@@ -161,7 +163,7 @@ void	ft_handshake(Client *tmp, struct pollfd *fds, int i)
 	nick = ref.substr(ret, ref.find("USER") - 2 - ret);
 	ret = ref.find("USER") + 5;
 	username = ref.substr(ret, ref.find(" ", ret) - ret);
-	response = RPL_WELCOME(nick, username);
+	response = RPL_WELCOME(nick, username, tmp->getHost());
 	std::cout << "\tnickname = " << nick << "\n\tusername = " << username << std::endl;
 	(*tmp).setNickname(nick);
 	(*tmp).setUsername(username);
@@ -190,7 +192,7 @@ int	client_request( struct pollfd **fds, Client *tmp, std::string ref, int i, t_
 		args = ft_split( ref, " " );
 		cmd = args[0];
 		args.erase(args.begin());
-		std::cout << "CMD = " << cmd << " et args.begin() = " << (*args.begin()) << std::endl;
+		std::cout << "CMD = " << cmd << " et args[0]] = " << (*args.begin()) << std::endl;
 		for(j = 0; j < 18; j++)				// si la commande fait partie des operateurs
 		{
 			if (cmd == funcTab[j].name)
@@ -307,6 +309,9 @@ struct pollfd	*check_communication( struct pollfd *fds, int *socket_nbr, int pas
 	context.password = password;
 	context.channels = channels;
 	context.socket_nbr[0] = *socket_nbr;
+	context.op_name = "admin";
+	context.op_password = "321";
+	context.op_host = "127.0.0.1 localhost";
 	// void (*funcTab[])(Client *tmp, struct pollfd *fds, int i) = { ft_user, ft_join, ft_mode, ft_who, ft_privmsg };
 
 	while (1)

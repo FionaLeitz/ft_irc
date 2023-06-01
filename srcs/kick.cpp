@@ -70,20 +70,20 @@ void	ft_kick(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 	//trouver le channel
 	if (context->channels.find(args[0]) == context->channels.end())
 	{
-		response = ERR_NOSUCHCHANNEL(tmp->getNickname(), tmp->getUsername(), args[0]);
+		response = ERR_NOSUCHCHANNEL(tmp->getNickname(), tmp->getUsername(), tmp->getHost(), args[0]);
 		send(tmp->getFd(), response.c_str(), response.length(), 0);
 		return ;
 	}
 	//si channel ok, trouver user dans le channel
 	else if (!context->channels[args[0]].isUserThere(args[1]))
 	{
-		response = ERR_USERNOTINCHANNEL(tmp->getNickname(), tmp->getUsername(), args[0], args[1]);
+		response = ERR_USERNOTINCHANNEL(tmp->getNickname(), tmp->getUsername(), tmp->getHost(), args[0], args[1]);
 		send(tmp->getFd(), response.c_str(), response.length(), 0);
 		return ;
 	}
 	else
 	{
-		response = RPL_KICK(tmp->getNickname(), tmp->getUsername(), args[0], args[1], reason);
+		response = RPL_KICK(tmp->getNickname(), tmp->getUsername(), tmp->getHost(), args[0], args[1], reason);
 		context->channels[args[0]].sendToAll(response);
 		context->channels[args[0]].suppress_client(args[1]);
 		int fd = findClientFd(context->clients, args[1]);

@@ -626,8 +626,8 @@ Attention, si deux commandes a la suite ( /QUIT /JOIN ), il prend le join et c'e
 
 - check nickname a la connexion voir s'il exste deja
 
-INVITE : - souci de verification d'operator
-		- que se passe-t-il si on fait /invie dans un channel qui n'a pas de mode +i ?
+INVITE : - que se passe-t-il si on fait /invie dans un channel qui n'a pas de mode +i ?
+		 - messages d'erreur dans le chan principal et pas de le channel, jsp si c'est normal, a voir avec d'autres serveurs
 JOIN :	- join plusieurs channels en meme temps, avec les mdp associes si besoin
 		- checker si le user peut rejoindre le channel (limite de channels, limite de membres, mdp, invite only, banni...)
 		- une fois le channel rejoint, envoyer a la personne qui join le topic (RPL_TOPIC (332)) et le RPL_TOPICWHOTIME (333) (ou rien si pas de topic)
@@ -635,6 +635,7 @@ JOIN :	- join plusieurs channels en meme temps, avec les mdp associes si besoin
 		parameter. If the client cannot join this channel because they would be over their limit, they will receive an ERR_TOOMANYCHANNELS (405)
 		reply and the command will fail.
 		- (a faire ou pas ?) argument "0" (/join 0 ?) qui quitte tous les channels dans lequel est le user
+		- liste des users dans hexchat
 MODE : 	- avertir une personne qu'il est devenu operator (et les autres aussi)
 		- afficher le nouveau mot de passe a tout le mode (en ce moment il y a un trou dans la phrase)
 NICK : 	- si le nickname est deja utilise, ERR_NICKNAMEINUSE
@@ -649,14 +650,8 @@ PASS : 	- si le mot de passe est mauvais, pas de connection ERR_PASSWMISMATCH (4
 PRIVMSG :	- on le recoit pas s'il n'est pas en majuscule
 KICK :	- eventuellement rajouter un caractere special quand on est operateur (ex : "cmeston_ H :0 Chine MESTON" -->  "cmeston_ H@ :0 Chine MESTON")
 TOPIC : - ne prend que le premier mot du topic
-
-
-
-COMMANDE PAS DU TOUT FAITE :
-		kill
-		list
-		names
-		oper : "pr les operateurs serveur en fait tu as une liste d'operateurs
+NAMES : - adapter les variables symbol et prefix en fonction du statut du channel (public, secret, prive) et de l'user (chanop, founder, protected, halfop, voice)
+OPER : oper : "pr les operateurs serveur en fait tu as une liste d'operateurs
 				ca peut etre en dur ou dans un fichier de config
 				chaque operateur a un operateur name (rien a voir avec le username) un mot de passe
 					associé ainsi qu'une liste d'host a partir desquels il peut se connecter en operateur
@@ -666,10 +661,16 @@ COMMANDE PAS DU TOUT FAITE :
 				le mode operator server ne peux pas etre assigné via la cmd MODE:
 			- seul les localhost pourront etre server operators, premiere connection avec OPER on set son nom et son mot de passe s'il est sur localhost
 			- autre tentative de OPER hors localhost, on verifie que le nom et le mot de passe existe deja, et bim. C'est bon ou c'est pas bon.
+			- comment faire autrement qu'en dur vu qu'a priori aucune fonction autorisee d'ouverture de fichier ?
+
+
+COMMANDE PAS DU TOUT FAITE :
+		kill
+		list
+		names
 		part
 		restart
 
 
-TRUC EN PLUS :	- la liste des gens en ligne sur la droite du channel ?
-				- les signaux sur notre server
-				- 
+TRUC EN PLUS : - les signaux sur notre server
+				- voir si on verifie des caracteres interdits dans le nickname
