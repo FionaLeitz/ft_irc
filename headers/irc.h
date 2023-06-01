@@ -36,7 +36,7 @@
 #define RPL_NAMREPLY(nickname, symbol, channel, prefix, user) (":server 353 " + nickname + " " + symbol + " " + channel + " :" + prefix + user + "\r\n")
 #define	RPL_YOUREOPER(nickname) (":server 381 " + nickname + " :You are now an IRC operator\r\n");
 
-#define ERR_NOSUCHNICK(nickname, username, host, target) (":server 401 " + USER_ID(nickname, username, host) + " " + target + " :No such nick\r\n")
+#define ERR_NOSUCHNICK(nickname, username, host, channel, target) (":server 401 " + USER_ID(nickname, username, host) + " " + channel + " " + target + " :No such nick\r\n")
 #define ERR_NOSUCHCHANNEL(nickname, username, host, target) (":server 403 " + USER_ID(nickname, username, host) + " " + target + " :No such channel\r\n")
 #define ERR_NOTEXTTOSEND(nickname, username, host) (":server 412 " + USER_ID(nickname, username, host) + " :No text to send\r\n")
 #define ERR_USERNOTINCHANNEL(nickname, username, host, channel, target) (":server 441 " + USER_ID(nickname, username, host) + " " + channel + " " + target + " :They aren't on that channel\r\n")
@@ -48,6 +48,8 @@
 #define ERR_CHANOPRIVSNEEDED(nickname, channel) (":server 482 " + nickname + " " + channel + " :You're not channel operator\r\n")
 #define ERR_NOOPERHOST(nickname, username, host) (":server 491 " + USER_ID(nickname, username, host) + " :No O-lines for your host\r\n")
 #define ERR_INVALIDMODEPARAM(nickname, username, channel, mode) (":server 696 " + nickname + " " + channel + " :Invalid " + mode + " mode parameter(s).\r\n")
+#define ERR_INVITEONLYCHAN(nickname, channel) (":server 473 " + nickname + " " + channel + " :Cannot join channel (+i)\r\n")
+#define ERR_CHANNELISFULL(nickname, channel) (":server 471 " + nickname + " " + channel + " :Cannot join channel (+l)\r\n")
 
 
 #define RPL_JOIN(nickname, username, host, channel) (":" + USER_ID(nickname, username, host) + " JOIN " + channel + "\r\n")

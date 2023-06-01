@@ -626,9 +626,8 @@ Attention, si deux commandes a la suite ( /QUIT /JOIN ), il prend le join et c'e
 
 - check nickname a la connexion voir s'il exste deja
 
-INVITE :	- messages d'erreur dans le chan principal et pas de le channel, jsp si c'est normal, a voir avec d'autres serveurs
-JOIN :	- checker si le user peut rejoindre le channel (limite de membres, invite only)
-		- une fois le channel rejoint, envoyer a la personne qui join le topic (RPL_TOPIC (332)) et le RPL_TOPICWHOTIME (333) (ou rien si pas de topic)
+QUIT :	- supprimer le user de toutes les listes dans lesquelles il est
+JOIN :	- une fois le channel rejoint, envoyer a la personne qui join le topic (RPL_TOPIC (332)) et le RPL_TOPICWHOTIME (333) (ou rien si pas de topic)
 		- (a faire ou pas ?) argument "0" (/join 0 ?) qui quitte tous les channels dans lequel est le user
 		- liste des users dans hexchat
 MODE : 	- avertir une personne qu'il est devenu channel operator (et les autres aussi)
@@ -667,3 +666,4 @@ COMMANDE PAS DU TOUT FAITE :
 
 TRUC EN PLUS : - les signaux sur notre server
 				- voir si on verifie des caracteres interdits dans le nickname
+				- rajouter dans toutes les erreurs le channel ou on veut l'envoyer

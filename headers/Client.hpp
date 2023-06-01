@@ -14,6 +14,7 @@ class	Client {
 		
 		void			add_buff( char *buffer );
 		void			clear( void );
+		// void			removefromall( void );
 
 		const std::string &			getUsername( void ) const;
 		const std::string &			getNickname( void ) const;

@@ -47,6 +47,12 @@ void	Client::add_buff( char *buffer ) {
 	this->_buffer.insert( this->_buffer.size(), buffer );
 }
 
+// void	Client::removefromall( std::map<std::string, Channel> channels ) {
+// 	for ( int count = this->channelList.size() - 1; count >= 0; count-- ) {
+// 		channels[this->channelList[count].first].
+// 	}
+// }
+
 const std::string &	Client::getUsername( void ) const {
 	return this->_username;
 }

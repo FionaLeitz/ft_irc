@@ -24,7 +24,7 @@ class	Channel {
 		const std::string &						getMode( void ) const;
 		const std::string &						getTopic( void ) const;
 		const std::string &						getPassword( void ) const;
-		const int &								getSizemax( void ) const;
+		const unsigned long &					getSizemax( void ) const;
 		const std::map<std::string, Client> &	getClientlist( void ) const;
 		const std::set<std::string> &			getOperators( void ) const;
 
@@ -45,7 +45,7 @@ class	Channel {
 		std::string						_mode;
 		std::string						_topic;
 		std::string						_password;
-		int								_sizemax;
+		unsigned long					_sizemax;
 		std::map<std::string, Client>	_clientlist;
 		std::set<std::string>			_operators;
 
