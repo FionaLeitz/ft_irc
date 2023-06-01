@@ -645,16 +645,9 @@ PRIVMSG :	- on le recoit pas s'il n'est pas en majuscule
 KICK :	- eventuellement rajouter un caractere special quand on est operateur (ex : "cmeston_ H :0 Chine MESTON" -->  "cmeston_ H@ :0 Chine MESTON")
 TOPIC : - ne prend que le premier mot du topic
 NAMES : - adapter les variables symbol et prefix en fonction du statut de l'user (chanop, founder, protected, halfop, voice)
-OPER : "pr les operateurs serveur en fait tu as une liste d'operateurs
-			ca peut etre en dur ou dans un fichier de config
-			chaque operateur a un operateur name (rien a voir avec le username) un mot de passe
-				associé ainsi qu'une liste d'host a partir desquels il peut se connecter en operateur
-			par exemple nous on avait mit un seul operateur en dur comme des sagouins: son operator name
-				ct Agathe son pass ct Thepower et il pouvait se mettre en operator seulement a partir de localhost
-			donc n'importequel user connecté en localhost pouvait devenir operator server en faisant OPER Agathe Thepower
-			le mode operator server ne peux pas etre assigné via la cmd MODE:
-		- seul les localhost pourront etre server operators, premiere connection avec OPER on set son nom et son mot de passe s'il est sur localhost
-		- autre tentative de OPER hors localhost, on verifie que le nom et le mot de passe existe deja, et bim. C'est bon ou c'est pas bon.
+OPER : - plusieurs personnes peuvent se log en operateur en meme temps ?
+		- plusieurs combinaisons admin/mdp possible ? --> me parait chiant de ouf a faire
+		- ou stocker le fait qu'un user est server operateur pour le verifier par la suite ?
 
 
 COMMANDE PAS DU TOUT FAITE :

@@ -32,10 +32,9 @@ void	ft_topic(t_context *context, Client *tmp, struct pollfd *fds, int i, std::v
 */
 	std::string response;
 
-	std::cout << "Client "<<tmp->getNickname() << " is trying to use the topic command" << std::endl;// w args " << args[0] << " and " << args[1] << std::endl;
+	std::cout << "Client "<<tmp->getNickname() << " is trying to use the topic command" << std::endl;
 
-	std::cout << "length == "<< args[1].length() << std::endl;
-	if (args[1].empty())
+	if (args.size() == 1)
 	{
 		//check topic
 		if (context->channels[args[0]].getTopic().empty())
@@ -46,6 +45,11 @@ void	ft_topic(t_context *context, Client *tmp, struct pollfd *fds, int i, std::v
 	}
 	else
 	{
+		for(size_t i = 2; i < args.size(); i++) {
+			args[1].append(" ");
+			args[1].append(args[i]);
+		}
+		std::cout << args.size() << std::endl;
 		// change topic
 		if (context->channels[args[0]].isUserOperator(*tmp) == false)
 			return ;

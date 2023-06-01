@@ -59,7 +59,7 @@ const std::string &	Channel::getPassword( void ) const {
 	return this->_password;
 }
 
-const int &	Channel::getSizemax( void ) const {
+const unsigned long &Channel::getSizemax( void ) const {
 	return this->_sizemax;
 }
 
