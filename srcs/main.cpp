@@ -308,7 +308,7 @@ int	initialize_context(t_context &context, int *socket_nbr, int password)
         found = line.find("operator_name =");
         if (found != std::string::npos && line.size() > sizeof("operator_name ="))
             context.op_name  = line.substr(found + sizeof("operator_name ="));
-        found = line.find("operator_password");
+        found = line.find("operator_password =");
        if (found != std::string::npos && line.size() > sizeof("operator_password ="))
             context.op_password = line.substr(found + sizeof("operator_password ="));
     }
@@ -320,6 +320,11 @@ int	initialize_context(t_context &context, int *socket_nbr, int password)
 	if (context.op_host.empty()) {
 		std::cout << "Error in IRCd-config : No operator host provided." << std::endl;
 		 confFile.close();
+		return 1;
+	}
+	if ((context.op_name.empty() && !context.op_password.empty()) || (!context.op_name.empty() && context.op_password.empty()) ) {  // pour ne pas qu'il y ait de name sans mdp ou inversement
+		std::cout << "Error in IRCd-config : There should be a name and a password for the operator." << std::endl;
+		confFile.close();
 		return 1;
 	}
     confFile.close();

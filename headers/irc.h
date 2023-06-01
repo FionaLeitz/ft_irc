@@ -2,6 +2,7 @@
 # define IRC_H
 
 # include <iostream>
+# include <ostream>
 # include <algorithm>
 # include <cstring>
 # include <sys/socket.h>
@@ -43,6 +44,7 @@
 #define ERR_ALREADYREGISTERED(nickname, username, host)(":server 462 " + USER_ID( (*tmp).getNickname(), (*tmp).getUsername() ) + " :You may not reregister\r\n")
 #define ERR_BADCHANNELKEY(nickname, channel) (":server 475 " + nickname + " " + channel + " :Cannot join " + channel + " (Requires keyword)\r\n")
 #define ERR_CHANOPRIVSNEEDED(nickname, channel) (":server 482 " + nickname + " " + channel + " :You're not channel operator\r\n")
+#define ERR_NOOPERHOST(nickname, username, host) (":server 491 " + USER_ID(nickname, username, host) + " :No O-lines for your host\r\n")
 #define ERR_INVALIDMODEPARAM(nickname, username, channel, mode) (":server 696 " + nickname + " " + channel + " :Invalid " + mode + " mode parameter(s).\r\n")
 
 #define RPL_JOIN(nickname, username, host, channel) (":" + USER_ID(nickname, username, host) + " JOIN " + channel + "\r\n")
