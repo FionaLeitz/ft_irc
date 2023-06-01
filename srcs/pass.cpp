@@ -1,8 +1,8 @@
 #include "../headers/irc.h"
 
-void	ft_pass(t_context *context, Client *tmp, struct pollfd *fds, int i, std::string *args)
+void	ft_pass(t_context *context, Client *tmp, struct pollfd *fds, int i, std::vector<std::string> args)
 {
-	std::cout << "Received command PASS w args " << args[0] << " and " << args[1] << std::endl;
+	std::cout << "Received command PASS" << std::endl;// w args " << args[0] << " and " << args[1] << std::endl;
 	std::string	response;
 	(void)tmp;
 	(void)fds;

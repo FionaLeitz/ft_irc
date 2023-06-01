@@ -179,14 +179,18 @@ int	client_request( struct pollfd **fds, Client *tmp, std::string ref, int i, t_
 		// Recherche de la fonction correspondante et appel si trouvée
 		t_func_ptr funcTab[18];
 		t_func_initialize(funcTab);
-		std::istringstream iss(ref);
+		// std::istringstream iss(ref);
 		std::string cmd;
-		std::string args[2];
+		std::vector<std::string> args;
 		int			j;
 		// int			ret;
 		// int			pos;
 
-		iss >> cmd >> args[0] >> args[1];  // on decoupe la string en 3 parties : cmd, args[0] et args[1];
+		// iss >> cmd;  // on decoupe la string en 3 parties : cmd, args[0] et args[1];
+		args = ft_split( ref, " " );
+		cmd = args[0];
+		args.erase(args.begin());
+		std::cout << "CMD = " << cmd << " et args.begin() = " << (*args.begin()) << std::endl;
 		for(j = 0; j < 18; j++)				// si la commande fait partie des operateurs
 		{
 			if (cmd == funcTab[j].name)

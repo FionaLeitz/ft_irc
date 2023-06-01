@@ -1,6 +1,6 @@
 #include "../headers/irc.h"
 
-void	ft_part(t_context *context, Client *tmp, struct pollfd *fds, int i, std::string *args) {
+void	ft_part(t_context *context, Client *tmp, struct pollfd *fds, int i, std::vector<std::string> args) {
 	(void)context;
 	(void)fds;
 	(void)i;

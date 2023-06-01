@@ -70,31 +70,32 @@ typedef struct	s_context {
 typedef struct s_func_ptr
 {
 	std::string	name;
-	void (*ptr)(t_context *context, Client *tmp, struct pollfd *fds, int i, std::string *args);
+	void (*ptr)(t_context *context, Client *tmp, struct pollfd *fds, int i, std::vector<std::string> args);
 }	t_func_ptr;
 
 
 int		parse_number( const char *number );
-void	ft_quit(t_context *context, Client *tmp, struct pollfd *fds, int i, std::string *args);
-void	ft_user(t_context *context, Client *tmp, struct pollfd *fds, int i, std::string *args);
-void	ft_nick(t_context *context, Client *tmp, struct pollfd *fds, int i, std::string *args);
-void	ft_privmsg(t_context *context, Client *tmp, struct pollfd *fds, int i, std::string *args);
-void	ft_who(t_context *context, Client *tmp, struct pollfd *fds, int i, std::string *args);
-void	ft_mode(t_context *context, Client *tmp, struct pollfd *fds, int i, std::string *args);
-void	ft_join(t_context *context, Client *tmp, struct pollfd *fds, int i, std::string *args);
-void	ft_pass(t_context *context, Client *tmp, struct pollfd *fds, int i, std::string *args);
-void	ft_invite(t_context *context, Client *tmp, struct pollfd *fds, int i, std::string *args);
-void	ft_kick(t_context *context, Client *tmp, struct pollfd *fds, int i, std::string *args);
-void	ft_kill(t_context *context, Client *tmp, struct pollfd *fds, int i, std::string *args);
-void	ft_list(t_context *context, Client *tmp, struct pollfd *fds, int i, std::string *args);
-void	ft_names(t_context *context, Client *tmp, struct pollfd *fds, int i, std::string *args);
-void	ft_oper(t_context *context, Client *tmp, struct pollfd *fds, int i, std::string *args);
-void	ft_part(t_context *context, Client *tmp, struct pollfd *fds, int i, std::string *args);
-void	ft_ping(t_context *context, Client *tmp, struct pollfd *fds, int i, std::string *args);
-void	ft_restart(t_context *context, Client *tmp, struct pollfd *fds, int i, std::string *args);
-void	ft_topic(t_context *context, Client *tmp, struct pollfd *fds, int i, std::string *args);
+void	ft_quit(t_context *context, Client *tmp, struct pollfd *fds, int i, std::vector<std::string> args);
+void	ft_user(t_context *context, Client *tmp, struct pollfd *fds, int i, std::vector<std::string> args);
+void	ft_nick(t_context *context, Client *tmp, struct pollfd *fds, int i, std::vector<std::string> args);
+void	ft_privmsg(t_context *context, Client *tmp, struct pollfd *fds, int i, std::vector<std::string> args);
+void	ft_who(t_context *context, Client *tmp, struct pollfd *fds, int i, std::vector<std::string> args);
+void	ft_mode(t_context *context, Client *tmp, struct pollfd *fds, int i, std::vector<std::string> args);
+void	ft_join(t_context *context, Client *tmp, struct pollfd *fds, int i, std::vector<std::string> args);
+void	ft_pass(t_context *context, Client *tmp, struct pollfd *fds, int i, std::vector<std::string> args);
+void	ft_invite(t_context *context, Client *tmp, struct pollfd *fds, int i, std::vector<std::string> args);
+void	ft_kick(t_context *context, Client *tmp, struct pollfd *fds, int i, std::vector<std::string> args);
+void	ft_kill(t_context *context, Client *tmp, struct pollfd *fds, int i, std::vector<std::string> args);
+void	ft_list(t_context *context, Client *tmp, struct pollfd *fds, int i, std::vector<std::string> args);
+void	ft_names(t_context *context, Client *tmp, struct pollfd *fds, int i, std::vector<std::string> args);
+void	ft_oper(t_context *context, Client *tmp, struct pollfd *fds, int i, std::vector<std::string> args);
+void	ft_part(t_context *context, Client *tmp, struct pollfd *fds, int i, std::vector<std::string> args);
+void	ft_ping(t_context *context, Client *tmp, struct pollfd *fds, int i, std::vector<std::string> args);
+void	ft_restart(t_context *context, Client *tmp, struct pollfd *fds, int i, std::vector<std::string> args);
+void	ft_topic(t_context *context, Client *tmp, struct pollfd *fds, int i, std::vector<std::string> args);
 
 int		findClientFd(const std::map<int, Client> &clientList, std::string nick);
 void	sendToAllClients(const std::map<std::string, Client> &clientList, std::string response);
+std::vector<std::string>	ft_split( std::string to_split, std::string separate );
 
 #endif

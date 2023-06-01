@@ -1,6 +1,6 @@
 #include "../headers/irc.h"
 
-void	ft_topic(t_context *context, Client *tmp, struct pollfd *fds, int i, std::string *args) {
+void	ft_topic(t_context *context, Client *tmp, struct pollfd *fds, int i, std::vector<std::string> args) {
 
 /*
   
@@ -32,7 +32,7 @@ void	ft_topic(t_context *context, Client *tmp, struct pollfd *fds, int i, std::s
 */
 	std::string response;
 
-	std::cout << "Client "<<tmp->getNickname() << " is trying to use the topic command w args " << args[0] << " and " << args[1] << std::endl;
+	std::cout << "Client "<<tmp->getNickname() << " is trying to use the topic command" << std::endl;// w args " << args[0] << " and " << args[1] << std::endl;
 
 	std::cout << "length == "<< args[1].length() << std::endl;
 	if (args[1].empty())

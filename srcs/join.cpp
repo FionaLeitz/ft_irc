@@ -60,34 +60,59 @@ multiple channels in this message to clients, and SHOULD distribute these multip
 single channel name on each.
 */
 
-void	ft_join(t_context *context, Client *tmp, struct pollfd *fds, int i, std::string *args)
+void	ft_join(t_context *context, Client *tmp, struct pollfd *fds, int i, std::vector<std::string> args)
 {
 	std::string	response;
 	(void)fds;
 	(void)i;
 
-	std::cout << "Received command JOIN w args " << args[0] << " and " << args[1] << std::endl;
-	std::cout << (*tmp).getNickname() << " veut rejoindre le channel" << args[0] << std::endl;
-	if (context->channels.find(args[0]) == context->channels.end())
-	{
-		context->channels[args[0]] = Channel(args[0], "t", (*tmp));	//ajoute le channel a la map
-		context->channels[args[0]].add_operator(tmp->getNickname());
+	std::cout << "Received command JOIN " << std::endl;//w args " << args[0] << " and " << args[1] << std::endl;
+	// std::cout << (*tmp).getNickname() << " veut rejoindre le channel" << args[0] << std::endl;
+
+	// args[0] = channels
+	// args[1] = mdp
+	std::vector<std::string>	channels = ft_split( args[0], "," );
+	std::vector<std::string>	passwords;
+	if ( args.size() != 1 )
+		passwords = ft_split( args[1], "," );
+	else {
+		for (int count = channels.size(); count > 0; count--)
+			passwords.push_back("");
 	}
-	else if ( context->channels[args[0]].getMode().find("k") != std::string::npos ) {
-		// std::cout << "ON VEUT UN PASSWORD !" << std::endl;
-		if ( args[1] != context->channels[args[0]].getPassword() ) {
-			response = ERR_BADCHANNELKEY(tmp->getNickname(), args[0]);
-			std::cout << response << std::endl;
-			send(tmp->getFd(), response.c_str(), response.size(), 0);
-			// message d'erreur : Cannot join #e (Requires keyword
-			return ;
+
+	std::vector<std::string>::iterator	it = channels.begin();
+	// std::vector<std::string>::iterator	ite = channels.end();
+	std::vector<std::string>::iterator	it_mdp = passwords.begin();
+	std::vector<std::string>::iterator	ite_mdp = passwords.end();
+	for ( ; it_mdp != ite_mdp; it_mdp++ )
+		std::cout << (*it++) << " et " << (*it_mdp) << std::endl;
+
+	int	size = channels.size();
+	for ( int count = 0; count < size; count++ ) {
+		int	save = 0;
+		if (context->channels.find(channels[count]) == context->channels.end())
+		{
+			context->channels[channels[count]] = Channel(channels[count], "t", (*tmp));	//ajoute le channel a la map
+			context->channels[channels[count]].add_operator(tmp->getNickname());
 		}
-		// std::cout << "I have the password" << std::endl;
+		else if ( context->channels[channels[count]].getMode().find("k") != std::string::npos ) {
+			// std::cout << "ON VEUT UN PASSWORD !" << std::endl;
+			if ( passwords[count] != context->channels[channels[count]].getPassword() ) {
+				response = ERR_BADCHANNELKEY(tmp->getNickname(), channels[count]);
+				std::cout << response << std::endl;
+				send(tmp->getFd(), response.c_str(), response.size(), 0);
+				// message d'erreur : Cannot join #e (Requires keyword
+				save = 1;
+			}
+			// std::cout << "I have the password" << std::endl;
+		}
+		if ( save == 0 ) {
+			context->channels[channels[count]].add_client((*tmp));
+			(*tmp).addChannel(channels[count]);
+			response = RPL_JOIN((*tmp).getNickname(), (*tmp).getUsername(), channels[count]);
+			context->channels[channels[count]].sendToAll(response);
+		}
 	}
-	context->channels[args[0]].add_client((*tmp));
-	(*tmp).addChannel(args[0]);
-	response = RPL_JOIN((*tmp).getNickname(), (*tmp).getUsername(), args[0]);
-	context->channels[args[0]].sendToAll(response);
 	// send(fds[i].fd, response.c_str(), response.length(), 0);
 	// context->channels[args[0]].appliquerFonction(afficherNomClient);	
 }

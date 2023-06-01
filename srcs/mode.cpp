@@ -1,9 +1,10 @@
 #include "../headers/irc.h"
 
-int	check_args( t_context *context, Client *tmp, std::string *args, Channel	**chan ) {
+int	check_args( t_context *context, Client *tmp, std::vector<std::string> args, Channel	**chan ) {
 	std::string	response;
 
-	if ( args[0].empty() ) {
+	// if ( args[0].empty() ) {
+	if ( args.size() == 0 ) {
 		response = ERR_NEEDMOREPARAMS(tmp->getNickname(), tmp->getUsername(), "MODE");
 		send(tmp->getFd(), response.c_str(), response.length(), 0);
 		return -1;
@@ -15,8 +16,11 @@ int	check_args( t_context *context, Client *tmp, std::string *args, Channel	**ch
 		return -1;
 	}
 	*chan = &it->second;
-	if ( args[1].empty() ) {
+	std::cout << "ICI : " << args.size() << std::endl;
+	// if ( args[1].empty() ) {
+	if ( args.size() == 1 || args[1].empty() ) {
 		response = RPL_CHANNELMODEIS((*tmp).getNickname(), args[0], " +", (*chan)->getMode());
+		std::cout << response << std::endl;
 		send(tmp->getFd(), response.c_str(), response.length(), 0);
 		return -1;
 	}
@@ -98,9 +102,9 @@ void	verify_valid_pass_size_operator( Client *tmp, int *letters_int, std::string
 	}
 }
 
-void	ft_mode(t_context *context, Client *tmp, struct pollfd *fds, int i, std::string *args)
+void	ft_mode(t_context *context, Client *tmp, struct pollfd *fds, int i, std::vector<std::string> args)
 {
-	std::cout << "Received command MODE w args " << args[0] << " and " << args[1] << " and " << args[2] << " and " << args[3] << std::endl;
+	std::cout << "Received command MODE" << std::endl;// w args " << args[0] << " and " << args[1] << " and " << args[2] << " and " << args[3] << std::endl;
 	Channel	*chan;
 	(void)i;
 	(void)fds;

@@ -36,7 +36,7 @@ else
 // >> :hash.ix.nl.dal.net 352 cmeston_ #ez ~cmeston 2618-2ed8-f8de-36d4-9088.210.62.ip punch.wa.us.dal.net tuutuutu H@ :4 Chine MESTON
 // >> :hash.ix.nl.dal.net 352 cmeston_ #ez ~cmeston 2618-2ed8-f8de-36d4-9088.210.62.ip hash.ix.nl.dal.net cmeston_ H@ :0 Chine MESTON
 
-void	ft_kick(t_context *context, Client *tmp, struct pollfd *fds, int i, std::string *args) {
+void	ft_kick(t_context *context, Client *tmp, struct pollfd *fds, int i, std::vector<std::string> args) {
 	(void)fds;
 	(void)i;
 
@@ -45,7 +45,7 @@ void	ft_kick(t_context *context, Client *tmp, struct pollfd *fds, int i, std::st
 	std::string reason;
 	std::string response;
 
-	std::cout << "Client "<< tmp->getNickname() << " is trying to use the KICK command w args " << args[0] << " and " << args[1] << std::endl;
+	std::cout << "Client "<< tmp->getNickname() << " is trying to use the KICK command" << std::endl;// w args " << args[0] << " and " << args[1] << std::endl;
 
 	if (context->channels[args[0]].isUserOperator(*tmp) == false)
 		return ;

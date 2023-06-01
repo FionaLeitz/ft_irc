@@ -11,9 +11,9 @@ int	nickname_fd( std::string nickname, std::map<int, Client> clients ) {
 	return -1;
 }
 
-void	ft_privmsg(t_context *context, Client *tmp, struct pollfd *fds, int i, std::string *args)
+void	ft_privmsg(t_context *context, Client *tmp, struct pollfd *fds, int i, std::vector<std::string> args)
 {
-	std::cout << "Received command PRIVMSG w args " << args[0] << " and " << args[1] << std::endl;
+	std::cout << "Received command PRIVMSG" << std::endl;// w args " << args[0] << " and " << args[1] << std::endl;
 	std::cout << "	client buff is  " << (*tmp).getBuffer() << std::endl;
 	std::string dest;
 	std::string	message;

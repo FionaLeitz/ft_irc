@@ -10,9 +10,9 @@
 // 	clients.erase( fd );
 // }
 
-void	ft_quit(t_context *context, Client *tmp, struct pollfd *fds, int i, std::string *args)
+void	ft_quit(t_context *context, Client *tmp, struct pollfd *fds, int i, std::vector<std::string> args)
 {
-	std::cout << "Received command PRIVMSG w args " << args[0] << " and " << args[1] << std::endl;
+	std::cout << "Received command PRIVMSG" << std::endl;// w args " << args[0] << " and " << args[1] << std::endl;
 	std::string						response;
 	std::map<int, Client>::iterator	it;
 	(void)args;

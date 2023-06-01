@@ -1,12 +1,12 @@
 #include "../headers/irc.h"
 
-void	ft_invite(t_context *context, Client *tmp, struct pollfd *fds, int i, std::string *args) {
+void	ft_invite(t_context *context, Client *tmp, struct pollfd *fds, int i, std::vector<std::string> args) {
 	(void)fds;
 	(void)i;
 
 	std::string response;
 	int			fd;
-	std::cout << "Client "<<tmp->getNickname() << " is trying to use the invite command w args " << args[0] <<  " and " << args[1] << std::endl;
+	std::cout << "Client "<<tmp->getNickname() << " is trying to use the invite command" << std::endl;//w args " << args[0] <<  " and " << args[1] << std::endl;
 	if (context->channels[args[1]].isUserOperator(*tmp) == false)
 		return ;
 	response = RPL_INVITE_MSG(tmp->getNickname(), tmp->getUsername(), args[0], args[1]);
