@@ -18,6 +18,7 @@
 # include <sstream>
 # include <list>
 # include <set>
+# include <fstream>
 # include "Client.hpp"
 # include "Channel.hpp"
 

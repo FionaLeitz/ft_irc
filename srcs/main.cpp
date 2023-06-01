@@ -48,7 +48,6 @@ int	create_server_link( char *port ) {
 	std::memset( &serverAddress, 0, sizeof( serverAddress ) );
 	serverAddress.sin_family = AF_INET;
 	serverAddress.sin_addr.s_addr = htonl( INADDR_ANY );
-	// serverAddress.sin_port = htons( 3630 );
 	serverAddress.sin_port = htons( atoi( port ) );
 
     /* Attribution de l'adresse IP et du port à la socket */
@@ -289,31 +288,67 @@ void	check_clients_sockets(struct pollfd **fds, char *buffer, t_context *context
 	}
 }
 
+int	initialize_context(t_context &context, int *socket_nbr, int password)
+{
+	std::map<std::string, Channel>	channels;
+	std::ifstream 					confFile;
+	std::string						line;
+	std::size_t 					found;
+	
+	confFile.open("./.IRCd-config"); // Ouvrir le fichier en lecture
+    if (!confFile) {
+        std::cout << "Failed to open conf file : " << strerror(errno) << std::endl;
+		confFile.close();
+        return 1;
+    }
+    while (std::getline(confFile, line)) {
+		found = line.find("operator_host =");
+        if (found != std::string::npos && line.size() > sizeof("operator_host ="))
+            context.op_host  = line.substr(found + sizeof("operator_host ="));
+        found = line.find("operator_name =");
+        if (found != std::string::npos && line.size() > sizeof("operator_name ="))
+            context.op_name  = line.substr(found + sizeof("operator_name ="));
+        found = line.find("operator_password");
+       if (found != std::string::npos && line.size() > sizeof("operator_password ="))
+            context.op_password = line.substr(found + sizeof("operator_password ="));
+    }
+
+	std::cout << "Hosts : " << context.op_host  << std::endl;
+    std::cout << "Admin : " << context.op_name  << std::endl;
+    std::cout << "Password : " << context.op_password << std::endl;
+
+	if (context.op_host.empty()) {
+		std::cout << "Error in IRCd-config : No operator host provided." << std::endl;
+		 confFile.close();
+		return 1;
+	}
+    confFile.close();
+	context.channels = channels;
+	context.socket_nbr[0] = *socket_nbr;
+	context.password = password;
+	return 0;
+}
+
 struct pollfd	*check_communication( struct pollfd *fds, int *socket_nbr, int password)
 {
 	int						ret;
-	// struct sockaddr_in		clientAddress;
 	char					buffer[1024];			// limite d'une reception ???
-	// socklen_t 				clientAddressLength = sizeof(clientAddress);
-	t_context				context;
-	// std::map<int, Client>	clients;
-	std::map<std::string, Channel>	channels;
 
 	std::string			nick;
 	std::string			username;
 	std::string			response;
 	std::string			message;
+	t_context			context;
 
-	// t_func_ptr funcTab[18];
-	// t_func_initialize(funcTab);
-	context.password = password;
-	context.channels = channels;
-	context.socket_nbr[0] = *socket_nbr;
-	context.op_name = "admin";
-	context.op_password = "321";
-	context.op_host = "127.0.0.1 localhost";
-	// void (*funcTab[])(Client *tmp, struct pollfd *fds, int i) = { ft_user, ft_join, ft_mode, ft_who, ft_privmsg };
+	// std::cout << "\tcontext.channels = " << &context.channels;
+	// std::cout << "\n\tcontext.pasword = " << context.password;
+	// std::cout << "\n\tcontext.socket_nbr = " << context.socket_nbr[0];
+	// std::cout << "\n\tcontext.op_host = " << context.op_host;
+	// std::cout << "\n\tcontext.op_name = " << context.op_name;
+	// std::cout << "\n\tcontext.op_password = " << context.op_password << std::endl;
 
+	if (initialize_context(context, socket_nbr, password) != 0)
+		return NULL;
 	while (1)
 	{
 		ret = poll(fds, context.socket_nbr[0], -1);
