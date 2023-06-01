@@ -303,14 +303,14 @@ int	initialize_context(t_context &context, int *socket_nbr, int password)
     }
     while (std::getline(confFile, line)) {
 		found = line.find("operator_host =");
-        if (found != std::string::npos && line.size() > sizeof("operator_host ="))
+        if (found != std::string::npos && line.size() > sizeof("operator_host =") -1 )
             context.op_host  = line.substr(found + sizeof("operator_host ="));
         found = line.find("operator_name =");
-        if (found != std::string::npos && line.size() > sizeof("operator_name ="))
+        if (found != std::string::npos && line.size() > sizeof("operator_name =") -1)
             context.op_name  = line.substr(found + sizeof("operator_name ="));
         found = line.find("operator_password =");
        if (found != std::string::npos && line.size() > sizeof("operator_password ="))
-            context.op_password = line.substr(found + sizeof("operator_password ="));
+            context.op_password = line.substr(found + sizeof("operator_password =") - 1);
     }
 
 	std::cout << "Hosts : " << context.op_host  << std::endl;

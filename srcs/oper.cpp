@@ -10,7 +10,7 @@ Both parameters are required for the command to be successful.
 - if valid name and valid password and valid host --> RPL_YOUREOPER +  MODE message indicating their new user mode
     ERR_PASSWDMISMATCH (464)
     ERR_NOOPERHOST (491)
-    RPL_YOUREOPER (381)
+   
 
 The <name> specified by this command is separate to the accounts specified by SASL authentication, and is generally stored in the
 IRCd configuration.
@@ -91,13 +91,23 @@ void	ft_oper(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 			std::cout << "host ok tu peux devenir oprateur bravo" << std::endl;
 			if (update_confFile(args[0], args[1]) == 1)
 				return ; // send ERR_ custom ?
-			
+			response = RPL_YOUREOPER(tmp->getNickname());
+			send(tmp->getFd(), response.c_str(), response.size(), 0);
+			response = RPL_oMODE(tmp->getNickname(), tmp->getUsername(), tmp->getHost(), "+o");
+			send(tmp->getFd(), response.c_str(), response.size(), 0);
 		}
 	
 	}
-	else		// sinon, l'operateur peut se connecter depuis n'importe quelle adresse
+	else							// sinon, l'operateur peut se connecter depuis n'importe quelle adresse
 	{
-		// - if wrong password for the given name --> ERR_PASSWDMISMATCH
+		if (args[1] == context->op_password && args[0] == context->op_name) {
+			response = RPL_YOUREOPER(tmp->getNickname());
+			send(tmp->getFd(), response.c_str(), response.size(), 0);
+			response = RPL_oMODE(tmp->getNickname(), tmp->getUsername(), tmp->getHost(), "+o");
+		}
+		else 
+			response = ERR_PASSWDMISMATCH(tmp->getNickname());
+		send(tmp->getFd(), response.c_str(), response.size(), 0);
 	}
 	
 

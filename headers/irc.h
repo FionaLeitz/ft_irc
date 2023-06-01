@@ -34,6 +34,7 @@
 #define RPL_INVITING(nickname, channel, target) (":server 341 " + nickname + " " + target + " :join " + channel + "\r\n")
 #define RPL_WHOREPLY(nickname, channel, username, host, usernick) (":server 352 " + nickname + " " + channel + " " + username + " " + host + " server " + usernick + " H :0 " + "realname" + "\r\n")
 #define RPL_NAMREPLY(nickname, symbol, channel, prefix, user) (":server 353 " + nickname + " " + symbol + " " + channel + " :" + prefix + user + "\r\n")
+#define	RPL_YOUREOPER(nickname) (":server 381 " + nickname + " :You are now an IRC operator\r\n");
 
 #define ERR_NOSUCHNICK(nickname, username, host, target) (":server 401 " + USER_ID(nickname, username, host) + " " + target + " :No such nick\r\n")
 #define ERR_NOSUCHCHANNEL(nickname, username, host, target) (":server 403 " + USER_ID(nickname, username, host) + " " + target + " :No such channel\r\n")
@@ -42,10 +43,12 @@
 #define ERR_NEEDMOREPARAMS(nickname, channel, command) (":server 461 " + nickname + " " + channel + " " + command + " :Not enough parameters\r\n")
 #define ERR_NEEDMOREPARAMS_MODE(nickname, channel, command, mode, syntax) (":server 461 " + nickname + " " + channel + " " + command + " :You must specify a parameter for the " + mode + " mode. Syntax: <" + syntax + ">.\r\n")
 #define ERR_ALREADYREGISTERED(nickname, username, host)(":server 462 " + USER_ID( (*tmp).getNickname(), (*tmp).getUsername() ) + " :You may not reregister\r\n")
+#define ERR_PASSWDMISMATCH(nickname) (":server 464 " + nickname + " :Password incorrect\r\n");
 #define ERR_BADCHANNELKEY(nickname, channel) (":server 475 " + nickname + " " + channel + " :Cannot join " + channel + " (Requires keyword)\r\n")
 #define ERR_CHANOPRIVSNEEDED(nickname, channel) (":server 482 " + nickname + " " + channel + " :You're not channel operator\r\n")
 #define ERR_NOOPERHOST(nickname, username, host) (":server 491 " + USER_ID(nickname, username, host) + " :No O-lines for your host\r\n")
 #define ERR_INVALIDMODEPARAM(nickname, username, channel, mode) (":server 696 " + nickname + " " + channel + " :Invalid " + mode + " mode parameter(s).\r\n")
+
 
 #define RPL_JOIN(nickname, username, host, channel) (":" + USER_ID(nickname, username, host) + " JOIN " + channel + "\r\n")
 #define	RPL_KICK(nickname, username, host, channel, target, reason)(":" + USER_ID(nickname, username, host) + " KICK " + channel + " " + target + " :" + reason + "\r\n")
@@ -54,6 +57,7 @@
 #define RPL_PING(nickname, username, host, token) (":" + USER_ID(nickname, username, host) + " PONG server_name " + token + "\r\n")
 #define RPL_INVITE_MSG(nickname, username, host, target, channel) (":" + USER_ID(nickname, username, host) + " INVITE " + target + " :" + channel + "\r\n")
 #define RPL_MODE(nickname, username, host, channel, mode) (":" + USER_ID(nickname, username, host) + " MODE " + channel + " " + mode + "\r\n")
+#define	RPL_oMODE(nickname, username, host, mode) (":" + USER_ID(nickname, username, host) + " MODE " + nickname + " " + mode + "\r\n");
 
 // #define ERR_USERNOTINCHANNEL(nickname, username, channel, target) (":server 441 " + USER_ID(nickname, username, host) + " " + target + " :They aren't on that channel\r\n")
 // normalement comme ca, et le msg d'erreur arrive sur l'onglet principal (et non pas sur le channel)
