@@ -17,8 +17,8 @@ void	ft_pass(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 	else
 	{
 		std::cout << "Invalid pass" << std::endl;
-		// response = RPL_WELCOME((*tmp).getNickname(), (*tmp).getUsername());
-		// send(fds[i].fd, response.c_str(), response.length(), 0);
+		response = ERR_PASSWDMISMATCH(tmp->getNickname());
+		send(tmp->getFd(), response.c_str(), response.length(), 0);
+		//la il faut trouver un moyen de refuser sa connexion ensuite
 	}
-
 }

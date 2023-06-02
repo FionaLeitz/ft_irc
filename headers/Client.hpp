@@ -1,6 +1,7 @@
 #ifndef CLIENT_HPP
 # define CLIENT_HPP
 
+class	Channel;
 
 class	Client {
 	public:
@@ -26,13 +27,15 @@ class	Client {
 		void						setUsername(std::string username);
 		void						setHost(std::string host);
 		const struct sockaddr_in	&getIp(void) const;
-		// const std::vector<std::string>	&getChannelList(void) const;
 		const std::map<std::string, int>	&getChannelList(void) const;
+
 		void						addChannel(std::string name);
 		void						addInviteChannel(std::string name);
 		void						removeChannel(std::string name);
+		void						leaveAllChannels(std::map<std::string, Channel>	channels_map, std::string rpl);
 
 		void						printChannelList(void) const;
+
 
 	private:
 		std::string					_username;

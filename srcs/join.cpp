@@ -69,8 +69,6 @@ void	ft_join(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 	std::cout << "Received command JOIN " << std::endl;//w args " << args[0] << " and " << args[1] << std::endl;
 	// std::cout << (*tmp).getNickname() << " veut rejoindre le channel" << args[0] << std::endl;
 
-	// args[0] = channels
-	// args[1] = mdp
 	std::vector<std::string>	channels = ft_split( args[0], "," );
 	std::vector<std::string>	passwords;
 	if ( args.size() != 1 )

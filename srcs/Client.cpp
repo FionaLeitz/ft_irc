@@ -138,3 +138,16 @@ void	Client::printChannelList(void) const
         std::cout << it->first << " (" << it->second << ")" << std::endl;
     }
 }
+
+void	Client::leaveAllChannels(std::map<std::string, Channel>	channels_map, std::string rpl)
+{
+	for (std::map<std::string, int>::const_iterator it2 = _channelList.begin(); it2 != _channelList.end(); ++it2)
+	{
+		if (it2->second == 1)
+		{
+			std::cout << "sending goodbye to channel " << it2->first << std::endl;
+			channels_map[it2->first].sendMessage(rpl, _fd);
+			channels_map[it2->first].suppress_client(_nickname);
+		}
+	}
+}

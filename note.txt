@@ -634,6 +634,7 @@ MODE : 	- avertir une personne qu'il est devenu channel operator (et les autres 
 		- afficher le nouveau mot de passe a tout le mode (en ce moment il y a un trou dans la phrase)
 NICK : 	- si le nickname est deja utilise, ERR_NICKNAMEINUSE
 		- si le nickname n'est pas valide, ERR_ERRONEUSNICKNAME (peut etre interdire # : et espace (ca se gere deja je crois))
+		- hexchat : split automatiquement avec l'espace;  accepte ':' ;  accepte '#';
 		- si pas d'argument (pas de nickname communique) ERR_NONICKNAMEGIVEN
 				"The NICK message may be sent from the server to clients to
 				acknowledge their NICK command was successful, and to inform
@@ -641,9 +642,9 @@ NICK : 	- si le nickname est deja utilise, ERR_NICKNAMEINUSE
 				the <source> of the message will be the old nickname
 				[ [ "!" user ] "@" host ] of the user who is changing their nickname."
 PASS : 	- si le mot de passe est mauvais, pas de connection ERR_PASSWMISMATCH (464)
-PRIVMSG :	- on le recoit pas s'il n'est pas en majuscule
+PRIVMSG :
 KICK :	- eventuellement rajouter un caractere special quand on est operateur (ex : "cmeston_ H :0 Chine MESTON" -->  "cmeston_ H@ :0 Chine MESTON")
-TOPIC : - ne prend que le premier mot du topic
+TOPIC :
 NAMES : - adapter les variables symbol et prefix en fonction du statut de l'user (chanop, founder, protected, halfop, voice)
 OPER : - plusieurs personnes peuvent se log en operateur en meme temps ?
 		- plusieurs combinaisons admin/mdp possible ? --> me parait chiant de ouf a faire
@@ -660,3 +661,4 @@ COMMANDE PAS DU TOUT FAITE :
 TRUC EN PLUS : - les signaux sur notre server
 				- voir si on verifie des caracteres interdits dans le nickname
 				- rajouter dans toutes les erreurs le channel ou on veut l'envoyer
+				- bien virer le user de partout  quand il part

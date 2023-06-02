@@ -26,9 +26,6 @@ struct pollfd	*new_tab( struct pollfd *fds, int socket_nbr ) {
 
 	while ( count < socket_nbr ) {
 		new_tab[count] = fds[count];
-		// new_tab[count].fd = fds[count].fd;
-        // new_tab[count].events = fds[count].events;
-        // new_tab[count].revents = fds[count].revents;
 		count++;
 	}
 	delete [] fds;
@@ -50,7 +47,7 @@ int	create_server_link( char *port ) {
 	struct sockaddr_in	serverAddress;
 	int					ret;
 
-	// signal(SIGQUIT, SIG_IGN);
+	// signal(SIGQUIT, SIG_IGN);  //que faire 
 	signal(SIGINT, sig_handler);
 
 	/* Création de la socket d'ecoute du serveur */
@@ -153,17 +150,18 @@ void	t_func_initialize(t_func_ptr *funcTab)
 	funcTab[11].ptr = &ft_ping;
 	funcTab[12].name = "PRIVMSG";
 	funcTab[12].ptr = &ft_privmsg;
-	funcTab[13].name = "QUIT";
-	funcTab[13].ptr = &ft_quit;
-	funcTab[14].name = "RESTART";
-	funcTab[14].ptr = &ft_restart;
-	funcTab[15].name = "TOPIC";
-	funcTab[15].ptr = &ft_topic;
-	funcTab[16].name = "USER";
-	funcTab[16].ptr = &ft_user;
-	funcTab[17].name = "WHO";
-	funcTab[17].ptr = &ft_who;
-
+	funcTab[13].name = "privmsg";
+	funcTab[13].ptr = &ft_privmsg;
+	funcTab[14].name = "QUIT";
+	funcTab[14].ptr = &ft_quit;
+	funcTab[15].name = "RESTART";
+	funcTab[15].ptr = &ft_restart;
+	funcTab[16].name = "TOPIC";
+	funcTab[16].ptr = &ft_topic;
+	funcTab[17].name = "USER";
+	funcTab[17].ptr = &ft_user;
+	funcTab[18].name = "WHO";
+	funcTab[18].ptr = &ft_who;
 }
 
 void	ft_handshake(Client *tmp, struct pollfd *fds, int i)
@@ -196,7 +194,7 @@ int	client_request( struct pollfd **fds, Client *tmp, std::string ref, int i, t_
 		std::cout << "Message reçu : " << ref << std::endl;
 
 		// Recherche de la fonction correspondante et appel si trouvée
-		t_func_ptr funcTab[18];
+		t_func_ptr funcTab[19];
 		t_func_initialize(funcTab);
 		// std::istringstream iss(ref);
 		std::string cmd;
@@ -210,7 +208,7 @@ int	client_request( struct pollfd **fds, Client *tmp, std::string ref, int i, t_
 		cmd = args[0];
 		args.erase(args.begin());
 		// std::cout << "CMD = " << cmd << " et args[0]] = " << (*args.begin()) << std::endl;
-		for(j = 0; j < 18; j++)				// si la commande fait partie des operateurs
+		for(j = 0; j < 19; j++)				// si la commande fait partie des operateurs
 		{
 			if (cmd == funcTab[j].name)
 			{
@@ -218,7 +216,7 @@ int	client_request( struct pollfd **fds, Client *tmp, std::string ref, int i, t_
 				break ;
 			}
 		}
-		if (j == 18)
+		if (j == 19)
 		{
 			std::cout << "Action non reconnue : " << ref << std::endl;
 		}
