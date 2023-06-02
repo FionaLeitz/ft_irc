@@ -1,5 +1,6 @@
 #include "../headers/irc.h"
 
+bool server_statut = true;
 /*
 struct sockaddr_in {
 	short	sin_family;		// famille d'adresses : AF_INET   
@@ -25,10 +26,22 @@ struct pollfd	*new_tab( struct pollfd *fds, int socket_nbr ) {
 
 	while ( count < socket_nbr ) {
 		new_tab[count] = fds[count];
+		// new_tab[count].fd = fds[count].fd;
+        // new_tab[count].events = fds[count].events;
+        // new_tab[count].revents = fds[count].revents;
 		count++;
 	}
 	delete [] fds;
 	return new_tab;
+}
+
+void	sig_handler(int signum)
+{
+	if (signum == SIGINT)
+	{
+		std::cout << std::endl;
+		server_statut = false;
+	}
 }
 
 int	create_server_link( char *port ) {
@@ -36,6 +49,9 @@ int	create_server_link( char *port ) {
 	int					server_socket;
 	struct sockaddr_in	serverAddress;
 	int					ret;
+
+	// signal(SIGQUIT, SIG_IGN);
+	signal(SIGINT, sig_handler);
 
 	/* Création de la socket d'ecoute du serveur */
 	server_socket = socket( AF_INET, SOCK_STREAM, 0 );
@@ -73,8 +89,10 @@ int	create_server_link( char *port ) {
 }
 
 void	end_close( struct pollfd *fds, int socket_nbr ) {
-	for ( int i = 0; i < socket_nbr; i++ )
-		close( fds[socket_nbr].fd );
+	for ( int i = 0; i < socket_nbr && &fds[i]; i++ ) {
+			std::cout << &fds[i] << std::endl;
+		close( fds[i].fd );
+	}
 }
 
 
@@ -354,12 +372,13 @@ struct pollfd	*check_communication( struct pollfd *fds, int *socket_nbr, int pas
 
 	if (initialize_context(context, socket_nbr, password) != 0)
 		return NULL;
-	while (1)
+	while (server_statut == true)
 	{
 		ret = poll(fds, context.socket_nbr[0], -1);
         if (ret < 0)
 		{
             std::cerr << "Error while executing poll() : " << strerror(errno) << std::endl;
+			delete [] fds;
             return NULL;
         }
 		incoming_connections(&fds, context);
@@ -377,28 +396,42 @@ int	parse_number( const char *number ) {
 	return 0;
 }	
 
+void	shutdown_server(struct pollfd *fds, int *socket_nbr)
+{
+	end_close( fds, *socket_nbr );
+	delete[] fds;
+}
+
 int	main( int argc, char **argv ) {
 	struct pollfd		*fds = new pollfd[1];
 	int					socket_nbr[1];
 
 	if ( argc != 3 ) {
 		std::cout << "Error number of arguments" << std::endl;
+		delete[] fds;
 		return 1;
 	}
 	if ( parse_number( argv[1] ) == -1 ) {
 		std::cout << "Error port" << std::endl;
+		delete[] fds;
 		return 1;
 	}
 
 	fds[0].fd = create_server_link( argv[1] );
 	if ( fds[0].fd == -1 )
+	{
+		delete [] fds;
 		return -1;
+	}
 	fds[0].events = POLLIN;
 	
 	*socket_nbr = 1;
 	fds = check_communication( fds, socket_nbr, atoi(argv[2]));
 	if ( fds == NULL )
+	{
+		shutdown_server(fds, socket_nbr);
 		return -1;
+	}
 
 	end_close( fds, *socket_nbr );
 

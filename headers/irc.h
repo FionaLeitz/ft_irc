@@ -20,6 +20,7 @@
 # include <list>
 # include <set>
 # include <fstream>
+# include <signal.h>
 # include "Client.hpp"
 # include "Channel.hpp"
 
