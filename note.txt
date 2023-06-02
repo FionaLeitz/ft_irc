@@ -627,7 +627,7 @@ Attention, si deux commandes a la suite ( /QUIT /JOIN ), il prend le join et c'e
 - check nickname a la connexion voir s'il exste deja
 
 QUIT :	- supprimer le user de toutes les listes dans lesquelles il est
-JOIN :	- une fois le channel rejoint, envoyer a la personne qui join le topic (RPL_TOPIC (332)) et le RPL_TOPICWHOTIME (333) (ou rien si pas de topic)
+JOIN :	- (une fois le channel rejoint, envoyer a la personne qui join le RPL_TOPICWHOTIME (333))
 		- (a faire ou pas ?) argument "0" (/join 0 ?) qui quitte tous les channels dans lequel est le user
 		- liste des users dans hexchat
 MODE : 	- avertir une personne qu'il est devenu channel operator (et les autres aussi)
@@ -641,7 +641,7 @@ NICK : 	- si le nickname est deja utilise, ERR_NICKNAMEINUSE
 				other clients about the change of nickname. In these cases,
 				the <source> of the message will be the old nickname
 				[ [ "!" user ] "@" host ] of the user who is changing their nickname."
-PASS : 	- si le mot de passe est mauvais, pas de connection ERR_PASSWMISMATCH (464)
+PASS : 	- si le mot de passe est mauvais, trouver moyen de refuser la connexion (une variable dans chaque client peut-etre ? qu'on verifie par la suite)
 PRIVMSG :
 KICK :	- eventuellement rajouter un caractere special quand on est operateur (ex : "cmeston_ H :0 Chine MESTON" -->  "cmeston_ H@ :0 Chine MESTON")
 TOPIC :

@@ -108,5 +108,6 @@ void	ft_topic(t_context *context, Client *tmp, struct pollfd *fds, int i, std::v
 int		findClientFd(const std::map<int, Client> &clientList, std::string nick);
 void	sendToAllClients(const std::map<std::string, Client> &clientList, std::string response);
 std::vector<std::string>	ft_split( std::string to_split, std::string separate );
+void	check_topic(Client *tmp, Channel &channel);
 
 #endif

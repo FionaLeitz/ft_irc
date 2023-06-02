@@ -1,5 +1,16 @@
 #include "../headers/irc.h"
 
+void	check_topic(Client *tmp, Channel &channel)
+{
+	std::string response;
+
+	if (channel.getTopic().empty())
+		response = RPL_NOTOPIC(tmp->getNickname(), channel.getName());
+	else
+		response = 	RPL_TOPIC(tmp->getNickname(), channel.getName(), channel.getTopic());
+	send(tmp->getFd(), response.c_str(), response.length(), 0);
+}
+
 void	ft_topic(t_context *context, Client *tmp, struct pollfd *fds, int i, std::vector<std::string> args) {
 
 /*
@@ -30,6 +41,8 @@ void	ft_topic(t_context *context, Client *tmp, struct pollfd *fds, int i, std::v
   	TOPIC #test :                   ; Clearing the topic on "#test"
   	TOPIC #test                     ; Checking the topic for "#test"
 */
+	(void)fds;
+	(void)i;
 	std::string response;
 
 	std::cout << "Client "<<tmp->getNickname() << " is trying to use the topic command" << std::endl;
@@ -37,11 +50,12 @@ void	ft_topic(t_context *context, Client *tmp, struct pollfd *fds, int i, std::v
 	if (args.size() == 1)
 	{
 		//check topic
-		if (context->channels[args[0]].getTopic().empty())
-			response = RPL_NOTOPIC(tmp->getNickname(), args[0]);
-		else
-			response = 	RPL_TOPIC(tmp->getNickname(), args[0], context->channels[args[0]].getTopic());
-		send(fds[i].fd, response.c_str(), response.length(), 0);
+		// if (context->channels[args[0]].getTopic().empty())
+		// 	response = RPL_NOTOPIC(tmp->getNickname(), args[0]);
+		// else
+		// 	response = 	RPL_TOPIC(tmp->getNickname(), args[0], context->channels[args[0]].getTopic());
+		// send(fds[i].fd, response.c_str(), response.length(), 0);
+		check_topic(tmp, context->channels[args[0]]);
 	}
 	else
 	{
