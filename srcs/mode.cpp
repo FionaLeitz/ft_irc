@@ -3,7 +3,6 @@
 int	check_args( t_context *context, Client *tmp, std::vector<std::string> args, Channel	**chan ) {
 	std::string	response;
 
-	// if ( args[0].empty() ) {
 	if ( args.size() == 0 ) {
 		response = ERR_NEEDMOREPARAMS(tmp->getNickname(), tmp->getUsername(), "MODE");
 		send(tmp->getFd(), response.c_str(), response.length(), 0);
@@ -17,7 +16,6 @@ int	check_args( t_context *context, Client *tmp, std::vector<std::string> args, 
 	}
 	*chan = &it->second;
 	std::cout << "ICI : " << args.size() << std::endl;
-	// if ( args[1].empty() ) {
 	if ( args.size() == 1 || args[1].empty() ) {
 		response = RPL_CHANNELMODEIS((*tmp).getNickname(), args[0], " +", (*chan)->getMode());
 		std::cout << response << std::endl;
@@ -27,41 +25,19 @@ int	check_args( t_context *context, Client *tmp, std::vector<std::string> args, 
 	return 0;
 }
 
-void	pass_size_operator( std::string cpy, std::string *new_arg0, std::string *new_arg1, std::string *new_arg2 ) {
-	int	save = cpy.find_first_not_of( " \r\n" );
-	if (save == -1)
-		save = cpy.size();
-	cpy.substr(save);
-	save = cpy.find_first_of( " \r\n" );
-	if (save == -1)
-		save = cpy.size();
-	*new_arg0 = cpy.substr(0, save);
-	cpy = cpy.substr(new_arg0->size());
-	save = cpy.find_first_not_of( " \r\n" );
-	if (save == -1)
-		save = cpy.size();
-	cpy = cpy.substr(save);
-	save = cpy.find_first_of(" \r\n");
-	if (save == -1)
-		save = cpy.size();
-	*new_arg1 = cpy.substr(0, save);
-	cpy = cpy.substr(new_arg1->size());
-	save = cpy.find_first_not_of( " \r\n" );
-	if (save == -1)
-		save = cpy.size();
-	cpy = cpy.substr(save);
-	save = cpy.find_first_of(" \r\n");
-	if (save == -1)
-		save = cpy.size();
-	*new_arg2 = cpy.substr(0, save);
-	// std::cout << "premier argument : " << *new_arg0 << ", deuxieme argument : " << *new_arg1 << ", troisieme argument : " << *new_arg2 << std::endl;
+void	pass_size_operator( std::vector<std::string> args, std::string *new_arg0, std::string *new_arg1, std::string *new_arg2 ) {
+	if (args.size() > 2)
+		*new_arg0 = args[2];
+	if (args.size() > 3)
+		*new_arg1 = args[3];
+	if (args.size() > 4)
+		*new_arg2 = args[4];
 	return ;
 }
 
 void	verify_valid_pass_size_operator( Client *tmp, int *letters_int, std::string *new_args, Channel **chan, int pass, int size, int oper ) {
 	if ( letters_int[1] != 0 ) {
 		if ( new_args[pass].size() == 0 ) {
-			// std::string response = ERR_INVALIDMODEPARAM(tmp->getNickname(), tmp->getUsername(), chan[0]->getName());
 			std::string response = ERR_NEEDMOREPARAMS_MODE(tmp->getNickname(), chan[0]->getName(), "k", "key", "key");
 			send(tmp->getFd(), response.c_str(), response.length(), 0);
 			letters_int[1] = -1;
@@ -71,28 +47,29 @@ void	verify_valid_pass_size_operator( Client *tmp, int *letters_int, std::string
 	}
 	if ( letters_int[4] != 0 ) {
 		if ( new_args[oper].size() == 0 ) {
-			// #e o * :You must specify a parameter for the op mode. Syntax: <nick>.
 			std::string response = ERR_NEEDMOREPARAMS_MODE(tmp->getNickname(), chan[0]->getName(), "o", "op", "nick");
 			send(tmp->getFd(), response.c_str(), response.length(), 0);
-
 			letters_int[4] = -1;
 		}
-		else
+		else if ( letters_int[4] == 1 )
 		{
-			// std::cout << "Il va falloir faire quelque que chose pour definir les operators des chans." << std::endl;
+			if (chan[0]->getOperators().find(tmp->getNickname()) != chan[0]->getOperators().end())
+				letters_int[4] = -1;
 			chan[0]->add_operator(new_args[oper]);
+		}
+		else {
+			if (chan[0]->getOperators().find(tmp->getNickname()) == chan[0]->getOperators().end())
+				letters_int[4] = -1;
+			chan[0]->suppress_operator(new_args[oper]);
 		}
 	}
 	if ( letters_int[2] == 1 ) {
 		if ( new_args[size].size() == 0 ) {
-			// #e l * :You must specify a parameter for the limit mode. Syntax: <limit>.
 			std::string response = ERR_NEEDMOREPARAMS_MODE(tmp->getNickname(), chan[0]->getName(), "l", "limit", "limit");
 			send(tmp->getFd(), response.c_str(), response.length(), 0);
 			letters_int[2] = -1;
 		}
 		else if (parse_number(new_args[size].c_str()) == -1) {
-			// std::cout << "La size n'est pas un nombre..." << std::endl;
-			// #e l rew :Invalid limit mode parameter. Syntax: <limit>
 			std::string response = ERR_INVALIDMODEPARAM(tmp->getNickname(), tmp->getUsername(), chan[0]->getName(), "limit");
 			send(tmp->getFd(), response.c_str(), response.length(), 0);
 			letters_int[2] = -1;
@@ -120,7 +97,7 @@ void	ft_mode(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 	letters_int[1] = args[1].rfind( 'k' );	// password
 	letters_int[2] = args[1].rfind( 'l' );	// number
 	letters_int[3] = args[1].rfind( 't' );
-	letters_int[4] = args[1].rfind( 'o' );	// j'ai oublie ca !
+	letters_int[4] = args[1].rfind( 'o' );	// nouvel operator de channel
 
 	std::string	new_args[3];
 	int	pass = 0;
@@ -140,7 +117,7 @@ void	ft_mode(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 	else if (letters_int[4] != -1 && letters_int[2] != -1)
 		oper++;
 
-	pass_size_operator( tmp->getBuffer().substr(tmp->getBuffer().find(args[1]) + args[1].size() + 1), &new_args[0], &new_args[1], &new_args[2] );
+	pass_size_operator( args, &new_args[0], &new_args[1], &new_args[2] );
 	for (int count = 0; count < 5; count++) {
 		int	plus = args[1].rfind('+');
 		int minus = args[1].rfind('-');
@@ -169,7 +146,7 @@ void	ft_mode(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 
 	std::string	flags = chan->getMode();
 	std::string	changes;
-	for (int count = 0; count < 4; count++) {
+	for (int count = 0; count < 5; count++) {
 		std::string	response;
 		if (letters_int[count] == 1 && flags.find(letters_char[count]) == flags.npos) {
 			flags += letters_char[count];
@@ -182,6 +159,17 @@ void	ft_mode(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 			changes += letters_char[count];
 		}
 	}
+
+	if (changes.size() == 0 )
+		return ;
+	changes += " ";
+	if ( letters_int[1] == 1 )
+		changes += new_args[pass];
+	changes += " ";
+	if ( letters_int[2] == 1 )
+		changes += new_args[size];
+	changes += " ";
+	changes += new_args[oper];
 	chan->setMode( flags );
 	std::string response = RPL_MODE(tmp->getNickname(), tmp->getUsername(), tmp->getHost(), chan->getName(), changes); // remplacer args[1] par ce qui a ete effectivement change
 																									   // par exemple, si le mode etait deja t, et que le user fait +it, on ne doit mettre que +i ici

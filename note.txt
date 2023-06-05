@@ -662,3 +662,4 @@ TRUC EN PLUS : - les signaux sur notre server
 				- voir si on verifie des caracteres interdits dans le nickname
 				- rajouter dans toutes les erreurs le channel ou on veut l'envoyer
 				- bien virer le user de partout  quand il part
+
