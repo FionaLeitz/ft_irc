@@ -35,14 +35,4 @@ void	ft_quit(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 	std::cout << "RPL QUIT = " << response << std::endl;
 	context->clients.erase(it);
 	close( fds[i].fd );
-
-	// envoyer a tous les channels du client qui QUIT
-	// while (fds[j])
-	// 	{
-	// 	if (fds[j].fd != fds[i].fd)
-	// 		send(fds[j].fd, response.c_str(), response.length(), 0);
-	// 	j++;
-	// }
-	// context->clients.erase(fds[i].fd);
-	// close(fds[i].fd);
 }

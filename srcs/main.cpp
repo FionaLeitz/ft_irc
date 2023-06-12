@@ -304,7 +304,7 @@ void	check_clients_sockets(struct pollfd **fds, char *buffer, t_context *context
 	}
 }
 
-int	initialize_context(t_context &context, int *socket_nbr, int password)
+int	initialize_context(t_context &context, int *socket_nbr, std::string password)
 {
 	std::map<std::string, Channel>	channels;
 	std::ifstream 					confFile;
@@ -350,7 +350,7 @@ int	initialize_context(t_context &context, int *socket_nbr, int password)
 	return 0;
 }
 
-struct pollfd	*check_communication( struct pollfd *fds, int *socket_nbr, int password)
+struct pollfd	*check_communication( struct pollfd *fds, int *socket_nbr, std::string password)
 {
 	int						ret;
 	char					buffer[1024];			// limite d'une reception ???
@@ -424,7 +424,7 @@ int	main( int argc, char **argv ) {
 	fds[0].events = POLLIN;
 	
 	*socket_nbr = 1;
-	fds = check_communication( fds, socket_nbr, atoi(argv[2]));
+	fds = check_communication( fds, socket_nbr, argv[2]);
 	if ( fds == NULL )
 	{
 		shutdown_server(fds, socket_nbr);

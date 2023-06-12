@@ -37,6 +37,7 @@ void	Channel::add_operator( std::string new_client ) {
 
 void	Channel::suppress_client( std::string nick ) {
 	this->_clientlist.erase( nick );
+	this->_operators.erase( nick );
 }
 
 void	Channel::suppress_operator( std::string nick ) {

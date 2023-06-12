@@ -44,10 +44,8 @@ class	Client {
 		std::string					_buffer;
 		int							_fd;
 		struct sockaddr_in			_ip;
-		// std::vector<std::string>	_channelList;
 		std::map<std::string, int>	_channelList;		//nom du channel, int pour dire si le user est membre ou est invite a rejoindre (1 = membre, 0 = invite mais pas encore membre)
-		// std::vector<std::string>	_inviteChannelList;
-	
+		
 };
 
 #endif

@@ -623,15 +623,15 @@ TO DO LIST :
 
 
 Attention, si deux commandes a la suite ( /QUIT /JOIN ), il prend le join et c'est tout
+	-> pour moi ca c'est regle !
 
 - check nickname a la connexion voir s'il exste deja
 
-QUIT :	- supprimer le user de toutes les listes dans lesquelles il est
+QUIT :
 JOIN :	- (une fois le channel rejoint, envoyer a la personne qui join le RPL_TOPICWHOTIME (333))
 		- (a faire ou pas ?) argument "0" (/join 0 ?) qui quitte tous les channels dans lequel est le user
 		- liste des users dans hexchat
-MODE : 	- avertir une personne qu'il est devenu channel operator (et les autres aussi)
-		- afficher le nouveau mot de passe a tout le mode (en ce moment il y a un trou dans la phrase)
+MODE :
 NICK : 	- si le nickname est deja utilise, ERR_NICKNAMEINUSE
 		- si le nickname n'est pas valide, ERR_ERRONEUSNICKNAME (peut etre interdire # : et espace (ca se gere deja je crois))
 		- hexchat : split automatiquement avec l'espace;  accepte ':' ;  accepte '#';
@@ -658,8 +658,8 @@ COMMANDE PAS DU TOUT FAITE :
 		restart
 
 
-TRUC EN PLUS : - les signaux sur notre server
+TRUC EN PLUS :	- les signaux sur notre server
 				- voir si on verifie des caracteres interdits dans le nickname
 				- rajouter dans toutes les erreurs le channel ou on veut l'envoyer
-				- bien virer le user de partout  quand il part
+				- bien virer le user de partout quand il part
 
