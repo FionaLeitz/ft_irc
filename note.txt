@@ -642,6 +642,7 @@ NICK : 	- si le nickname est deja utilise, ERR_NICKNAMEINUSE
 				the <source> of the message will be the old nickname
 				[ [ "!" user ] "@" host ] of the user who is changing their nickname."
 PASS : 	- si le mot de passe est mauvais, trouver moyen de refuser la connexion (une variable dans chaque client peut-etre ? qu'on verifie par la suite)
+		- quand on ne rentre pas de mdp dans hexchat on peut se connecter dans tous les cas.... hexchat n'envoie pas la commande PASS donc on ne check pas
 PRIVMSG :
 KICK :	- eventuellement rajouter un caractere special quand on est operateur (ex : "cmeston_ H :0 Chine MESTON" -->  "cmeston_ H@ :0 Chine MESTON")
 TOPIC :
