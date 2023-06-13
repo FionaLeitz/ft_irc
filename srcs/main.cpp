@@ -90,6 +90,7 @@ void	end_close( struct pollfd *fds, int socket_nbr ) {
 			std::cout << &fds[i] << std::endl;
 		close( fds[i].fd );
 	}
+	delete [] fds;
 }
 
 
