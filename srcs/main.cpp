@@ -36,7 +36,6 @@ void	sig_handler(int signum)
 {
 	if (signum == SIGINT)
 	{
-		std::cout << std::endl;
 		server_statut = false;
 	}
 }
@@ -86,10 +85,8 @@ int	create_server_link( char *port ) {
 }
 
 void	end_close( struct pollfd *fds, int socket_nbr ) {
-	for ( int i = 0; i < socket_nbr && &fds[i]; i++ ) {
-			std::cout << &fds[i] << std::endl;
+	for ( int i = 0; i < socket_nbr && &fds[i]; i++ )
 		close( fds[i].fd );
-	}
 }
 
 
@@ -398,6 +395,7 @@ void	shutdown_server(struct pollfd *fds, int *socket_nbr)
 {
 	end_close( fds, *socket_nbr );
 	delete[] fds;
+	std::cout << "Goodbye !" << std::endl;
 }
 
 int	main( int argc, char **argv ) {
@@ -432,6 +430,7 @@ int	main( int argc, char **argv ) {
 	}
 
 	end_close( fds, *socket_nbr );
+	std::cout << "Goodbye !" << std::endl;
 
     return (0);
 }

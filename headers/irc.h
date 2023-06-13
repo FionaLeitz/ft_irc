@@ -39,9 +39,12 @@
 
 #define ERR_NOSUCHNICK(nickname, username, host, channel, target) (":server 401 " + USER_ID(nickname, username, host) + " " + channel + " " + target + " :No such nick\r\n")
 #define ERR_NOSUCHCHANNEL(nickname, username, host, target) (":server 403 " + USER_ID(nickname, username, host) + " " + target + " :No such channel\r\n")
-#define ERR_NOTONCHANNEL(nickname, username, host, target) (":server 442 " + USER_ID(nickname, username, host) + " " + target + " :You're not on that channel\r\n")
 #define ERR_NOTEXTTOSEND(nickname, username, host) (":server 412 " + USER_ID(nickname, username, host) + " :No text to send\r\n")
+#define ERR_NONICKNAMEGIVEN() (":server 431 :No nickname given\r\n")
+#define ERR_ERRONEUSNICKNAME(nickname) (":server 432 " + nickname + " :Erroneus nickname\r\n")
+#define ERR_NICKNAMEINUSE(nickname) (":server 433 " + nickname + " :Nickname is already in use\r\n")
 #define ERR_USERNOTINCHANNEL(nickname, username, host, channel, target) (":server 441 " + USER_ID(nickname, username, host) + " " + channel + " " + target + " :They aren't on that channel\r\n")
+#define ERR_NOTONCHANNEL(nickname, username, host, target) (":server 442 " + USER_ID(nickname, username, host) + " " + target + " :You're not on that channel\r\n")
 #define ERR_NEEDMOREPARAMS(nickname, channel, command) (":server 461 " + nickname + " " + channel + " " + command + " :Not enough parameters\r\n")
 #define ERR_NEEDMOREPARAMS_MODE(nickname, channel, command, mode, syntax) (":server 461 " + nickname + " " + channel + " " + command + " :You must specify a parameter for the " + mode + " mode. Syntax: <" + syntax + ">.\r\n")
 #define ERR_ALREADYREGISTERED(nickname, username, host)(":server 462 " + USER_ID( (*tmp).getNickname(), (*tmp).getUsername() ) + " :You may not reregister\r\n")
@@ -53,7 +56,8 @@
 #define ERR_INVITEONLYCHAN(nickname, channel) (":server 473 " + nickname + " " + channel + " :Cannot join channel (+i)\r\n")
 #define ERR_CHANNELISFULL(nickname, channel) (":server 471 " + nickname + " " + channel + " :Cannot join channel (+l)\r\n")
 
-
+#define	RPL_NICK(oldNick, username, host, newNick) (":" + USER_ID(oldNick, username, host) + " NICK :" + newNick + "\r\n");
+#define	RPL_FIRSTNICK(nickname) (":server NICK :" + nickname + "\r\n");
 #define RPL_JOIN(nickname, username, host, channel) (":" + USER_ID(nickname, username, host) + " JOIN " + channel + "\r\n")
 #define	RPL_KICK(nickname, username, host, channel, target, reason)(":" + USER_ID(nickname, username, host) + " KICK " + channel + " " + target + " :" + reason + "\r\n")
 #define RPL_MSG(nickname, username, host, dest, message) (":" + USER_ID(nickname, username, host) + " PRIVMSG " + dest + " :" + message + "\r\n")
@@ -62,6 +66,7 @@
 #define RPL_INVITE_MSG(nickname, username, host, target, channel) (":" + USER_ID(nickname, username, host) + " INVITE " + target + " :" + channel + "\r\n")
 #define RPL_MODE(nickname, username, host, channel, mode) (":" + USER_ID(nickname, username, host) + " MODE " + channel + " " + mode + "\r\n")
 #define	RPL_oMODE(nickname, username, host, mode) (":" + USER_ID(nickname, username, host) + " MODE " + nickname + " " + mode + "\r\n");
+
 
 // #define ERR_USERNOTINCHANNEL(nickname, username, channel, target) (":server 441 " + USER_ID(nickname, username, host) + " " + target + " :They aren't on that channel\r\n")
 // normalement comme ca, et le msg d'erreur arrive sur l'onglet principal (et non pas sur le channel)

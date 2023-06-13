@@ -63,16 +63,27 @@ single channel name on each.
 void	ft_join(t_context *context, Client *tmp, struct pollfd *fds, int i, std::vector<std::string> args)
 {
 	std::string	response;
+	std::string message;
 	(void)fds;
 	(void)i;
 
 	std::cout << "Received command JOIN " << std::endl;//w args " << args[0] << " and " << args[1] << std::endl;
 	// std::cout << (*tmp).getNickname() << " veut rejoindre le channel" << args[0] << std::endl;
 
-	if (args.size() > 0 && args[1] == "0")
-	{
-		std::cout << "args[0] = " << args[0] << std::endl;
-	}
+	/*		-- JOIN 0 (a voir plus tard ) -- */
+
+	// std::cout << "args size = " << args.size() << std::endl;
+	// if (args.size() >= 1 && args[0] == "0")
+	// {
+	// 	if (args.size() > 1)
+	// 		message = args[1];
+	// 	response = RPL_QUIT((*tmp).getNickname(), (*tmp).getUsername(), tmp->getHost(), message);
+	// 	std::cout << "args[0] = " << args[0] << std::endl;
+	// 	tmp->leaveAllChannels(context->channels, response);
+	// 	return ;
+	// }
+
+	/*	--------------------------			*/
 
 	std::vector<std::string>	channels = ft_split( args[0], "," );
 	std::vector<std::string>	passwords;

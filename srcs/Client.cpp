@@ -147,6 +147,7 @@ void	Client::leaveAllChannels(std::map<std::string, Channel>	channels_map, std::
 		{
 			std::cout << "sending goodbye to channel " << it2->first << std::endl;
 			channels_map[it2->first].sendMessage(rpl, _fd);
+			// channels_map[it2->first].sendToAll(rpl);
 			channels_map[it2->first].suppress_client(_nickname);
 			this->_channelList.erase(it2++);
 		}
