@@ -47,20 +47,15 @@ void	ft_nick(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 				}
 			}
 			// dispo 
-							// si premiere authentification
 			if (it == context->clients.end())
 			{
 				std::cout << "Nickname dispo" << std::endl;
-				// (*tmp).setNickname(args[0]);
 				oldNick = tmp->getNickname();
 				if (oldNick.empty()){
-					// response = RPL_NICK(args[0], tmp->getUsername(), tmp->getHost(), args[0]);
 					oldNick = args[0];
 				}
-				// else
 					response = RPL_NICK(oldNick, tmp->getUsername(), tmp->getHost(), args[0]);
 				(*tmp).setNickname(args[0]);
-				
 			}
 		}
 		std::cout << "RPL = " << response << std::endl;
