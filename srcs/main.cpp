@@ -87,6 +87,7 @@ int	create_server_link( char *port ) {
 void	end_close( struct pollfd *fds, int socket_nbr ) {
 	for ( int i = 0; i < socket_nbr && &fds[i]; i++ )
 		close( fds[i].fd );
+	delete [] fds;
 }
 
 
