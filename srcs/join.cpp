@@ -69,6 +69,11 @@ void	ft_join(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 	std::cout << "Received command JOIN " << std::endl;//w args " << args[0] << " and " << args[1] << std::endl;
 	// std::cout << (*tmp).getNickname() << " veut rejoindre le channel" << args[0] << std::endl;
 
+	if (args.size() > 0 && args[1] == "0")
+	{
+		std::cout << "args[0] = " << args[0] << std::endl;
+	}
+
 	std::vector<std::string>	channels = ft_split( args[0], "," );
 	std::vector<std::string>	passwords;
 	if ( args.size() != 1 )
@@ -78,6 +83,7 @@ void	ft_join(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 			passwords.push_back("");
 	}
 
+	
 	// std::vector<std::string>::iterator	it = channels.begin();
 	// // std::vector<std::string>::iterator	ite = channels.end();
 	// std::vector<std::string>::iterator	it_mdp = passwords.begin();

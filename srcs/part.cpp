@@ -23,7 +23,8 @@ void	ft_part(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 	}
 	// args[0] = le nom du/des channels
 	// args[1] = la raison du part
-
+	(void)fds;
+	(void)i;
 	std::vector<std::string>	chans = ft_split( args[0], "," );
 	std::string					response;
 	for ( std::vector<std::string>::iterator 			it = chans.begin(); it != chans.end(); it++ ) {
@@ -44,7 +45,7 @@ void	ft_part(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 		else {
 			std::cout << "Il peut quitter le channel "<< *it << std::endl;
 			response = RPL_QUIT(tmp->getNickname(), tmp->getUsername(), tmp->getHost(), message);
-			existingchannel->second.sendMessage( response, fds[i].fd );
+			existingchannel->second.sendToAll( response);
 			// theoriquement, on envoie a tou les gens du chan qu'on quitte
 			tmp->removeChannel( *it );
 			existingchannel->second.suppress_client( tmp->getNickname() );
@@ -55,3 +56,4 @@ void	ft_part(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 }
 
 // PROBLEME ! On envoit le message de quit pas au bon endroit, et on quit pas vraiment et ca c'est nul
+// c'etait juste qu'il fallait utiliser la fonction sendToAll au lieu de sendMessage ;)

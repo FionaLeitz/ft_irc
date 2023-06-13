@@ -649,12 +649,12 @@ NAMES : - adapter les variables symbol et prefix en fonction du statut de l'user
 OPER :	- plusieurs personnes peuvent se log en operateur en meme temps ?
 		- plusieurs combinaisons admin/mdp possible ? --> me parait chiant de ouf a faire
 		- ou stocker le fait qu'un user est server operateur pour le verifier par la suite ?
+PART :
 
 
 COMMANDE PAS DU TOUT FAITE :
 		kill
 		list
-		part
 		restart
 
 
