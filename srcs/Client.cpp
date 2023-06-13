@@ -3,6 +3,7 @@
 Client::Client( void ) {}
 
 Client::Client( const Client & value ) {
+	this->_canConnect = false;
 	this->_username = value.getUsername();
 	this->_nickname = value.getNickname();
 	this->_buffer = value.getBuffer();
@@ -13,6 +14,7 @@ Client::Client( const Client & value ) {
 Client::Client( const Client & value, struct sockaddr_in &ip) {
 	std::stringstream ss;
 
+	this->_canConnect = value.canConnect();
 	this->_username = value.getUsername();
 	this->_nickname = value.getNickname();
 	this->_buffer = value.getBuffer();
@@ -24,6 +26,7 @@ Client::Client( const Client & value, struct sockaddr_in &ip) {
 }
 
 Client &	Client::operator=( const Client & rhs ) {
+	this->_canConnect = rhs.canConnect();
 	this->_username = rhs.getUsername();
 	this->_nickname = rhs.getNickname();
 	this->_buffer = rhs.getBuffer();
@@ -53,6 +56,10 @@ void	Client::add_buff( char *buffer ) {
 // 	}
 // }
 
+bool	Client::canConnect(void) const {
+	return this->_canConnect;
+}
+
 const std::string &	Client::getUsername( void ) const {
 	return this->_username;
 }
@@ -71,6 +78,11 @@ const std::string &	Client::getBuffer( void ) const {
 
 const int &	Client::getFd( void ) const {
 	return this->_fd;
+}
+
+
+void	Client::setCanConnect(bool auth) {
+	this->_canConnect = auth;
 }
 
 void	Client::setNickname(std::string nick) {

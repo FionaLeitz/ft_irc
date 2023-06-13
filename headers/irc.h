@@ -37,6 +37,7 @@
 #define RPL_NAMREPLY(nickname, symbol, channel, prefix, user) (":server 353 " + nickname + " " + symbol + " " + channel + " :" + prefix + user + "\r\n")
 #define	RPL_YOUREOPER(nickname) (":server 381 " + nickname + " :You are now an IRC operator\r\n");
 
+#define	ERR_UNKOWNERROR(nickname, username, host, command, message) (":server 400 " + USER_ID(nickname, username, host) + " " + command + " :" + message + "\r\n")
 #define ERR_NOSUCHNICK(nickname, username, host, channel, target) (":server 401 " + USER_ID(nickname, username, host) + " " + channel + " " + target + " :No such nick\r\n")
 #define ERR_NOSUCHCHANNEL(nickname, username, host, target) (":server 403 " + USER_ID(nickname, username, host) + " " + target + " :No such channel\r\n")
 #define ERR_NOTEXTTOSEND(nickname, username, host) (":server 412 " + USER_ID(nickname, username, host) + " :No text to send\r\n")
@@ -115,5 +116,6 @@ int		findClientFd(const std::map<int, Client> &clientList, std::string nick);
 void	sendToAllClients(const std::map<std::string, Client> &clientList, std::string response);
 std::vector<std::string>	ft_split( std::string to_split, std::string separate );
 void	check_topic(Client *tmp, Channel &channel);
+int	isAuthorized(const Client &user, std::string command);
 
 #endif

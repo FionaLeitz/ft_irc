@@ -16,6 +16,7 @@ void	ft_nick(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 	(void)fds;
 	std::cout << "Received command NICK" << std::endl;// w args " << args[0] << " and " << args[1] << std::endl;
 	std::string	response;
+	std::string	RPLnick;
 	std::map<int, Client>::const_iterator it;
 	std::string oldNick;
 
@@ -31,6 +32,9 @@ void	ft_nick(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 		{
 			response = ERR_ERRONEUSNICKNAME(args[0]);
 			std::cout << "Invalid char in nick" << std::endl;
+			if (tmp->getNickname().empty())
+				(*tmp).setNickname(args[0]);
+			tmp->setCanConnect(false);
 		}
 		else
 		{
@@ -42,7 +46,9 @@ void	ft_nick(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 				{
 					std::cout << "Nickname deja pris par user " << it->first << " (" << USER_ID(it->second.getNickname(), it->second.getUsername(), it->second.getHost()) << ")" << std::endl;
 					response = ERR_NICKNAMEINUSE(args[0]);
-					(*tmp).setNickname(args[0]);
+					if (tmp->getNickname().empty())
+						(*tmp).setNickname(args[0]);
+					tmp->setCanConnect(false);
 					break ;
 				}
 			}
@@ -50,26 +56,17 @@ void	ft_nick(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 			if (it == context->clients.end())
 			{
 				std::cout << "Nickname dispo" << std::endl;
-				oldNick = tmp->getNickname();
 				if (oldNick.empty()){
-					oldNick = args[0];
+					oldNick = tmp->getNickname();
+					if (oldNick.empty())
+						oldNick = args[0];
 				}
-					response = RPL_NICK(oldNick, tmp->getUsername(), tmp->getHost(), args[0]);
+				response = RPL_NICK(oldNick, tmp->getUsername(), tmp->getHost(), args[0]);
 				(*tmp).setNickname(args[0]);
+				tmp->setCanConnect(true);
 			}
 		}
 		std::cout << "RPL = " << response << std::endl;
 		send(tmp->getFd(), response.c_str(), response.length(), 0);
 	}
-	// send(fds[i].fd, response.c_str(), response.length(), 0);
 }
-// The NICK message may be sent from the server to clients to acknowledge their NICK command was successful, and to inform other clients about the change of nickname. In these cases, the <source> of the message will be the old nickname [ [ "!" user ] "@" host ] of the user who is changing their nickname.
-
-//   :WiZ NICK Kilroy          ; WiZ changed his nickname to Kilroy.
-
-//   :dan-!d@localhost NICK Mamoped
-//                             ; dan- changed his nickname to Mamoped.
-
-
-// * :Nickname is already in use. Retrying with t...
-// * to the test IRC Network !t@127.0.0.1:56500

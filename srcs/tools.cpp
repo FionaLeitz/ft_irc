@@ -19,6 +19,19 @@ std::vector<std::string>	ft_split( std::string to_split, std::string separate ) 
 	return my_list;
 }
 
+int	isAuthorized(const Client &user, std::string command)
+{
+	std::string reply;
+
+	if (user.canConnect() == false)
+	{
+		reply = ERR_UNKOWNERROR(user.getNickname(), user.getUsername(), user.getHost(), command, "You must set a nickname first.");
+		send(user.getFd(), reply.c_str(), reply.size(), 0);
+		return 1;
+	}
+	return 0;
+}
+
 // int	main( int argc, char **argv ) {
 // 	if ( argc != 3 )
 // 		return 1;

@@ -6,7 +6,7 @@ void	ft_user(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 	std::cout << "Received command USER" << std::endl;// w args " << args[0] << " and " << args[1] << std::endl;
 	std::string	response;
 
-	if (tmp->getNickname().empty())
+	if (tmp->canConnect() == false)
 		return ;
 	if ( (*tmp).getUsername() != "\0" ) {
 		response = ":server 462 " + USER_ID( (*tmp).getNickname(), (*tmp).getUsername(), tmp->getHost()) + " :You may not reregister\r\n";

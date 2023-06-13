@@ -209,7 +209,10 @@ int	client_request( struct pollfd **fds, Client *tmp, std::string ref, int i, t_
 		{
 			if (cmd == funcTab[j].name)
 			{
-				(*(funcTab[j].ptr))(context, tmp, *fds, i, args);
+				if(cmd == "NICK" || tmp->canConnect() == true)
+					(*(funcTab[j].ptr))(context, tmp, *fds, i, args);
+				else
+					isAuthorized(*tmp, cmd);
 				break ;
 			}
 		}

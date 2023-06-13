@@ -17,12 +17,14 @@ class	Client {
 		void			clear( void );
 		// void			removefromall( void );
 
+		bool						canConnect(void) const;
 		const std::string &			getUsername( void ) const;
 		const std::string &			getNickname( void ) const;
 		const std::string &			getHost( void ) const;
 		const std::string &			getBuffer( void ) const;
 		const int &					getFd( void ) const;
 
+		void						setCanConnect(bool auth);
 		void						setNickname(std::string nick);
 		void						setUsername(std::string username);
 		void						setHost(std::string host);
@@ -38,6 +40,7 @@ class	Client {
 
 
 	private:
+		bool						_canConnect;
 		std::string					_username;
 		std::string					_nickname;
 		std::string					_host;
