@@ -660,7 +660,9 @@ COMMANDE PAS DU TOUT FAITE :
 
 
 TRUC EN PLUS :	- les signaux sur notre server
+					--> ca me parait ok !
 				- voir si on verifie des caracteres interdits dans le nickname
 				- rajouter dans toutes les erreurs le channel ou on veut l'envoyer
+					--> p't-etre on s'en fout ?
 				- bien virer le user de partout quand il part
 

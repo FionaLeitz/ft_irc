@@ -15,7 +15,6 @@ int	check_args( t_context *context, Client *tmp, std::vector<std::string> args, 
 		return -1;
 	}
 	*chan = &it->second;
-	std::cout << "ICI : " << args.size() << std::endl;
 	if ( args.size() == 1 || args[1].empty() ) {
 		response = RPL_CHANNELMODEIS((*tmp).getNickname(), args[0], " +", (*chan)->getMode());
 		std::cout << response << std::endl;
@@ -46,19 +45,19 @@ void	verify_valid_pass_size_operator( Client *tmp, int *letters_int, std::string
 			(*chan)->setPassword(new_args[pass]);
 	}
 	if ( letters_int[4] != 0 ) {
-		if ( new_args[oper].size() == 0 ) {
+		if ( new_args[oper].empty() ) {
 			std::string response = ERR_NEEDMOREPARAMS_MODE(tmp->getNickname(), chan[0]->getName(), "o", "op", "nick");
 			send(tmp->getFd(), response.c_str(), response.length(), 0);
 			letters_int[4] = -1;
 		}
 		else if ( letters_int[4] == 1 )
 		{
-			if (chan[0]->getOperators().find(tmp->getNickname()) != chan[0]->getOperators().end())
+			if (chan[0]->getOperators().find(new_args[oper]) != chan[0]->getOperators().end())
 				letters_int[4] = -1;
 			chan[0]->add_operator(new_args[oper]);
 		}
 		else {
-			if (chan[0]->getOperators().find(tmp->getNickname()) == chan[0]->getOperators().end())
+			if (chan[0]->getOperators().find(new_args[oper]) == chan[0]->getOperators().end())
 				letters_int[4] = -1;
 			chan[0]->suppress_operator(new_args[oper]);
 		}
@@ -158,19 +157,27 @@ void	ft_mode(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 			changes += "-";
 			changes += letters_char[count];
 		}
+		else {
+			letters_int[count] = 0;
+		}
 	}
 
 	if (changes.size() == 0 )
 		return ;
-	changes += " ";
-	if ( letters_int[1] == 1 )
+	if ( letters_int[1] == 1 ) {
+		changes += " ";
 		changes += new_args[pass];
-	changes += " ";
-	if ( letters_int[2] == 1 )
+	}
+	if ( letters_int[2] == 1 ) {
+		changes += " ";
 		changes += new_args[size];
-	changes += " ";
-	changes += new_args[oper];
+	}
+	if ( letters_int[4] != 0 ) {
+		changes += " ";
+		changes += new_args[oper];
+	}
 	chan->setMode( flags );
+	std::cout << "changes = " << changes << std::endl;
 	std::string response = RPL_MODE(tmp->getNickname(), tmp->getUsername(), tmp->getHost(), chan->getName(), changes); // remplacer args[1] par ce qui a ete effectivement change
 																									   // par exemple, si le mode etait deja t, et que le user fait +it, on ne doit mettre que +i ici
 	chan->sendToAll(response);
