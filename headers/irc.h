@@ -39,6 +39,7 @@
 
 #define ERR_NOSUCHNICK(nickname, username, host, channel, target) (":server 401 " + USER_ID(nickname, username, host) + " " + channel + " " + target + " :No such nick\r\n")
 #define ERR_NOSUCHCHANNEL(nickname, username, host, target) (":server 403 " + USER_ID(nickname, username, host) + " " + target + " :No such channel\r\n")
+#define ERR_NOTONCHANNEL(nickname, username, host, target) (":server 442 " + USER_ID(nickname, username, host) + " " + target + " :You're not on that channel\r\n")
 #define ERR_NOTEXTTOSEND(nickname, username, host) (":server 412 " + USER_ID(nickname, username, host) + " :No text to send\r\n")
 #define ERR_USERNOTINCHANNEL(nickname, username, host, channel, target) (":server 441 " + USER_ID(nickname, username, host) + " " + channel + " " + target + " :They aren't on that channel\r\n")
 #define ERR_NEEDMOREPARAMS(nickname, channel, command) (":server 461 " + nickname + " " + channel + " " + command + " :Not enough parameters\r\n")
