@@ -48,7 +48,7 @@
 #define ERR_NOTONCHANNEL(nickname, username, host, target) (":server 442 " + USER_ID(nickname, username, host) + " " + target + " :You're not on that channel\r\n")
 #define ERR_NEEDMOREPARAMS(nickname, channel, command) (":server 461 " + nickname + " " + channel + " " + command + " :Not enough parameters\r\n")
 #define ERR_NEEDMOREPARAMS_MODE(nickname, channel, command, mode, syntax) (":server 461 " + nickname + " " + channel + " " + command + " :You must specify a parameter for the " + mode + " mode. Syntax: <" + syntax + ">.\r\n")
-#define ERR_ALREADYREGISTERED(nickname, username, host)(":server 462 " + USER_ID( (*tmp).getNickname(), (*tmp).getUsername() ) + " :You may not reregister\r\n")
+#define ERR_ALREADYREGISTERED(nickname, username, host)(":server 462 " + USER_ID(nickname, username, host) + " :You may not reregister\r\n")
 #define ERR_PASSWDMISMATCH(nickname) (":server 464 " + nickname + " :Password incorrect\r\n");
 #define ERR_BADCHANNELKEY(nickname, channel) (":server 475 " + nickname + " " + channel + " :Cannot join " + channel + " (Requires keyword)\r\n")
 #define ERR_CHANOPRIVSNEEDED(nickname, channel) (":server 482 " + nickname + " " + channel + " :You're not channel operator\r\n")
@@ -56,6 +56,7 @@
 #define ERR_INVALIDMODEPARAM(nickname, username, channel, mode) (":server 696 " + nickname + " " + channel + " :Invalid " + mode + " mode parameter(s).\r\n")
 #define ERR_INVITEONLYCHAN(nickname, channel) (":server 473 " + nickname + " " + channel + " :Cannot join channel (+i)\r\n")
 #define ERR_CHANNELISFULL(nickname, channel) (":server 471 " + nickname + " " + channel + " :Cannot join channel (+l)\r\n")
+#define ERR_NOPRIVILEGES (nickname, username, host) (":server 481 " + USER_ID(nickname, username, host) + " :Permission Denied- You're not an IRC operator\r\n") 
 
 #define	RPL_NICK(oldNick, username, host, newNick) (":" + USER_ID(oldNick, username, host) + " NICK :" + newNick + "\r\n");
 #define	RPL_FIRSTNICK(nickname) (":server NICK :" + nickname + "\r\n");
@@ -67,6 +68,7 @@
 #define RPL_INVITE_MSG(nickname, username, host, target, channel) (":" + USER_ID(nickname, username, host) + " INVITE " + target + " :" + channel + "\r\n")
 #define RPL_MODE(nickname, username, host, channel, mode) (":" + USER_ID(nickname, username, host) + " MODE " + channel + " " + mode + "\r\n")
 #define	RPL_oMODE(nickname, username, host, mode) (":" + USER_ID(nickname, username, host) + " MODE " + nickname + " " + mode + "\r\n");
+#define RPL_KILL(nickname, username, host, target, message) (":server " + USER_ID(nickname, username, host) + " KILL " + target + ":" + message + "\r\n")
 
 
 // #define ERR_USERNOTINCHANNEL(nickname, username, channel, target) (":server 441 " + USER_ID(nickname, username, host) + " " + target + " :They aren't on that channel\r\n")

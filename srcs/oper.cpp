@@ -95,6 +95,7 @@ void	ft_oper(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 			send(tmp->getFd(), response.c_str(), response.size(), 0);
 			response = RPL_oMODE(tmp->getNickname(), tmp->getUsername(), tmp->getHost(), "+o");
 			send(tmp->getFd(), response.c_str(), response.size(), 0);
+			tmp->setOperator(true);
 		}
 	
 	}

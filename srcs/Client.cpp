@@ -9,6 +9,7 @@ Client::Client( const Client & value ) {
 	this->_buffer = value.getBuffer();
 	this->_fd = value.getFd();
 	this->_host = value.getHost();
+	this->_serverOperator = false;
 }
 
 Client::Client( const Client & value, struct sockaddr_in &ip) {
@@ -20,6 +21,7 @@ Client::Client( const Client & value, struct sockaddr_in &ip) {
 	this->_buffer = value.getBuffer();
 	this->_fd = value.getFd();
 	this->_ip = ip;
+	this->_serverOperator = value.getOperator();
 		
 	ss << inet_ntoa(this->_ip.sin_addr) << ":" << ntohs(this->_ip.sin_port);
 	this->_host = ss.str();
@@ -32,6 +34,7 @@ Client &	Client::operator=( const Client & rhs ) {
 	this->_buffer = rhs.getBuffer();
 	this->_fd = rhs.getFd();
 	this->_host = rhs.getHost();
+	this->_serverOperator = rhs.getOperator();
 	return *this;
 }
 
@@ -56,7 +59,7 @@ void	Client::add_buff( char *buffer ) {
 // 	}
 // }
 
-bool	Client::canConnect(void) const {
+const bool	Client::canConnect(void) const {
 	return this->_canConnect;
 }
 
@@ -110,6 +113,17 @@ const std::map<std::string, int>	&Client::getChannelList(void) const
 {
 	return this->_channelList;
 }
+
+void	Client::setOperator(bool status)
+{
+	this->_serverOperator = status;
+}
+
+const bool	Client::getOperator( void ) const
+{
+	return this->_serverOperator;
+}
+
 
 void	Client::addChannel(std::string name)
 {

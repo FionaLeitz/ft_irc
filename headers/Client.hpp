@@ -17,19 +17,21 @@ class	Client {
 		void			clear( void );
 		// void			removefromall( void );
 
-		bool						canConnect(void) const;
+		const bool					canConnect(void) const;
 		const std::string &			getUsername( void ) const;
 		const std::string &			getNickname( void ) const;
 		const std::string &			getHost( void ) const;
 		const std::string &			getBuffer( void ) const;
 		const int &					getFd( void ) const;
+		const struct sockaddr_in	&getIp(void) const;
+		const std::map<std::string, int>	&getChannelList(void) const;
+		const bool					getOperator( void ) const;
 
 		void						setCanConnect(bool auth);
 		void						setNickname(std::string nick);
 		void						setUsername(std::string username);
 		void						setHost(std::string host);
-		const struct sockaddr_in	&getIp(void) const;
-		const std::map<std::string, int>	&getChannelList(void) const;
+		void						setOperator(bool status);
 
 		void						addChannel(std::string name);
 		void						addInviteChannel(std::string name);
@@ -48,6 +50,7 @@ class	Client {
 		int							_fd;
 		struct sockaddr_in			_ip;
 		std::map<std::string, int>	_channelList;		//nom du channel, int pour dire si le user est membre ou est invite a rejoindre (1 = membre, 0 = invite mais pas encore membre)
+		bool						_serverOperator;
 		
 };
 
