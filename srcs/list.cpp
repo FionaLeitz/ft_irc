@@ -10,9 +10,9 @@ void	ft_list(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 	std::string response = RPL_LISTSTART(tmp->getNickname(), tmp->getUsername(), tmp->getHost());
 	send(tmp->getFd(), response.c_str(), response.length(), 0);
 	for ( std::map<std::string,Channel>::iterator it = context->channels.begin(); it != context->channels.end(); it++ ) {
-		response.clear();
-		// response = RPL_LIST(tmp->getNickname(), tmp->getUsername(), tmp->getHost(), it->first, it->second.getClientlist().size(), it->second.getTopic());
-		response = RPL_LIST(tmp->getNickname(), tmp->getUsername(), tmp->getHost(), it->first, "8", it->second.getTopic());
+		response.clear(); std::ostringstream oss;
+		oss << it->second.getClientlist().size();
+		response = RPL_LIST(tmp->getNickname(), tmp->getUsername(), tmp->getHost(), it->first, oss.str(), it->second.getTopic());
 		send(tmp->getFd(), response.c_str(), response.length(), 0);
 	}
 	response.clear();
