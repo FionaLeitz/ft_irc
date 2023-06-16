@@ -30,6 +30,8 @@ void	ft_nick(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 	std::map<int, Client>::const_iterator it;
 	std::string oldNick;
 
+	if (tmp->getPassBool() == false)
+		return ;
 	if (args.size() == 0)
 	{
 		response = ERR_NONICKNAMEGIVEN();

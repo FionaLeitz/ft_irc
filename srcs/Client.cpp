@@ -4,6 +4,7 @@ Client::Client( void ) {}
 
 Client::Client( const Client & value ) {
 	this->_canConnect = false;
+	this->_pass = false;
 	this->_username = value.getUsername();
 	this->_nickname = value.getNickname();
 	this->_buffer = value.getBuffer();
@@ -16,6 +17,7 @@ Client::Client( const Client & value, struct sockaddr_in &ip) {
 	std::stringstream ss;
 
 	this->_canConnect = value.canConnect();
+	this->_pass = value.getPassBool();
 	this->_username = value.getUsername();
 	this->_nickname = value.getNickname();
 	this->_buffer = value.getBuffer();
@@ -29,6 +31,7 @@ Client::Client( const Client & value, struct sockaddr_in &ip) {
 
 Client &	Client::operator=( const Client & rhs ) {
 	this->_canConnect = rhs.canConnect();
+	this->_pass = rhs.getPassBool();
 	this->_username = rhs.getUsername();
 	this->_nickname = rhs.getNickname();
 	this->_buffer = rhs.getBuffer();
@@ -63,6 +66,10 @@ const bool &	Client::canConnect(void) const {
 	return this->_canConnect;
 }
 
+const bool &	Client::getPassBool(void) const {
+	return this->_pass;
+}
+
 const std::string &	Client::getUsername( void ) const {
 	return this->_username;
 }
@@ -86,6 +93,10 @@ const int &	Client::getFd( void ) const {
 
 void	Client::setCanConnect(bool auth) {
 	this->_canConnect = auth;
+}
+
+void	Client::setPassBool(bool auth) {
+	this->_pass = auth;
 }
 
 void	Client::setNickname(std::string nick) {

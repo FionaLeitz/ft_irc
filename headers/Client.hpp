@@ -18,6 +18,7 @@ class	Client {
 		// void			removefromall( void );
 
 		const bool &				canConnect(void) const;
+		const bool &				getPassBool(void) const;
 		const std::string &			getUsername( void ) const;
 		const std::string &			getNickname( void ) const;
 		const std::string &			getHost( void ) const;
@@ -28,6 +29,7 @@ class	Client {
 		const bool &				getOperator( void ) const;
 
 		void						setCanConnect(bool auth);
+		void						setPassBool(bool auth);
 		void						setNickname(std::string nick);
 		void						setUsername(std::string username);
 		void						setHost(std::string host);
@@ -43,6 +45,7 @@ class	Client {
 
 	private:
 		bool						_canConnect;
+		bool						_pass;
 		std::string					_username;
 		std::string					_nickname;
 		std::string					_host;
