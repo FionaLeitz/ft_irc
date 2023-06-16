@@ -10,6 +10,16 @@
 // 				the <source> of the message will be the old nickname
 // 				[ [ "!" user ] "@" host ] of the user who is changing their nickname."
 
+bool	isStringAlnum(std::string s)
+{
+	for (unsigned long i = 0; i < s.size(); i++)
+	{
+		if (!isalnum(s[i]) && s[i] != '-' && s[i] != '_')
+			return false;
+	}
+	return true;
+}
+
 void	ft_nick(t_context *context, Client *tmp, struct pollfd *fds, int i, std::vector<std::string> args)
 {
 	(void)i;
@@ -28,7 +38,7 @@ void	ft_nick(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 	else
 	{
 		// check caracteres interdits
-		if (args[0].find_first_of("#:") != std::string::npos)
+		if (isStringAlnum(args[0]) == false)
 		{
 			response = ERR_ERRONEUSNICKNAME(args[0]);
 			std::cout << "Invalid char in nick" << std::endl;
