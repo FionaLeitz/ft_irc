@@ -8,6 +8,11 @@ void	ft_user(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 
 	if (tmp->canConnect() == false)
 		return ;
+	if (args.size() == 0) {
+		response = ERR_NEEDMOREPARAMS(tmp->getNickname(), "", "USER");
+		send(fds[i].fd, response.c_str(), response.length(), 0);
+		return ;
+	}
 	if ( (*tmp).getUsername() != "\0" ) {
 		response = ":server 462 " + USER_ID( (*tmp).getNickname(), (*tmp).getUsername(), tmp->getHost()) + " :You may not reregister\r\n";
 		send(fds[i].fd, response.c_str(), response.length(), 0);

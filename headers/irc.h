@@ -81,7 +81,6 @@
 
 
 typedef struct	s_context {
-	// a changer, int vers std::string pour le nickname
 	std::map<int, Client>			clients;
 	std::map<std::string, Channel>	channels;
 	std::string						password;

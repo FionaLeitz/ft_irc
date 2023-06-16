@@ -646,9 +646,6 @@ PART :
 
 
 COMMANDE PAS DU TOUT FAITE :
-		kill
-		list
-		restart
 
 
 TRUC EN PLUS :	- les signaux sur notre server
@@ -658,4 +655,12 @@ TRUC EN PLUS :	- les signaux sur notre server
 				- rajouter dans toutes les erreurs le channel ou on veut l'envoyer
 					--> p't-etre on s'en fout ?
 				- bien virer le user de partout quand il part
+
+
+
+
+
+
+
+
 
