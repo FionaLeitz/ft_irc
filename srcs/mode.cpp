@@ -44,24 +44,30 @@ void	verify_valid_pass_size_operator( Client *tmp, int *letters_int, std::string
 		else
 			(*chan)->setPassword(new_args[pass]);
 	}
+
+
 	if ( letters_int[4] != 0 ) {
 		if ( new_args[oper].empty() ) {
 			std::string response = ERR_NEEDMOREPARAMS_MODE(tmp->getNickname(), chan[0]->getName(), "o", "op", "nick");
 			send(tmp->getFd(), response.c_str(), response.length(), 0);
-			letters_int[4] = -1;
+			letters_int[4] = 0;
 		}
 		else if ( letters_int[4] == 1 )
 		{
-			if (chan[0]->getOperators().find(new_args[oper]) != chan[0]->getOperators().end())
-				letters_int[4] = -1;
-			chan[0]->add_operator(new_args[oper]);
+			if (chan[0]->getOperators().find(new_args[oper]) == chan[0]->getOperators().end() && chan[0]->getClientlist().find(new_args[oper]) != chan[0]->getClientlist().end())
+				chan[0]->add_operator(new_args[oper]);
+			else
+				letters_int[4] = 0;
 		}
 		else {
-			if (chan[0]->getOperators().find(new_args[oper]) == chan[0]->getOperators().end())
-				letters_int[4] = -1;
-			chan[0]->suppress_operator(new_args[oper]);
+			if (chan[0]->getOperators().find(new_args[oper]) != chan[0]->getOperators().end() && chan[0]->getClientlist().find(new_args[oper]) != chan[0]->getClientlist().end())
+				chan[0]->suppress_operator(new_args[oper]);
+			else
+				letters_int[4] = 0;
 		}
 	}
+
+
 	if ( letters_int[2] == 1 ) {
 		if ( new_args[size].size() == 0 ) {
 			std::string response = ERR_NEEDMOREPARAMS_MODE(tmp->getNickname(), chan[0]->getName(), "l", "limit", "limit");
