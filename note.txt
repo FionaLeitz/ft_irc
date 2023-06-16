@@ -655,6 +655,7 @@ TRUC EN PLUS :	- les signaux sur notre server
 				- rajouter dans toutes les erreurs le channel ou on veut l'envoyer
 					--> p't-etre on s'en fout ?
 				- bien virer le user de partout quand il part
+				- voir pk les mots sont tronques dans certains message d'erreur (ex : "incorrect", "have not registered"...)
 
 
 

@@ -46,11 +46,11 @@
 #define ERR_NICKNAMEINUSE(nickname) (":server 433 " + nickname + " :Nickname is already in use\r\n")
 #define ERR_USERNOTINCHANNEL(nickname, username, host, channel, target) (":server 441 " + USER_ID(nickname, username, host) + " " + channel + " " + target + " :They aren't on that channel\r\n")
 #define ERR_NOTONCHANNEL(nickname, username, host, target) (":server 442 " + USER_ID(nickname, username, host) + " " + target + " :You're not on that channel\r\n")
-#define ERR_NOTREGISTERED(nickname)(":server 451 " + nickname + " :You have not registered\r\n")
+#define ERR_NOTREGISTERED(nickname)(":server 451 " + nickname + " :You You have not registered\r\n")
 #define ERR_NEEDMOREPARAMS(nickname, channel, command) (":server 461 " + nickname + " " + channel + " " + command + " :Not enough parameters\r\n")
 #define ERR_NEEDMOREPARAMS_MODE(nickname, channel, command, mode, syntax) (":server 461 " + nickname + " " + channel + " " + command + " :You must specify a parameter for the " + mode + " mode. Syntax: <" + syntax + ">.\r\n")
 #define ERR_ALREADYREGISTERED(nickname, username, host)(":server 462 " + USER_ID(nickname, username, host) + " :You may not reregister\r\n")
-#define ERR_PASSWDMISMATCH(nickname) (":server 464 " + nickname + " :Password incorrect\r\n");
+#define ERR_PASSWDMISMATCH(nickname) (":server 464 " + nickname + " :Password Password incorrect\r\n");
 #define ERR_BADCHANNELKEY(nickname, channel) (":server 475 " + nickname + " " + channel + " :Cannot join " + channel + " (Requires keyword)\r\n")
 #define ERR_CHANOPRIVSNEEDED(nickname, channel) (":server 482 " + nickname + " " + channel + " :You're not channel operator\r\n")
 #define ERR_NOOPERHOST(nickname, username, host) (":server 491 " + USER_ID(nickname, username, host) + " :No O-lines for your host\r\n")
