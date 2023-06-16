@@ -632,22 +632,14 @@ JOIN :	- (une fois le channel rejoint, envoyer a la personne qui join le RPL_TOP
 		- (a faire ou pas ?) argument "0" (/join 0 ?) qui quitte tous les channels dans lequel est le user
 		- liste des users dans hexchat
 MODE :
-NICK : 	- si le nickname est deja utilise, ERR_NICKNAMEINUSE
-		- si le nickname n'est pas valide, ERR_ERRONEUSNICKNAME (peut etre interdire # : et espace (ca se gere deja je crois))
-		- hexchat : split automatiquement avec l'espace;  accepte ':' ;  accepte '#';
-		- si pas d'argument (pas de nickname communique) ERR_NONICKNAMEGIVEN
-				"The NICK message may be sent from the server to clients to
-				acknowledge their NICK command was successful, and to inform
-				other clients about the change of nickname. In these cases,
-				the <source> of the message will be the old nickname
-				[ [ "!" user ] "@" host ] of the user who is changing their nickname."
+NICK :
 PASS : 	- si le mot de passe est mauvais, trouver moyen de refuser la connexion (une variable dans chaque client peut-etre ? qu'on verifie par la suite)
 		- quand on ne rentre pas de mdp dans hexchat on peut se connecter dans tous les cas.... hexchat n'envoie pas la commande PASS donc on ne check pas
 PRIVMSG :
 KICK :	- eventuellement rajouter un caractere special quand on est operateur (ex : "cmeston_ H :0 Chine MESTON" -->  "cmeston_ H@ :0 Chine MESTON")
 TOPIC :
 NAMES : - adapter les variables symbol et prefix en fonction du statut de l'user (chanop, founder, protected, halfop, voice)
-OPER :	- plusieurs personnes peuvent se log en operateur en meme temps ?
+OPER :	- plusieurs personnes peuvent se log en operateur en meme temps ? --> auquel cas il faut changer tout le parsing du fichier .conf
 		- plusieurs combinaisons admin/mdp possible ? --> me parait chiant de ouf a faire
 		- ou stocker le fait qu'un user est server operateur pour le verifier par la suite ?
 PART :
