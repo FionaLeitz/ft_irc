@@ -42,7 +42,8 @@
 #define ERR_NOSUCHCHANNEL(nickname, username, host, target) (":server 403 " + USER_ID(nickname, username, host) + " " + target + " :No such channel\r\n")
 #define ERR_NOTEXTTOSEND(nickname, username, host) (":server 412 " + USER_ID(nickname, username, host) + " :No text to send\r\n")
 #define ERR_NONICKNAMEGIVEN() (":server 431 :No nickname given\r\n")
-#define ERR_ERRONEUSNICKNAME(nickname) (":server 432 " + nickname + " :Erroneus nickname\r\n")
+// #define ERR_ERRONEUSNICKNAME(nickname) (":server 432 " + nickname + " :Erroneus nickname\r\n")
+#define ERR_ERRONEUSNICKNAME(nickname) (":server 432 " + nickname + "nicsdkname\r\n")
 #define ERR_NICKNAMEINUSE(nickname) (":server 433 " + nickname + " :Nickname is already in use\r\n")
 #define ERR_USERNOTINCHANNEL(nickname, username, host, channel, target) (":server 441 " + USER_ID(nickname, username, host) + " " + channel + " " + target + " :They aren't on that channel\r\n")
 #define ERR_NOTONCHANNEL(nickname, username, host, target) (":server 442 " + USER_ID(nickname, username, host) + " " + target + " :You're not on that channel\r\n")
@@ -73,6 +74,7 @@
 #define RPL_LISTSTART(nickname, username, host) (":server 321 " + USER_ID(nickname, username, host) + " Channel :Users Name\r\n")
 #define RPL_LIST(nickname, username, host, channel, count, topic) (":server 322 " + USER_ID(nickname, username, host) + " " + channel + " " + count + " :" + topic + "\r\n")
 #define RPL_LISTEND(nickname, username, host) (":server 323 " + USER_ID(nickname, username, host) + " :End of /LIST\r\n")
+#define RPL_PART(nickname, username, host, channel, message) (":" + USER_ID(nickname, username, host) + " PART " + channel + " " + message + "\r\n")
 
 // #define ERR_USERNOTINCHANNEL(nickname, username, channel, target) (":server 441 " + USER_ID(nickname, username, host) + " " + target + " :They aren't on that channel\r\n")
 // normalement comme ca, et le msg d'erreur arrive sur l'onglet principal (et non pas sur le channel)

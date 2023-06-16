@@ -1,224 +1,68 @@
+
 << CAP LS
 << NICK cmeston
-<< USER cmeston cmeston irc.ircsource.net :Chine MESTON
->> NOTICE AUTH :*** Processing connection to irc.sosdg.org
->> NOTICE AUTH :*** Looking up your hostname...
->> NOTICE AUTH :*** Checking Ident
->> NOTICE AUTH :*** Couldn't look up your hostname
->> NOTICE AUTH :*** No Ident response
->> :irc.sosdg.org CAP * LS :multi-prefix
-<< CAP REQ :multi-prefix
->> :irc.sosdg.org CAP cmeston ACK :multi-prefix 
-<< CAP END
->> :irc.sosdg.org 001 cmeston :Welcome to the IRCsource Internet Relay Chat Network cmeston
+<< USER cmeston cmeston irc.dal.net :Chine MESTON
+>> :choopa.nj.us.dal.net NOTICE AUTH :*** Looking up your hostname...
+>> :choopa.nj.us.dal.net NOTICE AUTH :*** Checking Ident
+>> :choopa.nj.us.dal.net NOTICE AUTH :*** Couldn't look up your hostname
+>> :choopa.nj.us.dal.net NOTICE AUTH :*** No Ident response
+>> :choopa.nj.us.dal.net 001 cmeston :Welcome to the DALnet IRC Network cmeston!~cmeston@62.210.33.1
 << MODE cmeston +i
->> :irc.sosdg.org 002 cmeston :Your host is irc.sosdg.org[205.233.35.10/6667], running version ircd-ratbox-3.0.10
->> :irc.sosdg.org 003 cmeston :This server was created Tue Jun 13 2017 at 11:22:31 MDT
->> :irc.sosdg.org 004 cmeston irc.sosdg.org ircd-ratbox-3.0.10 oiwszcrkfydnxbauglZCD biklmnopstveIrS bkloveI
->> :irc.sosdg.org 005 cmeston CHANTYPES=&# EXCEPTS INVEX CHANMODES=eIb,k,l,imnpstS CHANLIMIT=&#:25 PREFIX=(ov)@+ MAXLIST=beI:100 MODES=4 NETWORK=IRCsource KNOCK STATUSMSG=@+ CALLERID=g :are supported by this server
->> :irc.sosdg.org 005 cmeston SAFELIST ELIST=U CASEMAPPING=rfc1459 CHARSET=ascii NICKLEN=9 CHANNELLEN=50 TOPICLEN=160 ETRACE CPRIVMSG CNOTICE DEAF=D MONITOR=60 :are supported by this server
->> :irc.sosdg.org 005 cmeston FNC ACCEPT=20 MAP TARGMAX=NAMES:1,LIST:1,KICK:1,WHOIS:1,PRIVMSG:4,NOTICE:4,ACCEPT:,MONITOR: :are supported by this server
->> :irc.sosdg.org 251 cmeston :There are 18 users and 68 invisible on 15 servers
->> :irc.sosdg.org 252 cmeston 29 :IRC Operators online
->> :irc.sosdg.org 254 cmeston 43 :channels formed
->> :irc.sosdg.org 255 cmeston :I have 4 clients and 1 servers
->> :irc.sosdg.org 265 cmeston 4 13 :Current local users 4, max 13
->> :irc.sosdg.org 266 cmeston 86 98 :Current global users 86, max 98
->> :irc.sosdg.org 250 cmeston :Highest connection count: 14 (13 clients) (734 connections received)
->> :irc.sosdg.org 375 cmeston :- irc.sosdg.org Message of the Day - 
->> :irc.sosdg.org 372 cmeston :-                  _                            _        
->> :irc.sosdg.org 372 cmeston :-    __      _____| | ___ ___  _ __ ___   ___  | |_ ___  
->> :irc.sosdg.org 372 cmeston :-    \ \ /\ / / _ \ |/ __/ _ \| '_ ` _ \ / _ \ | __/ _ \ 
->> :irc.sosdg.org 372 cmeston :-     \ V  V /  __/ | (_| (_) | | | | | |  __/ | || (_) |
->> :irc.sosdg.org 372 cmeston :-      \_/\_/ \___|_|\___\___/|_| |_| |_|\___|  \__\___/ 
->> :irc.sosdg.org 372 cmeston :-                           ____   ___  ____  ____   ____ 
->> :irc.sosdg.org 372 cmeston :-                          / ___| / _ \/ ___||  _ \ / ___|
->> :irc.sosdg.org 372 cmeston :-                          \___ \| | | \___ \| | | | |  _ 
->> :irc.sosdg.org 372 cmeston :-                           ___) | |_| |___) | |_| | |_| |
->> :irc.sosdg.org 372 cmeston :-                          |____/ \___/|____/|____/ \____|
->> :irc.sosdg.org 372 cmeston :-  
->> :irc.sosdg.org 372 cmeston :-                          Visit us @ http://www.sosdg.org
->> :irc.sosdg.org 372 cmeston :-   
->> :irc.sosdg.org 372 cmeston :-                         You are connected to irc.sosdg.org  
->> :irc.sosdg.org 372 cmeston :-                  Listening on ports: 5000, 6665 - 6669, 7000 - 7001 
->> :irc.sosdg.org 372 cmeston :-                          Now with SSL on port 6697, 9000
->> :irc.sosdg.org 372 cmeston :-    
->> :irc.sosdg.org 372 cmeston :-    +------- Server Rules ---------------------------------------------+
->> :irc.sosdg.org 372 cmeston :-    |                                                                  |
->> :irc.sosdg.org 372 cmeston :-    |       o No Flooding                     o No Spamming            |
->> :irc.sosdg.org 372 cmeston :-    |       o No Clones                       o No Drones              |
->> :irc.sosdg.org 372 cmeston :-    |       o No Abusive Bots                 o No Whining             |
->> :irc.sosdg.org 372 cmeston :-    |                                                                  |
->> :irc.sosdg.org 372 cmeston :-    |        Do NOT ask for spoofs on this server, as we only spoof    |
->> :irc.sosdg.org 372 cmeston :-    |             our opers, staff, and booty call friends.            |
->> :irc.sosdg.org 372 cmeston :-    |                                                                  |
->> :irc.sosdg.org 372 cmeston :-    |         Do NOT ask for an O-Line, get a real job instead!        |
->> :irc.sosdg.org 372 cmeston :-    |                                                                  |
->> :irc.sosdg.org 372 cmeston :-    +------- Server Staff ---------------------------------------------+
->> :irc.sosdg.org 372 cmeston :-    |                                                                  |
->> :irc.sosdg.org 372 cmeston :-    |       o IRC Admin: raven                                         |
->> :irc.sosdg.org 372 cmeston :-    |                                                                  |
->> :irc.sosdg.org 372 cmeston :-    |       o Co-Admin: gmh                                            |
->> :irc.sosdg.org 372 cmeston :-    |                                                                  |
->> :irc.sosdg.org 372 cmeston :-    |       o IRCop: snugglo                                           |
->> :irc.sosdg.org 372 cmeston :-    |                                                                  |
->> :irc.sosdg.org 372 cmeston :-    |             Need to talk to us? Please join #SOSDG               |
->> :irc.sosdg.org 372 cmeston :-    |                                                                  |
->> :irc.sosdg.org 372 cmeston :-    +------- Disclaimer -----------------------------------------------+
->> :irc.sosdg.org 372 cmeston :-    |                                                                  |
->> :irc.sosdg.org 372 cmeston :-    |   IRC is an unmoderated chat forum and we shall take no legal    |
->> :irc.sosdg.org 372 cmeston :-    |   liability or responsibility for the content of any messages    |
->> :irc.sosdg.org 372 cmeston :-    |  or files which might pass through this server and the results   |
->> :irc.sosdg.org 372 cmeston :-    |   of running any commands you choose or do not choose to run     |
->> :irc.sosdg.org 372 cmeston :-    |   as a result of being connected to this server.                 |
->> :irc.sosdg.org 372 cmeston :-    |                                                                  |
->> :irc.sosdg.org 372 cmeston :-    |   Use of this server is a *privilege* which may be removed at    |
->> :irc.sosdg.org 372 cmeston :-    |    any time and for any reason by the friendly server staff.     |
->> :irc.sosdg.org 372 cmeston :-    |                                                                  |
->> :irc.sosdg.org 372 cmeston :-    +------- Notices --------------------------------------------------+
->> :irc.sosdg.org 372 cmeston :-    |                                                                  |
->> :irc.sosdg.org 372 cmeston :-    |   8 Aug, 2011:    Server up again after spending a few years     |
->> :irc.sosdg.org 372 cmeston :-    |                   under my bed, keeping the trolls away!! We     |
->> :irc.sosdg.org 372 cmeston :-    |                   now support SSL (port 6697 and 9000) and IPv6  |
->> :irc.sosdg.org 372 cmeston :-    |                   access along with IPv4.                        |
->> :irc.sosdg.org 372 cmeston :-    |                                                                  |
->> :irc.sosdg.org 372 cmeston :-    |   2 Sep, 2011:    Voting passed and we are now linked in with    |
->> :irc.sosdg.org 372 cmeston :-    |                   IRCsource. Hope they are ready for some        |
->> :irc.sosdg.org 372 cmeston :-    |                   SOSDG action! :)                               |
->> :irc.sosdg.org 372 cmeston :-    |                                                                  |
->> :irc.sosdg.org 372 cmeston :-    +------- End of MOTD ----------------------------------------------+
->> :irc.sosdg.org 372 cmeston :-  
->> :irc.sosdg.org 372 cmeston :-  
->> :irc.sosdg.org 372 cmeston :-  
->> :irc.sosdg.org 376 cmeston :End of /MOTD command.
->> :cmeston MODE cmeston :+i
-<< PING irc.sosdg.org
->> :irc.sosdg.org PONG irc.sosdg.org :irc.sosdg.org
+>> :choopa.nj.us.dal.net 002 cmeston :Your host is choopa.nj.us.dal.net, running version bahamut-2.2.2
+>> :choopa.nj.us.dal.net 003 cmeston :This server was created Tue Aug 23 2022 at 00:35:14 EDT
+>> :choopa.nj.us.dal.net 004 cmeston choopa.nj.us.dal.net bahamut-2.2.2 aAbcCdefFghHiIjkKmnoOPrRsSwxXy AbceiIjklLmMnoOpPrRsStv beIjklov
+>> :choopa.nj.us.dal.net 005 cmeston NETWORK=DALnet SAFELIST MAXBANS=200 MAXCHANNELS=20 CHANNELLEN=32 KICKLEN=307 NICKLEN=30 TOPICLEN=307 MODES=6 CHANTYPES=# CHANLIMIT=#:20 PREFIX=(ohv)@%+ STATUSMSG=@%+ :are available on this server
+>> :choopa.nj.us.dal.net 005 cmeston CASEMAPPING=ascii WATCH=128 SILENCE=10 ELIST=cmntu EXCEPTS INVEX CHANMODES=beI,k,jl,ciPAmMnOprRsSt MAXLIST=b:200,e:100,I:100 TARGMAX=DCCALLOW:,JOIN:,KICK:4,KILL:20,NOTICE:20,PART:,PRIVMSG:20,WHOIS:,WHOWAS: :are available on this server
+>> :choopa.nj.us.dal.net 251 cmeston :There are 87 users and 6979 invisible on 35 servers
+>> :choopa.nj.us.dal.net 252 cmeston 61 :IRC Operators online
+>> :choopa.nj.us.dal.net 254 cmeston 3814 :channels formed
+>> :choopa.nj.us.dal.net 255 cmeston :I have 263 clients and 1 servers
+>> :choopa.nj.us.dal.net 265 cmeston :Current local users: 263 Max: 2193
+>> :choopa.nj.us.dal.net 266 cmeston :Current global users: 7066 Max: 12809
+>> :choopa.nj.us.dal.net NOTICE cmeston :*** Notice -- motd was last changed at 16/3/2021 11:13
+>> :choopa.nj.us.dal.net 375 cmeston :- choopa.nj.us.dal.net Message of the Day - 
+>> :choopa.nj.us.dal.net 372 cmeston :-16/3/2021 11:13
+>> :choopa.nj.us.dal.net 372 cmeston :- Welcome to choopa.nj.us.dal.net!
+>> :choopa.nj.us.dal.net 372 cmeston :- 
+>> :choopa.nj.us.dal.net 372 cmeston :-   .,-:::::   ::   .:      ...         ...   ::::::::::. :::.
+>> :choopa.nj.us.dal.net 372 cmeston :- ,;;;'````'  ,;;   ;;,  .;;;;;;;.   .;;;;;;;. `;;;```.;;;;;`;;
+>> :choopa.nj.us.dal.net 372 cmeston :- [[[        ,[[[,,,[[[ ,[[     \[[,,[[     \[[,`]]nnn]]',[[ '[[,
+>> :choopa.nj.us.dal.net 372 cmeston :- $$$        "$$$"""$$$ $$$,     $$$$$$,     $$$ $$$""  c$$$cc$$$c
+>> :choopa.nj.us.dal.net 372 cmeston :- `88bo,__,o, 888   "88o"888,_ _,88P"888,_ _,88P 888o    888   888,
+>> :choopa.nj.us.dal.net 372 cmeston :-   "YUMMMMMP"MMM    YMM  "YMMMMMP"   "YMMMMMP"  YMMMb   YMM   ""`
+>> :choopa.nj.us.dal.net 372 cmeston :- 
+>> :choopa.nj.us.dal.net 372 cmeston :- Server generously sponsored by http://www.choopa.com/
+>> :choopa.nj.us.dal.net 372 cmeston :- 
+>> :choopa.nj.us.dal.net 372 cmeston :- By connecting to this server you agree to be bound by the terms put forth
+>> :choopa.nj.us.dal.net 372 cmeston :- in DALnet's Acceptable Use Policy (http://www.dal.net/aup/)
+>> :choopa.nj.us.dal.net 372 cmeston :- 
+>> :choopa.nj.us.dal.net 372 cmeston :- For questions; please contact choopa-staff@dal.net
+>> :choopa.nj.us.dal.net 376 cmeston :End of /MOTD command.
+>> :choopa.nj.us.dal.net NOTICE cmeston :*** Notice -- This server runs an open proxy monitor to prevent abuse.
+>> :choopa.nj.us.dal.net NOTICE cmeston :*** Notice -- If you see connections on various ports from 108.61.240.240
+>> :choopa.nj.us.dal.net NOTICE cmeston :*** Notice -- please disregard them, as they are the monitor in action.
+>> :choopa.nj.us.dal.net NOTICE cmeston :*** Notice -- For more information please visit kline.dal.net/proxy/wingate.htm
+>> :cmeston MODE cmeston :+iH
+<< PING choopa.nj.us.dal.net
+>> :choopa.nj.us.dal.net PONG choopa.nj.us.dal.net :cmeston
 --> lag pong
-<< NICK tototo
->> :cmeston!~cmeston@62.210.33.47 NICK :tototo
-<< NICK toto
->> :tototo!~cmeston@62.210.33.47 NICK :toto
-<< JOIN #hlp
->> :toto!~cmeston@62.210.33.47 JOIN :#hlp
->> :irc.sosdg.org MODE #hlp +nt
->> :irc.sosdg.org 353 toto = #hlp :@toto
->> :irc.sosdg.org 366 toto #hlp :End of /NAMES list.
-<< MODE #hlp
->> :irc.sosdg.org 324 toto #hlp +tn
+<< JOIN #uwuwuwuwu
+>> :cmeston!~cmeston@dd87-b33b-eb70-76be-57f1.210.62.ip JOIN :#uwuwuwuwu
+>> :choopa.nj.us.dal.net 353 cmeston = #uwuwuwuwu :@cmeston 
+>> :choopa.nj.us.dal.net 366 cmeston #uwuwuwuwu :End of /NAMES list.
+<< MODE #uwuwuwuwu
+>> :choopa.nj.us.dal.net 324 cmeston #uwuwuwuwu + 
 --> chanquery mode
-<< WHO #hlp
->> :irc.sosdg.org 329 toto #hlp 1686666310
+<< WHO #uwuwuwuwu
+>> :choopa.nj.us.dal.net 329 cmeston #uwuwuwuwu 1686918702
 --> event 329
->> :irc.sosdg.org 352 toto #hlp ~cmeston 62.210.33.47 irc.sosdg.org toto H@ :0 Chine MESTON
+>> :choopa.nj.us.dal.net 352 cmeston #uwuwuwuwu ~cmeston dd87-b33b-eb70-76be-57f1.210.62.ip choopa.nj.us.dal.net cmeston H@ :0 Chine MESTON
 --> silent event who
->> :irc.sosdg.org 315 toto #hlp :End of /WHO list.
+>> :choopa.nj.us.dal.net 315 cmeston #uwuwuwuwu :End of /WHO list.
 --> chanquery who end
-<< MODE #hlp b
->> :irc.sosdg.org 368 toto #hlp :End of Channel Ban List
+<< MODE #uwuwuwuwu b
+>> :choopa.nj.us.dal.net 368 cmeston #uwuwuwuwu :End of Channel Ban List
 --> chanquery ban end
-<< JOIN #help
->> :toto!~cmeston@62.210.33.47 JOIN :#help
->> :irc.sosdg.org MODE #help +nt
->> :irc.sosdg.org 353 toto = #help :@toto
->> :irc.sosdg.org 366 toto #help :End of /NAMES list.
-<< MODE #help
->> :irc.sosdg.org 324 toto #help +tn
---> chanquery mode
-<< WHO #help
->> :irc.sosdg.org 329 toto #help 1686666314
---> event 329
->> :irc.sosdg.org 352 toto #help ~cmeston 62.210.33.47 irc.sosdg.org toto H@ :0 Chine MESTON
---> silent event who
->> :irc.sosdg.org 315 toto #help :End of /WHO list.
---> chanquery who end
-<< MODE #help b
->> :irc.sosdg.org 368 toto #help :End of Channel Ban List
---> chanquery ban end
-<< LIST 
->> :irc.sosdg.org 321 toto Channel :Users  Name
->> :irc.sosdg.org 322 toto #help 1 :
->> :irc.sosdg.org 322 toto #hlp 1 :
->> :irc.sosdg.org 322 toto #PoulsKitchen 11 :Welcome to #PoulsKitchen Please Be Respectful  www.PoulsKitchen.club https://youtu.be/eoattbjrnOw
->> :irc.sosdg.org 322 toto #irc.unworldly.nl 11 :irc.unworldly.nl (formerly known as irc.coruscant.org)
->> :irc.sosdg.org 322 toto #CoolServer 3 :WELCOME BACK TO IRCSOURCE, TOOCOOL! \o/ 
->> :irc.sosdg.org 322 toto #irc.nbots.net 4 :
->> :irc.sosdg.org 322 toto #irc.okcnet.net 3 :
->> :irc.sosdg.org 322 toto #underworld 4 :
->> :irc.sosdg.org 322 toto #switch 1 :
->> :irc.sosdg.org 322 toto #ninja 1 :
->> :irc.sosdg.org 322 toto #music-cafe 4 :1,08Welcome to #music-cafe on IRCsource |12,05This Channel is linked with all other music channels on IRC|1,09Enjoy it here please! |
->> :irc.sosdg.org 322 toto #scc 1 :
->> :irc.sosdg.org 322 toto #netsplit 1 :
->> :irc.sosdg.org 322 toto #ircsource 38 :Welcome to IRCSource | https://ircsource.net/
->> :irc.sosdg.org 323 toto :End of /LIST
-<< PART #help
->> :toto!~cmeston@62.210.33.47 PART #help
-<< PART #hlp
->> :toto!~cmeston@62.210.33.47 PART #hlp
-<< LIST 
->> :irc.sosdg.org 321 toto Channel :Users  Name
->> :irc.sosdg.org 322 toto #PoulsKitchen 11 :Welcome to #PoulsKitchen Please Be Respectful  www.PoulsKitchen.club https://youtu.be/eoattbjrnOw
->> :irc.sosdg.org 322 toto #irc.unworldly.nl 11 :irc.unworldly.nl (formerly known as irc.coruscant.org)
->> :irc.sosdg.org 322 toto #CoolServer 3 :WELCOME BACK TO IRCSOURCE, TOOCOOL! \o/ 
->> :irc.sosdg.org 322 toto #irc.nbots.net 4 :
->> :irc.sosdg.org 322 toto #irc.okcnet.net 3 :
->> :irc.sosdg.org 322 toto #underworld 4 :
->> :irc.sosdg.org 322 toto #switch 1 :
->> :irc.sosdg.org 322 toto #ninja 1 :
->> :irc.sosdg.org 322 toto #music-cafe 4 :1,08Welcome to #music-cafe on IRCsource |12,05This Channel is linked with all other music channels on IRC|1,09Enjoy it here please! |
->> :irc.sosdg.org 322 toto #scc 1 :
->> :irc.sosdg.org 322 toto #netsplit 1 :
->> :irc.sosdg.org 322 toto #ircsource 38 :Welcome to IRCSource | https://ircsource.net/
->> :irc.sosdg.org 323 toto :End of /LIST
-<< JOIN #music-cafe
->> :toto!~cmeston@62.210.33.47 JOIN :#music-cafe
->> :irc.sosdg.org 332 toto #music-cafe :1,08Welcome to #music-cafe on IRCsource |12,05This Channel is linked with all other music channels on IRC|1,09Enjoy it here please! |
->> :irc.sosdg.org 333 toto #music-cafe Chewbakka!~chewy@irc.chewbakka.ch 1665325799
->> :irc.sosdg.org 353 toto = #music-cafe :toto @Quo-fun ChewyLonk Chewbakka Quo-fan
->> :irc.sosdg.org 366 toto #music-cafe :End of /NAMES list.
-<< MODE #music-cafe
->> :irc.sosdg.org 324 toto #music-cafe +
---> chanquery mode
-<< WHO #music-cafe
->> :irc.sosdg.org 329 toto #music-cafe 1658516020
---> event 329
->> :irc.sosdg.org 352 toto #music-cafe ~cmeston 62.210.33.47 irc.sosdg.org toto H :0 Chine MESTON
---> silent event who
->> :irc.sosdg.org 352 toto #music-cafe quofan status-quo.rules ircsource.quoservers.net Quo-fun H@ :3 Terho Nikkila
---> silent event who
->> :irc.sosdg.org 352 toto #music-cafe ~Relay znc.irc.chewbakka.ch ircsource.quoservers.net ChewyLonk H :3 Relay
---> silent event who
->> :irc.sosdg.org 352 toto #music-cafe ~chewy irc.chewbakka.ch ircsource.quoservers.net Chewbakka G :3 danny
---> silent event who
->> :irc.sosdg.org 352 toto #music-cafe quofan quo.rocks ircsource.quoservers.net Quo-fan H* :3 Terho Nikkila
---> silent event who
->> :irc.sosdg.org 315 toto #music-cafe :End of /WHO list.
---> chanquery who end
-<< MODE #music-cafe b
->> :irc.sosdg.org 367 toto #music-cafe *!*@38.* east.ca.hub 1686643488
---> chanquery ban
->> :irc.sosdg.org 367 toto #music-cafe *!*CRAZYMF@* east.ca.hub 1686643488
---> chanquery ban
->> :irc.sosdg.org 367 toto #music-cafe *!*@38.54.* east.ca.hub 1686643488
---> chanquery ban
->> :irc.sosdg.org 368 toto #music-cafe :End of Channel Ban List
---> chanquery ban end
-<< WHO #music-cafe
->> :irc.sosdg.org 352 toto #music-cafe ~cmeston 62.210.33.47 irc.sosdg.org toto H :0 Chine MESTON
->> :irc.sosdg.org 352 toto #music-cafe quofan status-quo.rules ircsource.quoservers.net Quo-fun H@ :3 Terho Nikkila
->> :irc.sosdg.org 352 toto #music-cafe ~Relay znc.irc.chewbakka.ch ircsource.quoservers.net ChewyLonk H :3 Relay
->> :irc.sosdg.org 352 toto #music-cafe ~chewy irc.chewbakka.ch ircsource.quoservers.net Chewbakka G :3 danny
->> :irc.sosdg.org 352 toto #music-cafe quofan quo.rocks ircsource.quoservers.net Quo-fan H* :3 Terho Nikkila
->> :irc.sosdg.org 315 toto #music-cafe :End of /WHO list.
-<< PING irc.sosdg.org
->> :irc.sosdg.org PONG irc.sosdg.org :irc.sosdg.org
---> lag pong
-<< NICK tototo
->> :toto!~cmeston@62.210.33.47 NICK :tototo
-<< NICK Chewbakka
->> :irc.sosdg.org 433 tototo Chewbakka :Nickname is already in use.
-<< PING irc.sosdg.org
->> :irc.sosdg.org PONG irc.sosdg.org :irc.sosdg.org
---> lag pong
+<< PART #uwuwuwuwu
+>> :cmeston!~cmeston@dd87-b33b-eb70-76be-57f1.210.62.ip PART #uwuwuwuwu
 << QUIT :Lost terminal

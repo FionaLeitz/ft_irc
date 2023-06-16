@@ -44,13 +44,16 @@ void	ft_part(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 		}
 		else {
 			std::cout << "Il peut quitter le channel "<< *it << std::endl;
-			response = RPL_QUIT(tmp->getNickname(), tmp->getUsername(), tmp->getHost(), message);
+			response = RPL_PART(tmp->getNickname(), tmp->getUsername(), tmp->getHost(), *it, message);
+			std::cout << "rpl : " << response << std::endl;
 			existingchannel->second.sendToAll( response);
 			// theoriquement, on envoie a tou les gens du chan qu'on quitte
 			tmp->removeChannel( *it );
 			existingchannel->second.suppress_client( tmp->getNickname() );
 			// on remove ce channel des listes du client
 			// et on le vire des listes du channel
+
+			// :cmeston!~cmeston@dd87-b33b-eb70-76be-57f1.210.62.ip PART #uwuwuwuwu
 		}
 	}
 }
