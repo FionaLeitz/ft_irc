@@ -28,19 +28,31 @@ void	ft_kill(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 	else
 	{
 		fd = findClientFd(context->clients, args[0]);
-		if (fd == -1)
+		if (fd == -1) {
 			reply = ERR_NOSUCHNICK(tmp->getNickname(), tmp->getUsername(), tmp->getHost(), "", args[0]);
+			send(tmp->getFd(), reply.c_str(), reply.size(), 0);
+		}
 		else
 		{
 			target = &context->clients[fd];
 			reply = RPL_KILL(tmp->getNickname(), tmp->getUsername(), tmp->getHost(), args[0], args[1]);
+			std::cout << "RPL = " << reply << std::endl;
 			send(fd, reply.c_str(), reply.size(), 0);
 			reply = RPL_QUIT(target->getNickname(), target->getUsername(), target->getHost(), killMessage(tmp->getNickname(), args[1]));
 			context->clients[fd].leaveAllChannels(context->channels, reply);
-			reply = "ERROR :Closing Link: server (Killed (Operator (Excessive spamming)))"; //test
+			reply = "ERROR :Closing Link: server (Killed (Operator (Excessive spamming)))\r\n"; //test
+			std::cout << "RPL = " << reply << std::endl;
 			send(fd, reply.c_str(), reply.size(), 0);
 			//close la connexion
-
+			context->clients.erase(fd);
+			close(fd);
+			for (int i = 0; i < context->socket_nbr[0]; i++) {
+				if (fds[i].fd == fd)
+				{
+					fds[i].fd = -1;
+					break ;
+				}
+			}
 		}
 	}
 }

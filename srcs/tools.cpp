@@ -22,10 +22,12 @@ std::vector<std::string>	ft_split( std::string to_split, std::string separate ) 
 int	isAuthorized(const Client &user, std::string command)
 {
 	std::string reply;
-
+	(void)command;
+	
 	if (user.canConnect() == false)
 	{
-		reply = ERR_UNKOWNERROR(user.getNickname(), user.getUsername(), user.getHost(), command, "You must set a nickname first.");
+		// reply = ERR_UNKOWNERROR(user.getNickname(), user.getUsername(), user.getHost(), command, "You must set a nickname first.");
+		reply = ERR_NOTREGISTERED(user.getNickname());
 		send(user.getFd(), reply.c_str(), reply.size(), 0);
 		return 1;
 	}

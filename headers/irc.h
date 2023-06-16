@@ -46,6 +46,7 @@
 #define ERR_NICKNAMEINUSE(nickname) (":server 433 " + nickname + " :Nickname is already in use\r\n")
 #define ERR_USERNOTINCHANNEL(nickname, username, host, channel, target) (":server 441 " + USER_ID(nickname, username, host) + " " + channel + " " + target + " :They aren't on that channel\r\n")
 #define ERR_NOTONCHANNEL(nickname, username, host, target) (":server 442 " + USER_ID(nickname, username, host) + " " + target + " :You're not on that channel\r\n")
+#define ERR_NOTREGISTERED(nickname)(":server 451 " + nickname + " :You have not registered\r\n")
 #define ERR_NEEDMOREPARAMS(nickname, channel, command) (":server 461 " + nickname + " " + channel + " " + command + " :Not enough parameters\r\n")
 #define ERR_NEEDMOREPARAMS_MODE(nickname, channel, command, mode, syntax) (":server 461 " + nickname + " " + channel + " " + command + " :You must specify a parameter for the " + mode + " mode. Syntax: <" + syntax + ">.\r\n")
 #define ERR_ALREADYREGISTERED(nickname, username, host)(":server 462 " + USER_ID(nickname, username, host) + " :You may not reregister\r\n")
@@ -68,7 +69,7 @@
 #define RPL_INVITE_MSG(nickname, username, host, target, channel) (":" + USER_ID(nickname, username, host) + " INVITE " + target + " :" + channel + "\r\n")
 #define RPL_MODE(nickname, username, host, channel, mode) (":" + USER_ID(nickname, username, host) + " MODE " + channel + " " + mode + "\r\n")
 #define	RPL_oMODE(nickname, username, host, mode) (":" + USER_ID(nickname, username, host) + " MODE " + nickname + " " + mode + "\r\n");
-#define RPL_KILL(nickname, username, host, target, message) (":server " + USER_ID(nickname, username, host) + " KILL " + target + ":" + message + "\r\n")
+#define RPL_KILL(nickname, username, host, target, message) (":" + USER_ID(nickname, username, host) + " KILL " + target + " " + message + "\r\n")
 #define RPL_LISTSTART(nickname, username, host) (":server 321 " + USER_ID(nickname, username, host) + " Channel :Users Name\r\n")
 #define RPL_LIST(nickname, username, host, channel, count, topic) (":server 322 " + USER_ID(nickname, username, host) + " " + channel + " " + count + " :" + topic + "\r\n")
 #define RPL_LISTEND(nickname, username, host) (":server 323 " + USER_ID(nickname, username, host) + " :End of /LIST\r\n")

@@ -258,21 +258,21 @@ void	check_clients_sockets(struct pollfd **fds, char *buffer, t_context *context
 	/* Verification de demande de communication */
 	for ( int i = 1; i < context->socket_nbr[0]; i++ )
 	{
-		if ((*fds)[i].revents & POLLIN)
+		if ((*fds)[i].fd >= 0 && (*fds)[i].revents & POLLIN)
 		{
 			bzero( buffer, 1024 );
 			ret = recv((*fds)[i].fd, buffer, sizeof(buffer), 0 );
-			if (ret == -1)
-			{
-				std::cerr << "Error while receiving the message with recv() : " << strerror(errno) << std::endl;
-				end_close(*fds, context->socket_nbr[0] );
-				return ;
-			}
-			else if (ret == 0)
+			if (ret == 0 || (ret == -1 && errno == 9))
 			{
 				std::cout << "Client has left the chat" << std::endl;
-				context->socket_nbr[0]--;
+				// context->socket_nbr[0]--;
 				close ((*fds)[i].fd);
+			}
+			else if (ret == -1 && errno != 9)
+			{
+				std::cerr << "Error while receiving the message with recv() : " << strerror(errno) << std::endl;
+				// end_close(*fds, context->socket_nbr[0] );
+				return ;
 			}
 			else
 			{
