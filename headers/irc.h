@@ -69,7 +69,9 @@
 #define RPL_MODE(nickname, username, host, channel, mode) (":" + USER_ID(nickname, username, host) + " MODE " + channel + " " + mode + "\r\n")
 #define	RPL_oMODE(nickname, username, host, mode) (":" + USER_ID(nickname, username, host) + " MODE " + nickname + " " + mode + "\r\n");
 #define RPL_KILL(nickname, username, host, target, message) (":server " + USER_ID(nickname, username, host) + " KILL " + target + ":" + message + "\r\n")
-
+#define RPL_LISTSTART(nickname, username, host) (":server 321 " + USER_ID(nickname, username, host) + " Channel :Users Name\r\n")
+#define RPL_LIST(nickname, username, host, channel, count, topic) (":server 322 " + USER_ID(nickname, username, host) + " " + channel + " " + count + " :" + topic + "\r\n")
+#define RPL_LISTEND(nickname, username, host) (":server 323 " + USER_ID(nickname, username, host) + " :End of /LIST\r\n")
 
 // #define ERR_USERNOTINCHANNEL(nickname, username, channel, target) (":server 441 " + USER_ID(nickname, username, host) + " " + target + " :They aren't on that channel\r\n")
 // normalement comme ca, et le msg d'erreur arrive sur l'onglet principal (et non pas sur le channel)

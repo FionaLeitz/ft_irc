@@ -17,7 +17,7 @@ class	Client {
 		void			clear( void );
 		// void			removefromall( void );
 
-		const bool					canConnect(void) const;
+		const bool &				canConnect(void) const;
 		const std::string &			getUsername( void ) const;
 		const std::string &			getNickname( void ) const;
 		const std::string &			getHost( void ) const;
@@ -25,7 +25,7 @@ class	Client {
 		const int &					getFd( void ) const;
 		const struct sockaddr_in	&getIp(void) const;
 		const std::map<std::string, int>	&getChannelList(void) const;
-		const bool					getOperator( void ) const;
+		const bool &				getOperator( void ) const;
 
 		void						setCanConnect(bool auth);
 		void						setNickname(std::string nick);

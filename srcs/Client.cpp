@@ -59,7 +59,7 @@ void	Client::add_buff( char *buffer ) {
 // 	}
 // }
 
-const bool	Client::canConnect(void) const {
+const bool &	Client::canConnect(void) const {
 	return this->_canConnect;
 }
 
@@ -119,7 +119,7 @@ void	Client::setOperator(bool status)
 	this->_serverOperator = status;
 }
 
-const bool	Client::getOperator( void ) const
+const bool &	Client::getOperator( void ) const
 {
 	return this->_serverOperator;
 }
