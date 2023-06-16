@@ -16,6 +16,16 @@ The <name> specified by this command is separate to the accounts specified by SA
 IRCd configuration.
 */
 
+/*
+Si le host est mauvais, ca degage !
+Si le host est bon :
+	- si le name est nouveau, on le rajoute avec le mot de passe
+	- si le name existe, on verifie le mot de pass correspondant
+		- si c'est bon, c'est cool
+		- si c'est pas bon, ca degage
+Est ce qu'on le reset quand on relance le serveur, ou est ce qu'on le garde ?
+	- je dirais qu'on le reset, mais pas sure...
+*/
 int	update_confFile(std::string op_newName, std::string op_newPassword)
 {
 	std::ifstream	confFile;

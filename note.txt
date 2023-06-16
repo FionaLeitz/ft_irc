@@ -588,11 +588,6 @@ http://abcdrfc.free.fr/rfc-vf/rfc1459.html#422
 
 
 TO DO LIST :
-	- On en est ou ? Discution sur ce qu'il y a a faire
-	- Definir les besoins des clients (channel, username, nickname, mode, ...)
-	- Les channels, on a besoin de quoi pour eux ?
-	- Le mot de passe en paramettre, ou le rentrer en tant que client ?
-
 	- Commande client server
 		PASS			-> met un mot de passe de connection
 		AUTHENTICATE	-> ???
@@ -621,20 +616,13 @@ TO DO LIST :
 		RESTART	-> redemarre le server (risque)
 
 
-
-Attention, si deux commandes a la suite ( /QUIT /JOIN ), il prend le join et c'est tout
-	-> pour moi ca c'est regle !
-
-- check nickname a la connexion voir s'il exste deja
-
 QUIT :
 JOIN :	- (une fois le channel rejoint, envoyer a la personne qui join le RPL_TOPICWHOTIME (333))
 		- (a faire ou pas ?) argument "0" (/join 0 ?) qui quitte tous les channels dans lequel est le user
 		- liste des users dans hexchat
 MODE :
 NICK :
-PASS : 	- si le mot de passe est mauvais, trouver moyen de refuser la connexion (une variable dans chaque client peut-etre ? qu'on verifie par la suite)
-		- quand on ne rentre pas de mdp dans hexchat on peut se connecter dans tous les cas.... hexchat n'envoie pas la commande PASS donc on ne check pas
+PASS :
 PRIVMSG :
 KICK :	- eventuellement rajouter un caractere special quand on est operateur (ex : "cmeston_ H :0 Chine MESTON" -->  "cmeston_ H@ :0 Chine MESTON")
 TOPIC :
