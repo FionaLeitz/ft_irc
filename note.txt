@@ -632,15 +632,7 @@ JOIN :	- (une fois le channel rejoint, envoyer a la personne qui join le RPL_TOP
 		- (a faire ou pas ?) argument "0" (/join 0 ?) qui quitte tous les channels dans lequel est le user
 		- liste des users dans hexchat
 MODE :
-NICK : 	- si le nickname est deja utilise, ERR_NICKNAMEINUSE
-		- si le nickname n'est pas valide, ERR_ERRONEUSNICKNAME (peut etre interdire # : et espace (ca se gere deja je crois))
-		- hexchat : split automatiquement avec l'espace;  accepte ':' ;  accepte '#';
-		- si pas d'argument (pas de nickname communique) ERR_NONICKNAMEGIVEN
-				"The NICK message may be sent from the server to clients to
-				acknowledge their NICK command was successful, and to inform
-				other clients about the change of nickname. In these cases,
-				the <source> of the message will be the old nickname
-				[ [ "!" user ] "@" host ] of the user who is changing their nickname."
+NICK :
 PASS : 	- si le mot de passe est mauvais, trouver moyen de refuser la connexion (une variable dans chaque client peut-etre ? qu'on verifie par la suite)
 		- quand on ne rentre pas de mdp dans hexchat on peut se connecter dans tous les cas.... hexchat n'envoie pas la commande PASS donc on ne check pas
 PRIVMSG :
@@ -654,9 +646,6 @@ PART :
 
 
 COMMANDE PAS DU TOUT FAITE :
-		kill
-		list
-		restart
 
 
 TRUC EN PLUS :	- les signaux sur notre server
@@ -666,4 +655,12 @@ TRUC EN PLUS :	- les signaux sur notre server
 				- rajouter dans toutes les erreurs le channel ou on veut l'envoyer
 					--> p't-etre on s'en fout ?
 				- bien virer le user de partout quand il part
+
+
+
+
+
+
+
+
 
