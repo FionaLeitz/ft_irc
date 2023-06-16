@@ -57,7 +57,7 @@
 #define ERR_INVALIDMODEPARAM(nickname, username, channel, mode) (":server 696 " + nickname + " " + channel + " :Invalid " + mode + " mode parameter(s).\r\n")
 #define ERR_INVITEONLYCHAN(nickname, channel) (":server 473 " + nickname + " " + channel + " :Cannot join channel (+i)\r\n")
 #define ERR_CHANNELISFULL(nickname, channel) (":server 471 " + nickname + " " + channel + " :Cannot join channel (+l)\r\n")
-#define ERR_NOPRIVILEGES (nickname, username, host) (":server 481 " + USER_ID(nickname, username, host) + " :Permission Denied- You're not an IRC operator\r\n") 
+#define ERR_NOPRIVILEGES(nickname, username, host) (":server 481 " + USER_ID(nickname, username, host) + " :Permission Denied- You're not an IRC operator\r\n") 
 
 #define	RPL_NICK(oldNick, username, host, newNick) (":" + USER_ID(oldNick, username, host) + " NICK :" + newNick + "\r\n");
 #define	RPL_FIRSTNICK(nickname) (":server NICK :" + nickname + "\r\n");

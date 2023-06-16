@@ -20,9 +20,16 @@ void	ft_kill(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 	Client		*target;
 
 	std::cout << "Client "<<tmp->getNickname() << " is trying to use the kill command." << std::endl;
+	if (tmp->getOperator() == false)
+	{
+		reply = ERR_NOPRIVILEGES(tmp->getNickname(), tmp->getUsername(), tmp->getHost());
+		send(tmp->getFd(), reply.c_str(), reply.size(), 0);
+		return ;
+	}
 	if (args.size() < 2)
 	{
 		reply = ERR_NEEDMOREPARAMS(tmp->getNickname(), "", "KILL");
+		send(tmp->getFd(), reply.c_str(), reply.size(), 0);
 		// return ;
 	}
 	else
