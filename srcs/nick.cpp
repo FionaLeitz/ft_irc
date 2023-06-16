@@ -40,9 +40,6 @@ void	ft_nick(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 		if (isStringAlnum(args[0]) == false)
 		{
 			response = ERR_ERRONEUSNICKNAME(args[0]);
-			send(tmp->getFd(), response.c_str(), response.length(), 0);
-			response = ":server 432 toto! :Erroneus nickname\r\n";
-			send(tmp->getFd(), response.c_str(), response.length(), 0);
 			std::cout << "Invalid char in nick" << std::endl;
 			if (tmp->getNickname().empty())
 				(*tmp).setNickname(args[0]);
