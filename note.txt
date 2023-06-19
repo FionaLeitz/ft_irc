@@ -644,6 +644,12 @@ TRUC EN PLUS :	- les signaux sur notre server
 					--> p't-etre on s'en fout ?
 				- bien virer le user de partout quand il part
 				- voir pk les mots sont tronques dans certains message d'erreur (ex : "incorrect", "have not registered"...)
+				- rendre plus propre l'enchainement close, -1, erase quand un client part
+				- envoyer mode +o a la cretation d'un channel
+				- manque erreur ERR_NOSUCHNICK pour mode
+				- pb de parsing raison KILL
+				- changer la RPL par defaut (excessive spammig) dand KILL
+				- signaux a revoir
 
 
 
