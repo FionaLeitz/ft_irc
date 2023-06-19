@@ -26,6 +26,7 @@ void	ft_pass(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 		send(tmp->getFd(), response.c_str(), response.length(), 0);
 		response.clear();
 		close( fds[i].fd );
+		tmp->clear();
 		fds[i].fd = -1;
 	}
 }
