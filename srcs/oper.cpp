@@ -85,8 +85,61 @@ int	isinop_names(std::string name, std::vector<std::string> op_names) {
 	return -1;
 }
 
-void	add_in_config(std::string name, std::string pass) {
-	
+std::string	add_in_config(std::string name, std::string pass, Client *tmp) {
+	std::ifstream	confFile;
+	std::ofstream	newConfFile;
+	std::string		swap;
+	std::string		lines;
+	size_t			found;
+	std::string		reply;
+
+	if (isStringAlnum(name) == false){
+		reply = ERR_ERRONEUSNICKNAME(name);
+		return reply;
+	}
+
+	confFile.open("./.IRCd-config");
+    if (!confFile) {
+        std::cout << "in update_confile : Failed to open conf file : " << strerror(errno) << std::endl;
+		confFile.close();
+		reply  = ERR_UNKOWNERROR(tmp->getNickname(), tmp->getUsername(), tmp->getHost(), "OPER", "Failed to open conf file");
+        return reply;
+    }
+	std::getline(confFile, lines);
+	std::string	ip = &lines[16];
+	unsigned long	end = ip.find(' ');
+	if (end != std::string::npos)
+		ip.resize(end);
+	std::getline(confFile, swap, (char)EOF);
+	confFile.close();
+	found = swap.find("operator_name =");
+	found = swap.find("\n", found);
+	if (found != std::string::npos) {
+		name.insert(name.begin(), ' ');
+		swap.replace(found, 1, name.append("\n"));
+	}
+	else {
+		std::cout << "Error in conf file." << std::endl;
+		reply  = ERR_UNKOWNERROR(tmp->getNickname(), tmp->getUsername(), tmp->getHost(), "OPER", "Error in conf file");
+		return reply;
+	}
+	found = swap.find("operator_password =");
+	found = swap.find("\n", found);
+	if (found != std::string::npos) {
+		pass.insert(pass.begin(), ' ');
+		swap.replace(found, 1, pass.append("\n"));
+	}
+	else {
+		std::cout << "Error in conf file : missing newline" << std::endl;
+		reply  = ERR_UNKOWNERROR(tmp->getNickname(), tmp->getUsername(), tmp->getHost(), "OPER", "Error in conf file");
+		newConfFile.close();
+		return reply;
+	}
+	std::cout << swap;
+	newConfFile.open("./.IRCd-config");
+	newConfFile << swap;
+	newConfFile.close();
+	return reply;
 }
 
 void	ft_oper(t_context *context, Client *tmp, struct pollfd *fds, int i, std::vector<std::string> args) {
@@ -153,7 +206,11 @@ void	ft_oper(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 	}
 	else if (client_ip == ip ) {
 		std::cout << "Il est sur le bon IP, il peut creer un name et un pass pour etre OPERATOR" << std::endl;
-		add_in_config(args[0], args[1]);
+		response = add_in_config(args[0], args[1], tmp);
+		if (!response.empty()) {
+			send(tmp->getFd(), response.c_str(), response.size(), 0);
+			return ;
+		}
 		response = RPL_YOUREOPER(tmp->getNickname());
 		send(tmp->getFd(), response.c_str(), response.size(), 0);
 		response = RPL_oMODE(tmp->getNickname(), tmp->getUsername(), tmp->getHost(), "+o");
