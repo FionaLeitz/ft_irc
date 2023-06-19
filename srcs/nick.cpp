@@ -77,12 +77,13 @@ void	ft_nick(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 				}
 				response = RPL_NICK(oldNick, tmp->getUsername(), tmp->getHost(), args[0]);
 				(*tmp).setNickname(args[0]);
-				if (tmp->canConnect() == 0) {
-					user_args.push_back(tmp->getUsername());
-					if (tmp->canConnect() != 2)
-						tmp->setCanConnect(1);
-					if (!tmp->getUsername().empty())
-						ft_user(context, tmp, fds, i, user_args);
+				send(tmp->getFd(), response.c_str(), response.length(), 0);
+				if (tmp->canConnect() != 2 && !tmp->getUsername().empty()) {
+					response = RPL_WELCOME(tmp->getNickname(), tmp->getUsername(), tmp->getHost());
+					tmp->setCanConnect(2);
+				}
+				else
+					response = "";
 				}
 				if (tmp->canConnect() != 2)
 					tmp->setCanConnect(1);
@@ -91,4 +92,3 @@ void	ft_nick(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 		std::cout << "RPL = " << response << std::endl;
 		send(tmp->getFd(), response.c_str(), response.length(), 0);
 	}
-}

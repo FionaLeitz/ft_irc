@@ -46,7 +46,7 @@
 #define ERR_NICKNAMEINUSE(nickname) (":server 433 " + nickname + " :Nickname is already in use\r\n")
 #define ERR_USERNOTINCHANNEL(nickname, username, host, channel, target) (":server 441 " + USER_ID(nickname, username, host) + " " + channel + " " + target + " :They aren't on that channel\r\n")
 #define ERR_NOTONCHANNEL(nickname, username, host, target) (":server 442 " + USER_ID(nickname, username, host) + " " + target + " :You're not on that channel\r\n")
-#define ERR_NOTREGISTERED(nickname)(":server 451 " + nickname + " :You You have not registered\r\n")
+#define ERR_NOTREGISTERED(nickname)(":server 451 " + nickname + " :You have not registered\r\n")
 #define ERR_NEEDMOREPARAMS(nickname, channel, command) (":server 461 " + nickname + " " + channel + " " + command + " :Not enough parameters\r\n")
 #define ERR_NEEDMOREPARAMS_MODE(nickname, channel, command, mode, syntax) (":server 461 " + nickname + " " + channel + " " + command + " :You must specify a parameter for the " + mode + " mode. Syntax: <" + syntax + ">.\r\n")
 #define ERR_ALREADYREGISTERED(nickname, username, host)(":server 462 " + USER_ID(nickname, username, host) + " :You may not reregister\r\n")
@@ -125,3 +125,55 @@ int							isAuthorized(const Client &user, std::string command);
 bool						isStringAlnum(std::string s);
 
 #endif
+
+/*
+  _      ________   _________  __  _______
+ | | /| / / __/ /  / ___/ __ \/  |/  / __/
+ | |/ |/ / _// /__/ /__/ /_/ / /|_/ / _/  
+ |__/|__/___/____/\___/\____/_/  /_/___/ 
+
+    __           ________  ______    _____ __________ _    ____________ 
+  / /_____     /  _/ __ \/ ____/   / ___// ____/ __ \ |  / / ____/ __ \
+ / __/ __ \    / // /_/ / /        \__ \/ __/ / /_/ / | / / __/ / /_/ /
+/ /_/ /_/ /  _/ // _, _/ /___     ___/ / /___/ _, _/| |/ / /___/ _, _/ 
+\__/\____/  /___/_/ |_|\____/____/____/_____/_/ |_| |___/_____/_/ |_|  
+                           /_____/                                     
+
+ _        
+| |_  _ _ 
+| . \| | |
+|___/`_. |
+     <___'
+
+						         ___                       ___                                   ___     
+     /  /\                     /  /\        ___           ___        /  /\    
+    /  /:/_                   /  /:/_      /  /\         /  /\      /  /::|   
+   /  /:/ /\  ___     ___    /  /:/ /\    /  /:/        /  /:/     /  /:/:|   
+  /  /:/ /:/ /__/\   /  /\  /  /:/ /:/_  /__/::\       /  /:/     /  /:/|:|__ 
+ /__/:/ /:/  \  \:\ /  /:/ /__/:/ /:/ /\ \__\/\:\__   /  /::\    /__/:/ |:| /\
+ \  \:\/:/    \  \:\  /:/  \  \:\/:/ /:/    \  \:\/\ /__/:/\:\   \__\/  |:|/:/
+  \  \::/      \  \:\/:/    \  \::/ /:/      \__\::/ \__\/  \:\      |  |:/:/ 
+   \  \:\       \  \::/      \  \:\/:/       /__/:/       \  \:\     |  |::/  
+    \  \:\       \__\/        \  \::/        \__\/         \__\/     |  |:/   
+     \__\/                     \__\/                                 |__|/    
+	       ___           ___           ___           ___                       ___    
+		                     _ 
+                 | |
+   __ _ _ __   __| |
+  / _` | '_ \ / _` |
+ | (_| | | | | (_| |
+  \__,_|_| |_|\__,_|
+                    
+                           ___     
+     /  /\         /__/\         /  /\         /  /\          ___        /  /\         /__/\    
+    /  /:/        |  |::\       /  /:/_       /  /:/_        /  /\      /  /::\        \  \:\   
+   /  /:/         |  |:|:\     /  /:/ /\     /  /:/ /\      /  /:/     /  /:/\:\        \  \:\  
+  /  /:/  ___   __|__|:|\:\   /  /:/ /:/_   /  /:/ /::\    /  /:/     /  /:/  \:\   _____\__\:\ 
+ /__/:/  /  /\ /__/::::| \:\ /__/:/ /:/ /\ /__/:/ /:/\:\  /  /::\    /__/:/ \__\:\ /__/::::::::\
+ \  \:\ /  /:/ \  \:\~~\__\/ \  \:\/:/ /:/ \  \:\/:/~/:/ /__/:/\:\   \  \:\ /  /:/ \  \:\~~\~~\/
+  \  \:\  /:/   \  \:\        \  \::/ /:/   \  \::/ /:/  \__\/  \:\   \  \:\  /:/   \  \:\  ~~~ 
+   \  \:\/:/     \  \:\        \  \:\/:/     \__\/ /:/        \  \:\   \  \:\/:/     \  \:\     
+    \  \::/       \  \:\        \  \::/        /__/:/          \__\/    \  \::/       \  \:\    
+     \__\/         \__\/         \__\/         \__\/                     \__\/         \__\/    
+                                          */
+
