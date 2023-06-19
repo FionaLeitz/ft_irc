@@ -262,6 +262,7 @@ void	check_clients_sockets(struct pollfd **fds, char *buffer, t_context *context
 		{
 			bzero( buffer, 1024 );
 			ret = recv((*fds)[i].fd, buffer, sizeof(buffer), 0 );
+			// std::cout << "TEST COMMANDE : " << buffer << std::endl;
 			if (ret == 0 || (ret == -1 && errno == 9))
 			{
 				std::cout << "Client has left the chat" << std::endl;
@@ -276,7 +277,6 @@ void	check_clients_sockets(struct pollfd **fds, char *buffer, t_context *context
 			}
 			else
 			{
-				// std::cout << "Successfully received a message of size " << ret << " from client ! "<< std::endl;
 				Client *tmp = &context->clients.find((*fds)[i].fd)->second;
 				(*tmp).add_buff(buffer);
 				const std::string &ref = (*tmp).getBuffer();
@@ -302,6 +302,7 @@ void	check_clients_sockets(struct pollfd **fds, char *buffer, t_context *context
 				}
 			}
 		}
+		bzero(buffer, strlen(buffer));
 	}
 }
 

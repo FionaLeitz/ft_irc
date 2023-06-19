@@ -176,19 +176,19 @@ void	Client::printChannelList(void) const
     }
 }
 
-void	Client::leaveAllChannels(std::map<std::string, Channel>	channels_map, std::string rpl)
+void	Client::leaveAllChannels(t_context *context, std::string rpl)
 {
 	for (std::map<std::string, int>::iterator it2 = _channelList.begin(); it2 != _channelList.end(); )//++it2)
 	{
+		std::map<std::string, int>::iterator	save = it2;
+		save++;
 		if (it2->second == 1)
 		{
 			std::cout << "sending goodbye to channel " << it2->first << std::endl;
-			channels_map[it2->first].sendMessage(rpl, _fd);
-			// channels_map[it2->first].sendToAll(rpl);
-			channels_map[it2->first].suppress_client(_nickname);
-			this->_channelList.erase(it2++);
+			context->channels[it2->first].sendMessage(rpl, _fd);
+			context->channels[it2->first].suppress_client(_nickname);
+			this->_channelList.erase(it2);
 		}
-		else
-			it2++;
+		it2 = save;
 	}
 }

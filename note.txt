@@ -657,6 +657,11 @@ TRUC EN PLUS :	- les signaux sur notre server
 					changes = +i
 						(???)
 				- voir les modes du sujet 
+				- si mauvais mot de passe, nick et user ne font rien mais n'ont pas de message d'erreur
+				- supprimer les channels vides ? (zero utilisateur)
+				- erreur mode +o invalid user
+				- pas de rpl welcome quand nickname est deja pris
+	
 
 
 

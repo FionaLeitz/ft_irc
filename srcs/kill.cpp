@@ -55,7 +55,7 @@ void	ft_kill(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 			std::cout << "RPL = " << reply << std::endl;
 			send(fd, reply.c_str(), reply.size(), 0);
 			reply = RPL_QUIT(target->getNickname(), target->getUsername(), target->getHost(), killMessage(tmp->getNickname(), args[1]));
-			context->clients[fd].leaveAllChannels(context->channels, reply);
+			context->clients[fd].leaveAllChannels(context, reply);
 			reply = "ERROR :Closing Link: server (Killed (Operator (Excessive spamming)))\r\n"; //test
 			std::cout << "RPL = " << reply << std::endl;
 			send(fd, reply.c_str(), reply.size(), 0);
