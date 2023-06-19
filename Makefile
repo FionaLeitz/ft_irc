@@ -46,8 +46,6 @@ clean:
 clean_config:
 	@echo "operator_host = 127.0.0.1 localhost\noperator_name = \noperator_password = " > .IRCd-config
 
-
-
 fclean: clean
 	rm -rf $(NAME)
 

@@ -31,8 +31,13 @@ void	ft_quit(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 	// 		context->channels[it2->first].suppress_client(tmp->getNickname());
 	// 	}
 	// }
-	tmp->leaveAllChannels(context->channels, response);
+	tmp->leaveAllChannels(context, response);
 	std::cout << "RPL QUIT = " << response << std::endl;
 	context->clients.erase(it);
+	// it = context->clients.find(fds[i].fd);
+	// if (it == context->clients.end())
+	// 	std::cout << "C'est bon il n'est plus trouvable" << std::endl;
+	// else
+	// 	std::cout << "C'est pas normal ca pue" << std::endl;
 	close( fds[i].fd );
 }
