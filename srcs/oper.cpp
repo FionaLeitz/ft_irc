@@ -147,10 +147,12 @@ void	ft_oper(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 	(void)i;
 	(void)context;
 
-	std::string							response;
-	// std::vector<std::string>			op_hosts;
-	// std::string							clientHost;
-	// std::vector<std::string>::iterator	it;
+	std::string					response;
+	std::ifstream				confFile;
+	std::string					lines;
+	std::vector<std::string>	op_names;
+	std::vector<std::string>	op_pass;
+	std::string					client_ip;
 
 	std::cout << "Client "<<tmp->getNickname() << " is trying to use the oper command." << std::endl;
 	if ( args.size() < 2)
@@ -161,9 +163,12 @@ void	ft_oper(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 	}
 	std::cout << "Trying to log as operator with name: " << args[0] << ", password: " << args[1] << ", and host: " << tmp->getHost() << std::endl;
 
-
-	std::ifstream	confFile;
-	std::string		lines;
+	if (tmp->getOperator() == true)
+	{
+		response = ERR_UNKOWNERROR(tmp->getNickname(), tmp->getUsername(), tmp->getHost(), "OPER", "You are already logged as a network operator");
+		send(tmp->getFd(), response.c_str(), response.size(), 0);
+		return ;
+	}
 	confFile.open("./.IRCd-config");
     if (!confFile) {
         std::cout << "in update_confile : Failed to open conf file : " << strerror(errno) << std::endl;
@@ -177,11 +182,11 @@ void	ft_oper(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 		ip.resize(end);
 	std::getline(confFile, lines);		
 	std::string	names = &lines[16];
-	std::vector<std::string>	op_names = ft_split(names, " ");
+	op_names = ft_split(names, " ");
 	std::getline(confFile, lines);		
 	std::string	pass = &lines[20];
-	std::vector<std::string>	op_pass = ft_split(pass, " ");
-	std::string	client_ip = tmp->getHost();
+	op_pass = ft_split(pass, " ");
+	client_ip = tmp->getHost();
 	end = client_ip.find(':');
 	if (end != std::string::npos)
 		client_ip.resize(end);
