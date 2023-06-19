@@ -29,6 +29,7 @@ void	ft_nick(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 	std::string	RPLnick;
 	std::map<int, Client>::const_iterator it;
 	std::string oldNick;
+	std::vector<std::string> user_args;
 
 	if (tmp->getPassBool() == false)
 		return ;
@@ -45,7 +46,8 @@ void	ft_nick(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 			std::cout << "Invalid char in nick" << std::endl;
 			if (tmp->getNickname().empty())
 				(*tmp).setNickname(args[0]);
-			tmp->setCanConnect(false);
+			if (tmp->canConnect() != 2)
+				tmp->setCanConnect(0);
 		}
 		else
 		{
@@ -59,7 +61,8 @@ void	ft_nick(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 					response = ERR_NICKNAMEINUSE(args[0]);
 					if (tmp->getNickname().empty())
 						(*tmp).setNickname(args[0]);
-					tmp->setCanConnect(false);
+					if (tmp->canConnect() != 2)
+						tmp->setCanConnect(0);
 					break ;
 				}
 			}
@@ -74,7 +77,15 @@ void	ft_nick(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 				}
 				response = RPL_NICK(oldNick, tmp->getUsername(), tmp->getHost(), args[0]);
 				(*tmp).setNickname(args[0]);
-				tmp->setCanConnect(true);
+				if (tmp->canConnect() == 0) {
+					user_args.push_back(tmp->getUsername());
+					if (tmp->canConnect() != 2)
+						tmp->setCanConnect(1);
+					if (!tmp->getUsername().empty())
+						ft_user(context, tmp, fds, i, user_args);
+				}
+				if (tmp->canConnect() != 2)
+					tmp->setCanConnect(1);
 			}
 		}
 		std::cout << "RPL = " << response << std::endl;

@@ -17,7 +17,7 @@ class	Client {
 		void			clear( void );
 		// void			removefromall( void );
 
-		const bool &				canConnect(void) const;
+		const int &				canConnect(void) const;
 		const bool &				getPassBool(void) const;
 		const std::string &			getUsername( void ) const;
 		const std::string &			getNickname( void ) const;
@@ -28,7 +28,7 @@ class	Client {
 		const std::map<std::string, int>	&getChannelList(void) const;
 		const bool &				getOperator( void ) const;
 
-		void						setCanConnect(bool auth);
+		void						setCanConnect(int auth);
 		void						setPassBool(bool auth);
 		void						setNickname(std::string nick);
 		void						setUsername(std::string username);
@@ -44,7 +44,7 @@ class	Client {
 
 
 	private:
-		bool						_canConnect;
+		int							_canConnect;
 		bool						_pass;
 		std::string					_username;
 		std::string					_nickname;

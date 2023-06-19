@@ -650,6 +650,14 @@ TRUC EN PLUS :	- les signaux sur notre server
 				- pb de parsing raison KILL
 				- changer la RPL par defaut (excessive spammig) dand KILL
 				- signaux a revoir
+				- si on quit et qu'on fait /server ca marche pas
+				- 	Message reçu : MODE #vip_salon navierxiel +o
+					Received command MODE
+					OK c'est bien un operateur
+					changes = +i
+						(???)
+				- voir les modes du sujet 
+
 
 
 

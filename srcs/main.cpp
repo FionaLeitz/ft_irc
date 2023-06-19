@@ -210,7 +210,7 @@ int	client_request( struct pollfd **fds, Client *tmp, std::string ref, int i, t_
 		{
 			if (cmd == funcTab[j].name)
 			{
-				if(cmd == "NICK" || cmd == "PASS" || tmp->canConnect() == true)
+				if(cmd == "NICK" || cmd == "PASS" || cmd == "USER" || tmp->canConnect() != 0)
 					(*(funcTab[j].ptr))(context, tmp, *fds, i, args);
 				else
 					isAuthorized(*tmp, cmd);

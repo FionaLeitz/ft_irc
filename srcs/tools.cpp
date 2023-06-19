@@ -24,7 +24,7 @@ int	isAuthorized(const Client &user, std::string command)
 	std::string reply;
 	(void)command;
 	
-	if (user.canConnect() == false)
+	if (user.canConnect() == 0)
 	{
 		// reply = ERR_UNKOWNERROR(user.getNickname(), user.getUsername(), user.getHost(), command, "You must set a nickname first.");
 		reply = ERR_NOTREGISTERED(user.getNickname());

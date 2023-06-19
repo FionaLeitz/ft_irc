@@ -1,5 +1,14 @@
 #include "../headers/irc.h"
 
+// void	killClient(t_context *context, Client *tmp, struct pollfd *fds, int i)
+// {
+// 	std::map<int, Client>::iterator it;
+// 	close(fds[i].fd);
+// 	it = context->clients.find(fds[i].fd);
+// 	context->clients.erase(it);
+// 	fds[i].fd = -1;
+// }
+
 std::string killMessage(std::string killer, std::string reason)
 {
 	std::string msg;
