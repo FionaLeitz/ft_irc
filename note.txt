@@ -659,16 +659,14 @@ TRUC EN PLUS :	- les signaux sur notre server
 				- voir les modes du sujet 
 				- si mauvais mot de passe, nick et user ne font rien mais n'ont pas de message d'erreur
 				- supprimer les channels vides ? (zero utilisateur)
-				- erreur mode +o invalid user
-				- pas de rpl welcome quand nickname est deja pris
-				- rajouter # dans join si existe deja
+	ok !		- erreur mode +o invalid user
+	ok !		- rajouter # dans join si existe deja
 				- si on fait names, ca nous rajoute dans la liste a droite
 				- nick est chelou ?
 
 
 Selon moi, les commandes bonnes sont :
 	- invite
-	- join
 	- kick
 	- list
 	- mode

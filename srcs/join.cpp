@@ -105,13 +105,13 @@ void	ft_join(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 	int	size = channels.size();
 	for ( int count = 0; count < size; count++ ) {
 		int	save = 0;
+		if ( channels[count][0] != '#' ) {
+			std::string newchan = "#";
+			newchan += channels[count];
+			channels[count] = newchan;
+		}
 		if (context->channels.find(channels[count]) == context->channels.end())
 		{
-			if ( channels[count][0] != '#' ) {
-				std::string newchan = "#";
-				newchan += channels[count];
-				channels[count] = newchan;
-			}
 			context->channels[channels[count]] = Channel(channels[count], "t", (*tmp));	//ajoute le channel a la map
 			context->channels[channels[count]].add_operator(tmp->getNickname());
 		}

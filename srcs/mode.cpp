@@ -52,6 +52,11 @@ void	verify_valid_pass_size_operator( Client *tmp, int *letters_int, std::string
 			send(tmp->getFd(), response.c_str(), response.length(), 0);
 			letters_int[4] = 0;
 		}
+		else if ( chan[0]->isUserThere( new_args[oper] ) == false ) {
+			std::string response = ERR_USERNOTINCHANNEL(tmp->getNickname(), tmp->getUsername(), tmp->getHost(), chan[0]->getName(), new_args[oper]);
+			send(tmp->getFd(), response.c_str(), response.length(), 0);
+			letters_int[4] = 0;
+		}
 		else if ( letters_int[4] == 1 )
 		{
 			if (chan[0]->getOperators().find(new_args[oper]) == chan[0]->getOperators().end() && chan[0]->getClientlist().find(new_args[oper]) != chan[0]->getClientlist().end())
