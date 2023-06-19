@@ -3,7 +3,7 @@
 Client::Client( void ) {}
 
 Client::Client( const Client & value ) {
-	this->_canConnect = false;
+	this->_canConnect = 0;
 	this->_pass = false;
 	this->_username = value.getUsername();
 	this->_nickname = value.getNickname();
@@ -62,7 +62,7 @@ void	Client::add_buff( char *buffer ) {
 // 	}
 // }
 
-const bool &	Client::canConnect(void) const {
+const int &	Client::canConnect(void) const {
 	return this->_canConnect;
 }
 
@@ -91,7 +91,7 @@ const int &	Client::getFd( void ) const {
 }
 
 
-void	Client::setCanConnect(bool auth) {
+void	Client::setCanConnect(int auth) {
 	this->_canConnect = auth;
 }
 
