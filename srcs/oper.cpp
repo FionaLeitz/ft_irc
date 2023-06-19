@@ -25,54 +25,79 @@ Si le host est bon :
 		- si c'est pas bon, ca degage
 Est ce qu'on le reset quand on relance le serveur, ou est ce qu'on le garde ?
 	- je dirais qu'on le reset, mais pas sure...
+	- option : dans le Makefile on ajoute une commande qui le reset ! Comme ca on choisit si on le remet a zero ou pas
 */
-int	update_confFile(std::string op_newName, std::string op_newPassword)
-{
-	std::ifstream	confFile;
-	std::ofstream	newConfFile;
-	std::string		swap;
-	size_t			found;
 
-	confFile.open("./.IRCd-config");
-    if (!confFile) {
-        std::cout << "in update_confile : Failed to open conf file : " << strerror(errno) << std::endl;
-		confFile.close();
-        return 1;
-    }
-	std::getline(confFile, swap, (char)EOF);
-	confFile.close();
-	found = swap.find("operator_name =");
-	found = swap.find("\n", found);
-	if (found != std::string::npos)
-		swap.replace(found, 1, op_newName.append("\n"));
-	else {
-		std::cout << "Error in conf file." << std::endl;
-		return 1;
+// int	update_confFile(std::string op_newName, std::string op_newPassword)
+// {
+// 	std::ifstream	confFile;
+// 	std::ofstream	newConfFile;
+// 	// std::string		swap;
+// 	std::string		lines;
+// 	// size_t			found;
+
+// 	confFile.open("./.IRCd-config");
+//     if (!confFile) {
+//         std::cout << "in update_confile : Failed to open conf file : " << strerror(errno) << std::endl;
+// 		confFile.close();
+//         return 1;
+//     }
+// 	std::getline(confFile, lines);
+// 	std::string	ip = &lines[16];
+// 	int	end = ip.find(' ');
+// 	if (end != std::string::npos)
+// 		ip.resize(end);
+// 	std::cout << "ip = --" << ip <<"--" << std::endl;
+// 	// std::getline(confFile, swap, (char)EOF);
+// 	// confFile.close();
+// 	// found = swap.find("operator_name =");
+// 	// found = swap.find("\n", found);
+// 	// if (found != std::string::npos)
+// 	// 	swap.replace(found, 1, op_newName.append("\n"));
+// 	// else {
+// 	// 	std::cout << "Error in conf file." << std::endl;
+// 	// 	return 1;
+// 	// }
+// 	// found = swap.find("operator_password =");
+// 	// found = swap.find("\n", found);
+// 	// if (found != std::string::npos)
+// 	// 	swap.replace(found, 1, op_newPassword.append("\n"));
+// 	// else {
+// 	// 	std::cout << "Error in conf file : missing \n" << std::endl;
+// 	// 	newConfFile.close();
+// 	// 	return 1;
+// 	// }
+// 	// std::cout << swap;
+// 	// newConfFile.open("./.IRCd-config");
+// 	// newConfFile << swap;
+// 	// newConfFile.close();
+// 	return 0;
+// }
+
+int	isinop_names(std::string name, std::vector<std::string> op_names) {
+	std::vector<std::string>::iterator	it;
+	int	count = 0;
+	for (it = op_names.begin(); it != op_names.end(); it++) {
+		if (*it == name)
+			return count;
+		count++;
 	}
-	found = swap.find("operator_password =");
-	found = swap.find("\n", found);
-	if (found != std::string::npos)
-		swap.replace(found, 1, op_newPassword.append("\n"));
-	else {
-		std::cout << "Error in conf file : missing \n" << std::endl;
-		newConfFile.close();
-		return 1;
-	}
-	std::cout << swap;
-	newConfFile.open("./.IRCd-config");
-	newConfFile << swap;
-	newConfFile.close();
-	return 0;
+	return -1;
+}
+
+void	add_in_config(std::string name, std::string pass) {
+	
 }
 
 void	ft_oper(t_context *context, Client *tmp, struct pollfd *fds, int i, std::vector<std::string> args) {
 	(void)fds;
 	(void)i;
+	(void)context;
 
 	std::string							response;
-	std::vector<std::string>			op_hosts;
-	std::string							clientHost;
-	std::vector<std::string>::iterator	it;
+	// std::vector<std::string>			op_hosts;
+	// std::string							clientHost;
+	// std::vector<std::string>::iterator	it;
 
 	std::cout << "Client "<<tmp->getNickname() << " is trying to use the oper command." << std::endl;
 	if ( args.size() < 2)
@@ -83,43 +108,102 @@ void	ft_oper(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 	}
 	std::cout << "Trying to log as operator with name: " << args[0] << ", password: " << args[1] << ", and host: " << tmp->getHost() << std::endl;
 
-	if (context->op_name.empty())		// si aucun operateur n'a encore ete set, il faut etre en localhost pour le devenir
-	{
-		op_hosts = ft_split(context->op_host, " ");
-		clientHost = tmp->getHost().substr(0, tmp->getHost().find(':'));
-		for (it = op_hosts.begin(); it != op_hosts.end(); ++it) {
-			if (clientHost == *it)
-				break ;
-		}
-		if (it == op_hosts.end()) {
-				std::cout << "mauvais host !!!! dsl tu ne peux pas devenir operateur" << std::endl;
-				response = ERR_NOOPERHOST(tmp->getNickname(), tmp->getUsername(), tmp->getHost());
-				send(tmp->getFd(), response.c_str(), response.size(), 0);
-				return ;
-		}
-		else {
-			std::cout << "host ok tu peux devenir oprateur bravo" << std::endl;
-			if (update_confFile(args[0], args[1]) == 1)
-				return ; // send ERR_ custom ?
+
+	std::ifstream	confFile;
+	std::string		lines;
+	confFile.open("./.IRCd-config");
+    if (!confFile) {
+        std::cout << "in update_confile : Failed to open conf file : " << strerror(errno) << std::endl;
+		confFile.close();
+        return ;
+    }
+	std::getline(confFile, lines);
+	std::string	ip = &lines[16];
+	unsigned long	end = ip.find(' ');
+	if (end != std::string::npos)
+		ip.resize(end);
+	std::getline(confFile, lines);		
+	std::string	names = &lines[16];
+	std::vector<std::string>	op_names = ft_split(names, " ");
+	std::getline(confFile, lines);		
+	std::string	pass = &lines[20];
+	std::vector<std::string>	op_pass = ft_split(pass, " ");
+	std::string	client_ip = tmp->getHost();
+	end = client_ip.find(':');
+	if (end != std::string::npos)
+		client_ip.resize(end);
+	int	place = isinop_names(args[0], op_names);
+	std::cout <<"Place = "<<place<<std::endl;
+
+	if ( place != -1) {
+		std::cout << "Le name est dans les operator_name" << std::endl;
+		if (op_pass[place] == args[1]) {
+			std::cout << "Le mot de passe est le bon, il peut se connecter en tant que OPERATOR"<<std::endl;
 			response = RPL_YOUREOPER(tmp->getNickname());
 			send(tmp->getFd(), response.c_str(), response.size(), 0);
 			response = RPL_oMODE(tmp->getNickname(), tmp->getUsername(), tmp->getHost(), "+o");
 			send(tmp->getFd(), response.c_str(), response.size(), 0);
 			tmp->setOperator(true);
 		}
-	
-	}
-	else							// sinon, l'operateur peut se connecter depuis n'importe quelle adresse
-	{
-		if (args[1] == context->op_password && args[0] == context->op_name) {
-			response = RPL_YOUREOPER(tmp->getNickname());
-			send(tmp->getFd(), response.c_str(), response.size(), 0);
-			response = RPL_oMODE(tmp->getNickname(), tmp->getUsername(), tmp->getHost(), "+o");
-		}
-		else 
+		else {
+			std::cout << "Le mot de passe est mauvais, il ne devient pas operator" << std::endl;
 			response = ERR_PASSWDMISMATCH(tmp->getNickname());
+			send(tmp->getFd(), response.c_str(), response.size(), 0);
+		}
+	}
+	else if (client_ip == ip ) {
+		std::cout << "Il est sur le bon IP, il peut creer un name et un pass pour etre OPERATOR" << std::endl;
+		add_in_config(args[0], args[1]);
+		response = RPL_YOUREOPER(tmp->getNickname());
+		send(tmp->getFd(), response.c_str(), response.size(), 0);
+		response = RPL_oMODE(tmp->getNickname(), tmp->getUsername(), tmp->getHost(), "+o");
+		send(tmp->getFd(), response.c_str(), response.size(), 0);
+		tmp->setOperator(true);
+	}
+	else {
+		std::cout << "Il est refuse ! Il ne peut pas devenir operator" << std::endl;
+		response = ERR_NOOPERHOST(tmp->getNickname(), tmp->getUsername(), tmp->getHost());
 		send(tmp->getFd(), response.c_str(), response.size(), 0);
 	}
+	confFile.close();
+
+	// if (context->op_name.empty())		// si aucun operateur n'a encore ete set, il faut etre en localhost pour le devenir
+	// {
+	// 	op_hosts = ft_split(context->op_host, " ");
+	// 	clientHost = tmp->getHost().substr(0, tmp->getHost().find(':'));
+	// 	for (it = op_hosts.begin(); it != op_hosts.end(); ++it) {
+	// 		if (clientHost == *it)
+	// 			break ;
+	// 	}
+	// 	if (it == op_hosts.end()) {
+	// 			std::cout << "mauvais host !!!! dsl tu ne peux pas devenir operateur" << std::endl;
+	// 			response = ERR_NOOPERHOST(tmp->getNickname(), tmp->getUsername(), tmp->getHost());
+	// 			send(tmp->getFd(), response.c_str(), response.size(), 0);
+	// 			return ;
+	// 	}
+	// 	else {
+	// 		std::cout << "host ok tu peux devenir oprateur bravo" << std::endl;
+	// 		if (update_confFile(args[0], args[1]) == 1)
+	// 			return ; // send ERR_ custom ?
+	// 		response = RPL_YOUREOPER(tmp->getNickname());
+	// 		send(tmp->getFd(), response.c_str(), response.size(), 0);
+	// 		response = RPL_oMODE(tmp->getNickname(), tmp->getUsername(), tmp->getHost(), "+o");
+	// 		send(tmp->getFd(), response.c_str(), response.size(), 0);
+	// 		tmp->setOperator(true);
+	// 	}
+	
+	// }
+	// else							// sinon, l'operateur peut se connecter depuis n'importe quelle adresse
+	// {
+	// 	if (args[1] == context->op_password && args[0] == context->op_name) {
+	// 		response = RPL_YOUREOPER(tmp->getNickname());
+	// 		send(tmp->getFd(), response.c_str(), response.size(), 0);
+	// 		response = RPL_oMODE(tmp->getNickname(), tmp->getUsername(), tmp->getHost(), "+o");
+	// 	}
+	// 	else 
+	// 		response = ERR_PASSWDMISMATCH(tmp->getNickname());
+	// 	send(tmp->getFd(), response.c_str(), response.size(), 0);
+	// }
 	
 
 
