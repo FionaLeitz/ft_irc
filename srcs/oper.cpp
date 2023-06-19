@@ -137,6 +137,7 @@ std::string	add_in_config(std::string name, std::string pass, Client *tmp) {
 	}
 	std::cout << swap;
 	newConfFile.open("./.IRCd-config");
+	newConfFile << lines << std::endl;
 	newConfFile << swap;
 	newConfFile.close();
 	return reply;
