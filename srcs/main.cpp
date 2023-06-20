@@ -1,24 +1,6 @@
 #include "../headers/irc.h"
 
 bool server_statut = true;
-/*
-struct sockaddr_in {
-	short	sin_family;		// famille d'adresses : AF_INET   
-	u_short	sin_port;		// port dans l'ordre d'octets du réseau
-	struct	in_addr sin_addr; // adresse Internet   
-	char	sin_zero[8];
-};
-
-// Adresse Internet
-struct in_addr {
-    uint32_t       s_addr;     // Adresse dans l'ordre d'octets réseau 
-};
-
-struct sockaddr {
-	u_short sa_family;
-	char	sa_data[14];
-};
-*/
 
 struct pollfd	*new_tab( struct pollfd *fds, int socket_nbr ) {
 	struct pollfd	*new_tab = new pollfd[socket_nbr + 1];
@@ -80,7 +62,6 @@ int	create_server_link( char *port ) {
 		std::cerr << "Error while executing listen(): " << strerror( errno ) << std::endl;
 		return -1;
 	}
-
 	return server_socket;
 }
 
@@ -111,7 +92,6 @@ int	incoming_connections(struct pollfd **fds, t_context &context)
 		Client new_client((*fds)[context.socket_nbr[0]].fd, clientAddress);
 		context.clients.insert( std::map<int, Client>::value_type( (*fds)[context.socket_nbr[0]].fd, new_client ) );
 		(context.socket_nbr[0])++;
-        // std::cout << "Connexion acceptée depuis " << inet_ntoa(clientAddress.sin_addr) << ":" << ntohs(clientAddress.sin_port) << std::endl;
 	
 		std::cout << "Connexion acceptée depuis " << inet_ntoa(new_client.getIp().sin_addr) << ":" << ntohs(new_client.getIp().sin_port) << std::endl;
 		std::cout << "Connexion acceptée depuis " << new_client.getHost() << std::endl;
@@ -162,31 +142,6 @@ void	t_func_initialize(t_func_ptr *funcTab)
 	funcTab[18].ptr = &ft_who;
 }
 
-void	ft_handshake(Client *tmp, struct pollfd *fds, int i)
-{
-	int			ret;
-	std::string	nick;
-	std::string	username;
-	std::string	response;
-	const std::string &	ref = (*tmp).getBuffer();
-
-	// #IRC connection handshake consists of sending NICK and USER messages. All IRC messages must end in \r\n
-	
-	ret = ref.find("NICK") + 5;
-	nick = ref.substr(ret, ref.find("USER") - 2 - ret);
-	ret = ref.find("USER") + 5;
-	username = ref.substr(ret, ref.find(" ", ret) - ret);
-	response = RPL_WELCOME(nick, username, tmp->getHost());
-	std::cout << "\tnickname = " << nick << "\n\tusername = " << username << std::endl;
-	(*tmp).setNickname(nick);
-	(*tmp).setUsername(username);
-	std::cout << "DANS LA CLASSE CLIENT" << "\tnickname = " << (*tmp).getNickname() << "\n\tusername = " << (*tmp).getUsername() << std::endl;
-	send(fds[i].fd, response.c_str(), response.length(), 0);
-	//jsp si utile ou pas ?
-}
-
-
-
 int	client_request( struct pollfd **fds, Client *tmp, std::string ref, int i, t_context *context)
 {
 		std::cout << "Message reçu : " << ref << std::endl;
@@ -194,18 +149,13 @@ int	client_request( struct pollfd **fds, Client *tmp, std::string ref, int i, t_
 		// Recherche de la fonction correspondante et appel si trouvée
 		t_func_ptr funcTab[19];
 		t_func_initialize(funcTab);
-		// std::istringstream iss(ref);
 		std::string cmd;
 		std::vector<std::string> args;
 		int			j;
-		// int			ret;
-		// int			pos;
 
-		// iss >> cmd;  // on decoupe la string en 3 parties : cmd, args[0] et args[1];
 		args = ft_split( ref, " " );
 		cmd = args[0];
 		args.erase(args.begin());
-		// std::cout << "CMD = " << cmd << " et args[0]] = " << (*args.begin()) << std::endl;
 		for(j = 0; j < 19; j++)				// si la commande fait partie des operateurs
 		{
 			if (cmd == funcTab[j].name)
@@ -220,32 +170,8 @@ int	client_request( struct pollfd **fds, Client *tmp, std::string ref, int i, t_
 		if (j == 19)
 		{
 			std::cout << "Action non reconnue : " << ref << std::endl;
+			// un message d'erreur pour le client ?
 		}
-		/*
-		autre methode :
-						enum Action { USER, JOIN, MODE, WHO, PRIVMSG, NONE};
-						Action				action;
-						if (action >= 0 && action < sizeof(funcTab) / sizeof(funcTab[0]))
-						{
-							funcTab[action](tmp, fds, i);
-						}
-						else if (ref.find("CAPS") != std::string::npos)
-							ft_handshake(tmp, fds, i);
-						else 
-						{
-							std::cout << "Action non reconnue : " << ref << std::endl;
-						}
-						*/
-		// ret = ref.find("\r\n");
-		// pos = 0;
-		// while (ret != -1)
-		// {
-		// 	std::cout << "Commande recue (ref[" << pos << "] -- ref[" << ret - 1 << "]) : " 
-		// 	<< ref.substr(pos, ret - pos) << std::endl;
-		// 	pos = ret + 2;
-		// 	ret = ref.find("\r\n", ret + 2);
-		// 	(*tmp).clear();
-		// }
 		return 0;
 }
 
@@ -262,17 +188,14 @@ void	check_clients_sockets(struct pollfd **fds, char *buffer, t_context *context
 		{
 			bzero( buffer, 1024 );
 			ret = recv((*fds)[i].fd, buffer, sizeof(buffer), 0 );
-			// std::cout << "TEST COMMANDE : " << buffer << std::endl;
 			if (ret == 0 || (ret == -1 && errno == 9))
 			{
 				std::cout << "Client has left the chat" << std::endl;
-				// context->socket_nbr[0]--;
 				close ((*fds)[i].fd);
 			}
 			else if (ret == -1 && errno != 9)
 			{
 				std::cerr << "Error while receiving the message with recv() : " << strerror(errno) << std::endl;
-				// end_close(*fds, context->socket_nbr[0] );
 				return ;
 			}
 			else
@@ -363,13 +286,6 @@ struct pollfd	*check_communication( struct pollfd *fds, int *socket_nbr, std::st
 	std::string			message;
 	t_context			context;
 
-	// std::cout << "\tcontext.channels = " << &context.channels;
-	// std::cout << "\n\tcontext.pasword = " << context.password;
-	// std::cout << "\n\tcontext.socket_nbr = " << context.socket_nbr[0];
-	// std::cout << "\n\tcontext.op_host = " << context.op_host;
-	// std::cout << "\n\tcontext.op_name = " << context.op_name;
-	// std::cout << "\n\tcontext.op_password = " << context.op_password << std::endl;
-
 	if (initialize_context(context, socket_nbr, password) != 0)
 		return NULL;
 	while (server_statut == true)
@@ -399,7 +315,6 @@ int	parse_number( const char *number ) {
 void	shutdown_server(struct pollfd *fds, int *socket_nbr)
 {
 	end_close( fds, *socket_nbr );
-	delete[] fds;
 	std::cout << "Goodbye !" << std::endl;
 }
 

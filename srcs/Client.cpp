@@ -56,12 +56,6 @@ void	Client::add_buff( char *buffer ) {
 	this->_buffer.insert( this->_buffer.size(), buffer );
 }
 
-// void	Client::removefromall( std::map<std::string, Channel> channels ) {
-// 	for ( int count = this->channelList.size() - 1; count >= 0; count-- ) {
-// 		channels[this->channelList[count].first].
-// 	}
-// }
-
 const int &	Client::canConnect(void) const {
 	return this->_canConnect;
 }
@@ -115,11 +109,6 @@ const struct sockaddr_in	&Client::getIp( void ) const {
 	return this->_ip;
 }
 
-// const std::vector<std::string>	&Client::getChannelList(void) const
-// {
-// 	return this->_channelList;
-// }
-
 const std::map<std::string, int>	&Client::getChannelList(void) const
 {
 	return this->_channelList;
@@ -145,20 +134,6 @@ void	Client::addInviteChannel(std::string name)
 {
 	_channelList[name] = 0;
 }
-
-// void	Client::removeChannel(std::string name)
-// {
-// 	std::vector<std::string>::iterator it;
-
-// 	 for (it = _channelList.begin(); it != _channelList.end(); ++it)
-// 	 {
-//         if (*it == name)
-// 		{
-//             _channelList.erase(it);
-// 			break ;
-//         }
-//     }
-// }
 
 void	Client::removeChannel(std::string name)
 {

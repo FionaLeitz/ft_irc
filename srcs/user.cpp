@@ -3,7 +3,7 @@
 void	ft_user(t_context *context, Client *tmp, struct pollfd *fds, int i, std::vector<std::string> args)
 {
 	(void)context;
-	std::cout << "Received command USER" << std::endl;// w args " << args[0] << " and " << args[1] << std::endl;
+	std::cout << "Received command USER" << std::endl;
 	std::string	response;
 
 

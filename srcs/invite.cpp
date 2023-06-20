@@ -6,7 +6,7 @@ void	ft_invite(t_context *context, Client *tmp, struct pollfd *fds, int i, std::
 
 	std::string response;
 	int			fd;
-	std::cout << "Client "<<tmp->getNickname() << " is trying to use the invite command" << std::endl;//w args " << args[0] <<  " and " << args[1] << std::endl;
+	std::cout << "Client "<<tmp->getNickname() << " is trying to use the invite command" << std::endl;
 	if ( context->channels.find(args[1]) == context->channels.end() ) {
 		response = ERR_NOSUCHCHANNEL(tmp->getNickname(), tmp->getUsername(), tmp->getHost(), args[1]);
 		send(tmp->getFd(), response.c_str(), response.size(), 0);

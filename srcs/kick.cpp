@@ -1,6 +1,5 @@
 #include "../headers/irc.h"
 
-
 int		findClientFd(const std::map<int, Client> &clientList, std::string nick)
 {
 		std::map<int, Client>::const_iterator it;
@@ -11,24 +10,6 @@ int		findClientFd(const std::map<int, Client> &clientList, std::string nick)
 		}
 		return (-1);
 }
-/*
-bool	check_operator(const Channel &channel, const Client &client) {
-
-std::string response;
-
-if (channel.getOperators().find(client.getNickname()) != channel.getOperators().end()) //si le user est un operateur du channel
-	{
-		std::cout << "OK c'est bien un operateur" << std::endl;
-		return true ;
-	}
-else
-	{
-		std::cout << "ce n'est pas un operateur !!" << std::endl;
-		response = ERR_CHANOPRIVSNEEDED(client.getNickname(), channel.getName());
-		send(client.getFd(), response.c_str(), response.size(), 0);
-		return false ;
-	}
-}*/
 
 // << MODE #ez +o tuutuutu
 // >> :cmeston_!~cmeston@2618-2ed8-f8de-36d4-9088.210.62.ip MODE #ez +o tuutuutu
@@ -56,22 +37,6 @@ void	ft_kick(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 	reason = reason.substr(args[1].length() + 1);
 	std::cout << "Trying to kick " << user << " from channel " << channel << " with reason : " << reason << std::endl;
 
-	// if (context->channels[args[0]].getOperators().find(tmp->getNickname()) != context->channels[args[0]].getOperators().end()) //si le user est un operateur du channel
-	// {
-	// 	std::cout << "OK c'est bien un operateur" << std::endl;
-	// }
-	// else
-	// {
-	// 	std::cout << "ce n'est pas un operateur !!" << std::endl;
-	// 	response = ERR_CHANOPRIVSNEEDED(tmp->getNickname(), args[0]);
-	// 	std::cout << "Response : " << response << std::endl;
-	// 	std::cout << "Nick : " << tmp->getNickname() << std::endl;
-	// 	std::cout << "User : " << tmp->getUsername() << std::endl;
-	// 	std::cout << "Host : " << tmp->getHost() << std::endl;
-	// 	std::cout << "Args[0] : " << args[0] << std::endl;
-	// 	send(tmp->getFd(), response.c_str(), response.size(), 0);
-	// 	return ;
-	// }
 	//trouver le channel
 	if (context->channels.find(args[0]) == context->channels.end())
 	{
@@ -96,14 +61,6 @@ void	ft_kick(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 		// >> :totousse!~cmeston@2618-2ed8-f8de-36d4-9088.210.62.ip KICK #wewewe cmeston_ :totousse
 	}
 }
-
-// void	kick( Client operator, std::string nick, Channel channel ) {
-// 	// verifier que l'operateur (le kickeur) ait les droits pour le faire
-// 	if ( channel.getOperators().find( operator.getNickname() ) == channel.getOperators().end() )
-// 		return ;
-// 	channel.suppress_client( nick );
-// }
-
 
 
 // erreurs possibles :

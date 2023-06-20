@@ -91,7 +91,7 @@ void	verify_valid_pass_size_operator( Client *tmp, int *letters_int, std::string
 
 void	ft_mode(t_context *context, Client *tmp, struct pollfd *fds, int i, std::vector<std::string> args)
 {
-	std::cout << "Received command MODE" << std::endl;// w args " << args[0] << " and " << args[1] << " and " << args[2] << " and " << args[3] << std::endl;
+	std::cout << "Received command MODE" << std::endl;
 	Channel	*chan;
 	(void)i;
 	(void)fds;
@@ -192,27 +192,4 @@ void	ft_mode(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 	std::string response = RPL_MODE(tmp->getNickname(), tmp->getUsername(), tmp->getHost(), chan->getName(), changes); // remplacer args[1] par ce qui a ete effectivement change
 																									   // par exemple, si le mode etait deja t, et que le user fait +it, on ne doit mettre que +i ici
 	chan->sendToAll(response);
-
-	// std::string	response = RPL_CHANNELMODEIS(tmp->getNickname(), args[0], " +", chan->getMode());
-	// send(tmp->getFd(), response.c_str(), response.length(), 0);
 }
-
-// si besoin d'arguments, voir les args suivants (dans le meme ordre que la string)
-
-// · i: Set/remove Invite-only channel
-//		si join un chan en invite only sans invite, ERR_INVITEONLYCHAN (473)
-
-// · t: Set/remove the restrictions of the TOPIC command to channel operators
-//		besoin d'etre operator pour changer le TOPIC (commande TOPIC)
-
-// · k: Set/remove the channel key (password)
-//		besoin d'un mot de passe pour join le chan (pass en argument)
-//		si mauvais mot de passe pour join, ERR_BADCHANNELKEY (475)
-
-// · o: Give/take channel operator privilege
-//		donne les droits d'operator a un autre client du chan (nickname en argument)
-
-// · l: Set/remove the user limit to channel
-// 		argument, un nombre max de gens sur ce changer
-// 		si join un chan qui n'a plus de place, "Cannot join #e (User limit reached)"
-//		ERR_CHANNELISFULL (471)

@@ -5,7 +5,6 @@ void	ft_pass(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 	std::cout << "Received command PASS" << std::endl;
 	std::string	response;
 
-	// std::cout << "args[0] = " << args[0] << " et context->password = " << context->password << std::endl;
 	if (args.size() == 0) {
 		response = ERR_NEEDMOREPARAMS(tmp->getNickname(), "", "USER");
 		send(fds[i].fd, response.c_str(), response.length(), 0);

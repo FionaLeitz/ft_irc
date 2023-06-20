@@ -7,7 +7,7 @@ void	check_topic(Client *tmp, Channel &channel)
 	if (channel.getTopic().empty())
 		reply = RPL_NOTOPIC(tmp->getNickname(), channel.getName());
 	else
-		reply = 	RPL_TOPIC(tmp->getNickname(), channel.getName(), channel.getTopic());
+		reply = RPL_TOPIC(tmp->getNickname(), channel.getName(), channel.getTopic());
 	send(tmp->getFd(), reply.c_str(), reply.length(), 0);
 }
 
@@ -48,15 +48,7 @@ void	ft_topic(t_context *context, Client *tmp, struct pollfd *fds, int i, std::v
 	std::cout << "Client "<<tmp->getNickname() << " is trying to use the topic command" << std::endl;
 
 	if (args.size() == 1)
-	{
-		//check topic
-		// if (context->channels[args[0]].getTopic().empty())
-		// 	reply = RPL_NOTOPIC(tmp->getNickname(), args[0]);
-		// else
-		// 	reply = 	RPL_TOPIC(tmp->getNickname(), args[0], context->channels[args[0]].getTopic());
-		// send(fds[i].fd, reply.c_str(), reply.length(), 0);
 		check_topic(tmp, context->channels[args[0]]);
-	}
 	else
 	{
 		for(size_t i = 2; i < args.size(); i++) {

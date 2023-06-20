@@ -636,12 +636,9 @@ PART :
 COMMANDE PAS DU TOUT FAITE :
 
 
-TRUC EN PLUS :	- les signaux sur notre server
-					--> ca me parait ok !
+TRUC EN PLUS :
 	ok !		- voir si on verifie des caracteres interdits dans le nickname
-					--> je crois que c'est gere ?
 	ok !		- rajouter dans toutes les erreurs le channel ou on veut l'envoyer
-					--> p't-etre on s'en fout ?
 	ok !		- bien virer le user de partout quand il part
 				- voir pk les mots sont tronques dans certains message d'erreur (ex : "incorrect", "have not registered"...)
 				- rendre plus propre l'enchainement close, -1, erase quand un client part

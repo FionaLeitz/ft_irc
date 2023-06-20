@@ -13,8 +13,7 @@ int	nickname_fd( std::string nickname, std::map<int, Client> clients ) {
 
 void	ft_privmsg(t_context *context, Client *tmp, struct pollfd *fds, int i, std::vector<std::string> args)
 {
-	std::cout << "Received command PRIVMSG" << std::endl;// w args " << args[0] << " and " << args[1] << std::endl;
-	std::cout << "	client buff is  " << (*tmp).getBuffer() << std::endl;
+	std::cout << "Received command PRIVMSG" << std::endl;
 	std::string dest;
 	std::string	message;
 	std::string	response;
@@ -31,7 +30,6 @@ void	ft_privmsg(t_context *context, Client *tmp, struct pollfd *fds, int i, std:
 	message = message.substr(message.find(dest) + dest.length() + 1);
 	if (message[0] == ':')		// retire le ':' au debut du message s'il y en a un
 		message = message.substr(1, message.size() - 1); 
-	std::cout << "\tmessage = " << message << "\n\tdestinataire = " << dest << std::endl;
 	response = ":" + (*tmp).getNickname() + " PRIVMSG " + dest + " :" + message +"\r\n";
 	if (dest[0] == '#')
 	{

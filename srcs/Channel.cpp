@@ -24,7 +24,6 @@ Channel::Channel( std::string name, std::string mode, Client new_client ) :
 	_name( name ), _mode( mode ) {
 	this->add_client( new_client );
 	this->add_operator( new_client.getNickname() );
-	// this->_clientlist.insert( std::map<std::string, Client>::value_type( new_client.getNickname(), new_client ) );
 }
 
 void	Channel::add_client( Client new_client ) {
@@ -131,15 +130,15 @@ bool	Channel::isUserOperator(const Client &client) const {
 	std::string response;
 
 	if (this->_operators.find(client.getNickname()) != this->_operators.end()) //si le user est un operateur du channel
-		{
-			std::cout << "OK c'est bien un operateur" << std::endl;
-			return true ;
-		}
+	{
+		std::cout << "OK c'est bien un operateur" << std::endl;
+		return true ;
+	}
 	else
-		{
-			std::cout << "ce n'est pas un operateur !!" << std::endl;
-			response = ERR_CHANOPRIVSNEEDED(client.getNickname(), this->_name);
-			send(client.getFd(), response.c_str(), response.size(), 0);
-			return false ;
-		}
+	{
+		std::cout << "ce n'est pas un operateur !!" << std::endl;
+		response = ERR_CHANOPRIVSNEEDED(client.getNickname(), this->_name);
+		send(client.getFd(), response.c_str(), response.size(), 0);
+		return false ;
+	}
 }

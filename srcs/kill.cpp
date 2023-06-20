@@ -31,7 +31,6 @@ std::string killMessage(std::string killer, std::vector<std::string> reason)
 	msg.append(": ");
 	msg.append(concat( reason ));
 	msg.append(")");
-	std::cout << "KILLING MESSAGE : " << msg << std::endl;
 	return msg;
 }
 
@@ -53,7 +52,6 @@ void	ft_kill(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 	{
 		reply = ERR_NEEDMOREPARAMS(tmp->getNickname(), "", "KILL");
 		send(tmp->getFd(), reply.c_str(), reply.size(), 0);
-		// return ;
 	}
 	else
 	{
@@ -70,7 +68,6 @@ void	ft_kill(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 			std::cout << "RPL = " << reply << std::endl;
 			send(fd, reply.c_str(), reply.size(), 0);
 			reply = RPL_QUIT(target->getNickname(), target->getUsername(), target->getHost(), killMessage(tmp->getNickname(), args));
-			std::cout << "KILLING MESSAGE 2 : " << reply << std::endl;
 			context->clients[fd].leaveAllChannels(context, reply);
 			reply = "ERROR :Closing Link: server (Killed (Operator (Excessive spamming)))\r\n"; //test
 			std::cout << "RPL = " << reply << std::endl;

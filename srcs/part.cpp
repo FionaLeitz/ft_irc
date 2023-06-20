@@ -1,15 +1,13 @@
 #include "../headers/irc.h"
 
 void	ft_part(t_context *context, Client *tmp, struct pollfd *fds, int i, std::vector<std::string> args) {
-	// (void)context;
-	// (void)fds;
-	// (void)i;
-	// (void)args;
-
+	(void)fds;
+	(void)i;
 	std::cout << "Client "<<tmp->getNickname() << " is trying to use the part command." << std::endl;
 
 	int	count = 0;
 	std::string	message;
+
 	for ( std::vector<std::string>::iterator it = args.begin(); it != args.end(); it++ ) {
 		std::cout << "args["<<count<<"] = " << *it << std::endl;
 		if (count != 0) {
@@ -21,10 +19,6 @@ void	ft_part(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 		}
 		count++;
 	}
-	// args[0] = le nom du/des channels
-	// args[1] = la raison du part
-	(void)fds;
-	(void)i;
 	std::vector<std::string>	chans = ft_split( args[0], "," );
 	std::string					response;
 	for ( std::vector<std::string>::iterator 			it = chans.begin(); it != chans.end(); it++ ) {
@@ -57,6 +51,3 @@ void	ft_part(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 		}
 	}
 }
-
-// PROBLEME ! On envoit le message de quit pas au bon endroit, et on quit pas vraiment et ca c'est nul
-// c'etait juste qu'il fallait utiliser la fonction sendToAll au lieu de sendMessage ;)

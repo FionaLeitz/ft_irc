@@ -24,7 +24,7 @@ void	ft_nick(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 {
 	(void)i;
 	(void)fds;
-	std::cout << "Received command NICK" << std::endl;// w args " << args[0] << " and " << args[1] << std::endl;
+	std::cout << "Received command NICK" << std::endl;
 	std::string	response;
 	std::string	RPLnick;
 	std::map<int, Client>::const_iterator it;
