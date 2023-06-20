@@ -1,67 +1,57 @@
 #include <iostream>
-#include <fstream>
-#include <string>
-#include <errno.h>
-#include <cstring>
 
-#include <fstream>  
-#include <ostream>     // std::ofstream
-int	main(void)
+int main(void)
 {
-	std::ifstream	confFile;
-	std::ofstream	newConfFile;
-	std::string		swap;
-	// std::string		line;
-	size_t			found;
-	// size_t			found_pass;
-	// long			pos;
+std::string errorMessage =
+    "    _      ________   _________  __  _______\n"
+    "   | | /| / / __/ /  / ___/ __ \\/  |/  / __/\n"
+    "   | |/ |/ / _// /__/ /__/ /_/ / /|_/ / _/  \n"
+    "   |__/|__/___/____/\\___/\\____/_/  /_/___/  \n"
+    "\n"
+    "    __           ________  ______    _____ __________ _    ____________\n"
+    "  / /_____     /  _/ __ \\/ ____/   / ___// ____/ __ \\ |  / / ____/ __ \\\n"
+    " / __/ __ \\    / // /_/ / /        \\__ \\/ __/ / /_/ / | / / __/ / /_/ /\n"
+    "/ /_/ /_/ /  _/ // _, _/ /___     ___/ / /___/ _, _/| |/ / /___/ _, _/ \n"
+    "\\__/\\____/  /___/_/ |_|\\____/____/____/_____/_/ |_| |___/_____/_/ |_|\n"
+    "                           /_____/\n"
+    "\n"
+    " _        \n"
+    "| |_  _ _ \n"
+    "| . \\| | |\n"
+    "|___/`_. |\n"
+    "     <___'\n"
+    "\n"
+    "      ___                        ___                                    ___     \n"
+    "     /  /\\                     /  /\\        ___           ___        /  /\\    \n"
+    "    /  /:/_                   /  /:/_      /  /\\         /  /:/      /  /::|   \n"
+    "   /  /:/ /\\  ___     ___    /  /:/ /\\    /  /:/        /  /:/     /  /:/:|   \n"
+    "  /  /:/ /:/ /__/\\   /  /\\  /  /:/ /:/_  /__/::\\       /  /:/     /  /:/|:|__ \n"
+    " /__/:/ /:/  \\  \\:\\ /  /:/ /__/:/ /:/ /\\ \\__\\/\\:\\__   /  /::\\    /__/:/ |:| /\\\n"
+    " \\  \\:\\/:/    \\  \\:\\  /:/  \\  \\:\\/:/ /:/    \\  \\:\\/\\ /__/:/\\:\\   \\__\\/  |:|/:/\n"
+    "  \\  \\::/      \\  \\:\\/:/    \\  \\::/ /:/      \\__\\::/ \\__\\/  \\:\\      |  |:/:/ \n"
+    "   \\  \\:\\       \\  \\::/      \\  \\:\\/:/       /__/:/       \\  \\:\\     |  |::/  \n"
+    "    \\  \\:\\       \\__\\/        \\  \\::/        \\__\\/         \\__\\/     |  |:/   \n"
+    "     \\__\\/                     \\__\\/                                 |__|/    \n"
+    "		                     _ \n"
+    "                 | |\n"
+    "   __ _ _ __   __| |\n"
+    "  / _` | '_ \\ / _` |\n"
+    " | (_| | | | | (_| |\n"
+    "  \\__,_|_| |_|\\__,_|\n"
+    "                    \n"
+    "      ___           ___           ___		___			___		  \n"
+    "     /  /\\         /__/\\         /  /\\         /  /\\          ___        /  /\\         /__/\\    \n"
+    "    /  /:/        |  |::\\       /  /:/_       /  /:/_        /  /:/     /  /::\\        \\  \\:\\   \n"
+    "   /  /:/         |  |:|:\\     /  /:/ /:\\     /  /:/ /:\\      /  /:/     /  /:/\\:\\        \\  \\:\\  \n"
+    "  /  /:/  ___   __|__|:|\\:\\   /  /:/ /::\\   /  /:/ /::\\    /  /:/     /  /:/  \\:\\   _____\\__\\:\\ \n"
+    " /__/:/  /  /\\ /__/::::| \\:\\ /__/:/ /:/\\:\\ /__/:/ /:/\\:\\  /  /::\\    /__/:/ \\__\\:\\ /__/::::::::\\\n"
+    " \\  \\:\\ /  /:/ \\  \\:\\~~\\__\\/ \\  \\:\\/:/~/:/ \\  \\:\\/:/~/:/ /__/:/\\:\\   \\  \\:\\ /  /:/ \\  \\:\\~~\\~~\\/ \n"
+    "  \\  \\:\\  /:/   \\  \\:\\        \\  \\::/ /:/   \\  \\::/ /:/  \\__\\/  \\:\\   \\  \\:\\  /:/   \\  \\:\\  ~~~  \n"
+    "   \\  \\:\\/:/     \\  \\:\\        \\  \\:\\/:/     \\__\\/ /:/        \\  \\:\\   \\  \\:\\/:/     \\  \\:\\      \n"
+    "    \\  \\::/       \\  \\:\\        \\  \\::/        /__/:/          \\__\\/    \\  \\::/       \\  \\:\\     \n"
+    "     \\__\\/         \\__\\/         \\__\\/         \\__\\/                     \\__\\/         \\__\\/     ";
 
-	confFile.open("./.IRCd-config"); // Ouvrir le fichier en lecture
-    if (!confFile) {
-        std::cout << "in update_confile : Failed to open conf file : " << strerror(errno) << std::endl;
-		confFile.close();
-        return 1;
-    }
-	std::getline(confFile, swap, (char)EOF);
-	confFile.close();
-	found = swap.find("operator_name =");
-	found = swap.find("\n", found);
-	if (found != std::string::npos)
-		swap.replace(found, 1, "titato\n");
-	else {
-		std::cout << "Error in conf file." << std::endl;
-		return 1;
-	}
+std::cout << errorMessage;
 
-	found = swap.find("operator_password =");
-	found = swap.find("\n", found);
-	if (found != std::string::npos)
-		swap.replace(found, 1, "12312312\n");
-	else {
-		std::cout << "Error in conf file : missing \n" << std::endl;
-		return 1;
-	}
-	// swap.replace(found, 1, "12312312\n");
-	std::cout << swap;
-	newConfFile.open("./.IRCd-config");
-	newConfFile << swap;
-    // while (std::getline(confFile, line)) {
-    //     found = line.find("operator_name =");
-	// 	found_pass = line.find("operator_password =");
-    //     if (found != std::string::npos)
-	// 	{
-	// 		swap << line;
-	// 		swap << "ocucoucoucouc" << std::endl;
-	// 	}
-    //     else if (found_pass != std::string::npos)
-	// 	{
-	// 		swap << line;
-	// 		swap << "123456" << std::endl;
-	// 	}
-	// 	else 
-	// 		swap << line << std::endl;
-    // }
-	// confFile.close();
-	// newConfFile.open("./.IRCd-config");
-	// newConfFile << swap;
+return 0;
 }

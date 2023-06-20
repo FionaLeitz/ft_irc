@@ -54,8 +54,9 @@ void	ft_nick(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 			// check si dispo
 			for (it = context->clients.begin(); it != context->clients.end(); ++it)
 			{
-				std::cout << "Comparing " << args[0] << " to " << it->second.getNickname()<< std::endl;
-				if (args[0] == it->second.getNickname())
+				if (it->second.getFd() != tmp->getFd())
+					std::cout << "Comparing " << args[0] << " to " << it->second.getNickname()<< std::endl;
+				if (args[0] == it->second.getNickname() && it->second.getFd() != tmp->getFd())
 				{
 					std::cout << "Nickname deja pris par user " << it->first << " (" << USER_ID(it->second.getNickname(), it->second.getUsername(), it->second.getHost()) << ")" << std::endl;
 					response = ERR_NICKNAMEINUSE(args[0]);
