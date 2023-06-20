@@ -2,23 +2,25 @@
 
 void	ft_names(t_context *context, Client *tmp, struct pollfd *fds, int i, std::vector<std::string> args)
 {
-	std::string	reply;
+	std::string	response;
 	std::string nick;
+	std::string oname;
 	(void)fds;
 	(void)i;
 
 	// names prend forcement un argument ?
 	nick = (*tmp).getNickname();
-	for (std::map<std::string, Client>::const_iterator it = context->channels[args[0]].getClientlist().begin(); it != context->channels[args[0]].getClientlist().end(); it++) {
-		reply = RPL_NAMREPLY(nick, "=", args[0], "", it->second.getNickname());
-		std::cout << reply << std::endl;
-		send(tmp->getFd(), reply.c_str(), reply.length(), 0);
+	for (std::map<std::string, Client>::const_iterator it = context->channels[args[0]].getClientlist().begin(); it != context->channels[args[0]].getClientlist().end(); ++it) {
+		oname = it->second.getNickname();
+		if (context->channels[args[0]].getOperators().find(tmp->getNickname()) != context->channels[args[0]].getOperators().end())
+			oname.insert(oname.begin(), '@');
+		response = RPL_NAMREPLY(nick, "=", args[0], "", oname);
+		std::cout << response << std::endl;
+		send(tmp->getFd(), response.c_str(), response.length(), 0);
+		// :server 353 navierxiel = #i :navierxiel
+		// :sakura.jp.as.dal.net 353 tuputu = #dskljfskljldj :@tuputu 
 	}
-	reply.clear();
-	reply = RPL_ENDOFNAMES(nick, args[0]);
-	send(tmp->getFd(), reply.c_str(), reply.length(), 0);
 }
-
 /*
 <symbol> notes the status of the channel. It can be one of the following:
 

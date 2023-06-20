@@ -16,7 +16,6 @@ int	check_args( t_context *context, Client *tmp, std::vector<std::string> args, 
 	}
 	*chan = &it->second;
 	if ( args.size() == 1 || args[1].empty() ) {
-		std::cout << "coucou" << std::endl;
 		response = RPL_CHANNELMODEIS((*tmp).getNickname(), args[0], " +", (*chan)->getMode());
 		std::cout << response << std::endl;
 		send(tmp->getFd(), response.c_str(), response.length(), 0);
