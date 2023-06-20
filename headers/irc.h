@@ -35,8 +35,7 @@
 #define RPL_INVITING(nickname, channel, target) (":server 341 " + nickname + " " + target + " :join " + channel + "\r\n")
 #define RPL_WHOREPLY(nickname, channel, username, host, usernick) (":server 352 " + nickname + " " + channel + " " + username + " " + host + " server " + usernick + " H :0 " + "realname" + "\r\n")
 #define RPL_NAMREPLY(nickname, symbol, channel, prefix, user) (":server 353 " + nickname + " " + symbol + " " + channel + " :" + prefix + user + "\r\n")
-#define RPL_ENDOFNAMES(nickname, channel) (":server 366 " + nickname + " " + channel + " :End of /NAMES list\r\n")
-#define	RPL_YOUREOPER(nickname) (":server 381 " + nickname + " :You are now an IRC operator\r\n")
+#define	RPL_YOUREOPER(nickname) (":server 381 " + nickname + " :You are now an IRC operator\r\n");
 
 #define	ERR_UNKOWNERROR(nickname, username, host, command, message) (":server 400 " + USER_ID(nickname, username, host) + " " + command + " :" + message + "\r\n")
 #define ERR_NOSUCHNICK(nickname, username, host, channel, target) (":server 401 " + USER_ID(nickname, username, host) + " " + channel + " " + target + " :No such nick\r\n")
