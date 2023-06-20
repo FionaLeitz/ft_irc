@@ -8,16 +8,30 @@
 // 	context->clients.erase(it);
 // 	fds[i].fd = -1;
 // }
+std::string	concat( std::vector<std::string> reason ) {
+	std::string msg;
+	std::vector<std::string>::iterator	it = reason.begin();
+	it++;
 
-std::string killMessage(std::string killer, std::string reason)
+	for ( ; it != reason.end(); it++ ) {
+		msg.append(*it);
+		msg.append(" ");
+	}
+	return msg;
+}
+
+std::string killMessage(std::string killer, std::vector<std::string> reason)
 {
 	std::string msg;
+	std::vector<std::string>::iterator	it = reason.begin();
+	it++;
 
 	msg = "Killed (";
 	msg.append(killer);
 	msg.append(": ");
-	msg.append(reason);
+	msg.append(concat( reason ));
 	msg.append(")");
+	std::cout << "KILLING MESSAGE : " << msg << std::endl;
 	return msg;
 }
 
@@ -51,10 +65,12 @@ void	ft_kill(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 		else
 		{
 			target = &context->clients[fd];
-			reply = RPL_KILL(tmp->getNickname(), tmp->getUsername(), tmp->getHost(), args[0], args[1]);
+			std::string	msg = concat( args );
+			reply = RPL_KILL(tmp->getNickname(), tmp->getUsername(), tmp->getHost(), args[0], msg);
 			std::cout << "RPL = " << reply << std::endl;
 			send(fd, reply.c_str(), reply.size(), 0);
-			reply = RPL_QUIT(target->getNickname(), target->getUsername(), target->getHost(), killMessage(tmp->getNickname(), args[1]));
+			reply = RPL_QUIT(target->getNickname(), target->getUsername(), target->getHost(), killMessage(tmp->getNickname(), args));
+			std::cout << "KILLING MESSAGE 2 : " << reply << std::endl;
 			context->clients[fd].leaveAllChannels(context, reply);
 			reply = "ERROR :Closing Link: server (Killed (Operator (Excessive spamming)))\r\n"; //test
 			std::cout << "RPL = " << reply << std::endl;

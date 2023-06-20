@@ -2,13 +2,13 @@
 
 void	check_topic(Client *tmp, Channel &channel)
 {
-	std::string response;
+	std::string reply;
 
 	if (channel.getTopic().empty())
-		response = RPL_NOTOPIC(tmp->getNickname(), channel.getName());
+		reply = RPL_NOTOPIC(tmp->getNickname(), channel.getName());
 	else
-		response = 	RPL_TOPIC(tmp->getNickname(), channel.getName(), channel.getTopic());
-	send(tmp->getFd(), response.c_str(), response.length(), 0);
+		reply = 	RPL_TOPIC(tmp->getNickname(), channel.getName(), channel.getTopic());
+	send(tmp->getFd(), reply.c_str(), reply.length(), 0);
 }
 
 void	ft_topic(t_context *context, Client *tmp, struct pollfd *fds, int i, std::vector<std::string> args) {
@@ -43,7 +43,7 @@ void	ft_topic(t_context *context, Client *tmp, struct pollfd *fds, int i, std::v
 */
 	(void)fds;
 	(void)i;
-	std::string response;
+	std::string reply;
 
 	std::cout << "Client "<<tmp->getNickname() << " is trying to use the topic command" << std::endl;
 
@@ -51,10 +51,10 @@ void	ft_topic(t_context *context, Client *tmp, struct pollfd *fds, int i, std::v
 	{
 		//check topic
 		// if (context->channels[args[0]].getTopic().empty())
-		// 	response = RPL_NOTOPIC(tmp->getNickname(), args[0]);
+		// 	reply = RPL_NOTOPIC(tmp->getNickname(), args[0]);
 		// else
-		// 	response = 	RPL_TOPIC(tmp->getNickname(), args[0], context->channels[args[0]].getTopic());
-		// send(fds[i].fd, response.c_str(), response.length(), 0);
+		// 	reply = 	RPL_TOPIC(tmp->getNickname(), args[0], context->channels[args[0]].getTopic());
+		// send(fds[i].fd, reply.c_str(), reply.length(), 0);
 		check_topic(tmp, context->channels[args[0]]);
 	}
 	else
@@ -64,18 +64,22 @@ void	ft_topic(t_context *context, Client *tmp, struct pollfd *fds, int i, std::v
 			args[1].append(args[i]);
 		}
 		std::cout << args.size() << std::endl;
+
 		// change topic
-		if (context->channels[args[0]].isUserOperator(*tmp) == false)
-			return ;
-		response = RPL_CHANGETOPIC(tmp->getNickname(), tmp->getUsername(), tmp->getHost(), args[0], args[1]);
+		if (context->channels[args[0]].getMode().find('t') != std::string::npos) {
+		 	if (context->channels[args[0]].isUserOperator(*tmp) == false)
+				return ;
+		}
+		
+		reply = RPL_CHANGETOPIC(tmp->getNickname(), tmp->getUsername(), tmp->getHost(), args[0], args[1]);
 		if (args[1].size() > 1)
 			context->channels[args[0]].setTopic(args[1].substr(1, args[1].size() - 1));
 		else
 			context->channels[args[0]].setTopic(" ");
-		context->channels[args[0]].sendToAll(response);
+		context->channels[args[0]].sendToAll(reply);
 		// :cmeston!~cmeston@ecc-b03d-a3d6-12a8-9792.210.62.ip TOPIC #aaaa :  
 	}
-	// context->channels[args[1]].sendToAll(response);
+	// context->channels[args[1]].sendToAll(reply);
 }
 /*
 >> /topic

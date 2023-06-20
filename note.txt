@@ -638,16 +638,16 @@ COMMANDE PAS DU TOUT FAITE :
 
 TRUC EN PLUS :	- les signaux sur notre server
 					--> ca me parait ok !
-				- voir si on verifie des caracteres interdits dans le nickname
+	ok !		- voir si on verifie des caracteres interdits dans le nickname
 					--> je crois que c'est gere ?
-				- rajouter dans toutes les erreurs le channel ou on veut l'envoyer
+	ok !		- rajouter dans toutes les erreurs le channel ou on veut l'envoyer
 					--> p't-etre on s'en fout ?
-				- bien virer le user de partout quand il part
+	ok !		- bien virer le user de partout quand il part
 				- voir pk les mots sont tronques dans certains message d'erreur (ex : "incorrect", "have not registered"...)
 				- rendre plus propre l'enchainement close, -1, erase quand un client part
 				- envoyer mode +o a la cretation d'un channel
-				- manque erreur ERR_NOSUCHNICK pour mode
-				- pb de parsing raison KILL
+	ok !		- manque erreur ERR_NOSUCHNICK pour mode
+	ok !		- pb de parsing raison KILL
 				- changer la RPL par defaut (excessive spammig) dand KILL
 				- signaux a revoir
 				- si on quit et qu'on fait /server ca marche pas
@@ -656,7 +656,8 @@ TRUC EN PLUS :	- les signaux sur notre server
 					OK c'est bien un operateur
 					changes = +i
 						(???)
-				- voir les modes du sujet 
+	ok !		- voir les modes du sujet
+	ok !		- topic pour les autorisations
 				- si mauvais mot de passe, nick et user ne font rien mais n'ont pas de message d'erreur
 				- supprimer les channels vides ? (zero utilisateur)
 	ok !		- erreur mode +o invalid user
@@ -665,7 +666,7 @@ TRUC EN PLUS :	- les signaux sur notre server
 				- nick est chelou ?
 
 
-Selon moi, les commandes bonnes sont :
+Selon moi (fiona), les commandes bonnes sont :
 	- invite
 	- kick
 	- list
