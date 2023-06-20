@@ -642,7 +642,7 @@ TRUC EN PLUS :
 	ok !		- envoyer mode +o a la cretation d'un channel
 	ok !		- manque erreur ERR_NOSUCHNICK pour mode
 	ok !		- pb de parsing raison KILL
-				- changer la RPL par defaut (excessive spammig) dans KILL
+	ok !		- changer la RPL par defaut (excessive spammig) dans KILL
 				- signaux a revoir
 	ok !		- si on quit et qu'on fait /server ca marche pas
 				- 	Message reçu : MODE #vip_salon navierxiel +o
@@ -653,7 +653,7 @@ TRUC EN PLUS :
 	ok !		- voir les modes du sujet
 	ok !		- topic pour les autorisations
 				- si mauvais mot de passe, nick et user ne font rien mais n'ont pas de message d'erreur (cf. nick.cpp:36)
-				- supprimer les channels vides ? (zero utilisateur)
+	ok !		- supprimer les channels vides ? (zero utilisateur)
 	ok !		- erreur mode +o invalid user
 	ok !		- rajouter # dans join si existe deja
 	ok !		- si on fait names, ca nous rajoute dans la liste a droite
