@@ -17,19 +17,18 @@ std::string	concat( std::vector<std::string> reason ) {
 		msg.append(*it);
 		msg.append(" ");
 	}
+	msg = &msg[1];
 	return msg;
 }
 
-std::string killMessage(std::string killer, std::vector<std::string> reason)
+std::string killMessage(std::string killer, std::string reason)
 {
 	std::string msg;
-	std::vector<std::string>::iterator	it = reason.begin();
-	it++;
 
 	msg = "Killed (";
 	msg.append(killer);
 	msg.append(": ");
-	msg.append(concat( reason ));
+	msg.append( reason );
 	msg.append(")");
 	return msg;
 }
@@ -63,17 +62,13 @@ void	ft_kill(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 		else
 		{
 			target = &context->clients[fd];
-			std::string	msg = concat( args );
-			reply = RPL_KILL(tmp->getNickname(), tmp->getUsername(), tmp->getHost(), args[0], msg);
+			std::string	reason = concat( args );
+			reply = RPL_KILL(tmp->getNickname(), tmp->getUsername(), tmp->getHost(), args[0], reason);
 			std::cout << "RPL = " << reply << std::endl;
 			send(fd, reply.c_str(), reply.size(), 0);
-			reply = RPL_QUIT(target->getNickname(), target->getUsername(), target->getHost(), killMessage(tmp->getNickname(), args));
+			reply = RPL_QUIT(target->getNickname(), target->getUsername(), target->getHost(), killMessage(tmp->getNickname(), reason));
 			context->clients[fd].leaveAllChannels(context, reply);
-			reply = "ERROR :Closing Link: server (Killed (";
-			reply += tmp->getNickname();
-			reply += "(";
-			reply += &concat( args )[1];
-			reply += ")))\r\n"; //test
+			reply = RPL_CLOSINGLINK(tmp->getNickname(), reason);
 			std::cout << "RPL = " << reply << std::endl;
 			send(fd, reply.c_str(), reply.size(), 0);
 			//close la connexion

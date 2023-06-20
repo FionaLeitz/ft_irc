@@ -74,6 +74,7 @@
 #define RPL_LIST(nickname, username, host, channel, count, topic) (":server 322 " + USER_ID(nickname, username, host) + " " + channel + " " + count + " :" + topic + "\r\n")
 #define RPL_LISTEND(nickname, username, host) (":server 323 " + USER_ID(nickname, username, host) + " :End of /LIST\r\n")
 #define RPL_PART(nickname, username, host, channel, message) (":" + USER_ID(nickname, username, host) + " PART " + channel + " " + message + "\r\n")
+#define RPL_CLOSINGLINK(killer, reason) ("ERROR :Closing Link: server (Killed (" + killer + " (" + reason + ")))\r\n")
 
 // #define ERR_USERNOTINCHANNEL(nickname, username, channel, target) (":server 441 " + USER_ID(nickname, username, host) + " " + target + " :They aren't on that channel\r\n")
 // normalement comme ca, et le msg d'erreur arrive sur l'onglet principal (et non pas sur le channel)
