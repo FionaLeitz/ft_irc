@@ -4,7 +4,7 @@ void afficherNomClient(const Client& client)
 {
     std::cout << client.getNickname() << std::endl;
 }
-void sendToAllClients(const std::map<std::string, Client> &clientList, std::string response)
+void sendToAllClients(const std::map<std::string, Client> &clientList, std::string reply)
 {
 	int	fd;
 
@@ -12,14 +12,14 @@ void sendToAllClients(const std::map<std::string, Client> &clientList, std::stri
     for (it = clientList.begin(); it != clientList.end(); ++it)
     {
 		fd = it->second.getFd();
-		send(fd, response.c_str(), response.length(), 0);
+		send(fd, reply.c_str(), reply.length(), 0);
     }
 
 }
 
 void	ft_join(t_context *context, Client *tmp, struct pollfd *fds, int i, std::vector<std::string> args)
 {
-	std::string	response;
+	std::string	reply;
 	std::string message;
 	(void)fds;
 	(void)i;
@@ -54,27 +54,27 @@ void	ft_join(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 		else if (context->channels[channels[count]].isUserThere(tmp->getNickname()) == false) {
 			if ( context->channels[channels[count]].getMode().find("k") != std::string::npos ) {
 				if ( passwords[count] != context->channels[channels[count]].getPassword() ) {
-					response = ERR_BADCHANNELKEY(tmp->getNickname(), channels[count]);
-					send(tmp->getFd(), response.c_str(), response.size(), 0);
+					reply = ERR_BADCHANNELKEY(tmp->getNickname(), channels[count]);
+					send(tmp->getFd(), reply.c_str(), reply.size(), 0);
 					save = 1;
 				}
 			}
 			if ( context->channels[channels[count]].getMode().find("i") != std::string::npos && save == 0 && tmp->getChannelList().find(channels[count]) == tmp->getChannelList().end() ) {
-				response = ERR_INVITEONLYCHAN(tmp->getNickname(), channels[count]);
-				send(tmp->getFd(), response.c_str(), response.size(), 0);
+				reply = ERR_INVITEONLYCHAN(tmp->getNickname(), channels[count]);
+				send(tmp->getFd(), reply.c_str(), reply.size(), 0);
 				save = 1;
 			}
 			if ( context->channels[channels[count]].getMode().find("l") != std::string::npos && save == 0 && context->channels[channels[count]].getClientlist().size() >= context->channels[channels[count]].getSizemax() ) {
-				response = ERR_CHANNELISFULL(tmp->getNickname(), channels[count]);
-				send(tmp->getFd(), response.c_str(), response.size(), 0);
+				reply = ERR_CHANNELISFULL(tmp->getNickname(), channels[count]);
+				send(tmp->getFd(), reply.c_str(), reply.size(), 0);
 				save = 1;
 			}
 		}
 		if ((save == 0 && context->channels[channels[count]].isUserThere(tmp->getNickname()) == false) || save == 2) {
 			context->channels[channels[count]].add_client((*tmp));
 			(*tmp).addChannel(channels[count]);
-			response = RPL_JOIN((*tmp).getNickname(), (*tmp).getUsername(), tmp->getHost(), channels[count]);
-			context->channels[channels[count]].sendToAll(response);
+			reply = RPL_JOIN((*tmp).getNickname(), (*tmp).getUsername(), tmp->getHost(), channels[count]);
+			context->channels[channels[count]].sendToAll(reply);
 			ft_names(context, tmp, fds, i, args2);
 			check_topic(tmp, context->channels[channels[count]]);
 		}
