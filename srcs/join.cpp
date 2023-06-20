@@ -25,7 +25,8 @@ void	ft_join(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 	std::string message;
 	(void)fds;
 	(void)i;
-
+	
+	int o;
 	std::cout << "Received command JOIN" << std::endl;
 	std::vector<std::string>	channels = ft_split( args[0], "," );
 	std::vector<std::string>	passwords;
@@ -36,7 +37,7 @@ void	ft_join(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 		for (int count = channels.size(); count > 0; count--)
 			passwords.push_back("");
 	}
-
+	o = 0;
 	int	size = channels.size();
 	for ( int count = 0; count < size; count++ ) {
 		int	save = 0;
@@ -75,6 +76,9 @@ void	ft_join(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 			(*tmp).addChannel(channels[count]);
 			reply = RPL_JOIN((*tmp).getNickname(), (*tmp).getUsername(), tmp->getHost(), channels[count]);
 			context->channels[channels[count]].sendToAll(reply);
+			reply = RPL_MODE(tmp->getNickname(), tmp->getUsername(), tmp->getHost(), context->channels[channels[count]].getName(), "+o");
+			context->channels[channels[count]].sendToAll(reply);
+			ft_names(context, tmp, fds, i, args);
 			check_topic(tmp, context->channels[channels[count]]);
 			if (save == 1) {
 				reply.clear();
