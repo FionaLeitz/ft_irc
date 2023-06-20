@@ -148,7 +148,7 @@ void	ft_oper(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 	(void)i;
 	(void)context;
 
-	std::string					response;
+	std::string					reply;
 	std::ifstream				confFile;
 	std::string					lines;
 	std::vector<std::string>	op_names;
@@ -158,16 +158,16 @@ void	ft_oper(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 	std::cout << "Client "<<tmp->getNickname() << " is trying to use the oper command." << std::endl;
 	if ( args.size() < 2)
 	{
-		response = ERR_NEEDMOREPARAMS(tmp->getNickname(), "", "OPER");
-		send(tmp->getFd(), response.c_str(), response.size(), 0);
+		reply = ERR_NEEDMOREPARAMS(tmp->getNickname(), "", "OPER");
+		send(tmp->getFd(), reply.c_str(), reply.size(), 0);
 		return ;
 	}
 	std::cout << "Trying to log as operator with name: " << args[0] << ", password: " << args[1] << ", and host: " << tmp->getHost() << std::endl;
 
 	if (tmp->getOperator() == true)
 	{
-		response = ERR_UNKOWNERROR(tmp->getNickname(), tmp->getUsername(), tmp->getHost(), "OPER", "You are already logged as a network operator");
-		send(tmp->getFd(), response.c_str(), response.size(), 0);
+		reply = ERR_UNKOWNERROR(tmp->getNickname(), tmp->getUsername(), tmp->getHost(), "OPER", "You are already logged as a network operator");
+		send(tmp->getFd(), reply.c_str(), reply.size(), 0);
 		return ;
 	}
 	confFile.open("./.IRCd-config");
@@ -198,35 +198,36 @@ void	ft_oper(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 		std::cout << "Le name est dans les operator_name" << std::endl;
 		if (op_pass[place] == args[1]) {
 			std::cout << "Le mot de passe est le bon, il peut se connecter en tant que OPERATOR"<<std::endl;
-			response = RPL_YOUREOPER(tmp->getNickname());
-			send(tmp->getFd(), response.c_str(), response.size(), 0);
-			response = RPL_oMODE(tmp->getNickname(), tmp->getUsername(), tmp->getHost(), "+o");
-			send(tmp->getFd(), response.c_str(), response.size(), 0);
+			reply = RPL_YOUREOPER(tmp->getNickname());
+			send(tmp->getFd(), reply.c_str(), reply.size(), 0);
+			reply = RPL_oMODE(tmp->getNickname(), tmp->getUsername(), tmp->getHost(), "+o");
+			send(tmp->getFd(), reply.c_str(), reply.size(), 0);
 			tmp->setOperator(true);
 		}
 		else {
 			std::cout << "Le mot de passe est mauvais, il ne devient pas operator" << std::endl;
-			response = ERR_PASSWDMISMATCH(tmp->getNickname());
-			send(tmp->getFd(), response.c_str(), response.size(), 0);
+			reply = ERR_PASSWDMISMATCH(tmp->getNickname());
+			std::cout << reply << std::endl;
+			send(tmp->getFd(), reply.c_str(), reply.size(), 0);
 		}
 	}
 	else if (client_ip == ip ) {
 		std::cout << "Il est sur le bon IP, il peut creer un name et un pass pour etre OPERATOR" << std::endl;
-		response = add_in_config(args[0], args[1], tmp);
-		if (!response.empty()) {
-			send(tmp->getFd(), response.c_str(), response.size(), 0);
+		reply = add_in_config(args[0], args[1], tmp);
+		if (!reply.empty()) {
+			send(tmp->getFd(), reply.c_str(), reply.size(), 0);
 			return ;
 		}
-		response = RPL_YOUREOPER(tmp->getNickname());
-		send(tmp->getFd(), response.c_str(), response.size(), 0);
-		response = RPL_oMODE(tmp->getNickname(), tmp->getUsername(), tmp->getHost(), "+o");
-		send(tmp->getFd(), response.c_str(), response.size(), 0);
+		reply = RPL_YOUREOPER(tmp->getNickname());
+		send(tmp->getFd(), reply.c_str(), reply.size(), 0);
+		reply = RPL_oMODE(tmp->getNickname(), tmp->getUsername(), tmp->getHost(), "+o");
+		send(tmp->getFd(), reply.c_str(), reply.size(), 0);
 		tmp->setOperator(true);
 	}
 	else {
 		std::cout << "Il est refuse ! Il ne peut pas devenir operator" << std::endl;
-		response = ERR_NOOPERHOST(tmp->getNickname(), tmp->getUsername(), tmp->getHost());
-		send(tmp->getFd(), response.c_str(), response.size(), 0);
+		reply = ERR_NOOPERHOST(tmp->getNickname(), tmp->getUsername(), tmp->getHost());
+		send(tmp->getFd(), reply.c_str(), reply.size(), 0);
 	}
 	confFile.close();
 
@@ -240,18 +241,18 @@ void	ft_oper(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 	// 	}
 	// 	if (it == op_hosts.end()) {
 	// 			std::cout << "mauvais host !!!! dsl tu ne peux pas devenir operateur" << std::endl;
-	// 			response = ERR_NOOPERHOST(tmp->getNickname(), tmp->getUsername(), tmp->getHost());
-	// 			send(tmp->getFd(), response.c_str(), response.size(), 0);
+	// 			reply = ERR_NOOPERHOST(tmp->getNickname(), tmp->getUsername(), tmp->getHost());
+	// 			send(tmp->getFd(), reply.c_str(), reply.size(), 0);
 	// 			return ;
 	// 	}
 	// 	else {
 	// 		std::cout << "host ok tu peux devenir oprateur bravo" << std::endl;
 	// 		if (update_confFile(args[0], args[1]) == 1)
 	// 			return ; // send ERR_ custom ?
-	// 		response = RPL_YOUREOPER(tmp->getNickname());
-	// 		send(tmp->getFd(), response.c_str(), response.size(), 0);
-	// 		response = RPL_oMODE(tmp->getNickname(), tmp->getUsername(), tmp->getHost(), "+o");
-	// 		send(tmp->getFd(), response.c_str(), response.size(), 0);
+	// 		reply = RPL_YOUREOPER(tmp->getNickname());
+	// 		send(tmp->getFd(), reply.c_str(), reply.size(), 0);
+	// 		reply = RPL_oMODE(tmp->getNickname(), tmp->getUsername(), tmp->getHost(), "+o");
+	// 		send(tmp->getFd(), reply.c_str(), reply.size(), 0);
 	// 		tmp->setOperator(true);
 	// 	}
 	
@@ -259,13 +260,13 @@ void	ft_oper(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 	// else							// sinon, l'operateur peut se connecter depuis n'importe quelle adresse
 	// {
 	// 	if (args[1] == context->op_password && args[0] == context->op_name) {
-	// 		response = RPL_YOUREOPER(tmp->getNickname());
-	// 		send(tmp->getFd(), response.c_str(), response.size(), 0);
-	// 		response = RPL_oMODE(tmp->getNickname(), tmp->getUsername(), tmp->getHost(), "+o");
+	// 		reply = RPL_YOUREOPER(tmp->getNickname());
+	// 		send(tmp->getFd(), reply.c_str(), reply.size(), 0);
+	// 		reply = RPL_oMODE(tmp->getNickname(), tmp->getUsername(), tmp->getHost(), "+o");
 	// 	}
 	// 	else 
-	// 		response = ERR_PASSWDMISMATCH(tmp->getNickname());
-	// 	send(tmp->getFd(), response.c_str(), response.size(), 0);
+	// 		reply = ERR_PASSWDMISMATCH(tmp->getNickname());
+	// 	send(tmp->getFd(), reply.c_str(), reply.size(), 0);
 	// }
 	
 

@@ -32,7 +32,10 @@ void	ft_nick(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 	std::vector<std::string> user_args;
 
 	if (tmp->getPassBool() == false)
+	{
+		// rajouter RPL d'erreur
 		return ;
+	}
 	if (args.size() == 0)
 	{
 		response = ERR_NONICKNAMEGIVEN();

@@ -619,17 +619,14 @@ TO DO LIST :
 QUIT :
 JOIN :	- (une fois le channel rejoint, envoyer a la personne qui join le RPL_TOPICWHOTIME (333))
 		- (a faire ou pas ?) argument "0" (/join 0 ?) qui quitte tous les channels dans lequel est le user
-		- liste des users dans hexchat
 MODE :
 NICK :
 PASS :
 PRIVMSG :
-KICK :	- eventuellement rajouter un caractere special quand on est operateur (ex : "cmeston_ H :0 Chine MESTON" -->  "cmeston_ H@ :0 Chine MESTON")
+KICK :
 TOPIC :
-NAMES : - adapter les variables symbol et prefix en fonction du statut de l'user (chanop, founder, protected, halfop, voice)
-OPER :	- plusieurs personnes peuvent se log en operateur en meme temps ? --> auquel cas il faut changer tout le parsing du fichier .conf
-		- plusieurs combinaisons admin/mdp possible ? --> me parait chiant de ouf a faire
-		- ou stocker le fait qu'un user est server operateur pour le verifier par la suite ?
+NAMES :
+OPER :
 PART :
 
 
@@ -642,12 +639,12 @@ TRUC EN PLUS :
 	ok !		- bien virer le user de partout quand il part
 				- voir pk les mots sont tronques dans certains message d'erreur (ex : "incorrect", "have not registered"...)
 				- rendre plus propre l'enchainement close, -1, erase quand un client part
-				- envoyer mode +o a la cretation d'un channel
+	ok !		- envoyer mode +o a la cretation d'un channel
 	ok !		- manque erreur ERR_NOSUCHNICK pour mode
 	ok !		- pb de parsing raison KILL
-				- changer la RPL par defaut (excessive spammig) dand KILL
+				- changer la RPL par defaut (excessive spammig) dans KILL
 				- signaux a revoir
-				- si on quit et qu'on fait /server ca marche pas
+	ok !		- si on quit et qu'on fait /server ca marche pas
 				- 	Message reçu : MODE #vip_salon navierxiel +o
 					Received command MODE
 					OK c'est bien un operateur
@@ -655,11 +652,11 @@ TRUC EN PLUS :
 						(???)
 	ok !		- voir les modes du sujet
 	ok !		- topic pour les autorisations
-				- si mauvais mot de passe, nick et user ne font rien mais n'ont pas de message d'erreur
+				- si mauvais mot de passe, nick et user ne font rien mais n'ont pas de message d'erreur (cf. nick.cpp:36)
 				- supprimer les channels vides ? (zero utilisateur)
 	ok !		- erreur mode +o invalid user
 	ok !		- rajouter # dans join si existe deja
-				- si on fait names, ca nous rajoute dans la liste a droite
+	ok !		- si on fait names, ca nous rajoute dans la liste a droite
 				- nick est chelou ?
 
 
