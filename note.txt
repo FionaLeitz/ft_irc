@@ -642,11 +642,9 @@ TRUC EN PLUS :
 	ok !		- bien virer le user de partout quand il part
 				- voir pk les mots sont tronques dans certains message d'erreur (ex : "incorrect", "have not registered"...)
 				- rendre plus propre l'enchainement close, -1, erase quand un client part
-				- envoyer mode +o a la cretation d'un channel
 	ok !		- manque erreur ERR_NOSUCHNICK pour mode
 	ok !		- pb de parsing raison KILL
 				- changer la RPL par defaut (excessive spammig) dand KILL
-				- signaux a revoir
 				- si on quit et qu'on fait /server ca marche pas
 				- 	Message reçu : MODE #vip_salon navierxiel +o
 					Received command MODE
@@ -659,7 +657,6 @@ TRUC EN PLUS :
 				- supprimer les channels vides ? (zero utilisateur)
 	ok !		- erreur mode +o invalid user
 	ok !		- rajouter # dans join si existe deja
-				- si on fait names, ca nous rajoute dans la liste a droite
 				- nick est chelou ?
 
 
@@ -677,9 +674,12 @@ Selon moi (fiona), les commandes bonnes sont :
 	- who
 
 
-
-
-
+on quitte des channels dans :
+						- kick
+						- kill 
+						- part
+						- quit
+			--> faire une fonction qui, si plus personne n'est sur le channel, le supprime
 
 
 
