@@ -57,7 +57,7 @@ void	ft_kick(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 		context->channels[args[0]].sendToAll(response);
 		context->channels[args[0]].suppress_client(args[1]);
 		int fd = findClientFd(context->clients, args[1]);
-		context->clients[fd].removeChannel(args[0]);
+		context->clients[fd].removeChannel(context, args[0]);
 		// >> :totousse!~cmeston@2618-2ed8-f8de-36d4-9088.210.62.ip KICK #wewewe cmeston_ :totousse
 	}
 }

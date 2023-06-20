@@ -135,12 +135,13 @@ void	Client::addInviteChannel(std::string name)
 	_channelList[name] = 0;
 }
 
-void	Client::removeChannel(std::string name)
+void	Client::removeChannel(t_context *context, std::string name)
 {
 	std::map<std::string, int>::iterator it;
 
  	it = _channelList.find(name);
-  	_channelList.erase (it);
+  	_channelList.erase(it);
+	suppress_empty_chan( context, it->first );
 }
 
 void	Client::printChannelList(void) const
@@ -163,6 +164,7 @@ void	Client::leaveAllChannels(t_context *context, std::string rpl)
 			context->channels[it2->first].sendMessage(rpl, _fd);
 			context->channels[it2->first].suppress_client(_nickname);
 			this->_channelList.erase(it2);
+			suppress_empty_chan( context, it2->first );
 		}
 		it2 = save;
 	}

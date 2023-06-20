@@ -25,13 +25,11 @@ void	ft_part(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 		std::map<std::string,int>::const_iterator		finding = tmp->getChannelList().find(*it);
 		std::map<std::string, Channel>::iterator		existingchannel = context->channels.find( *it );
 		if ( existingchannel == context->channels.end() ) {
-			// message ERR_NOSUCHCHANNEL (403)
 			response = ERR_NOSUCHCHANNEL(tmp->getNickname(), tmp->getUsername(), tmp->getHost(), *it );
 			send(tmp->getFd(), response.c_str(), response.size(), 0);
 			std::cout << "Le channel " <<*it<< " n'existe pas" << std::endl;
 		}
 		else if ( finding == tmp->getChannelList().end() || finding->second == 0 ) {
-			// message ERR_NOTONCHANNEL (442)
 			response = ERR_NOTONCHANNEL(tmp->getNickname(), tmp->getUsername(), tmp->getHost(), *it );
 			send(tmp->getFd(), response.c_str(), response.size(), 0);
 			std::cout << "Il n'est pas dans le channel "<< *it << std::endl;
@@ -39,15 +37,10 @@ void	ft_part(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 		else {
 			std::cout << "Il peut quitter le channel "<< *it << std::endl;
 			response = RPL_PART(tmp->getNickname(), tmp->getUsername(), tmp->getHost(), *it, message);
-			std::cout << "rpl : " << response << std::endl;
 			existingchannel->second.sendToAll( response);
-			// theoriquement, on envoie a tou les gens du chan qu'on quitte
-			tmp->removeChannel( *it );
+			tmp->removeChannel( context, *it );
 			existingchannel->second.suppress_client( tmp->getNickname() );
-			// on remove ce channel des listes du client
-			// et on le vire des listes du channel
-
-			// :cmeston!~cmeston@dd87-b33b-eb70-76be-57f1.210.62.ip PART #uwuwuwuwu
+			suppress_empty_chan( context, *it );
 		}
 	}
 }

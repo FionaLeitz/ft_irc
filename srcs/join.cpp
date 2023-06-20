@@ -49,6 +49,7 @@ void	ft_join(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 		{
 			context->channels[channels[count]] = Channel(channels[count], "t", (*tmp));	//ajoute le channel a la map
 			context->channels[channels[count]].add_operator(tmp->getNickname());
+			std::cout << "C'EST UN NOUVEAU CHANNEL !!!" << std::endl;
 			save = 2;
 		}
 		else if (context->channels[channels[count]].isUserThere(tmp->getNickname()) == false) {

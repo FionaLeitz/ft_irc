@@ -34,3 +34,10 @@ int	isAuthorized(const Client &user, std::string command)
 	}
 	return 0;
 }
+
+void	suppress_empty_chan( t_context *context, std::string channel_name ) {
+	if (context->channels[channel_name].getClientlist().size() == 0) {
+		std::cout << "Le channel est vide, on peut le supprimer" << std::endl;
+		context->channels.erase(channel_name);
+	}
+}

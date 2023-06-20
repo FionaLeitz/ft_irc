@@ -1,6 +1,8 @@
 #ifndef CLIENT_HPP
 # define CLIENT_HPP
 
+// void	suppress_empty_chan(t_context *context, std::string channel_name);
+
 typedef struct	s_context t_context;
 
 class	Channel;
@@ -39,7 +41,7 @@ class	Client {
 
 		void						addChannel(std::string name);
 		void						addInviteChannel(std::string name);
-		void						removeChannel(std::string name);
+		void						removeChannel(t_context *context, std::string name);
 		void						leaveAllChannels(t_context *context, std::string rpl);
 
 		void						printChannelList(void) const;
