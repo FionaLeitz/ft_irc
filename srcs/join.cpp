@@ -76,9 +76,6 @@ void	ft_join(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 			(*tmp).addChannel(channels[count]);
 			reply = RPL_JOIN((*tmp).getNickname(), (*tmp).getUsername(), tmp->getHost(), channels[count]);
 			context->channels[channels[count]].sendToAll(reply);
-			reply = RPL_MODE(tmp->getNickname(), tmp->getUsername(), tmp->getHost(), context->channels[channels[count]].getName(), "+o");
-			context->channels[channels[count]].sendToAll(reply);
-			ft_names(context, tmp, fds, i, args);
 			check_topic(tmp, context->channels[channels[count]]);
 			if (save == 1) {
 				reply.clear();
