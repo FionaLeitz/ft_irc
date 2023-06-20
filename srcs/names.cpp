@@ -2,7 +2,7 @@
 
 void	ft_names(t_context *context, Client *tmp, struct pollfd *fds, int i, std::vector<std::string> args)
 {
-	std::string	response;
+	std::string	reply;
 	std::string nick;
 	std::string oname;
 	(void)fds;
@@ -14,12 +14,15 @@ void	ft_names(t_context *context, Client *tmp, struct pollfd *fds, int i, std::v
 		oname = it->second.getNickname();
 		if ( context->channels[args[0]].isUserOperator(it->second) == true)
 			oname.insert(oname.begin(), '@');
-		response = RPL_NAMREPLY(nick, "=", args[0], "", oname);
-		std::cout << response << std::endl;
-		send(tmp->getFd(), response.c_str(), response.length(), 0);
+		reply = RPL_NAMREPLY(nick, "=", args[0], "", oname);
+		std::cout << reply << std::endl;
+		send(tmp->getFd(), reply.c_str(), reply.length(), 0);
 		// :server 353 navierxiel = #i :navierxiel
 		// :sakura.jp.as.dal.net 353 tuputu = #dskljfskljldj :@tuputu 
 	}
+	reply.clear();
+	reply = RPL_ENDOFNAMES(nick, args[0]);
+	send(tmp->getFd(), reply.c_str(), reply.length(), 0);
 }
 
 /*
