@@ -25,7 +25,7 @@ void	ft_nick(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 	(void)i;
 	(void)fds;
 	std::cout << "Received command NICK" << std::endl;
-	std::string	response;
+	std::string	reply;
 	std::string	RPLnick;
 	std::map<int, Client>::const_iterator it;
 	std::string oldNick;
@@ -34,18 +34,20 @@ void	ft_nick(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 	if (tmp->getPassBool() == false)
 	{
 		// rajouter RPL d'erreur
+		reply = ERR_UNKOWNERROR((std::string)"nickname", (std::string)"username", tmp->getHost(), args[0], (std::string)"You need to set the password first");
+		send(tmp->getFd(), reply.c_str(), reply.length(), 0);
 		return ;
 	}
 	if (args.size() == 0)
 	{
-		response = ERR_NONICKNAMEGIVEN();
+		reply = ERR_NONICKNAMEGIVEN();
 	}
 	else
 	{
 		// check caracteres interdits
 		if (isStringAlnum(args[0]) == false)
 		{
-			response = ERR_ERRONEUSNICKNAME(args[0]);
+			reply = ERR_ERRONEUSNICKNAME(args[0]);
 			std::cout << "Invalid char in nick" << std::endl;
 			if (tmp->getNickname().empty())
 				(*tmp).setNickname(args[0]);
@@ -62,7 +64,7 @@ void	ft_nick(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 				if (args[0] == it->second.getNickname() && it->second.getFd() != tmp->getFd())
 				{
 					std::cout << "Nickname deja pris par user " << it->first << " (" << USER_ID(it->second.getNickname(), it->second.getUsername(), it->second.getHost()) << ")" << std::endl;
-					response = ERR_NICKNAMEINUSE(args[0]);
+					reply = ERR_NICKNAMEINUSE(args[0]);
 					if (tmp->getNickname().empty())
 						(*tmp).setNickname(args[0]);
 					if (tmp->canConnect() != 2)
@@ -79,20 +81,20 @@ void	ft_nick(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 					if (oldNick.empty())
 						oldNick = args[0];
 				}
-				response = RPL_NICK(oldNick, tmp->getUsername(), tmp->getHost(), args[0]);
+				reply = RPL_NICK(oldNick, tmp->getUsername(), tmp->getHost(), args[0]);
 				(*tmp).setNickname(args[0]);
-				send(tmp->getFd(), response.c_str(), response.length(), 0);
+				send(tmp->getFd(), reply.c_str(), reply.length(), 0);
 				if (tmp->canConnect() != 2 && !tmp->getUsername().empty()) {
-					response = RPL_WELCOME(tmp->getNickname(), tmp->getUsername(), tmp->getHost());
+					reply = RPL_WELCOME(tmp->getNickname(), tmp->getUsername(), tmp->getHost());
 					tmp->setCanConnect(2);
 				}
 				else
-					response = "";
+					reply = "";
 				}
 				if (tmp->canConnect() != 2)
 					tmp->setCanConnect(1);
 			}
 		}
-		std::cout << "RPL = " << response << std::endl;
-		send(tmp->getFd(), response.c_str(), response.length(), 0);
+		std::cout << "RPL = " << reply << std::endl;
+		send(tmp->getFd(), reply.c_str(), reply.length(), 0);
 	}

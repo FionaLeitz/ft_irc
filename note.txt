@@ -637,7 +637,7 @@ TRUC EN PLUS :
 	ok !		- voir si on verifie des caracteres interdits dans le nickname
 	ok !		- rajouter dans toutes les erreurs le channel ou on veut l'envoyer
 	ok !		- bien virer le user de partout quand il part
-				- voir pk les mots sont tronques dans certains message d'erreur (ex : "incorrect", "have not registered"...)
+	ok !		- voir pk les mots sont tronques dans certains message d'erreur (ex : "incorrect", "have not registered"...)
 				- rendre plus propre l'enchainement close, -1, erase quand un client part
 	ok !		- envoyer mode +o a la cretation d'un channel
 	ok !		- manque erreur ERR_NOSUCHNICK pour mode
@@ -653,6 +653,7 @@ TRUC EN PLUS :
 	ok !		- voir les modes du sujet
 	ok !		- topic pour les autorisations
 				- si mauvais mot de passe, nick et user ne font rien mais n'ont pas de message d'erreur (cf. nick.cpp:36)
+							-> fait mais pas teste !!!
 	ok !		- supprimer les channels vides ? (zero utilisateur)
 	ok !		- erreur mode +o invalid user
 	ok !		- rajouter # dans join si existe deja
