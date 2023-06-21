@@ -29,9 +29,7 @@ void	ft_nick(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 		return ;
 	}
 	if (args.size() == 0)
-	{
 		reply = ERR_NONICKNAMEGIVEN();
-	}
 	else
 	{
 		// check caracteres interdits

@@ -659,6 +659,12 @@ TRUC EN PLUS :
 	ok !		- rajouter # dans join si existe deja
 	ok !		- si on fait names, ca nous rajoute dans la liste a droite
 				- nick : si on tente de changer de nick pour un nick invalide, on change de nick pour le suivant dans notre liste possible
+								--> en regardant notre code, je suis pas sure que ce soit notre faute ?
+								--> si tu ne comprends pas ce que je veux dire :
+								--> fait un user avec le nick "a", le 2e nick "b" et le 3e nick "c"
+								--> puis essaye de lui faire la commande "/nick #bla" (qui est un nickname invalide)
+								--> on va lui changer son nick pour "b" du coup...
+								--> et c'est pareil si on veut le changer par un nick deja pris
 	ok !		- rpl d'erreur si commande inconnu
 
 
