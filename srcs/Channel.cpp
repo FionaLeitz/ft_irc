@@ -87,16 +87,16 @@ void	Channel::setSizemax( int sizemax ) {
 	this->_sizemax = sizemax;
 }
 
-void Channel::appliquerFonction(FunctionType function)
-{
-    std::map<std::string, Client>::iterator it;
-    for (it = _clientlist.begin(); it != _clientlist.end(); ++it)
-    {
-        function(it->second);
-    }
-}
+// void Channel::appliquerFonction(FunctionType function)
+// {
+//     std::map<std::string, Client>::iterator it;
+//     for (it = _clientlist.begin(); it != _clientlist.end(); ++it)
+//     {
+//         function(it->second);
+//     }
+// }
 
-void	Channel::sendMessage(std::string response, int currentFd)
+void	Channel::sendMessage(std::string reply, int currentFd)
 {
 	int	fd;
 
@@ -105,16 +105,16 @@ void	Channel::sendMessage(std::string response, int currentFd)
     {
 		fd = it->second.getFd();
 		if (fd != currentFd)
-			send(fd, response.c_str(), response.length(), 0);
+			send(fd, reply.c_str(), reply.length(), 0);
     }
 }
 
-void	Channel::sendToAll(std::string response)
+void	Channel::sendToAll(std::string reply)
 {
 	std::map<std::string, Client>::const_iterator it;
 
     for (it = this->_clientlist.begin(); it != this->_clientlist.end(); ++it)
-    	send(it->second.getFd(), response.c_str(), response.length(), 0);
+    	send(it->second.getFd(), reply.c_str(), reply.length(), 0);
 }
 
 bool	Channel::isUserThere(std::string nick)
@@ -127,7 +127,7 @@ bool	Channel::isUserThere(std::string nick)
 
 bool	Channel::isUserOperator(const Client &client) const {
 
-	std::string response;
+	std::string reply;
 
 	if (this->_operators.find(client.getNickname()) != this->_operators.end()) //si le user est un operateur du channel
 	{
@@ -137,8 +137,8 @@ bool	Channel::isUserOperator(const Client &client) const {
 	else
 	{
 		std::cout << "ce n'est pas un operateur !!" << std::endl;
-		response = ERR_CHANOPRIVSNEEDED(client.getNickname(), this->_name);
-		send(client.getFd(), response.c_str(), response.size(), 0);
+		reply = ERR_CHANOPRIVSNEEDED(client.getNickname(), this->_name);
+		send(client.getFd(), reply.c_str(), reply.size(), 0);
 		return false ;
 	}
 }

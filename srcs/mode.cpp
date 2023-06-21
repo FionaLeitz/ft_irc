@@ -1,24 +1,24 @@
 #include "../headers/irc.h"
 
 int	check_args( t_context *context, Client *tmp, std::vector<std::string> args, Channel	**chan ) {
-	std::string	response;
+	std::string	reply;
 
 	if ( args.size() == 0 ) {
-		response = ERR_NEEDMOREPARAMS(tmp->getNickname(), tmp->getUsername(), "MODE");
-		send(tmp->getFd(), response.c_str(), response.length(), 0);
+		reply = ERR_NEEDMOREPARAMS(tmp->getNickname(), tmp->getUsername(), "MODE");
+		send(tmp->getFd(), reply.c_str(), reply.length(), 0);
 		return -1;
 	}
 	std::map<std::string, Channel>::iterator	it = context->channels.find(args[0]);
 	if ( it == context->channels.end() ) {
-		response = ERR_NOSUCHCHANNEL(tmp->getNickname(), tmp->getUsername(), tmp->getHost(), args[0]);
-		send(tmp->getFd(), response.c_str(), response.length(), 0);
+		reply = ERR_NOSUCHCHANNEL(tmp->getNickname(), tmp->getUsername(), tmp->getHost(), args[0]);
+		send(tmp->getFd(), reply.c_str(), reply.length(), 0);
 		return -1;
 	}
 	*chan = &it->second;
 	if ( args.size() == 1 || args[1].empty() ) {
-		response = RPL_CHANNELMODEIS((*tmp).getNickname(), args[0], " +", (*chan)->getMode());
-		std::cout << response << std::endl;
-		send(tmp->getFd(), response.c_str(), response.length(), 0);
+		reply = RPL_CHANNELMODEIS((*tmp).getNickname(), args[0], " +", (*chan)->getMode());
+		std::cout << reply << std::endl;
+		send(tmp->getFd(), reply.c_str(), reply.length(), 0);
 		return -1;
 	}
 	return 0;
@@ -37,8 +37,8 @@ void	pass_size_operator( std::vector<std::string> args, std::string *new_arg0, s
 void	verify_valid_pass_size_operator( Client *tmp, int *letters_int, std::string *new_args, Channel **chan, int pass, int size, int oper ) {
 	if ( letters_int[1] != 0 ) {
 		if ( new_args[pass].size() == 0 ) {
-			std::string response = ERR_NEEDMOREPARAMS_MODE(tmp->getNickname(), chan[0]->getName(), "k", "key", "key");
-			send(tmp->getFd(), response.c_str(), response.length(), 0);
+			std::string reply = ERR_NEEDMOREPARAMS_MODE(tmp->getNickname(), chan[0]->getName(), "k", "key", "key");
+			send(tmp->getFd(), reply.c_str(), reply.length(), 0);
 			letters_int[1] = -1;
 		}
 		else
@@ -48,13 +48,13 @@ void	verify_valid_pass_size_operator( Client *tmp, int *letters_int, std::string
 
 	if ( letters_int[4] != 0 ) {
 		if ( new_args[oper].empty() ) {
-			std::string response = ERR_NEEDMOREPARAMS_MODE(tmp->getNickname(), chan[0]->getName(), "o", "op", "nick");
-			send(tmp->getFd(), response.c_str(), response.length(), 0);
+			std::string reply = ERR_NEEDMOREPARAMS_MODE(tmp->getNickname(), chan[0]->getName(), "o", "op", "nick");
+			send(tmp->getFd(), reply.c_str(), reply.length(), 0);
 			letters_int[4] = 0;
 		}
 		else if ( chan[0]->isUserThere( new_args[oper] ) == false ) {
-			std::string response = ERR_USERNOTINCHANNEL(tmp->getNickname(), tmp->getUsername(), tmp->getHost(), chan[0]->getName(), new_args[oper]);
-			send(tmp->getFd(), response.c_str(), response.length(), 0);
+			std::string reply = ERR_USERNOTINCHANNEL(tmp->getNickname(), tmp->getUsername(), tmp->getHost(), chan[0]->getName(), new_args[oper]);
+			send(tmp->getFd(), reply.c_str(), reply.length(), 0);
 			letters_int[4] = 0;
 		}
 		else if ( letters_int[4] == 1 )
@@ -75,13 +75,13 @@ void	verify_valid_pass_size_operator( Client *tmp, int *letters_int, std::string
 
 	if ( letters_int[2] == 1 ) {
 		if ( new_args[size].size() == 0 ) {
-			std::string response = ERR_NEEDMOREPARAMS_MODE(tmp->getNickname(), chan[0]->getName(), "l", "limit", "limit");
-			send(tmp->getFd(), response.c_str(), response.length(), 0);
+			std::string reply = ERR_NEEDMOREPARAMS_MODE(tmp->getNickname(), chan[0]->getName(), "l", "limit", "limit");
+			send(tmp->getFd(), reply.c_str(), reply.length(), 0);
 			letters_int[2] = -1;
 		}
 		else if (parse_number(new_args[size].c_str()) == -1) {
-			std::string response = ERR_INVALIDMODEPARAM(tmp->getNickname(), tmp->getUsername(), chan[0]->getName(), "limit");
-			send(tmp->getFd(), response.c_str(), response.length(), 0);
+			std::string reply = ERR_INVALIDMODEPARAM(tmp->getNickname(), tmp->getUsername(), chan[0]->getName(), "limit");
+			send(tmp->getFd(), reply.c_str(), reply.length(), 0);
 			letters_int[2] = -1;
 		}
 		else
@@ -157,7 +157,7 @@ void	ft_mode(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 	std::string	flags = chan->getMode();
 	std::string	changes;
 	for (int count = 0; count < 5; count++) {
-		std::string	response;
+		std::string	reply;
 		if (letters_int[count] == 1 && flags.find(letters_char[count]) == flags.npos) {
 			flags += letters_char[count];
 			changes += "+";
@@ -189,7 +189,6 @@ void	ft_mode(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 	}
 	chan->setMode( flags );
 	std::cout << "changes = " << changes << std::endl;
-	std::string response = RPL_MODE(tmp->getNickname(), tmp->getUsername(), tmp->getHost(), chan->getName(), changes); // remplacer args[1] par ce qui a ete effectivement change
-																									   // par exemple, si le mode etait deja t, et que le user fait +it, on ne doit mettre que +i ici
-	chan->sendToAll(response);
+	std::string reply = RPL_MODE(tmp->getNickname(), tmp->getUsername(), tmp->getHost(), chan->getName(), changes);
+	chan->sendToAll(reply);
 }

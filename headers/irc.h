@@ -36,6 +36,23 @@
 #define RPL_WHOREPLY(nickname, channel, username, host, usernick) (":server 352 " + nickname + " " + channel + " " + username + " " + host + " server " + usernick + " H :0 " + "realname" + "\r\n")
 #define RPL_NAMREPLY(nickname, symbol, channel, prefix, user) (":server 353 " + nickname + " " + symbol + " " + channel + " :" + prefix + user + "\r\n")
 #define	RPL_YOUREOPER(nickname) (":server 381 " + nickname + " :You are now an IRC operator\r\n");
+#define	RPL_NICK(oldNick, username, host, newNick) (":" + USER_ID(oldNick, username, host) + " NICK :" + newNick + "\r\n");
+#define	RPL_FIRSTNICK(nickname) (":server NICK :" + nickname + "\r\n");
+#define RPL_JOIN(nickname, username, host, channel) (":" + USER_ID(nickname, username, host) + " JOIN " + channel + "\r\n")
+#define	RPL_KICK(nickname, username, host, channel, target, reason)(":" + USER_ID(nickname, username, host) + " KICK " + channel + " " + target + " :" + reason + "\r\n")
+#define RPL_MSG(nickname, username, host, dest, message) (":" + USER_ID(nickname, username, host) + " PRIVMSG " + dest + " :" + message + "\r\n")
+#define RPL_CHANGETOPIC(nickname, username, host, channel, topic) (":" + USER_ID(nickname, username, host) + " TOPIC " + channel + " " + topic + "\r\n")
+#define RPL_PING(nickname, username, host, token) (":" + USER_ID(nickname, username, host) + " PONG server_name " + token + "\r\n")
+#define RPL_INVITE_MSG(nickname, username, host, target, channel) (":" + USER_ID(nickname, username, host) + " INVITE " + target + " :" + channel + "\r\n")
+#define RPL_MODE(nickname, username, host, channel, mode) (":" + USER_ID(nickname, username, host) + " MODE " + channel + " " + mode + "\r\n")
+#define	RPL_oMODE(nickname, username, host, mode) (":" + USER_ID(nickname, username, host) + " MODE " + nickname + " " + mode + "\r\n");
+#define RPL_KILL(nickname, username, host, target, message) (":" + USER_ID(nickname, username, host) + " KILL " + target + " " + message + "\r\n")
+#define RPL_LISTSTART(nickname, username, host) (":server 321 " + USER_ID(nickname, username, host) + " Channel :Users Name\r\n")
+#define RPL_LIST(nickname, username, host, channel, count, topic) (":server 322 " + USER_ID(nickname, username, host) + " " + channel + " " + count + " :" + topic + "\r\n")
+#define RPL_LISTEND(nickname, username, host) (":server 323 " + USER_ID(nickname, username, host) + " :End of /LIST\r\n")
+#define RPL_PART(nickname, username, host, channel, message) (":" + USER_ID(nickname, username, host) + " PART " + channel + " " + message + "\r\n")
+#define RPL_CLOSINGLINK(killer, reason) ("ERROR :Closing Link: server (Killed (" + killer + " (" + reason + ")))\r\n")
+
 
 #define	ERR_UNKOWNERROR(nickname, username, host, command, message) (":server 400 " + USER_ID(nickname, username, host) + " " + command + " :" + message + "\r\n")
 #define ERR_NOSUCHNICK(nickname, username, host, channel, target) (":server 401 " + USER_ID(nickname, username, host) + " " + channel + " " + target + " :No such nick\r\n")
@@ -58,27 +75,6 @@
 #define ERR_INVITEONLYCHAN(nickname, channel) (":server 473 " + nickname + " " + channel + " :Cannot join channel (+i)\r\n")
 #define ERR_CHANNELISFULL(nickname, channel) (":server 471 " + nickname + " " + channel + " :Cannot join channel (+l)\r\n")
 #define ERR_NOPRIVILEGES(nickname, username, host) (":server 481 " + USER_ID(nickname, username, host) + " :Permission Denied- You're not an IRC operator\r\n") 
-
-#define	RPL_NICK(oldNick, username, host, newNick) (":" + USER_ID(oldNick, username, host) + " NICK :" + newNick + "\r\n");
-#define	RPL_FIRSTNICK(nickname) (":server NICK :" + nickname + "\r\n");
-#define RPL_JOIN(nickname, username, host, channel) (":" + USER_ID(nickname, username, host) + " JOIN " + channel + "\r\n")
-#define	RPL_KICK(nickname, username, host, channel, target, reason)(":" + USER_ID(nickname, username, host) + " KICK " + channel + " " + target + " :" + reason + "\r\n")
-#define RPL_MSG(nickname, username, host, dest, message) (":" + USER_ID(nickname, username, host) + " PRIVMSG " + dest + " :" + message + "\r\n")
-#define RPL_CHANGETOPIC(nickname, username, host, channel, topic) (":" + USER_ID(nickname, username, host) + " TOPIC " + channel + " " + topic + "\r\n")
-#define RPL_PING(nickname, username, host, token) (":" + USER_ID(nickname, username, host) + " PONG server_name " + token + "\r\n")
-#define RPL_INVITE_MSG(nickname, username, host, target, channel) (":" + USER_ID(nickname, username, host) + " INVITE " + target + " :" + channel + "\r\n")
-#define RPL_MODE(nickname, username, host, channel, mode) (":" + USER_ID(nickname, username, host) + " MODE " + channel + " " + mode + "\r\n")
-#define	RPL_oMODE(nickname, username, host, mode) (":" + USER_ID(nickname, username, host) + " MODE " + nickname + " " + mode + "\r\n");
-#define RPL_KILL(nickname, username, host, target, message) (":" + USER_ID(nickname, username, host) + " KILL " + target + " " + message + "\r\n")
-#define RPL_LISTSTART(nickname, username, host) (":server 321 " + USER_ID(nickname, username, host) + " Channel :Users Name\r\n")
-#define RPL_LIST(nickname, username, host, channel, count, topic) (":server 322 " + USER_ID(nickname, username, host) + " " + channel + " " + count + " :" + topic + "\r\n")
-#define RPL_LISTEND(nickname, username, host) (":server 323 " + USER_ID(nickname, username, host) + " :End of /LIST\r\n")
-#define RPL_PART(nickname, username, host, channel, message) (":" + USER_ID(nickname, username, host) + " PART " + channel + " " + message + "\r\n")
-#define RPL_CLOSINGLINK(killer, reason) ("ERROR :Closing Link: server (Killed (" + killer + " (" + reason + ")))\r\n")
-
-// #define ERR_USERNOTINCHANNEL(nickname, username, channel, target) (":server 441 " + USER_ID(nickname, username, host) + " " + target + " :They aren't on that channel\r\n")
-// normalement comme ca, et le msg d'erreur arrive sur l'onglet principal (et non pas sur le channel)
-// ca semble etre ca sur les vrais serveurs
 
 
 typedef struct	s_context {
@@ -118,13 +114,13 @@ void	ft_ping(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 void	ft_restart(t_context *context, Client *tmp, struct pollfd *fds, int i, std::vector<std::string> args);
 void	ft_topic(t_context *context, Client *tmp, struct pollfd *fds, int i, std::vector<std::string> args);
 
-int							findClientFd(const std::map<int, Client> &clientList, std::string nick);
-void						sendToAllClients(const std::map<std::string, Client> &clientList, std::string response);
+int						          	findClientFd(const std::map<int, Client> &clientList, std::string nick);
+void					          	sendToAllClients(const std::map<std::string, Client> &clientList, std::string response);
 std::vector<std::string>	ft_split(std::string to_split, std::string separate);
-void						check_topic(Client *tmp, Channel &channel);
-int							isAuthorized(const Client &user, std::string command);
-bool						isStringAlnum(std::string s);
-void						suppress_empty_chan(t_context *context, std::string channel_name);
+void						          check_topic(Client *tmp, Channel &channel);
+int							          isAuthorized(const Client &user, std::string command);
+bool						          isStringAlnum(std::string s);
+void						          suppress_empty_chan(t_context *context, std::string channel_name);
 
 #endif
 

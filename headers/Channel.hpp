@@ -15,10 +15,10 @@ class	Channel {
 
 		Channel &		operator=( const Channel & rhs );
 
-		void				add_client( Client new_client );
-		void				add_operator( std::string new_client );
-		void				suppress_client( std::string nick );
-		void				suppress_operator( std::string nick );
+		void									add_client( Client new_client );
+		void									add_operator( std::string new_client );
+		void									suppress_client( std::string nick );
+		void									suppress_operator( std::string nick );
 
 		const std::string &						getName( void ) const;
 		const std::string &						getMode( void ) const;
@@ -33,7 +33,7 @@ class	Channel {
 		void									setPassword( std::string password );
 		void									setSizemax( int sizemax );
 
-		void									appliquerFonction(FunctionType function);
+		// void									appliquerFonction(FunctionType function);
 		void									sendMessage(std::string response, int currentFd);  // envoie a tout le monde sauf l'expediteur
 		void									sendToAll(std::string response);				   // envoie a tout le monde
 		bool									isUserThere(std::string nick);

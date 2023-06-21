@@ -144,15 +144,15 @@ void	Client::removeChannel(t_context *context, std::string name)
 	suppress_empty_chan( context, it->first );
 }
 
-void	Client::printChannelList(void) const
-{
-       // parcours la map et affiche les clés et les valeurs
-    for (std::map<std::string, int>::const_iterator it = _channelList.begin(); it != _channelList.end(); ++it) {
-        std::cout << it->first << " (" << it->second << ")" << std::endl;
-    }
-}
+// void	Client::printChannelList(void) const
+// {
+//        // parcours la map et affiche les clés et les valeurs
+//     for (std::map<std::string, int>::const_iterator it = _channelList.begin(); it != _channelList.end(); ++it) {
+//         std::cout << it->first << " (" << it->second << ")" << std::endl;
+//     }
+// }
 
-void	Client::leaveAllChannels(t_context *context, std::string rpl)
+void	Client::leaveAllChannels(t_context *context, std::string reply)
 {
 	for (std::map<std::string, int>::iterator it2 = _channelList.begin(); it2 != _channelList.end(); )//++it2)
 	{
@@ -161,7 +161,7 @@ void	Client::leaveAllChannels(t_context *context, std::string rpl)
 		if (it2->second == 1)
 		{
 			std::cout << "sending goodbye to channel " << it2->first << std::endl;
-			context->channels[it2->first].sendMessage(rpl, _fd);
+			context->channels[it2->first].sendMessage(reply, _fd);
 			context->channels[it2->first].suppress_client(_nickname);
 			this->_channelList.erase(it2);
 			suppress_empty_chan( context, it2->first );

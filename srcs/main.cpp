@@ -170,7 +170,8 @@ int	client_request( struct pollfd **fds, Client *tmp, std::string ref, int i, t_
 		if (j == 19)
 		{
 			std::cout << "Action non reconnue : " << ref << std::endl;
-			// un message d'erreur pour le client ?
+			std::string	reply = ERR_UNKOWNERROR(tmp->getNickname(), tmp->getUsername(), tmp->getHost(), cmd, (std::string)"Unknown command");
+			send(tmp->getFd(), reply.c_str(), reply.length(), 0);
 		}
 		return 0;
 }

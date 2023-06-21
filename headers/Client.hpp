@@ -21,7 +21,7 @@ class	Client {
 		void			clear( void );
 		// void			removefromall( void );
 
-		const int &				canConnect(void) const;
+		const int &					canConnect(void) const;
 		const bool &				getPassBool(void) const;
 		const std::string &			getUsername( void ) const;
 		const std::string &			getNickname( void ) const;
@@ -44,7 +44,7 @@ class	Client {
 		void						removeChannel(t_context *context, std::string name);
 		void						leaveAllChannels(t_context *context, std::string rpl);
 
-		void						printChannelList(void) const;
+		// void						printChannelList(void) const;
 
 
 	private:

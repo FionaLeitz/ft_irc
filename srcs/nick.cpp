@@ -1,15 +1,5 @@
 #include "../headers/irc.h"
 
-// NICK : 	- si le nickname est deja utilise, ERR_NICKNAMEINUSE
-// 		- si le nickname n'est pas valide, ERR_ERRONEUSNICKNAME (peut etre interdire # : et espace (ca se gere deja je crois))
-// 		- hexchat : split automatiquement avec l'espace;  accepte ':' ;  accepte '#';
-// 		- si pas d'argument (pas de nickname communique) ERR_NONICKNAMEGIVEN
-// 				"The NICK message may be sent from the server to clients to
-// 				acknowledge their NICK command was successful, and to inform
-// 				other clients about the change of nickname. In these cases,
-// 				the <source> of the message will be the old nickname
-// 				[ [ "!" user ] "@" host ] of the user who is changing their nickname."
-
 bool	isStringAlnum(std::string s)
 {
 	for (unsigned long i = 0; i < s.size(); i++)
@@ -90,11 +80,11 @@ void	ft_nick(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 				}
 				else
 					reply = "";
-				}
-				if (tmp->canConnect() != 2)
-					tmp->setCanConnect(1);
 			}
+			if (tmp->canConnect() != 2)
+				tmp->setCanConnect(1);
 		}
-		std::cout << "RPL = " << reply << std::endl;
-		send(tmp->getFd(), reply.c_str(), reply.length(), 0);
 	}
+	std::cout << "RPL = " << reply << std::endl;
+	send(tmp->getFd(), reply.c_str(), reply.length(), 0);
+}
