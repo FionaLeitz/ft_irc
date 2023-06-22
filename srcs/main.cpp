@@ -66,8 +66,12 @@ int	create_server_link( char *port ) {
 }
 
 void	end_close( struct pollfd *fds, int socket_nbr ) {
-	for ( int i = 0; i < socket_nbr && &fds[i]; i++ )
-		close( fds[i].fd );
+	if (fds == NULL)
+		return ;
+	for ( int i = 0; i < socket_nbr && &fds[i]; i++ ) {
+		if (fds[i].fd >= 0)
+			close( fds[i].fd );
+	}
 	delete [] fds;
 }
 
@@ -275,8 +279,11 @@ struct pollfd	*check_communication( struct pollfd *fds, int *socket_nbr, std::st
 	std::string			message;
 	t_context			context;
 
-	if (initialize_context(context, socket_nbr, password) != 0)
+	bzero(buffer, 1024);
+	if (initialize_context(context, socket_nbr, password) != 0) {
+		delete [] fds;
 		return NULL;
+	}
 	while (server_statut == true)
 	{
 		ret = poll(fds, context.socket_nbr[0], -1);

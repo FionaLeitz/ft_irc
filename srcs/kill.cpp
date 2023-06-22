@@ -62,7 +62,8 @@ void	ft_kill(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 			send(fd, reply.c_str(), reply.size(), 0);
 			//close la connexion
 			context->clients.erase(fd);
-			close(fd);
+			if (fd)
+				close(fd);
 			for (int i = 0; i < context->socket_nbr[0]; i++) {
 				if (fds[i].fd == fd)
 				{

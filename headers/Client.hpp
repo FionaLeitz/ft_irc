@@ -1,8 +1,6 @@
 #ifndef CLIENT_HPP
 # define CLIENT_HPP
 
-// void	suppress_empty_chan(t_context *context, std::string channel_name);
-
 typedef struct	s_context t_context;
 
 class	Channel;
