@@ -36,12 +36,10 @@ void	ft_user(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 	}
 	if ( (*tmp).getUsername() != "\0" && tmp->canConnect() == 2) {
 		reply = ERR_ALREADYREGISTERED(tmp->getNickname(), tmp->getUsername(), tmp->getHost());
-		std::cout << reply << std::endl;
 		send(fds[i].fd, reply.c_str(), reply.length(), 0);
 		return ;
 	}
 	tmp->setUsername(args[0]);
-	std::cout << "dans USER : TMP->CANCONNECT = " << tmp->canConnect() << std::endl;
 	if (tmp->canConnect() != 1)
 		return ;
 	reply = RPL_WELCOME((*tmp).getNickname(), (*tmp).getUsername(), tmp->getHost());

@@ -29,7 +29,6 @@ void	ft_topic(t_context *context, Client *tmp, struct pollfd *fds, int i, std::v
 			args[1].append(" ");
 			args[1].append(args[i]);
 		}
-		std::cout << args.size() << std::endl;
 
 		// change topic
 		if (context->channels[args[0]].getMode().find('t') != std::string::npos) {
