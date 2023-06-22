@@ -167,7 +167,7 @@ int	client_request( struct pollfd **fds, Client *tmp, std::string ref, int i, t_
 				break ;
 			}
 		}
-		if (j == 19)
+		if (j == 19 && cmd != "CAP")
 		{
 			std::cout << "Action non reconnue : " << ref << std::endl;
 			std::string	reply = ERR_UNKOWNERROR(tmp->getNickname(), tmp->getUsername(), tmp->getHost(), cmd, (std::string)"Unknown command");
