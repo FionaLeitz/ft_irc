@@ -160,7 +160,6 @@ void	Client::leaveAllChannels(t_context *context, std::string reply)
 		save++;
 		if (it2->second == 1)
 		{
-			std::cout << "sending goodbye to channel " << it2->first << std::endl;
 			context->channels[it2->first].sendMessage(reply, _fd);
 			context->channels[it2->first].suppress_client(_nickname);
 			this->_channelList.erase(it2);

@@ -20,8 +20,6 @@ void	ft_kick(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 	std::string reason;
 	std::string reply;
 
-	std::cout << "Client "<< tmp->getNickname() << " is trying to use the KICK command" << std::endl;
-
 	if (context->channels[args[0]].isUserOperator(*tmp) == false)
 		return ;
 	channel = args[0];
@@ -29,7 +27,6 @@ void	ft_kick(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 	reason = ((*tmp).getBuffer());
 	reason = reason.substr(reason.find(args[1]));
 	reason = reason.substr(args[1].length() + 1);
-	std::cout << "Trying to kick " << user << " from channel " << channel << " with reason : " << reason << std::endl;
 
 	//trouver le channel
 	if (context->channels.find(args[0]) == context->channels.end())

@@ -93,9 +93,9 @@ int	incoming_connections(struct pollfd **fds, t_context &context)
 		context.clients.insert( std::map<int, Client>::value_type( (*fds)[context.socket_nbr[0]].fd, new_client ) );
 		(context.socket_nbr[0])++;
 	
-		std::cout << "Connexion acceptée depuis " << inet_ntoa(new_client.getIp().sin_addr) << ":" << ntohs(new_client.getIp().sin_port) << std::endl;
-		std::cout << "Connexion acceptée depuis " << new_client.getHost() << std::endl;
-		std::cout << "Son fd est : " <<  new_client.getFd() << std::endl;
+		// std::cout << "Connexion acceptée depuis " << inet_ntoa(new_client.getIp().sin_addr) << ":" << ntohs(new_client.getIp().sin_port) << std::endl;
+		// std::cout << "Connexion acceptée depuis " << new_client.getHost() << std::endl;
+		// std::cout << "Son fd est : " <<  new_client.getFd() << std::endl;
 	}
 	return 0;
 }
@@ -142,8 +142,6 @@ void	t_func_initialize(t_func_ptr *funcTab)
 
 int	client_request( struct pollfd **fds, Client *tmp, std::string ref, int i, t_context *context)
 {
-		std::cout << "Message reçu : " << ref << std::endl;
-
 		// Recherche de la fonction correspondante et appel si trouvée
 		t_func_ptr funcTab[18];
 		t_func_initialize(funcTab);
@@ -189,7 +187,6 @@ void	check_clients_sockets(struct pollfd **fds, char *buffer, t_context *context
 			ret = recv((*fds)[i].fd, buffer, sizeof(buffer), 0 );
 			if (ret == 0 || (ret == -1 && errno == 9))
 			{
-				std::cout << "Client has left the chat" << std::endl;
 				close ((*fds)[i].fd);
 			}
 			else if (ret == -1 && errno != 9)
@@ -210,8 +207,6 @@ void	check_clients_sockets(struct pollfd **fds, char *buffer, t_context *context
 					while (ret != -1)
 					{
 						cmd = ref.substr(pos, ret - pos);
-						std::cout << "Commande recue (ref[" << pos << "] -- ref[" << ret - 1 << "]) : " 
-						<< cmd << std::endl;
 						client_request(fds, tmp, cmd, i, context);
 						if (context->clients.find((*fds)[i].fd) == context->clients.end() )
 							break;

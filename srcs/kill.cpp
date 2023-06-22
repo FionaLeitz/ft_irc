@@ -32,7 +32,6 @@ void	ft_kill(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 	int			fd;
 	Client		*target;
 
-	std::cout << "Client "<<tmp->getNickname() << " is trying to use the kill command." << std::endl;
 	if (tmp->getOperator() == false)
 	{
 		reply = ERR_NOPRIVILEGES(tmp->getNickname(), tmp->getUsername(), tmp->getHost());
@@ -56,12 +55,10 @@ void	ft_kill(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 			target = &context->clients[fd];
 			std::string	reason = concat( args );
 			reply = RPL_KILL(tmp->getNickname(), tmp->getUsername(), tmp->getHost(), args[0], reason);
-			std::cout << "RPL = " << reply << std::endl;
 			send(fd, reply.c_str(), reply.size(), 0);
 			reply = RPL_QUIT(target->getNickname(), target->getUsername(), target->getHost(), killMessage(tmp->getNickname(), reason));
 			context->clients[fd].leaveAllChannels(context, reply);
 			reply = RPL_CLOSINGLINK(tmp->getNickname(), reason);
-			std::cout << "RPL = " << reply << std::endl;
 			send(fd, reply.c_str(), reply.size(), 0);
 			//close la connexion
 			context->clients.erase(fd);

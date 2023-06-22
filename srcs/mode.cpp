@@ -17,7 +17,6 @@ int	check_args( t_context *context, Client *tmp, std::vector<std::string> args, 
 	*chan = &it->second;
 	if ( args.size() == 1 || args[1].empty() ) {
 		reply = RPL_CHANNELMODEIS((*tmp).getNickname(), args[0], " +", (*chan)->getMode());
-		std::cout << reply << std::endl;
 		send(tmp->getFd(), reply.c_str(), reply.length(), 0);
 		return -1;
 	}
@@ -91,7 +90,6 @@ void	verify_valid_pass_size_operator( Client *tmp, int *letters_int, std::string
 
 void	ft_mode(t_context *context, Client *tmp, struct pollfd *fds, int i, std::vector<std::string> args)
 {
-	std::cout << "Received command MODE" << std::endl;
 	Channel	*chan;
 	(void)i;
 	(void)fds;
@@ -188,7 +186,6 @@ void	ft_mode(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 		changes += new_args[oper];
 	}
 	chan->setMode( flags );
-	std::cout << "changes = " << changes << std::endl;
 	std::string reply = RPL_MODE(tmp->getNickname(), tmp->getUsername(), tmp->getHost(), chan->getName(), changes);
 	chan->sendToAll(reply);
 }
