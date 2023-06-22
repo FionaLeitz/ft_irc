@@ -61,7 +61,6 @@ std::string	add_in_config(std::string name, std::string pass, Client *tmp) {
 		newConfFile.close();
 		return reply;
 	}
-	std::cout << swap;
 	newConfFile.open("./.IRCd-config");
 	newConfFile << lines << std::endl;
 	newConfFile << swap;
@@ -128,7 +127,6 @@ void	ft_oper(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 		}
 		else {
 			reply = ERR_PASSWDMISMATCH(tmp->getNickname());
-			std::cout << reply << std::endl;
 			send(tmp->getFd(), reply.c_str(), reply.size(), 0);
 		}
 	}

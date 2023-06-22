@@ -53,8 +53,8 @@ int	create_server_link( char *port ) {
 	struct sockaddr_in	name;
 	socklen_t			len = sizeof( name );
 	getsockname( server_socket, (struct sockaddr *)&name, &len );
-	std::cout << "sin_family = " << name.sin_family << "\nsin_port = " << ntohs(name.sin_port)
-			<< "\nsin_addr.s_addr = " << inet_ntoa(name.sin_addr) << std::endl;
+	// std::cout << "sin_family = " << name.sin_family << "\nsin_port = " << ntohs(name.sin_port)
+	// 		<< "\nsin_addr.s_addr = " << inet_ntoa(name.sin_addr) << std::endl;
 
     /* Attente de connexions entrantes */
 	ret = listen( server_socket, 10 );
@@ -247,11 +247,6 @@ int	initialize_context(t_context &context, int *socket_nbr, std::string password
        if (found != std::string::npos && line.size() > sizeof("operator_password ="))
             context.op_password = line.substr(found + sizeof("operator_password =") - 1);
     }
-
-	std::cout << "Hosts : " << context.op_host  << std::endl;
-    std::cout << "Admin : " << context.op_name  << std::endl;
-    std::cout << "Password : " << context.op_password << std::endl;
-
 	if (context.op_host.empty()) {
 		std::cout << "Error in IRCd-config : No operator host provided." << std::endl;
 		 confFile.close();
