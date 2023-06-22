@@ -130,13 +130,9 @@ bool	Channel::isUserOperator(const Client &client) const {
 	std::string reply;
 
 	if (this->_operators.find(client.getNickname()) != this->_operators.end()) //si le user est un operateur du channel
-	{
-		std::cout << "OK c'est bien un operateur" << std::endl;
 		return true ;
-	}
 	else
 	{
-		std::cout << "ce n'est pas un operateur !!" << std::endl;
 		reply = ERR_CHANOPRIVSNEEDED(client.getNickname(), this->_name);
 		send(client.getFd(), reply.c_str(), reply.size(), 0);
 		return false ;

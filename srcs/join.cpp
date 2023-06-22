@@ -1,9 +1,5 @@
 #include "../headers/irc.h"
 
-// void afficherNomClient(const Client& client)
-// {
-//     std::cout << client.getNickname() << std::endl;
-// }
 void sendToAllClients(const std::map<std::string, Client> &clientList, std::string reply)
 {
 	int	fd;
@@ -24,7 +20,6 @@ void	ft_join(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 	(void)fds;
 	(void)i;
 	
-	std::cout << "Received command JOIN" << std::endl;
 	std::vector<std::string>	channels = ft_split( args[0], "," );
 	std::vector<std::string>	passwords;
 	if ( args.size() != 1 )
@@ -49,7 +44,6 @@ void	ft_join(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 		{
 			context->channels[channels[count]] = Channel(channels[count], "t", (*tmp));	//ajoute le channel a la map
 			context->channels[channels[count]].add_operator(tmp->getNickname());
-			std::cout << "C'EST UN NOUVEAU CHANNEL !!!" << std::endl;
 			save = 2;
 		}
 		else if (context->channels[channels[count]].isUserThere(tmp->getNickname()) == false) {

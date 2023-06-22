@@ -78,6 +78,5 @@ void	ft_nick(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 				tmp->setCanConnect(1);
 		}
 	}
-	std::cout << "RPL = " << reply << std::endl;
 	send(tmp->getFd(), reply.c_str(), reply.length(), 0);
 }

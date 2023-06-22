@@ -14,7 +14,6 @@ void	ft_names(t_context *context, Client *tmp, struct pollfd *fds, int i, std::v
 		if (context->channels[args[0]].getOperators().find(tmp->getNickname()) != context->channels[args[0]].getOperators().end())
 			oname.insert(oname.begin(), '@');
 		reply = RPL_NAMREPLY(nick, "=", args[0], "", oname);
-		std::cout << reply << std::endl;
 		send(tmp->getFd(), reply.c_str(), reply.length(), 0);
 	}
 }
