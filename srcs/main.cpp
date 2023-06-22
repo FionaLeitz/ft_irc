@@ -326,6 +326,11 @@ int	main( int argc, char **argv ) {
 		delete[] fds;
 		return 1;
 	}
+	if ( argv[2][0] == '\0' ) {
+		std::cout << "Empty pass" << std::endl;
+		delete[] fds;
+		return 1;
+	}
 
 	fds[0].fd = create_server_link( argv[1] );
 	if ( fds[0].fd == -1 )
