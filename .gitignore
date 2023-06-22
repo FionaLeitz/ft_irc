@@ -3,3 +3,4 @@ hexchat
 .nfs*
 .devcontainer
 ircserv
+.IRCd-config
