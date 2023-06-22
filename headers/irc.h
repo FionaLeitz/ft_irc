@@ -120,6 +120,7 @@ void						check_topic(Client *tmp, Channel &channel);
 int							isAuthorized(const Client &user, std::string command);
 bool						isStringAlnum(std::string s);
 void						suppress_empty_chan(t_context *context, std::string channel_name);
+void						ft_welcome(Client *tmp, struct pollfd *fds, int i);
 
 
 #endif

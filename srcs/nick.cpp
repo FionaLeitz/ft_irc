@@ -35,7 +35,7 @@ void	ft_nick(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 			if (tmp->getNickname().empty())
 				(*tmp).setNickname(args[0]);
 			if (tmp->canConnect() != 2)
-				tmp->setCanConnect(0);
+			tmp->setCanConnect(0);
 		}
 		else
 		{
@@ -59,6 +59,7 @@ void	ft_nick(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 			if (it == context->clients.end())
 			{
 				std::cout << "Nickname dispo" << std::endl;
+				tmp->setCanConnect(1);
 				if (oldNick.empty()){
 					oldNick = tmp->getNickname();
 					if (oldNick.empty())
@@ -70,12 +71,13 @@ void	ft_nick(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 				if (tmp->canConnect() != 2 && !tmp->getUsername().empty()) {
 					reply = RPL_WELCOME(tmp->getNickname(), tmp->getUsername(), tmp->getHost());
 					tmp->setCanConnect(2);
+					ft_welcome(tmp, fds, i);
 				}
 				else
 					reply = "";
 			}
-			if (tmp->canConnect() != 2)
-				tmp->setCanConnect(1);
+			// if (tmp->canConnect() != 2)
+			// 	tmp->setCanConnect(0);
 		}
 	}
 	send(tmp->getFd(), reply.c_str(), reply.length(), 0);

@@ -16,6 +16,7 @@ void	ft_welcome(Client *tmp, struct pollfd *fds, int i)
        	send(fds[i].fd, message.c_str(), message.length(), 0);
     }
 }
+
 void	ft_user(t_context *context, Client *tmp, struct pollfd *fds, int i, std::vector<std::string> args)
 {
 	(void)context;
@@ -40,6 +41,7 @@ void	ft_user(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 		return ;
 	}
 	tmp->setUsername(args[0]);
+	std::cout << "dans USER : TMP->CANCONNECT = " << tmp->canConnect() << std::endl;
 	if (tmp->canConnect() != 1)
 		return ;
 	reply = RPL_WELCOME((*tmp).getNickname(), (*tmp).getUsername(), tmp->getHost());

@@ -666,6 +666,7 @@ TRUC EN PLUS :
 								--> on va lui changer son nick pour "b" du coup...
 								--> et c'est pareil si on veut le changer par un nick deja pris
 	ok !		- rpl d'erreur si commande inconnu
+				-  :Nickname is already in use. Retrying with #tutu2...
 
 
 
