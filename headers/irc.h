@@ -60,7 +60,7 @@
 #define ERR_NOTEXTTOSEND(nickname, username, host) (":server 412 " + USER_ID(nickname, username, host) + " :No text to send\r\n")
 #define ERR_NONICKNAMEGIVEN() (":server 431 :No nickname given\r\n")
 #define ERR_ERRONEUSNICKNAME(nickname) (":server 432 " + nickname + " " + nickname + "\r\n")
-#define ERR_NICKNAMEINUSE(nickname) (":server 433 " + nickname + " :Nickname is already in use\r\n")
+#define ERR_NICKNAMEINUSE(nickname) (":server 433 " + nickname + " " + nickname + "\r\n")
 #define ERR_USERNOTINCHANNEL(nickname, username, host, channel, target) (":server 441 " + USER_ID(nickname, username, host) + " " + channel + " " + target + " :They aren't on that channel\r\n")
 #define ERR_NOTONCHANNEL(nickname, username, host, target) (":server 442 " + USER_ID(nickname, username, host) + " " + target + " :You're not on that channel\r\n")
 #define ERR_NOTREGISTERED(nickname)(":server 451 " + nickname + " :You have not registered\r\n")
