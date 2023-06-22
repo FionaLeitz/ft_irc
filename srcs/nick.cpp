@@ -22,12 +22,7 @@ void	ft_nick(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 	std::vector<std::string> user_args;
 
 	if (tmp->getPassBool() == false)
-	{
-		// rajouter RPL d'erreur
-		reply = ERR_UNKOWNERROR((std::string)"nickname", (std::string)"username", tmp->getHost(), args[0], (std::string)"You need to set the password first");
-		send(tmp->getFd(), reply.c_str(), reply.length(), 0);
 		return ;
-	}
 	if (args.size() == 0)
 		reply = ERR_NONICKNAMEGIVEN();
 	else

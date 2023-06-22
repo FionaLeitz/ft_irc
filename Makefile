@@ -19,7 +19,6 @@ SRC		=	srcs/main.cpp			\
 			srcs/oper.cpp			\
 			srcs/part.cpp			\
 			srcs/ping.cpp			\
-			srcs/restart.cpp		\
 			srcs/topic.cpp			\
 			srcs/tools.cpp			\
 

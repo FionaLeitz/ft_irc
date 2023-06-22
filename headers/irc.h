@@ -111,16 +111,15 @@ void	ft_names(t_context *context, Client *tmp, struct pollfd *fds, int i, std::v
 void	ft_oper(t_context *context, Client *tmp, struct pollfd *fds, int i, std::vector<std::string> args);
 void	ft_part(t_context *context, Client *tmp, struct pollfd *fds, int i, std::vector<std::string> args);
 void	ft_ping(t_context *context, Client *tmp, struct pollfd *fds, int i, std::vector<std::string> args);
-void	ft_restart(t_context *context, Client *tmp, struct pollfd *fds, int i, std::vector<std::string> args);
 void	ft_topic(t_context *context, Client *tmp, struct pollfd *fds, int i, std::vector<std::string> args);
 
-int						          	findClientFd(const std::map<int, Client> &clientList, std::string nick);
-void					          	sendToAllClients(const std::map<std::string, Client> &clientList, std::string response);
+int							findClientFd(const std::map<int, Client> &clientList, std::string nick);
+void						sendToAllClients(const std::map<std::string, Client> &clientList, std::string response);
 std::vector<std::string>	ft_split(std::string to_split, std::string separate);
-void						          check_topic(Client *tmp, Channel &channel);
-int							          isAuthorized(const Client &user, std::string command);
-bool						          isStringAlnum(std::string s);
-void						          suppress_empty_chan(t_context *context, std::string channel_name);
+void						check_topic(Client *tmp, Channel &channel);
+int							isAuthorized(const Client &user, std::string command);
+bool						isStringAlnum(std::string s);
+void						suppress_empty_chan(t_context *context, std::string channel_name);
 
 
 #endif
