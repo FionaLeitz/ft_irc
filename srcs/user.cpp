@@ -1,5 +1,21 @@
 #include "../headers/irc.h"
 
+void	ft_welcome(Client *tmp, struct pollfd *fds, int i)
+{
+	std::string line;
+	std::ifstream input_file("./banner.txt");
+	(void)tmp;
+	if (!input_file.is_open())
+	{
+		std::cout << strerror(errno) << std::endl;
+        return ;
+	}
+    while (getline(input_file, line))
+    {
+        std::string message = line + "\r\n";
+       	send(fds[i].fd, message.c_str(), message.length(), 0);
+    }
+}
 void	ft_user(t_context *context, Client *tmp, struct pollfd *fds, int i, std::vector<std::string> args)
 {
 	(void)context;
@@ -31,4 +47,5 @@ void	ft_user(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 	reply = RPL_WELCOME((*tmp).getNickname(), (*tmp).getUsername(), tmp->getHost());
 	send(fds[i].fd, reply.c_str(), reply.length(), 0);
 	tmp->setCanConnect(2);
+	ft_welcome(tmp, fds, i);
 }
