@@ -19,13 +19,11 @@ void	ft_welcome(Client *tmp, struct pollfd *fds, int i)
 void	ft_user(t_context *context, Client *tmp, struct pollfd *fds, int i, std::vector<std::string> args)
 {
 	(void)context;
-	std::cout << "Received command USER" << std::endl;
 	std::string	reply;
 
 
 	if (tmp->getPassBool() == false)
 	{
-		// rajouter RPL d'erreur
 		reply = ERR_UNKOWNERROR((std::string)"nickname", (std::string)"username", tmp->getHost(), args[0], (std::string)"You need to set the password first");
 		send(tmp->getFd(), reply.c_str(), reply.length(), 0);
 		return ;

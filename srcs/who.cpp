@@ -2,7 +2,6 @@
 
 void	ft_who(t_context *context, Client *tmp, struct pollfd *fds, int i, std::vector<std::string> args)
 {
-	std::cout << "Received command WHO" << std::endl;
 	std::string	reply;
 	std::string nick;
 

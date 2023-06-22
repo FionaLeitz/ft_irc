@@ -2,7 +2,6 @@
 
 void	ft_quit(t_context *context, Client *tmp, struct pollfd *fds, int i, std::vector<std::string> args)
 {
-	std::cout << "Received command PRIVMSG" << std::endl;
 	std::string						reply;
 	std::map<int, Client>::iterator	it;
 	(void)args;
@@ -13,7 +12,6 @@ void	ft_quit(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 	reply = RPL_QUIT((*tmp).getNickname(), (*tmp).getUsername(), tmp->getHost(), message);
 
 	tmp->leaveAllChannels(context, reply);
-	std::cout << "RPL QUIT = " << reply << std::endl;
 	context->clients.erase(it);
 	close( fds[i].fd );
 }

@@ -16,8 +16,6 @@ void	ft_topic(t_context *context, Client *tmp, struct pollfd *fds, int i, std::v
 	(void)i;
 	std::string reply;
 
-	std::cout << "Client "<<tmp->getNickname() << " is trying to use the topic command" << std::endl;
-
 	if (args.size() == 1)
 		check_topic(tmp, context->channels[args[0]]);
 	else
