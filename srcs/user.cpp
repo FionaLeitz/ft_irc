@@ -22,6 +22,12 @@ void	ft_user(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 	if (tmp->canConnect() != 1)
 		return ;
 	reply = RPL_WELCOME((*tmp).getNickname(), (*tmp).getUsername(), tmp->getHost());
+	reply = ":server 001 ";
+	reply.append((*tmp).getNickname());
+	reply.append(" :Welcome to the test IRC Network ");
+	reply.append(USER_ID(tmp->getNickname(), tmp->getUsername(), tmp->getHost()));
+	reply.append("\r\n");
+	std::cout << reply << std::endl;
 	send(fds[i].fd, reply.c_str(), reply.length(), 0);
 	tmp->setCanConnect(2);
 }

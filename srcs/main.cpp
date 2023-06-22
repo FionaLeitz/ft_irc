@@ -28,7 +28,7 @@ int	create_server_link( char *port ) {
 	struct sockaddr_in	serverAddress;
 	int					ret;
 
-	// signal(SIGQUIT, SIG_IGN);  //que faire 
+	signal(SIGTSTP, SIG_IGN);  //que faire 
 	signal(SIGINT, sig_handler);
 
 	/* Création de la socket d'ecoute du serveur */
@@ -288,6 +288,39 @@ struct pollfd	*check_communication( struct pollfd *fds, int *socket_nbr, std::st
 
 	if (initialize_context(context, socket_nbr, password) != 0)
 		return NULL;
+	
+	int					botsock;
+	struct sockaddr_in	serv_addr;
+
+	botsock = socket( AF_INET, SOCK_STREAM, 0 );
+	if ( botsock == -1 ) {
+		std::cerr << "Failed to create socket: " << strerror( errno ) << std::endl;
+		return NULL;
+	}
+	std::memset( &serv_addr, 0, sizeof( serv_addr ) );
+	serv_addr.sin_family = AF_INET;
+	serv_addr.sin_addr.s_addr = htonl( INADDR_ANY );
+	serv_addr.sin_port = htons( atoi("118218"));
+
+	while (connect(botsock, (struct sockaddr *)&serv_addr, sizeof(serv_addr)) < 0)
+	{
+		std::cerr << "connect() failed" << std::endl;
+		std::cout << "Retrying in 5 seconds..." << std::endl;
+		sleep(5);
+	}
+	// std::cout << "coucou" << std::endl;
+	std::string rpl = "CAP LS 302\r\n";
+	send(botsock, rpl.c_str(), rpl.size(), 0);
+	rpl = "PASS 123\r\n";
+	send(botsock, rpl.c_str(), rpl.size(), 0);
+	rpl = "NICK Bot\r\n";
+	send(botsock, rpl.c_str(), rpl.size(), 0);
+	rpl = "USER bot 0 * :realname\r\n";
+	send(botsock, rpl.c_str(), rpl.size(), 0);
+	rpl = "JOIN #bot\r\n";
+	send(botsock, rpl.c_str(), rpl.size(), 0);
+
+
 	while (server_statut == true)
 	{
 		ret = poll(fds, context.socket_nbr[0], -1);
@@ -340,8 +373,50 @@ int	main( int argc, char **argv ) {
 		return -1;
 	}
 	fds[0].events = POLLIN;
-	
+
+	//###############################################################################################
+
+	// int					botsock;
+	// struct sockaddr_in	serv_addr;
+
+	// botsock = socket( AF_INET, SOCK_STREAM, 0 );
+	// if ( botsock == -1 ) {
+	// 	std::cerr << "Failed to create socket: " << strerror( errno ) << std::endl;
+	// 	return -1;
+	// }
+	// std::memset( &serv_addr, 0, sizeof( serv_addr ) );
+	// serv_addr.sin_family = AF_INET;
+	// serv_addr.sin_addr.s_addr = htonl( INADDR_ANY );
+	// serv_addr.sin_port = htons( atoi( argv[1] ) );
+
+	// while (connect(botsock, (struct sockaddr *)&serv_addr, sizeof(serv_addr)) < 0)
+	// {
+	// 	std::cerr << "connect() failed" << std::endl;
+	// 	std::cout << "Retrying in 5 seconds..." << std::endl;
+	// 	sleep(5);
+	// }
+	// std::cout << "coucou" << std::endl;
+	// std::string rpl = "CAP LS 302\r\n";
+	// send(botsock, rpl.c_str(), rpl.size(), 0);
+	// rpl = "PASS 123\r\n";
+	// send(botsock, rpl.c_str(), rpl.size(), 0);
+	// rpl = "NICK Bot\r\n";
+	// send(botsock, rpl.c_str(), rpl.size(), 0);
+	// rpl = "USER Bot * * :thebot\r\n";
+	// send(botsock, rpl.c_str(), rpl.size(), 0);
+	// rpl = ":server 001 Bot :Welcome to the test IRC Network Bot!Bot@127.0.0.1:59136";
+	// send(botsock, rpl.c_str(), rpl.size(), 0);
+
+
+	// send_pass
+
+	//###############################################################################################
+
+
+
 	*socket_nbr = 1;
+
+
 	fds = check_communication( fds, socket_nbr, argv[2]);
 	if ( fds == NULL )
 	{
