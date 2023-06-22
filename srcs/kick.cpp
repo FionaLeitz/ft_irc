@@ -20,6 +20,11 @@ void	ft_kick(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 	std::string reason;
 	std::string reply;
 
+	if (args.size() < 2) {
+		reply = ERR_NEEDMOREPARAMS(tmp->getNickname(), "", "KICK");
+		send(tmp->getFd(), reply.c_str(), reply.length(), 0);
+		return ;
+	}
 	if (context->channels[args[0]].isUserOperator(*tmp) == false)
 		return ;
 	channel = args[0];

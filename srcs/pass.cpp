@@ -5,10 +5,12 @@ void	ft_pass(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 	std::string	reply;
 
 	if (args.size() == 0) {
-		reply = ERR_NEEDMOREPARAMS(tmp->getNickname(), "", "USER");
+		reply = ERR_NEEDMOREPARAMS(tmp->getNickname(), "", "PASS");
 		send(fds[i].fd, reply.c_str(), reply.length(), 0);
 		return ;
 	}
+	if (tmp->canConnect() == 2 && tmp->getPassBool() == true)
+		return ;
 	if (args[0] == context->password)
 	{
 		tmp->setPassBool(true);
@@ -17,7 +19,6 @@ void	ft_pass(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 	{
 		tmp->setPassBool(false);
 		reply = ERR_PASSWDMISMATCH((std::string)"nickname");
-		std::cout << reply << std::endl;
 		send(tmp->getFd(), reply.c_str(), reply.length(), 0);
 		reply.clear();
 		close( fds[i].fd );

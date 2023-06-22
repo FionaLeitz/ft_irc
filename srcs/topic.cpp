@@ -16,6 +16,11 @@ void	ft_topic(t_context *context, Client *tmp, struct pollfd *fds, int i, std::v
 	(void)i;
 	std::string reply;
 
+	if (args.size() < 1) {
+		reply = ERR_NEEDMOREPARAMS(tmp->getNickname(), "", "TOPIC");
+		send(tmp->getFd(), reply.c_str(), reply.length(), 0);
+		return ;
+	}
 	if (args.size() == 1)
 		check_topic(tmp, context->channels[args[0]]);
 	else

@@ -23,7 +23,7 @@ void	ft_nick(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 
 	if (tmp->getPassBool() == false)
 		return ;
-	if (args.size() == 0)
+	if (args.size() < 1)
 		reply = ERR_NONICKNAMEGIVEN();
 	else
 	{

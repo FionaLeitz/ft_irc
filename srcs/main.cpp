@@ -195,6 +195,7 @@ void	check_clients_sockets(struct pollfd **fds, char *buffer, t_context *context
 			}
 			else
 			{
+				// std::cout << "Received : " << buffer << std::endl;
 				Client *tmp = &context->clients.find((*fds)[i].fd)->second;
 				(*tmp).add_buff(buffer);
 				const std::string &ref = (*tmp).getBuffer();

@@ -19,6 +19,11 @@ void	ft_privmsg(t_context *context, Client *tmp, struct pollfd *fds, int i, std:
 	(void)fds;
 	(void)i;
 
+	if (args.size() < 2) {
+		reply = ERR_NEEDMOREPARAMS(tmp->getNickname(), "", "PRIVMSG");
+		send(tmp->getFd(), reply.c_str(), reply.length(), 0);
+		return ;
+	}
 	if ( args[1].empty() ) {
 		reply = ERR_NOTEXTTOSEND(tmp->getNickname(), tmp->getUsername(), tmp->getHost());
 		send(tmp->getFd(), reply.c_str(), reply.length(), 0);

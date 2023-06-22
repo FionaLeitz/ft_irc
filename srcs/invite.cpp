@@ -6,6 +6,11 @@ void	ft_invite(t_context *context, Client *tmp, struct pollfd *fds, int i, std::
 
 	std::string reply;
 	int			fd;
+	if (args.size() != 2) {
+		reply = ERR_NEEDMOREPARAMS(tmp->getNickname(), "", "INVITE");
+		send(tmp->getFd(), reply.c_str(), reply.length(), 0);
+		return ;
+	}
 	if ( context->channels.find(args[1]) == context->channels.end() ) {
 		reply = ERR_NOSUCHCHANNEL(tmp->getNickname(), tmp->getUsername(), tmp->getHost(), args[1]);
 		send(tmp->getFd(), reply.c_str(), reply.size(), 0);

@@ -17,11 +17,18 @@ void	ft_join(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 {
 	std::string	reply;
 	std::string message;
+	std::vector<std::string>	passwords;
 	(void)fds;
 	(void)i;
-	
+
+	if (args.size() < 1) {
+		reply = ERR_NEEDMOREPARAMS(tmp->getNickname(), "", "JOIN");
+		send(tmp->getFd(), reply.c_str(), reply.length(), 0);
+		return ;
+	}
+
 	std::vector<std::string>	channels = ft_split( args[0], "," );
-	std::vector<std::string>	passwords;
+
 	if ( args.size() != 1 )
 		passwords = ft_split( args[1], "," );
 	else {

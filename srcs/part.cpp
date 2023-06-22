@@ -5,7 +5,13 @@ void	ft_part(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 	(void)i;
 	int	count = 0;
 	std::string	message;
+	std::string	reply;
 
+	if (args.size() < 1) {
+		reply = ERR_NEEDMOREPARAMS(tmp->getNickname(), "", "PART");
+		send(tmp->getFd(), reply.c_str(), reply.length(), 0);
+		return ;
+	}
 	for ( std::vector<std::string>::iterator it = args.begin(); it != args.end(); it++ ) {
 		if (count != 0) {
 			if (count == 1)
@@ -17,7 +23,6 @@ void	ft_part(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 		count++;
 	}
 	std::vector<std::string>	chans = ft_split( args[0], "," );
-	std::string					reply;
 	for ( std::vector<std::string>::iterator 			it = chans.begin(); it != chans.end(); it++ ) {
 		std::map<std::string,int>::const_iterator		finding = tmp->getChannelList().find(*it);
 		std::map<std::string, Channel>::iterator		existingchannel = context->channels.find( *it );

@@ -667,6 +667,7 @@ TRUC EN PLUS :
 								--> et c'est pareil si on veut le changer par un nick deja pris
 	ok !		- rpl d'erreur si commande inconnu
 				-  :Nickname is already in use. Retrying with #tutu2...
+				- verifier mdp main ""
 
 
 
