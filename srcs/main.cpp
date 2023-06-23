@@ -99,12 +99,10 @@ int	incoming_connections(struct pollfd **fds, t_context &context)
 		context.clients.insert( std::map<int, Client>::value_type( (*fds)[context.socket_nbr[0]].fd, new_client ) );
 		(context.socket_nbr[0])++;
 	
-		std::cout << "Connexion acceptée depuis " << inet_ntoa(new_client.getIp().sin_addr) << ":" << ntohs(new_client.getIp().sin_port) << std::endl;
-		std::cout << "Connexion acceptée depuis " << new_client.getHost() << std::endl;
-		std::cout << "Son fd est : " <<  new_client.getFd() << std::endl;
+		// std::cout << "Connexion acceptée depuis " << inet_ntoa(new_client.getIp().sin_addr) << ":" << ntohs(new_client.getIp().sin_port) << std::endl;
+		// std::cout << "Connexion acceptée depuis " << new_client.getHost() << std::endl;
+		// std::cout << "Son fd est : " <<  new_client.getFd() << std::endl;
 	}
-	else
-		std::cout << "Pas (*fds)[0].revents & POLLIN" << std::endl;
 	return 0;
 }
 
@@ -194,7 +192,6 @@ void	check_clients_sockets(struct pollfd **fds, char *buffer, t_context *context
 			ret = recv((*fds)[i].fd, buffer, sizeof(buffer), 0 );
 			if (ret == 0 || (ret == -1 && errno == 9))
 			{
-				std::cout << "Ici" << std::endl;
 				std::map<int, Client>::iterator it = context->clients.find((*fds)[i].fd);
 				if (it != context->clients.end())
 				{
@@ -225,7 +222,7 @@ void	check_clients_sockets(struct pollfd **fds, char *buffer, t_context *context
 					while (ret != -1)
 					{
 						cmd = ref.substr(pos, ret - pos);
-						std::cout << "Received : " << cmd << std::endl;
+						// std::cout << "Received : " << cmd << std::endl;
 						client_request(fds, tmp, cmd, i, context);
 						if (context->clients.find((*fds)[i].fd) == context->clients.end() )
 							break;
@@ -352,7 +349,6 @@ int	main( int argc, char **argv ) {
 	fds[0].fd = create_server_link( argv[1] );
 	if ( fds[0].fd == -1 )
 	{
-		std::cout << "Server link" << std::endl;
 		delete [] fds;
 		return -1;
 	}
