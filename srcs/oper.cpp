@@ -37,7 +37,7 @@ std::string	add_in_config(std::string name, std::string pass, Client *tmp) {
 	if (end != std::string::npos)
 		ip.resize(end);
 	std::getline(confFile, swap, (char)EOF);
-	confFile.);
+	confFile.close();
 	found = swap.find("operator_name =");
 	found = swap.find("\n", found);
 	if (found != std::string::npos) {
