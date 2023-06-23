@@ -190,7 +190,8 @@ void	check_clients_sockets(struct pollfd **fds, char *buffer, t_context *context
 			ret = recv((*fds)[i].fd, buffer, sizeof(buffer), 0 );
 			if (ret == 0 || (ret == -1 && errno == 9))
 			{
-				close ((*fds)[i].fd);
+				if ((*fds)[i].fd)
+					close ((*fds)[i].fd);
 			}
 			else if (ret == -1 && errno != 9)
 			{
