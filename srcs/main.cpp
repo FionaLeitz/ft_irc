@@ -69,8 +69,10 @@ void	end_close( struct pollfd *fds, int socket_nbr ) {
 	if (fds == NULL)
 		return ;
 	for ( int i = 0; i < socket_nbr && &fds[i]; i++ ) {
-		if (fds[i].fd >= 0)
+		if (fds[i].fd >= 0) {
 			close( fds[i].fd );
+			fds[i].fd = -1;
+		}
 	}
 	delete [] fds;
 }
@@ -200,8 +202,10 @@ void	check_clients_sockets(struct pollfd **fds, char *buffer, t_context *context
 					it->second.leaveAllChannels(context, reply);
 					context->clients.erase(it);
 				}
-				if ((*fds)[i].fd)
+				if ((*fds)[i].fd) {
 					close ((*fds)[i].fd);
+					(*fds)[i].fd = -1;
+				}
 			}
 			else if (ret == -1 && errno != 9)
 			{

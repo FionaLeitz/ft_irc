@@ -34,7 +34,7 @@ void	ft_privmsg(t_context *context, Client *tmp, struct pollfd *fds, int i, std:
 	message = message.substr(message.find(dest) + dest.length() + 1);
 	if (message[0] == ':')
 		message = message.substr(1, message.size() - 1); 
-	reply = ":" + (*tmp).getNickname() + " PRIVMSG " + dest + " :" + message +"\r\n";
+	reply = ":" + (*tmp).getNickname() + " PRIVMSG " + dest + " :" + message + "\r\n";
 	if (dest[0] == '#')
 	{
 		if ( context->channels.find(dest) != context->channels.end() )
