@@ -145,17 +145,9 @@ void	Client::removeChannel(t_context *context, std::string name)
 
 }
 
-// void	Client::printChannelList(void) const
-// {
-//        // parcours la map et affiche les clés et les valeurs
-//     for (std::map<std::string, int>::const_iterator it = _channelList.begin(); it != _channelList.end(); ++it) {
-//         std::cout << it->first << " (" << it->second << ")" << std::endl;
-//     }
-// }
-
 void	Client::leaveAllChannels(t_context *context, std::string reply)
 {
-	for (std::map<std::string, int>::iterator it2 = _channelList.begin(); it2 != _channelList.end(); )//++it2)
+	for (std::map<std::string, int>::iterator it2 = _channelList.begin(); it2 != _channelList.end(); )
 	{
 		std::map<std::string, int>::iterator	save = it2;
 		save++;

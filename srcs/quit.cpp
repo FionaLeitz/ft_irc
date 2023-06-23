@@ -13,6 +13,8 @@ void	ft_quit(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 
 	tmp->leaveAllChannels(context, reply);
 	context->clients.erase(it);
-	if (fds[i].fd)
+	if (fds[i].fd) {
 		close( fds[i].fd );
+		fds[i].fd = -1;
+	}
 }
