@@ -200,8 +200,10 @@ void	check_clients_sockets(struct pollfd **fds, char *buffer, t_context *context
 					it->second.leaveAllChannels(context, reply);
 					context->clients.erase(it);
 				}
-				if ((*fds)[i].fd)
+				if ((*fds)[i].fd) {
 					close ((*fds)[i].fd);
+					(*fds)[i].fd = -1;
+				}
 			}
 			else if (ret == -1 && errno != 9)
 			{
@@ -210,7 +212,6 @@ void	check_clients_sockets(struct pollfd **fds, char *buffer, t_context *context
 			}
 			else
 			{
-				std::cout << "Received : " << buffer << std::endl;
 				Client *tmp = &context->clients.find((*fds)[i].fd)->second;
 				(*tmp).add_buff(buffer);
 				const std::string &ref = (*tmp).getBuffer();
@@ -222,6 +223,7 @@ void	check_clients_sockets(struct pollfd **fds, char *buffer, t_context *context
 					while (ret != -1)
 					{
 						cmd = ref.substr(pos, ret - pos);
+						std::cout << "Received : " << cmd << std::endl;
 						client_request(fds, tmp, cmd, i, context);
 						if (context->clients.find((*fds)[i].fd) == context->clients.end() )
 							break;

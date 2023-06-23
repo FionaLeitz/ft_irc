@@ -72,5 +72,6 @@ void	ft_nick(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 			}
 		}
 	}
-	send(tmp->getFd(), reply.c_str(), reply.length(), 0);
+	if (!reply.empty())
+		send(tmp->getFd(), reply.c_str(), reply.length(), 0);
 }
