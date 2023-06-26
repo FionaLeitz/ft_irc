@@ -100,14 +100,35 @@ void	ft_oper(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
         return ;
     }
 	std::getline(confFile, lines);
+	if (lines.size() == 0 || lines.find("operator_host = ") == std::string::npos) {
+		std::cout << "in update_confile : Wrong format" << std::endl;
+		confFile.close();
+		reply = ERR_UNKOWNERROR(tmp->getNickname(), tmp->getUsername(), tmp->getHost(), "OPER", "Error in conf file.");
+		send(tmp->getFd(), reply.c_str(), reply.size(), 0);
+        return ;
+	}
 	std::string	ip = &lines[16];
 	unsigned long	end = ip.find(' ');
 	if (end != std::string::npos)
 		ip.resize(end);
-	std::getline(confFile, lines);		
+	std::getline(confFile, lines);
+	if (lines.size() == 0 || lines.find("operator_name = ") == std::string::npos) {
+		std::cout << "in update_confile : Wrong format" << std::endl;
+		confFile.close();
+		reply = ERR_UNKOWNERROR(tmp->getNickname(), tmp->getUsername(), tmp->getHost(), "OPER", "Error in conf file.");
+		send(tmp->getFd(), reply.c_str(), reply.size(), 0);
+			return ;
+	}
 	std::string	names = &lines[16];
 	op_names = ft_split(names, " ");
-	std::getline(confFile, lines);		
+	std::getline(confFile, lines);
+	if (lines.size() == 0 || lines.find("operator_password = ") == std::string::npos) {
+		std::cout << "in update_confile : Wrong format" << std::endl;
+		confFile.close();
+		reply = ERR_UNKOWNERROR(tmp->getNickname(), tmp->getUsername(), tmp->getHost(), "OPER", "Error in conf file.");
+		send(tmp->getFd(), reply.c_str(), reply.size(), 0);
+			return ;
+	}
 	std::string	pass = &lines[20];
 	op_pass = ft_split(pass, " ");
 	client_ip = tmp->getHost();
