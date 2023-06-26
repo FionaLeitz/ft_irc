@@ -20,13 +20,13 @@ void	ft_pass(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 		tmp->setPassBool(false);
 		reply = ERR_PASSWDMISMATCH((std::string)"nickname");
 		send(tmp->getFd(), reply.c_str(), reply.length(), 0);
+
+		std::map<int, Client>::iterator it = context->clients.find(fds[i].fd);
+		if (it != context->clients.end())
+			context->clients.erase(it);
 		if (fds[i].fd) {
 			close( fds[i].fd );
 			fds[i].fd = -1;
 		}
-		std::map<int, Client>::iterator it = context->clients.find(fds[i].fd);
-		if (it != context->clients.end())
-			context->clients.erase(it);
-		fds[i].fd = -1;
 	}
 }
