@@ -155,14 +155,15 @@ void	ft_mode(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 	std::string	flags = chan->getMode();
 	std::string	changes;
 	for (int count = 0; count < 5; count++) {
-		std::string	reply;
 		if (letters_int[count] == 1 && flags.find(letters_char[count]) == flags.npos) {
-			flags += letters_char[count];
+			if (count != 4)
+				flags += letters_char[count];
 			changes += "+";
 			changes += letters_char[count];
 		}
-		else if (letters_int[count] == -1 && flags.find(letters_char[count]) != flags.npos) {
-			flags.erase(flags.find(letters_char[count]), 1);
+		else if (letters_int[count] == -1 && (flags.find(letters_char[count]) != flags.npos || count == 4)) {
+			if (count != 4)
+				flags.erase(flags.find(letters_char[count]), 1);
 			changes += "-";
 			changes += letters_char[count];
 		}
@@ -170,7 +171,6 @@ void	ft_mode(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 			letters_int[count] = 0;
 		}
 	}
-
 	if (changes.size() == 0 )
 		return ;
 	if ( letters_int[1] == 1 ) {
