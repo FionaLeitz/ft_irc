@@ -115,7 +115,6 @@ void	ft_oper(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 	if (end != std::string::npos)
 		client_ip.resize(end);
 	int	place = isinop_names(args[0], op_names);
-	std::cout <<"Place = "<<place<<std::endl;
 
 	if ( place != -1) {
 		if (op_pass[place] == args[1]) {
