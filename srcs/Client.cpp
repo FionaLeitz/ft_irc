@@ -140,6 +140,8 @@ void	Client::removeChannel(t_context *context, std::string name)
 	std::map<std::string, int>::iterator it;
 
  	it = _channelList.find(name);
+	if (it ==_channelList.end())
+		return ;
 	suppress_empty_chan( context, it->first );
   	_channelList.erase(it);
 

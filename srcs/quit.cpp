@@ -12,7 +12,8 @@ void	ft_quit(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 	reply = RPL_QUIT((*tmp).getNickname(), (*tmp).getUsername(), tmp->getHost(), message);
 
 	tmp->leaveAllChannels(context, reply);
-	context->clients.erase(it);
+	if (it != context->clients.end())
+		context->clients.erase(it);
 	if (fds[i].fd) {
 		close( fds[i].fd );
 		fds[i].fd = -1;

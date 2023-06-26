@@ -25,7 +25,8 @@ void	ft_pass(t_context *context, Client *tmp, struct pollfd *fds, int i, std::ve
 			fds[i].fd = -1;
 		}
 		std::map<int, Client>::iterator it = context->clients.find(fds[i].fd);
-		context->clients.erase(it);
+		if (it != context->clients.end())
+			context->clients.erase(it);
 		fds[i].fd = -1;
 	}
 }
